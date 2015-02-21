@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>EGC - Inicio</title>
+        <link rel="stylesheet" href="../../css/bootstrap.css" type="text/css"/>
+        <link rel="stylesheet" href="../../css/bootstrap-theme.css" type="text/css"/>
+        <link rel="stylesheet" href="../../css/estilo.css" type="text/css"/>
+        <script src="../../js/jquery-1.11.2.js" type="text/javascript"/>
+        <script src="../../js/bootstrap.js" type="text/javascript"/>
+        
+    </h:head>
+    <h:body>
+        
+        <div class="conteudo">
+            
+            <div class="container menu">
+                <div class="row">
+                    <div class="col-md-12">
+
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+            <div class="container centro">
+                <h:form>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div align="center"><h1>Participe hoje do EGC!</h1></div>
+                    </div>
+                </div>
+                    
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Nickname:</h4>
+                        <h:inputText value="#{controladorUsuario.usuario.nickname}" id="nickname" required="required" pt:placeholder="nickname" class="form-control input-lg"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Email</h4>
+                        <h:inputText value="#{controladorUsuario.usuario.email}" id="email" required="required" pt:placeholder="email" class="form-control input-lg"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Senha</h4>
+                        <h:inputText value="#{controladorUsuario.usuario.senha}" id="senha" required="required" pt:placeholder="senha" class="form-control input-lg"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <h4>Cidada:</h4>
+                        <h:inputText value="#{controladorUsuario.usuario.endereco.cidade}" id="cidade" required="required" pt:placeholder="cidade" class="form-control input-lg"/>
+                    </div>
+                    <div class="col-md-2">
+                        <h4>Estado:</h4>
+                        <h:inputText value="#{controladorUsuario.usuario.endereco.estado}" id="estado" required="required" pt:placeholder="estado" class="form-control input-lg"/>
+                    </div>
+                </div>  
+                <br/>    
+                <div class="row">
+                    <div class="col-md-6">
+                        <h:commandButton class="btn btn-primary btn-lg" value="Cadastrar" action="#{controladorUsuario.cadastro()}"/>
+                    </div>
+                </div>    
+                </h:form>    
+            </div>
+            
+            
+        </div>
+
+    </h:body>
+</html>
+
+
