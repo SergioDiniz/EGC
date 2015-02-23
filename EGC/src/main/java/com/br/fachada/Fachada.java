@@ -6,10 +6,9 @@
 package com.br.fachada;
 
 import com.br.beans.Usuario;
-import com.br.service.Dao;
 import com.br.service.DaoIT;
+import com.br.service.UsuarioServiceIT;
 import javax.ejb.EJB;
-import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 /**
@@ -17,17 +16,25 @@ import javax.ejb.Stateless;
  * @author Sergio Diniz
  */
 @Stateless
-@Remote(FachadaIT.class)
-public class Fachada implements FachadaIT{
+public class Fachada{
 
-    Dao dao = new Dao();
     
-    @Override
-    public String Cadastrar(Usuario object) {
-        System.out.println("++++++++++++++++++" + object.getNickname());
+    
+    @EJB
+    private DaoIT dao;    
+    @EJB
+    private UsuarioServiceIT us;
+    
+    public String cadastrar(Usuario object) {
         dao.salvar(object);
         return null;
     }
+    
+    public Usuario loginUsuario(Usuario usuario){
+        return us.login(usuario.getEmail(), usuario.getSenha());
+    }
+    
+    
 
     
     

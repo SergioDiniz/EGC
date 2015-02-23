@@ -5,10 +5,17 @@
  */
 package com.br.service;
 
+import com.br.beans.Usuario;
+
 /**
  *
  * @author Sergio Diniz
  */
-public interface UsuarioServiceIT {
+
+public interface UsuarioServiceIT{
+    
+    public Usuario login(String email, String senha);
+    
+    public boolean excluir(Usuario usuario);
     
 }

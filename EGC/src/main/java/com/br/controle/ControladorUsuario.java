@@ -8,12 +8,12 @@ package com.br.controle;
 import com.br.beans.EnderecoUsuario;
 import com.br.beans.Usuario;
 import com.br.fachada.Fachada;
-import com.br.fachada.FachadaIT;
-import com.br.service.DaoIT;
+import java.io.IOException;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -25,18 +25,49 @@ public class ControladorUsuario implements Serializable{
     
     Usuario usuario;
 
+    
     @EJB
-    private DaoIT dao;
+    private Fachada fachada;
     
     public ControladorUsuario() {
         this.usuario = new Usuario(new EnderecoUsuario());
     }
 
     public String cadastro(){
-        dao.salvar(this.usuario);
-        
+        try{
+            fachada.cadastrar(usuario);
+            return "/sis/usuario/index.jsf?faces-redirect=true";
+        } catch(Exception e){
+            
+        }
+        this.usuario = new Usuario(new EnderecoUsuario());
         return null;
     }
+    
+    public void mostrapagina() throws IOException{
+        if(usuario.getEmail() == null){
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/EGC/index.jsf");
+        }
+        
+    }
+    
+    public String login(){
+        this.usuario = fachada.loginUsuario(this.usuario);
+        if (usuario != null){
+            return "/sis/usuario/index.jsf?faces-redirect=true";
+//            FacesContext.getCurrentInstance().getExternalContext().redirect(null);
+        } else {
+            System.out.println("//////////////////////////////////////// erro");
+            this.usuario = new Usuario(new EnderecoUsuario());
+            return null;
+        }
+        
+    }
+    
+    public String logout(){
+        this.usuario = new Usuario(new EnderecoUsuario());
+        return "/index.jsf?faces-redirect=true";
+    }    
     
     
     
