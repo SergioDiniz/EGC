@@ -26,18 +26,36 @@ public class Dao implements DaoIT{
     }
     
     @Override
-    public void salvar(Object object) {
-        em.persist(object);
+    public boolean salvar(Object object) {
+        try{
+            em.persist(object);
+            return true;
+        } catch (Exception e){
+            
+        }
+        return false;
     }
 
     @Override
-    public void atualizar(Object object) {
-        em.merge(object);
+    public boolean atualizar(Object object) {
+        try{
+            em.merge(object);
+            return true;
+        } catch (Exception e){
+            
+        }
+        return false;
     }
 
     @Override
-    public void excluir(Object object) {
-        em.remove(object);
+    public boolean excluir(Object object) {
+        try{
+            em.remove(object);
+            return true;
+        } catch (Exception e){
+            
+        }
+        return false;
     }
     
 }

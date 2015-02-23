@@ -12,10 +12,10 @@ package com.br.service;
  */
 public interface DaoIT {
     
-    public void salvar(Object object);
+    public boolean salvar(Object object);
     
-    public void atualizar(Object object);
+    public boolean atualizar(Object object);
     
-    public void excluir(Object object);
+    public boolean excluir(Object object);
     
 }

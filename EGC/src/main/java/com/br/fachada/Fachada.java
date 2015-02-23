@@ -25,10 +25,23 @@ public class Fachada{
     @EJB
     private UsuarioServiceIT us;
     
-    public String cadastrar(Usuario object) {
-        dao.salvar(object);
-        return null;
+    public boolean cadastrar(Object object) {
+            return dao.salvar(object);
     }
+    
+    public boolean atualizar(Object object){
+        return dao.atualizar(object);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     public Usuario loginUsuario(Usuario usuario){
         return us.login(usuario.getEmail(), usuario.getSenha());

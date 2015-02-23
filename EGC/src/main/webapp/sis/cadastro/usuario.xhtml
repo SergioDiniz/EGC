@@ -17,7 +17,7 @@
         </div>
         
         <div class="container">
-            <div class="conteudo">     
+            <div class="conteudo">   
                 <div class="cadastro">
                 
                 
@@ -31,29 +31,29 @@
                 <div class="row">
                     <div class="col-md-offset-3 col-md-6">
                         <h4>Nickname:</h4>
-                        <h:inputText value="#{controladorUsuario.usuario.nickname}" id="nickname" required="required" pt:placeholder="nickname" class="form-control input-lg"/>
+                        <h:inputText value="#{controladorUsuario.usuario.nickname}" id="nickname" required="true" pt:placeholder="nickname" class="form-control input-lg"/>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-offset-3 col-md-6">
                         <h4>Email</h4>
-                        <h:inputText value="#{controladorUsuario.usuario.email}" id="email" required="required" pt:placeholder="email" class="form-control input-lg"/>
+                        <h:inputText value="#{controladorUsuario.usuario.email}" id="email" required="true" pt:placeholder="email" class="form-control input-lg"/>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-offset-3 col-md-6">
                         <h4>Senha</h4>
-                        <h:inputText value="#{controladorUsuario.usuario.senha}" id="senha" required="required" pt:placeholder="senha" class="form-control input-lg"/>
+                        <h:inputSecret value="#{controladorUsuario.usuario.senha}" id="senha" required="true" pt:placeholder="senha" class="form-control input-lg"/>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-offset-3 col-md-4">
                         <h4>Cidada:</h4>
-                        <h:inputText value="#{controladorUsuario.usuario.endereco.cidade}" id="cidade" required="required" pt:placeholder="cidade" class="form-control input-lg"/>
+                        <h:inputText value="#{controladorUsuario.usuario.endereco.cidade}" id="cidade" required="true" pt:placeholder="cidade" class="form-control input-lg"/>
                     </div>
                     <div class="col-md-2">
                         <h4>Estado:</h4>
-                        <h:inputText value="#{controladorUsuario.usuario.endereco.estado}" id="estado" required="required" pt:placeholder="estado" class="form-control input-lg"/>
+                        <h:inputText value="#{controladorUsuario.usuario.endereco.estado}" id="estado" required="true" pt:placeholder="estado" class="form-control input-lg"/>
                     </div>
                 </div>  
                 <br/>    

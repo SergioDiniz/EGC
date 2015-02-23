@@ -34,13 +34,18 @@ public class ControladorUsuario implements Serializable{
     }
 
     public String cadastro(){
-        try{
-            fachada.cadastrar(usuario);
+        
+        if(fachada.cadastrar(usuario)){
             return "/sis/usuario/index.jsf?faces-redirect=true";
-        } catch(Exception e){
-            
         }
+
         this.usuario = new Usuario(new EnderecoUsuario());
+        return null;
+    }
+    
+    public String atualizar(){
+        
+        fachada.atualizar(this.usuario);
         return null;
     }
     
