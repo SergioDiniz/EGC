@@ -35,8 +35,12 @@ public class ControladorUsuario implements Serializable{
 
     public String cadastro(){
         
-        if(fachada.cadastrar(usuario)){
+        try{
+            fachada.cadastrar(usuario);
+            this.usuario = fachada.loginUsuario(usuario);
             return "/sis/usuario/index.jsf?faces-redirect=true";
+        } catch (Exception e){
+            
         }
 
         this.usuario = new Usuario(new EnderecoUsuario());
@@ -62,7 +66,6 @@ public class ControladorUsuario implements Serializable{
             return "/sis/usuario/index.jsf?faces-redirect=true";
 //            FacesContext.getCurrentInstance().getExternalContext().redirect(null);
         } else {
-            System.out.println("//////////////////////////////////////// erro");
             this.usuario = new Usuario(new EnderecoUsuario());
             return null;
         }
