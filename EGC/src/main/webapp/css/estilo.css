@@ -56,6 +56,22 @@ body{
 }
 
 
+.escolherTipoLogin{
+    margin-top: 100px;
+}
+
+.rodape{
+    margin-top: 100px;
+    height: 80px;
+    background-color: #f3f5f6;
+}
+
+.descricaoTipoLogin{
+    text-align: justify;
+    color: #999;
+}
+
+
 .area-sair{
     float: right;
 }
