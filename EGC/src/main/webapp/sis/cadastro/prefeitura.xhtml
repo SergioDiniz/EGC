@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <link rel="stylesheet" href="../../css/prefeitura.css" type="text/css"/>
+        <title>EGC - Login Prefeitura</title>
+    </h:head>
+    <h:body>
+        <div id="menu">
+            <ui:include src="/menu.xhtml"/>
+        </div>
+
+        <div class="container">
+            <div class="conteudo">   
+                <div class="cadastro">
+
+
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-6">
+                            <div align="center">
+                                <img src="../../img/icon prefeitura.png" alt="Solicitar Cadastro Prefeitura"/>
+                                <h1>Solicite seu cadastro hoje do EGC!</h1>
+                            </div>
+                            <br/>
+                        </div>
+                    </div>
+                    <h:form enctype="multipart/form-data">    
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-6">
+                                <h4>Nome</h4>
+                                <h:inputText value="#{controladorUsuario.usuario.nickname}" id="nome" required="true" pt:placeholder="nome da prefeitura" class="form-control input-lg"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-6">
+                                <h4>Email</h4>
+                                <h:inputText value="#{controladorUsuario.usuario.email}" id="email" required="true" pt:placeholder="email" class="form-control input-lg"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-6">
+                                <h4>Senha</h4>
+                                <h:inputSecret value="#{controladorUsuario.usuario.senha}" id="senha" required="true" pt:placeholder="senha" class="form-control input-lg"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-4">
+                                <h4>Cidade:</h4>
+                                <h:inputText value="#{controladorUsuario.usuario.endereco.cidade}" id="cidade" required="true" pt:placeholder="cidade" class="form-control input-lg"/>
+                            </div>
+                            <div class="col-md-2">
+                                <h4>Estado:</h4>
+                                <h:inputText value="#{controladorUsuario.usuario.endereco.estado}" id="estado" required="true" pt:placeholder="estado" class="form-control input-lg"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-6">
+                                <br/>
+                                <p>Anexe um documento em formato JPEG solicitando 
+                                    o acesso ao sistema. O documento deve conter 
+                                    obrigatoriamente o timbre da prefeitura, carimbo 
+                                    e assinatura do prefeito.</p>
+
+                                <h:inputFile title="anexar arquivo" class="btn btn-default" required="true"  value="#{controladorPrefeitura.termo}"/>
+                            </div>
+                        </div>
+
+                        <br/>
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-6">
+                                <h:commandButton class="btn btn-primary btn-lg" value="Cadastrar" action="#{controladorPrefeitura.uploadTermo()}"/>
+                            </div>
+                        </div>    
+                    </h:form> 
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>
+
