@@ -12,7 +12,7 @@ Instituição: [IFPB Cajazeiras](http://portal.ifpb.edu.br/campi/campi/cajazeira
 
 Professor: **Profº Esp. Janderson Ferreira Dutra**
 
-Alunos:
+Aluno:
 - [Sérgio Diniz](http://buscatextual.cnpq.br/buscatextual/visualizacv.do?metodo=apresentar&id=K8153626U7)
  
 Descrição:
