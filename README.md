@@ -15,7 +15,7 @@ Professor: **Profº Esp. Janderson Ferreira Dutra**
 Alunos:
 - [Sérgio Diniz](http://buscatextual.cnpq.br/buscatextual/visualizacv.do?metodo=apresentar&id=K8153626U7)
  
- Descrição:
+Descrição:
 --------
 
 Se deparar com o mau estado das estradas de nossa cidade ou com o acumulo de lixo nas ruas não é novidade nem uma tarefa difícil. E não param por ai, outros problemas como falta de manutenção em postes de energia, vazamentos na rede de esgoto, que chegam até causar doenças graves, e mais uma infinidade de problema no âmbito urbano agravam ainda mais a situação.
