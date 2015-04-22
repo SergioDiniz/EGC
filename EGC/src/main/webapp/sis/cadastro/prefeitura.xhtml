@@ -32,29 +32,45 @@
                         <div class="row">
                             <div class="col-md-offset-3 col-md-6">
                                 <h4>Nome</h4>
-                                <h:inputText value="#{controladorUsuario.usuario.nickname}" id="nome" required="true" pt:placeholder="nome da prefeitura" class="form-control input-lg"/>
+                                <h:inputText value="#{controladorPrefeitura.prefeitura.nome}" id="nome" required="true" pt:placeholder="nome da prefeitura" class="form-control input-lg"/>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-offset-3 col-md-6">
                                 <h4>Email</h4>
-                                <h:inputText value="#{controladorUsuario.usuario.email}" id="email" required="true" pt:placeholder="email" class="form-control input-lg"/>
+                                <h:inputText value="#{controladorPrefeitura.prefeitura.email}" id="email" required="true" pt:placeholder="email" class="form-control input-lg"/>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-offset-3 col-md-6">
                                 <h4>Senha</h4>
-                                <h:inputSecret value="#{controladorUsuario.usuario.senha}" id="senha" required="true" pt:placeholder="senha" class="form-control input-lg"/>
+                                <h:inputSecret value="#{controladorPrefeitura.prefeitura.senha}" id="senha" required="true" pt:placeholder="senha" class="form-control input-lg"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-3">
+                                <h4>Estado:</h4>
+                                <h:inputText value="#{controladorPrefeitura.cidadePK.siglaEstado}" id="estado" required="true" pt:placeholder="estado" class="form-control input-lg"/>
+                            </div>
+                            <div class="col-md-3">
+                                <h4>CEP</h4>
+                                <h:inputText value="#{controladorPrefeitura.prefeitura.enderecoPrefeitura.cep}" id="cep" required="true" pt:placeholder="CEP" class="form-control input-lg"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-6">
+                                <h4>Cidade:</h4>
+                                <h:inputText value="#{controladorPrefeitura.cidadePK.nomeCidade}" id="cidade" required="true" pt:placeholder="cidade" class="form-control input-lg"/>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-offset-3 col-md-4">
-                                <h4>Cidade:</h4>
-                                <h:inputText value="#{controladorUsuario.usuario.endereco.cidade}" id="cidade" required="true" pt:placeholder="cidade" class="form-control input-lg"/>
+                                <h4>Rua</h4>
+                                <h:inputText value="#{controladorPrefeitura.prefeitura.enderecoPrefeitura.rua}" id="rua" required="true" pt:placeholder="rua" class="form-control input-lg"/>
                             </div>
                             <div class="col-md-2">
-                                <h4>Estado:</h4>
-                                <h:inputText value="#{controladorUsuario.usuario.endereco.estado}" id="estado" required="true" pt:placeholder="estado" class="form-control input-lg"/>
+                                <h4>Numero</h4>
+                                <h:inputText value="#{controladorPrefeitura.prefeitura.enderecoPrefeitura.numero}" id="numero" required="true" pt:placeholder="numero" class="form-control input-lg"/>
                             </div>
                         </div>
                         <div class="row">
@@ -72,7 +88,7 @@
                         <br/>
                         <div class="row">
                             <div class="col-md-offset-3 col-md-6">
-                                <h:commandButton class="btn btn-primary btn-lg" value="Cadastrar" action="#{controladorPrefeitura.uploadTermo()}"/>
+                                <h:commandButton class="btn btn-primary btn-lg" value="Cadastrar" action="#{controladorPrefeitura.cadastro()}"/>
                             </div>
                         </div>    
                     </h:form> 

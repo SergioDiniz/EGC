@@ -65,6 +65,10 @@ public class Prefeitura implements Serializable{
         this.cidade = cidade;
     }
 
+    public Prefeitura(EnderecoPrefeitura enderecoPrefeitura) {
+        this.enderecoPrefeitura = enderecoPrefeitura;
+    }
+
     
 
 

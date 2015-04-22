@@ -5,8 +5,12 @@
  */
 package com.br.fachada;
 
+import com.br.beans.Cidade;
+import com.br.beans.Prefeitura;
 import com.br.beans.Usuario;
+import com.br.service.CidadeServiceIT;
 import com.br.service.DaoIT;
+import com.br.service.PrefeituraServiceIT;
 import com.br.service.UsuarioServiceIT;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -24,6 +28,10 @@ public class Fachada{
     private DaoIT dao;    
     @EJB
     private UsuarioServiceIT us;
+    @EJB
+    private PrefeituraServiceIT ps;
+    @EJB
+    private CidadeServiceIT cs;
     
     public boolean cadastrar(Object object) {
             return dao.salvar(object);
@@ -41,14 +49,47 @@ public class Fachada{
     
     
     
-    
+    // UsuarioServices
     
     public Usuario loginUsuario(Usuario usuario){
         return us.login(usuario.getEmail(), usuario.getSenha());
     }
     
     
-
+    // FIM UsuarioServices
+    //
+    //
+    //
+    //
+    
+    
+    
+    
+    
+    // PrefeituraServices
+    
+    
+    
+    // FIM PrefeituraServices
+    //
+    //
+    //
+    //
+    
+    
+    
+    
+    // CidadeServices
+    
+    public Cidade pesquisarCidade(String nome, String estado){
+        return cs.pesquisarCidade(nome, estado);
+    }
+    
+    // FIM CidadeServices
+    //
+    //
+    //
+    //
     
     
 }
