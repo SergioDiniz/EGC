@@ -10,12 +10,17 @@ import com.br.beans.CidadePK;
 import com.br.beans.EnderecoPrefeitura;
 import com.br.beans.Prefeitura;
 import com.br.fachada.Fachada;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.servlet.http.Part;
+import org.primefaces.model.UploadedFile;
 
 /**
  *
@@ -25,85 +30,79 @@ import javax.servlet.http.Part;
 @SessionScoped
 public class ControladorPrefeitura implements Serializable {
 
-    private Part termo;
-    
+    private UploadedFile file;
+
     Prefeitura prefeitura;
     Cidade cidade;
-    CidadePK  cidadePK;
-    
+    CidadePK cidadePK;
+
     @EJB
     private Fachada fachada;
-    
+
     public ControladorPrefeitura() {
         this.prefeitura = new Prefeitura();
         this.prefeitura.setEnderecoPrefeitura(new EnderecoPrefeitura());
         this.cidade = new Cidade();
         this.cidadePK = new CidadePK();
     }
-    
-    public String cadastro() throws IOException{
-        
-        try{
+
+    public String cadastro() throws IOException {
+
+        try {
             cidade.setCidadePK(cidadePK);
             fachada.cadastrar(cidade);
             cidade = fachada.pesquisarCidade(cidadePK.getNomeCidade(), cidadePK.getSiglaEstado());
-        }catch(Exception e){
-            
+        } catch (Exception e) {
+
         }
-        
-        
-        
+
         prefeitura.setCidade(cidade);
         prefeitura.getEnderecoPrefeitura().setCidade(cidade.getCidadePK().getNomeCidade());
         prefeitura.getEnderecoPrefeitura().setEstado(cidade.getCidadePK().getSiglaEstado());
-        prefeitura.setDocumento(uploadTermo());
+        prefeitura.setDocumento(upload());
         fachada.atualizar(prefeitura);
-        
-        
-        
+
         cidade = new Cidade();
         cidadePK = new CidadePK();
-        prefeitura = new Prefeitura(new EnderecoPrefeitura());       
-        
+        prefeitura = new Prefeitura(new EnderecoPrefeitura());
+
         return "/index.jsf?faces-redirect=true";
-        
-    }
-    
-    // Local de Salvamento
-    //C:\Glassfish\glassfish\domains\domain1\generated\jsp\EGC
-    public String uploadTermo() throws IOException{
-        String nomeArquivo = getFilename(termo);
-        String extencaoArquivo = nomeArquivo.substring(nomeArquivo.lastIndexOf("."), nomeArquivo.length());
-        String nome = prefeitura.getEmail()+extencaoArquivo;
-        
-        termo.write("\\"+nome);
-        return nome;
+
     }
 
-    private static String getFilename(Part part){
-        for(String cd : part.getHeader("content-disposition").split(";")){
-            if(cd.trim().startsWith("filename")){
-                String filename = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
-                return filename.substring(filename.lastIndexOf('/') + 1).substring(filename.lastIndexOf('\\') + 1);
+    public String upload() {
+        if (file != null) {
+            try {
+                File targetFolder = new File("D:\\Sergio\\Documentos\\ADS\\P6\\TCC\\Sistema\\EGC\\EGC\\src\\main\\webapp\\sis\\admin\\documentos-de-solicitacao");
+                InputStream inputStream = file.getInputstream();
+
+                String tipoArquivo = file.getFileName();
+                tipoArquivo = tipoArquivo.substring(tipoArquivo.lastIndexOf("."), tipoArquivo.length());
+                String nomeArquivo = prefeitura.getEmail() + tipoArquivo;
+                System.out.println("tipo do arquivo: " + tipoArquivo);
+                System.out.println("nome do arquivo: " + nomeArquivo);
+
+                OutputStream out = new FileOutputStream(new File(targetFolder,
+                        nomeArquivo));
+                int read = 0;
+                byte[] bytes = new byte[1024];
+
+                while ((read = inputStream.read(bytes)) != -1) {
+                    out.write(bytes, 0, read);
+                }
+                inputStream.close();
+                out.flush();
+                out.close();
+                return nomeArquivo;
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
         return null;
+
     }
-    
-    
-    
-    
-    
+
     // gets and setes
-    
-    public Part getTermo() {
-        return termo;
-    }
-
-    public void setTermo(Part termo) {
-        this.termo = termo;
-    }
-
     public Prefeitura getPrefeitura() {
         return prefeitura;
     }
@@ -127,10 +126,13 @@ public class ControladorPrefeitura implements Serializable {
     public void setCidadePK(CidadePK cidadePK) {
         this.cidadePK = cidadePK;
     }
-    
-    
-    
-    
-    
-    
+
+    public UploadedFile getFile() {
+        return file;
+    }
+
+    public void setFile(UploadedFile file) {
+        this.file = file;
+    }
+
 }

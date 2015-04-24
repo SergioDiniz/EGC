@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+
+        <h:form enctype="multipart/form-data">
+
+            faz upload automatico
+            <p:fileUpload
+                mode="advanced"
+                fileUploadListener="#{uploaderBB.handleFileUpload}"
+                allowTypes="/(\.|\/)(gif|jpg|jpeg|gif|png|PNG|GIF|JPG|JPEG)$/" 
+                auto="true"/>
+
+
+        </h:form>
+        <br/><br/><br/><br/>
+        <h:form>
+            precisa aperta o botão <br/>
+            <p:fileUpload
+                value="#{uploaderBB.file}"
+                allowTypes="/(\.|\/)(gif|jpg|jpeg|gif|png|PNG|GIF|JPG|JPEG)$/" 
+                mode="simple" 
+                skinSimple="true"
+                />
+            <br/>
+            <p:commandButton value="Submit" ajax="false" actionListener="#{uploaderBB.upload}" disabled="false" update="@all"/>
+        </h:form>
+
+
+    </h:body>
+</html>
+

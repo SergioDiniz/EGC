@@ -4,10 +4,11 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <link rel="stylesheet" href="../../css/prefeitura.css" type="text/css"/>
-        <title>EGC - Login Prefeitura</title>
+        <title>EGC - Cadastro Prefeitura</title>
     </h:head>
     <h:body>
         <div id="menu">
@@ -81,7 +82,16 @@
                                     obrigatoriamente o timbre da prefeitura, carimbo 
                                     e assinatura do prefeito.</p>
 
-                                <h:inputFile title="anexar arquivo" class="btn btn-default" required="true"  value="#{controladorPrefeitura.termo}"/>
+                                <p:fileUpload
+                                    label="Procurar"
+                                    value="#{controladorPrefeitura.file}"
+                                    allowTypes="/(\.|\/)(gif|jpg|jpeg|gif|png|PNG|GIF|JPG|JPEG)$/" 
+                                    mode="simple" 
+                                    skinSimple="true"
+                                    required="true"
+                                    
+                                    />
+                                <br/>
                             </div>
                         </div>
 
