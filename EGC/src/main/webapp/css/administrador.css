@@ -1,10 +1,11 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 11/04/2015, 18:14:11
-    Author     : SergioD
-*/
+.ml-admin{
+    background-color: #000;
+}
 
+.m-admin{
+    background-color: #ffffff;
+}
+
+.nu-admin{
+    color: #999999;
+}
