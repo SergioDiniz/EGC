@@ -16,7 +16,7 @@
         
     </h:head>
     <h:body>
-        
+        #{controladorAdmin.mostrapagina()}
         
             
             <div class="container menu m-admin">
@@ -28,13 +28,13 @@
                     
                     <div class="area-sair">
                     <div class="nome-usuario nu-admin">
-                        Admin
+                        #{controladorAdmin.administrador.nome}
                     </div>
                     
                     <div class="btn-sair">
                         <h:form>
                             <span class="tooltips" title="Sair" rel="tooltip" data-placement="bottom" >
-                            <h:commandButton image="../../img/sair-azul.png"  />
+                                <h:commandButton action="#{controladorAdmin.logout()}" image="../../img/sair-azul.png"  />
                             </span>
                         </h:form>
                     </div>    

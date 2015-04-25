@@ -49,14 +49,14 @@
                                     <h:form>
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <h:inputText class="form-control input-lg" pt:placeholder="email"/>
+                                                <h:inputText value="#{controladorAdmin.administrador.email}" class="form-control input-lg" pt:placeholder="email"/>
                                                 <br/>
                                             </div>
                                         </div>
 
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <h:inputSecret class="form-control input-lg" pt:placeholder="senha"/>
+                                                <h:inputSecret value="#{controladorAdmin.administrador.senha}" class="form-control input-lg" pt:placeholder="senha"/>
                                                 <br/>
                                             </div>
                                         </div>
@@ -64,7 +64,7 @@
                                         <br/>
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <h:commandButton value="entrar" class="btn btn-lg btn-login btn-primary"/>
+                                                <h:commandButton action="#{controladorAdmin.login()}" value="entrar" class="btn btn-lg btn-login btn-primary"/>
                                             </div>
                                         </div>
                                     </h:form>

@@ -5,9 +5,12 @@
  */
 package com.br.fachada;
 
+import com.br.beans.Administrador;
 import com.br.beans.Cidade;
 import com.br.beans.Prefeitura;
 import com.br.beans.Usuario;
+import com.br.service.AdministradorService;
+import com.br.service.AdministradorServiceIT;
 import com.br.service.CidadeServiceIT;
 import com.br.service.DaoIT;
 import com.br.service.PrefeituraServiceIT;
@@ -32,6 +35,8 @@ public class Fachada{
     private PrefeituraServiceIT ps;
     @EJB
     private CidadeServiceIT cs;
+    @EJB
+    private AdministradorServiceIT as;
     
     public boolean cadastrar(Object object) {
             return dao.salvar(object);
@@ -90,6 +95,24 @@ public class Fachada{
     //
     //
     //
+    
+    
+    
+    // AdministradorServices
+    
+    
+    
+    // FIM AdministradorServices
+    public Administrador loginAdmin(String email, String senha){
+        return as.login(email, senha);
+    }
+    
+    //
+    //
+    //
+    //
+    //
+    
     
     
 }
