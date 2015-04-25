@@ -14,6 +14,8 @@ import com.br.beans.Prefeitura;
  */
 public interface PrefeituraServiceIT {
 
+    public Prefeitura login(String email, String senha);
+    
     public String cadastrarNaPrefeitura(Prefeitura prefeitura, Funcionario funcionario);
     
 }

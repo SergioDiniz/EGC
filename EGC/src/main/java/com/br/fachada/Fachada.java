@@ -72,7 +72,9 @@ public class Fachada{
     
     
     // PrefeituraServices
-    
+    public Prefeitura loginPrefeitura(String email, String senha){
+        return ps.login(email, senha);
+    }
     
     
     // FIM PrefeituraServices

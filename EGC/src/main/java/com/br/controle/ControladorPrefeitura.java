@@ -8,17 +8,21 @@ package com.br.controle;
 import com.br.beans.Cidade;
 import com.br.beans.CidadePK;
 import com.br.beans.EnderecoPrefeitura;
+import com.br.beans.Funcionario;
 import com.br.beans.Prefeitura;
+import static com.br.controle.ControladorAdmin.info;
 import com.br.fachada.Fachada;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import javax.servlet.http.Part;
 import org.primefaces.model.UploadedFile;
 
@@ -35,6 +39,11 @@ public class ControladorPrefeitura implements Serializable {
     Prefeitura prefeitura;
     Cidade cidade;
     CidadePK cidadePK;
+    Funcionario funcionario;
+    boolean funcionarioCadastrado;
+    boolean funcionarioVinculado;
+    boolean funcionarioNovo;
+    String CPFPesquisaF;
 
     @EJB
     private Fachada fachada;
@@ -44,6 +53,49 @@ public class ControladorPrefeitura implements Serializable {
         this.prefeitura.setEnderecoPrefeitura(new EnderecoPrefeitura());
         this.cidade = new Cidade();
         this.cidadePK = new CidadePK();
+    }
+
+    public void mostrapagina() throws IOException {
+        if (this.prefeitura.getEmail() == null) {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/EGC/index.jsf");
+        }
+
+    }
+
+    public String login() {
+        this.prefeitura = fachada.loginPrefeitura(prefeitura.getEmail(), prefeitura.getSenha());
+
+        if (this.prefeitura != null) {
+
+            if (prefeitura.isAtivo() == true) {
+
+                return "/sis/prefeitura/index.jsf?faces-redirect=true";
+            }
+            info("Conta aguardando confirmação!");
+            this.prefeitura = new Prefeitura();
+            this.prefeitura.setEmail("");
+            return null;
+        } else {
+            info("Usuário invalido!");
+            this.prefeitura = new Prefeitura();
+            this.prefeitura.setEmail("");
+            return null;
+        }
+
+    }
+
+    
+    
+    public String logout() {
+        this.cidade = new Cidade();
+        this.cidadePK = new CidadePK();
+        this.prefeitura = new Prefeitura();
+        this.funcionarioCadastrado = false;
+        this.funcionarioNovo = false;
+        this.funcionarioVinculado = false;
+        this.CPFPesquisaF = "";
+        this.funcionario = new Funcionario();
+        return "/index.jsf?faces-redirect=true";
     }
 
     public String cadastro() throws IOException {

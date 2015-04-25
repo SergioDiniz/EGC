@@ -7,11 +7,13 @@ package com.br.service;
 
 import com.br.beans.Funcionario;
 import com.br.beans.Prefeitura;
+import java.util.List;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -19,20 +21,18 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 @Remote(PrefeituraServiceIT.class)
-public class PrefeituraService implements PrefeituraServiceIT{
-    
+public class PrefeituraService implements PrefeituraServiceIT {
+
     @PersistenceContext(unitName = "jdbc/EGC")
     private EntityManager em;
-    
-    
-    
+
     @Override
     public String cadastrarNaPrefeitura(Prefeitura prefeitura, Funcionario funcionario) {
         try {
             prefeitura.getFuncionarios().add(funcionario);
-            
+
             em.merge(prefeitura);
-            
+
             return "Cadastrado com Sucesso";
 
         } catch (Exception e) {
@@ -40,5 +40,21 @@ public class PrefeituraService implements PrefeituraServiceIT{
 
         return "ERRO!";
     }
-    
+
+    @Override
+    public Prefeitura login(String email, String senha) {
+        Query query = em.createQuery("SELECT p FROM Prefeitura p WHERE p.email = :email AND p.senha = :senha ");
+        query.setParameter("email", email);
+        query.setParameter("senha", senha);
+
+        List<Prefeitura> p = query.getResultList();
+
+        if (p.size() > 0) {
+            p.get(0).getFuncionarios().size();
+            return p.get(0);
+        }
+
+        return null;
+    }
+
 }

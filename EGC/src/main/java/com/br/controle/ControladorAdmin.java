@@ -12,6 +12,7 @@ import java.io.IOException;
 import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
@@ -48,6 +49,7 @@ public class ControladorAdmin implements Serializable {
         if(administrador != null){
             return "/sis/admin/index.jsf?faces-redirect=true";
         } 
+            info("Usuário invalido!");
             this.administrador = new Administrador();    
             return null;
         
@@ -58,7 +60,9 @@ public class ControladorAdmin implements Serializable {
         return "/index.jsf?faces-redirect=true";
     }
     
-    
+    public static void info(String s) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", s));
+    }
     
     
     //getes and seters
