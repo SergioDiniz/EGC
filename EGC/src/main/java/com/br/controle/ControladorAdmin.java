@@ -65,6 +65,11 @@ public class ControladorAdmin implements Serializable {
     }
     
     
+    public static void info() {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Usuário inválido!"));
+    }
+    
+    
     //getes and seters
 
     public Administrador getAdministrador() {

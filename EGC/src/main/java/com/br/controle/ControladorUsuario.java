@@ -66,7 +66,7 @@ public class ControladorUsuario implements Serializable{
             return "/sis/usuario/index.jsf?faces-redirect=true";
 //            FacesContext.getCurrentInstance().getExternalContext().redirect(null);
         } else {
-            ControladorAdmin.info("Usuário invalido!");
+            ControladorAdmin.info();
             this.usuario = new Usuario(new EnderecoUsuario());
             return null;
         }

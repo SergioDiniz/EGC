@@ -7,12 +7,14 @@ package com.br.fachada;
 
 import com.br.beans.Administrador;
 import com.br.beans.Cidade;
+import com.br.beans.Funcionario;
 import com.br.beans.Prefeitura;
 import com.br.beans.Usuario;
 import com.br.service.AdministradorService;
 import com.br.service.AdministradorServiceIT;
 import com.br.service.CidadeServiceIT;
 import com.br.service.DaoIT;
+import com.br.service.FuncionarioServiceIT;
 import com.br.service.PrefeituraServiceIT;
 import com.br.service.UsuarioServiceIT;
 import javax.ejb.EJB;
@@ -37,6 +39,8 @@ public class Fachada{
     private CidadeServiceIT cs;
     @EJB
     private AdministradorServiceIT as;
+    @EJB
+    private FuncionarioServiceIT fs;
     
     public boolean cadastrar(Object object) {
             return dao.salvar(object);
@@ -82,6 +86,30 @@ public class Fachada{
     //
     //
     //
+    
+    
+    
+    // FuncionarioServices
+    
+    public Funcionario loginFuncionario(String email, String senha, String cidade, String estado){
+        System.out.println("entrou na fachada");
+        return fs.login(email, senha, cidade, estado);
+    }
+    
+    public Funcionario buscarFuncionarioPorCPF(String cpf){
+        return fs.buscarPorCPF(cpf);
+    }
+    
+    public String excluirFuncionario(Funcionario funcionario){
+        return fs.excluir(funcionario);
+    }
+    
+    // FIM FuncionarioServices
+    //
+    //
+    //
+    //
+    
     
     
     
