@@ -6,6 +6,7 @@
 package com.br.service;
 
 import com.br.beans.Administrador;
+import com.br.beans.Prefeitura;
 import java.util.List;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
@@ -38,6 +39,21 @@ public class AdministradorService implements AdministradorServiceIT {
         }
 
         return null;
+    }
+
+    @Override
+    public String excluir(Prefeitura prefeitura) {
+        try {
+            prefeitura.setFuncionarios(null);
+            prefeitura.setCidade(null);
+
+            em.remove(em.merge(prefeitura));
+            return "Excluido com sucesso!";
+
+        } catch (Exception e) {
+        }
+
+        return "ERRO!";
     }
 
 }

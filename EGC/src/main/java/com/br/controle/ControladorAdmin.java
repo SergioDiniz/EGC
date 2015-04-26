@@ -7,10 +7,12 @@ package com.br.controle;
 
 
 import com.br.beans.Administrador;
+import com.br.beans.Prefeitura;
 import com.br.fachada.Fachada;
 import java.io.IOException;
 import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -59,6 +61,20 @@ public class ControladorAdmin implements Serializable {
         this.administrador = new Administrador();
         return "/index.jsf?faces-redirect=true";
     }
+    
+    
+    public List<Prefeitura> prefeiturasPendentes(){
+        return fachada.prefeiturasPendentes();
+    }
+    
+    
+    public String excluirPrefeitura(Prefeitura p){
+        fachada.excluirPrefeitura(p);
+        return null;
+    }
+    
+    
+    
     
     public static void info(String s) {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", s));

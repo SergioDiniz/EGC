@@ -17,6 +17,7 @@ import com.br.service.DaoIT;
 import com.br.service.FuncionarioServiceIT;
 import com.br.service.PrefeituraServiceIT;
 import com.br.service.UsuarioServiceIT;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -80,6 +81,14 @@ public class Fachada{
         return ps.login(email, senha);
     }
     
+    public String cadastrarNaPrefeitura(Prefeitura prefeitura, Funcionario funcionario){
+        return ps.cadastrarNaPrefeitura(prefeitura, funcionario);
+    }
+    
+    public List<Prefeitura> prefeiturasPendentes(){
+        return ps.prefeiturasPendentes();
+    }
+    
     
     // FIM PrefeituraServices
     //
@@ -135,6 +144,11 @@ public class Fachada{
     // FIM AdministradorServices
     public Administrador loginAdmin(String email, String senha){
         return as.login(email, senha);
+    }
+    
+    
+    public String excluirPrefeitura(Prefeitura prefeitura){
+        return as.excluir(prefeitura);
     }
     
     //

@@ -57,4 +57,16 @@ public class PrefeituraService implements PrefeituraServiceIT {
         return null;
     }
 
+    @Override
+    public List<Prefeitura> prefeiturasPendentes() {
+        Query query = em.createQuery("SELECT p from Prefeitura p WHERE p.ativo = false");
+        List<Prefeitura> prefeituras = query.getResultList();
+
+        if (prefeituras.size() > 0) {
+            return prefeituras;
+        }
+
+        return null;
+    }
+
 }

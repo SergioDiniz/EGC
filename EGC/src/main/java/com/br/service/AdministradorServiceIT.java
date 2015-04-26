@@ -6,6 +6,7 @@
 package com.br.service;
 
 import com.br.beans.Administrador;
+import com.br.beans.Prefeitura;
 
 /**
  *
@@ -14,5 +15,7 @@ import com.br.beans.Administrador;
 public interface AdministradorServiceIT {
     
     public Administrador login(String email, String senha);
+    
+    public String  excluir(Prefeitura prefeitura);
     
 }

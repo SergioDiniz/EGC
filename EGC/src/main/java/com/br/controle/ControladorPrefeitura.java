@@ -11,6 +11,7 @@ import com.br.beans.EnderecoPrefeitura;
 import com.br.beans.Funcionario;
 import com.br.beans.Prefeitura;
 import static com.br.controle.ControladorAdmin.info;
+import static com.br.controle.ControladorAdmin.infoUsuarioInvalido;
 import com.br.fachada.Fachada;
 import java.io.File;
 import java.io.FileOutputStream;
