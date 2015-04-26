@@ -5,32 +5,48 @@
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        
+
+
         <link rel="stylesheet" href="../../css/bootstrap.css" type="text/css"/>
         <link rel="stylesheet" href="../../css/bootstrap-theme.css" type="text/css"/>
         <link rel="stylesheet" href="../../css/estilo.css" type="text/css"/>
         <link rel="stylesheet" href="../../css/administrador.css" type="text/css"/>
+        <link rel="stylesheet" href="../../js/rm/jquery.remodal.css" type="text/css"/>
+
+
+
         <script src="../../js/jquery-1.11.2.js" type="text/javascript"/>
+        
+        <script src="../../js/m-p/jquery.magnific-popup.js" type="text/javascript"/>
+        <link rel="stylesheet" href="../../js/m-p/magnific-popup.css"/> 
+        
+        <script src="../../js/rm/jquery.remodal.js" type="text/javascript"/>
+
         <script src="../../js/bootstrap.js" type="text/javascript"/>
         <script src="../../js/scripts.js" type="text/javascript"/>
-        
+
+
+
+
+
+
     </h:head>
     <h:body>
         #{controladorAdmin.mostrapagina()}
-        
-            
-            <div class="container menu m-admin">
-                <div class="row">
-                    
-                    <div class="logo">
-                        <img src="../../img/logo-azul.png" alt="EGC"/>
-                    </div>
-                    
-                    <div class="area-sair">
+
+
+        <div class="container menu m-admin">
+            <div class="row">
+
+                <div class="logo">
+                    <img src="../../img/logo-azul.png" alt="EGC"/>
+                </div>
+
+                <div class="area-sair">
                     <div class="nome-usuario nu-admin">
                         #{controladorAdmin.administrador.nome}
                     </div>
-                    
+
                     <div class="btn-sair">
                         <h:form>
                             <span class="tooltips" title="Sair" rel="tooltip" data-placement="bottom" >
@@ -38,11 +54,11 @@
                             </span>
                         </h:form>
                     </div>    
-                    </div>
                 </div>
             </div>
+        </div>
 
-        
+
 
     </h:body>
 </html>

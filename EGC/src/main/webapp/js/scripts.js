@@ -6,37 +6,59 @@ $(document).ready(function () {
     $('.tudo').animate({opacity: '1.0'})
 });
 
-
-//modal
 $(document).ready(function () {
-    $("a[rel=modal]").click(function (ev) {
-        ev.preventDefault();
-
-        var id = $(this).attr("href");
-
-        var alturaTela = $(document).height();
-        var larguraTela = $(window).width();
-
-        //colocando o fundo preto
-        $('#mascara').css({'width': larguraTela, 'height': alturaTela});
-        $('#mascara').fadeIn(1000);
-        $('#mascara').fadeTo("slow", 0.8);
-
-        var left = ($(window).width() / 2) - ($(id).width() / 2);
-        var top = ($(window).height() / 2) - ($(id).height() / 2);
-
-        $(id).css({'top': top, 'left': left});
-        $(id).show();
+    $('.test-popup-link').magnificPopup({
+        type: 'image'
+                // other options
     });
 
-    $("#mascara").click(function () {
-        $(this).hide();
-        $(".window").hide();
+});
+
+$(document).ready(function () {
+    $('.popup-with-zoom-anim').magnificPopup({
+        type: 'inline',
+        fixedContentPos: false,
+        fixedBgPos: true,
+        overflowY: 'auto',
+        closeBtnInside: true,
+        preloader: false,
+        midClick: true,
+        removalDelay: 300,
+        mainClass: 'my-mfp-zoom-in'
     });
 
-    $('.fechar').click(function (ev) {
-        ev.preventDefault();
-        $("#mascara").hide();
-        $(".window").hide();
+    $('.popup-with-move-anim').magnificPopup({
+        type: 'inline',
+        fixedContentPos: false,
+        fixedBgPos: true,
+        overflowY: 'auto',
+        closeBtnInside: true,
+        preloader: false,
+        midClick: true,
+        removalDelay: 300,
+        mainClass: 'my-mfp-slide-bottom'
     });
+
+
+
+});
+
+$(function () {
+    $('.popup-modal').magnificPopup({
+        type: 'inline',
+        preloader: true,
+        focus: '#username',
+        modal: true
+    });
+    $(document).on('click', '.popup-modal-dismiss', function (e) {
+        e.preventDefault();
+        $.magnificPopup.close();
+    });
+});
+
+
+$(document).ready( function(){
+    $(".chamar-modal").click( function(){
+      $(".remodal").modal("show");
+    });  
 });

@@ -5,7 +5,6 @@
  */
 package com.br.controle;
 
-
 import com.br.beans.Administrador;
 import com.br.beans.Prefeitura;
 import com.br.fachada.Fachada;
@@ -17,6 +16,7 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -27,87 +27,81 @@ import javax.faces.context.FacesContext;
 public class ControladorAdmin implements Serializable {
 
     Administrador administrador;
-    
+    Prefeitura prefeituraAx;
+
     @EJB
     private Fachada fachada;
-    
-    
+
     public ControladorAdmin() {
         this.administrador = new Administrador();
+        this.prefeituraAx = new Prefeitura();
     }
-    
-    
-    public void mostrapagina() throws IOException{
-        if(this.administrador.getEmail() == null){
+
+    public void mostrapagina() throws IOException {
+        if (this.administrador.getEmail() == null) {
             FacesContext.getCurrentInstance().getExternalContext().redirect("/EGC/index.jsf");
         }
-        
+
     }
-    
-    public String login(){
-        
+
+    public String login() {
+
         this.administrador = fachada.loginAdmin(administrador.getEmail(), administrador.getSenha());
-        
-        if(administrador != null){
+
+        if (administrador != null) {
             return "/sis/admin/index.jsf?faces-redirect=true";
-        } 
-            info("Usuário invalido!");
-            this.administrador = new Administrador();    
-            return null;
-        
+        }
+        info("Usuário invalido!");
+        this.administrador = new Administrador();
+        return null;
+
     }
-    
-    public String logout(){
+
+    public String logout() {
         this.administrador = new Administrador();
         return "/index.jsf?faces-redirect=true";
     }
-    
-    
-    public List<Prefeitura> prefeiturasPendentes(){
+
+    public List<Prefeitura> prefeiturasPendentes() {
         return fachada.prefeiturasPendentes();
     }
-    
-    
-    public String excluirPrefeitura(Prefeitura p){
+
+    public String excluirPrefeitura(Prefeitura p) {
         fachada.excluirPrefeitura(p);
         return null;
     }
-    
-    
-    
-    
+
     public static void info(String s) {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", s));
     }
-    
-    
+
     public static void infoUsuarioInvalido() {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Usuário inválido!"));
     }
-    
+
     public static void infoDadosAtualizados() {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Dados atualizado com sucesso!"));
     }
-    
+
     public void saveMessage() {
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Info", "Dados atualizados com sucesso!"));
     }
-    
-    public String atualizar(){
+
+    public String atualizar() {
         fachada.atualizar(this.administrador);
         infoDadosAtualizados();
         return null;
     }
-    
-    
-    
-    
-    
-    
-    
-    //getes and seters
 
+    public void mostraModal(Prefeitura p) throws IOException {
+        this.prefeituraAx = p;
+        System.out.println(p.getNome());
+//        return "/sis/admin/solicitacoes.jsf?faces-redirect=true#modal";
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/EGC/sis/admin/solicitacoes.jsf#modal");
+    }
+
+    //getes and seters
     public Administrador getAdministrador() {
         return administrador;
     }
@@ -115,6 +109,13 @@ public class ControladorAdmin implements Serializable {
     public void setAdministrador(Administrador administrador) {
         this.administrador = administrador;
     }
-    
-    
+
+    public Prefeitura getPrefeituraAx() {
+        return prefeituraAx;
+    }
+
+    public void setPrefeituraAx(Prefeitura prefeituraAx) {
+        this.prefeituraAx = prefeituraAx;
+    }
+
 }
