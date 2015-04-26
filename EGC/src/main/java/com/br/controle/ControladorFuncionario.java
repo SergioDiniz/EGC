@@ -55,7 +55,7 @@ public class ControladorFuncionario implements Serializable {
             return "/sis/funcionario/index.jsf?faces-redirect=true";
 
         } else {
-            ControladorAdmin.info();
+            ControladorAdmin.infoUsuarioInvalido();
             funcionario = new Funcionario();
             cidadePK = new CidadePK();
             return null;

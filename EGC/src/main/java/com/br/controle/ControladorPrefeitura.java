@@ -76,7 +76,7 @@ public class ControladorPrefeitura implements Serializable {
             this.prefeitura.setEmail("");
             return null;
         } else {
-            info();
+            infoUsuarioInvalido();
             this.prefeitura = new Prefeitura();
             this.prefeitura.setEmail("");
             return null;

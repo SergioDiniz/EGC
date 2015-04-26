@@ -156,6 +156,10 @@ body{
     border: none;
 }
 
+.tudo{
+    opacity: 0.2;
+}
+
 .conteudo{
     min-width: 1140px;
     max-width: 1140px;
