@@ -29,12 +29,17 @@ public class ControladorAdmin implements Serializable {
     Administrador administrador;
     Prefeitura prefeituraAx;
 
+    boolean mostrarModalRecusar;
+    boolean mostrarModalAceitar;
+
     @EJB
     private Fachada fachada;
 
     public ControladorAdmin() {
         this.administrador = new Administrador();
         this.prefeituraAx = new Prefeitura();
+        this.mostrarModalRecusar = false;
+        this.mostrarModalAceitar = false;
     }
 
     public void mostrapagina() throws IOException {
@@ -66,8 +71,8 @@ public class ControladorAdmin implements Serializable {
         return fachada.prefeiturasPendentes();
     }
 
-    public String excluirPrefeitura(Prefeitura p) {
-        fachada.excluirPrefeitura(p);
+    public String excluirPrefeitura() {
+        fachada.excluirPrefeitura(prefeituraAx);
         return null;
     }
 
@@ -94,11 +99,22 @@ public class ControladorAdmin implements Serializable {
         return null;
     }
 
-    public void mostraModal(Prefeitura p) throws IOException {
+    public void mostraModalRecusar(Prefeitura p) throws IOException {
         this.prefeituraAx = p;
-        System.out.println(p.getNome());
+        this.mostrarModalRecusar = true;
+
+        System.out.println("nome: " + p.getNome());
 //        return "/sis/admin/solicitacoes.jsf?faces-redirect=true#modal";
-        FacesContext.getCurrentInstance().getExternalContext().redirect("/EGC/sis/admin/solicitacoes.jsf#modal");
+//        FacesContext.getCurrentInstance().getExternalContext().redirect("/EGC/sis/admin/solicitacoes.jsf#modal");
+    }
+
+    public void mostraModalAceitar(Prefeitura p) throws IOException {
+        this.prefeituraAx = p;
+        this.mostrarModalAceitar = true;
+
+        System.out.println("nome: " + p.getNome());
+//        return "/sis/admin/solicitacoes.jsf?faces-redirect=true#modal";
+//        FacesContext.getCurrentInstance().getExternalContext().redirect("/EGC/sis/admin/solicitacoes.jsf#modal");
     }
 
     //getes and seters
@@ -118,4 +134,21 @@ public class ControladorAdmin implements Serializable {
         this.prefeituraAx = prefeituraAx;
     }
 
+    public boolean isMostrarModalRecusar() {
+        return mostrarModalRecusar;
+    }
+
+    public void setMostrarModalRecusar(boolean mostrarModalRecusar) {
+        this.mostrarModalRecusar = mostrarModalRecusar;
+    }
+
+    public boolean isMostrarModalAceitar() {
+        return mostrarModalAceitar;
+    }
+
+    public void setMostrarModalAceitar(boolean mostrarModalAceitar) {
+        this.mostrarModalAceitar = mostrarModalAceitar;
+    }
+
+    
 }

@@ -15,109 +15,172 @@
     <h:body>
 
 
+        <div class="tudo">
 
-        <div id="top">
-            <ui:include src="topo.xhtml"/>
-        </div>
-
-
-        <div id="menul">
-            <ui:include src="menulateral.xhtml"/>
-        </div>
-
-        <div class="area-titulo-pagina">
-            <div class="titulo-pagina">
-                Solicitações
+            <div id="top">
+                <ui:include src="topo.xhtml"/>
             </div>
-        </div>
 
 
+            <div id="menul">
+                <ui:include src="menulateral.xhtml"/>
+            </div>
 
-        <div class="container centro">
-            <div class="conteudo">
-                <div class="row">
-                    <div class="col-md-offset-1 col-md-10">
-                        <br/>
-                        <br/>
-
-                        <c:choose>
-                            <c:when test="${controladorAdmin.prefeiturasPendentes().size() > 0}">
-                                <h:form>
-                                    <h:dataTable value="#{controladorAdmin.prefeiturasPendentes()}" var="prefeitura" class="table table-striped" columnClasses="cDescricao">
-
-                                        <h:column id="cDescricao">
-                                            <f:facet name="header">
-                                                <h:outputText value="Nome"/>
-                                            </f:facet>
-                                            <h:outputText value="#{prefeitura.nome}"/>
-                                        </h:column>
-
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="local"/>
-                                            </f:facet>
-                                            <h:outputText value="#{prefeitura.cidade.cidadePK.nomeCidade} - #{prefeitura.cidade.cidadePK.siglaEstado}"/>
-                                        </h:column>
-
-
-
-                                        <h:column>
-                                            <div align="center">
-
-                                                <div class="btn-group">
-                                                    <h:commandButton value="Avaliar" class="btn btn-info" action="#{controladorAdministrador.atualizarSituacao(prefeitura, 'aceitar')}" />
-                                                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                        <span class="caret"></span>
-                                                        <span class="sr-only">Menu</span>
-                                                    </button>
-                                                    <ul class="dropdown-menu" role="menu">
-
-                                                        <li><h:commandLink value="Aceitar" /></li>
-                                                        <li><h:commandLink value="Recusar" action="#{controladorAdmin.excluirPrefeitura(prefeitura)}"/></li>
-                                                        <li>
-                                                            <h:commandLink value="teste" action="#modal"/>
-
-                                                            <div class="remodal" data-remodal-id="modal">
-                                                                <h1>Confirmação</h1>
-                                                                <p>
-                                                                    Deseja recusar a solicitação de <h:outputText value="#{controladorAdmin.prefeituraAx.nome}" />
-                                                                </p>
-                                                                <br/>
-                                                                <a class="remodal-cancel" href="#">Cancela</a>
-                                                                <!--<a class="remodal-confirm" href="#">OK</a>-->
-                                                                <h:commandButton value="OK" class="remodal-confirm" action="#{controladorAdmin.excluirPrefeitura(prefeitura)}"/>
-                                                            </div>
-
-                                                        </li>
-
-
-
-                                                        <li class="divider"></li>
-                                                        <li><a class="test-popup-link" href="documentos-de-solicitacao/#{prefeitura.documento}" >Documento</a></li>
-
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </h:column>
-                                    </h:dataTable>
-                                </h:form>
-
-                            </c:when>
-                            <c:otherwise>
-                                <h1>Nenhuma solicitação pendente.</h1>
-                            </c:otherwise>
-                        </c:choose>
-
-
-
-                        <br/><br/>
-
-                    </div>
+            <div class="area-titulo-pagina">
+                <div class="titulo-pagina">
+                    Solicitações
                 </div>
             </div>
 
-        </div>
 
+
+            <div class="container centro">
+                <div class="conteudo">
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-10">
+                            <br/>
+                            <br/>
+
+                            <c:choose>
+                                <c:when test="${controladorAdmin.prefeiturasPendentes().size() > 0}">
+                                    <h:form>
+                                        <h:dataTable value="#{controladorAdmin.prefeiturasPendentes()}" var="prefeitura" class="table table-striped" columnClasses="cDescricao">
+
+                                            <h:column id="cDescricao">
+                                                <f:facet name="header">
+                                                    <h:outputText value="Nome"/>
+                                                </f:facet>
+                                                <h:outputText value="#{prefeitura.nome}"/>
+                                            </h:column>
+
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="local"/>
+                                                </f:facet>
+                                                <h:outputText value="#{prefeitura.cidade.cidadePK.nomeCidade} - #{prefeitura.cidade.cidadePK.siglaEstado}"/>
+                                            </h:column>
+
+
+
+                                            <h:column>
+                                                <div align="center">
+                                                    <div class="btn-group">
+
+                                                        <h:commandButton value="Avaliar" class="btn btn-info" action="#{controladorAdministrador.atualizarSituacao(prefeitura, 'aceitar')}" />
+                                                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                            <span class="caret"></span>
+                                                            <span class="sr-only">Menu</span>
+                                                        </button>
+
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li>
+                                                                <h:commandLink value="Aceitar" action="#{controladorAdmin.mostraModalAceitar(prefeitura)}"/>
+                                                            </li>
+
+                                                            <li>
+                                                                <h:commandLink value="Recusar" action="#{controladorAdmin.mostraModalRecusar(prefeitura)}"/>
+                                                            </li>
+
+
+                                                            <li class="divider"></li>
+                                                            <li>
+                                                                <a class="test-popup-link" href="documentos-de-solicitacao/#{prefeitura.documento}" >Documento</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </h:column>
+                                        </h:dataTable>
+                                    </h:form>
+
+                                </c:when>
+                                <c:otherwise>
+                                    <h1>Nenhuma solicitação pendente.</h1>
+                                </c:otherwise>
+                            </c:choose>
+
+
+
+                            <br/><br/>
+
+                            <!-- Modal Aceitar -->
+                            <div style="position: fixed; padding-top: 200px" class="modal fade" id="myModalAceitar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel"><h2>Notificação</h2></h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            Deseja aceitar a solicitação de <h:outputText value="#{controladorAdmin.prefeituraAx.nome}"/>?
+                                            <br/>
+                                        </div>
+                                        <div class="modal-footer">
+
+
+                                            <h:form>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                                <h:commandButton class="btn btn-primary" value="Aceitar" action="#{controladorAdmin.excluirPrefeitura()}" />
+                                            </h:form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- Modal Recusar -->
+                            <div style="position: fixed; padding-top: 200px" class="modal fade" id="myModalRecusar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel"><h2>Notificação</h2></h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            Deseja recusar a solicitação de <h:outputText value="#{controladorAdmin.prefeituraAx.nome}"/>?
+                                            <br/>
+                                        </div>
+                                        <div class="modal-footer">
+
+
+                                            <h:form>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                                <h:commandButton class="btn btn-primary" value="Recusar" action="#{controladorAdmin.excluirPrefeitura()}" />
+                                            </h:form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <c:choose>
+                <c:when test="${controladorAdmin.mostrarModalRecusar == true }">
+                    <script>
+                        $(document).ready(function () {
+                            $("#myModalRecusar").modal("show");
+                        })
+                    </script>
+
+                    ${controladorAdmin.setMostrarModalRecusar(false)}
+
+                </c:when>
+
+                <c:when test="${controladorAdmin.mostrarModalAceitar == true }">
+                    <script>
+                        $(document).ready(function () {
+                            $("#myModalAceitar").modal("show");
+                        })
+                    </script>
+
+                    ${controladorAdmin.setMostrarModalAceitar(false)}
+
+                </c:when>
+            </c:choose>
+
+        </div>
     </h:body>
 </html>
 

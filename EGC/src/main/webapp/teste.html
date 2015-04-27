@@ -9,8 +9,19 @@
         <!-- Magnific Popup core JS file -->
         <script src="js/jquery-1.11.2.js"></script>
 
+        <script>
+            window.REMODAL_GLOBALS = {
+                NAMESPACE: 'modal',
+                DEFAULTS: {
+                    hashTracking: false
+                }
+            };
+        </script>
+
         <script src="js/rm/jquery.remodal.js"></script>
         <script src="js/scripts.js"></script>
+
+
         <title>Janela modal</title>
 
 
@@ -19,21 +30,20 @@
     <body>
 
 
-        
-        <a href="#modal">Call the modal with data-remodal-id="modal"</a>
-        
-        <div class="remodal" data-remodal-id="modal">
+        <a data-remodal-target="modal" href="#modal">Call the modal with data-remodal-id="modal"</a>
+
+        <div class="remodal" data-remodal-id="modal" data-remodal-options="hashTracking: false">
             <h1>Remodal</h1>
             <p>
                 Flat, responsive, lightweight, fast, easy customizable modal window plugin
                 with declarative state notation and hash tracking.
             </p>
             <br>
-            <a class="remodal-cancel" href="#">Cancel</a>
-            <a class="remodal-confirm" href="#">OK</a>
+            <a class="remodal-cancel" href="https://www.google.com.br">Cancel</a>
+
         </div>
 
-        
-        
+
+
     </body>
 </html> 
