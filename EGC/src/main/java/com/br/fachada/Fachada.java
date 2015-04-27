@@ -151,6 +151,10 @@ public class Fachada{
         return as.excluir(prefeitura);
     }
     
+    public String atualizarSituacaoPrefeitura(Prefeitura prefeitura, boolean situacao){
+        return as.atualizarSituacao(prefeitura, situacao);
+    }
+    
     //
     //
     //

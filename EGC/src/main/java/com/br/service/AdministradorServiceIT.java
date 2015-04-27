@@ -18,4 +18,6 @@ public interface AdministradorServiceIT {
     
     public String  excluir(Prefeitura prefeitura);
     
+    public String atualizarSituacao(Prefeitura prefeitura, boolean situacao);
+    
 }

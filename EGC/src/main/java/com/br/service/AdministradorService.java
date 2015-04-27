@@ -48,7 +48,21 @@ public class AdministradorService implements AdministradorServiceIT {
             prefeitura.setCidade(null);
 
             em.remove(em.merge(prefeitura));
-            return "Excluido com sucesso!";
+            return "Sucesso!";
+
+        } catch (Exception e) {
+        }
+
+        return "ERRO!";
+    }
+
+    @Override
+    public String atualizarSituacao(Prefeitura prefeitura, boolean situacao) {
+
+        try {
+            prefeitura.setAtivo(situacao);
+            em.merge(prefeitura);
+            return "Sucesso";
 
         } catch (Exception e) {
         }

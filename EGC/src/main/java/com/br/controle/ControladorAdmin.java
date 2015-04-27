@@ -76,6 +76,17 @@ public class ControladorAdmin implements Serializable {
         return null;
     }
 
+    public String aceitarSolicitacao() {
+        fachada.atualizarSituacaoPrefeitura(prefeituraAx, true);
+        return null;
+    }
+    
+    public String bloquearPrefeitura() {
+        fachada.atualizarSituacaoPrefeitura(prefeituraAx, false);
+        return null;
+    }
+    
+
     public static void info(String s) {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", s));
     }
@@ -150,5 +161,4 @@ public class ControladorAdmin implements Serializable {
         this.mostrarModalAceitar = mostrarModalAceitar;
     }
 
-    
 }
