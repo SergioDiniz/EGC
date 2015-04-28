@@ -14,7 +14,8 @@ body{
     height: 50px;
     background-color: #03a9f4;
     box-shadow: 0px 0px 10px 0.00px rgba(0, 0, 0, 0.43);
-    position: absolute;
+    position: fixed;
+    z-index: 1000;
 }
 
 .menu-inicio{
@@ -94,7 +95,8 @@ body{
     margin-top: 0px;
     border-right: solid 2px #dfdfdf;
     background-color: #fff;
-    position: absolute;
+    position: fixed;
+    z-index: 1001;
 }
 
 .btn-menu-lateral{
@@ -120,7 +122,7 @@ body{
     color: #1a7ab9;
     font-size: 30px;
     font-family: "Kozuka Gothic Pro";
-    
+
 }
 
 .area-sair{
@@ -146,7 +148,7 @@ body{
     padding-right: 50px;
     color: #fff;
     font-weight: bold;
-    
+
     float: right;
 }
 
@@ -165,7 +167,7 @@ body{
     max-width: 1140px;
     padding-top: 50px;
     opacity: 0.2;
-    
+
 }
 
 .cadastro{
@@ -178,7 +180,7 @@ body{
 
 }
 .login{
-    
+
 }
 
 .info-sistema{
@@ -233,3 +235,10 @@ body{
     margin-right: 10px;
 }
 
+.hide{
+    display:none;
+}
+
+.show{
+    display: block;
+}

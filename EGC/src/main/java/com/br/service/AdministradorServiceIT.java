@@ -7,6 +7,7 @@ package com.br.service;
 
 import com.br.beans.Administrador;
 import com.br.beans.Prefeitura;
+import java.util.List;
 
 /**
  *
@@ -19,5 +20,7 @@ public interface AdministradorServiceIT {
     public String  excluir(Prefeitura prefeitura);
     
     public String atualizarSituacao(Prefeitura prefeitura, boolean situacao);
+    
+    public List<Prefeitura> todasPrefeituras();
     
 }

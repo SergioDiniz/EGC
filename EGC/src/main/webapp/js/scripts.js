@@ -43,6 +43,34 @@ $(document).ready(function () {
 
 function mostraModalSolicitacao(id) {
     $(document).ready(function () {
-        $("#"+id).modal("show");
+        $("#" + id).modal("show");
     })
+}
+
+
+$(function () {
+    $('.doc').click(function () {
+        var conteudo = $(this).parent().find('.doc-img');
+        if (!conteudo.hasClass('show')) {
+            $('.caixa').find('.show').slideUp('fast', function () {
+                $(this).addClass('hide').removeClass('show')
+            });
+
+            conteudo.slideDown('fast', function () {
+                $(this).addClass('show').removeClass('hide')
+            });
+        }
+    });
+});
+
+
+function notificacaoSolicicatacao() {
+    
+    $.notify({
+        title: '<strong>Bem-Vindo!</strong><br/>',
+        message: "Exitem novas solicitações a serem visualizadas! <br/> Clique Aqui.",
+        url: "solicitacoes.jsf",
+        target: "_self",
+        delay: 10000,
+    });
 }

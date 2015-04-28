@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>EGC - Administrador</title>
     </h:head>
@@ -22,9 +23,13 @@
             <div class="area-titulo-pagina">
                 <div class="titulo-pagina">Bem Vindo!</div>
             </div>
-            
-            
-            
+
+            <c:if test="${controladorAdmin.prefeiturasPendentes().size() > 0}">
+                <script>
+                    notificacaoSolicicatacao();
+                </script>
+            </c:if>
+
         </div>
     </h:body>
 </html>

@@ -70,4 +70,17 @@ public class AdministradorService implements AdministradorServiceIT {
         return "ERRO!";
     }
 
+    @Override
+    public List<Prefeitura> todasPrefeituras() {
+        Query query = em.createQuery("SELECT p FROM Prefeitura p WHERE p.ativo = true");
+
+        List<Prefeitura> prefeituras = query.getResultList();
+
+        if (prefeituras.size() > 0) {
+            return prefeituras;
+        }
+
+        return null;
+    }
+
 }

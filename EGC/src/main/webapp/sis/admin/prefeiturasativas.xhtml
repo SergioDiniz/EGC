@@ -17,8 +17,7 @@
 
     </h:head>
     <h:body>
-
-        <div class="conteudo">
+        <div class="tudo">
 
             <div id="top">
                 <ui:include src="topo.xhtml"/>
@@ -31,68 +30,159 @@
 
             <div class="area-titulo-pagina">
                 <div class="titulo-pagina">
-                    Prefeituras Ativas
+                    Prefeituras
                 </div>
             </div>
 
 
 
             <div class="container centro">
-                <div class="row">
-                    <div class="col-md-offset-1 col-md-10">
-                        <br/>
-                        <br/>
+                <div class="conteudo">
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-10">
+                            <br/>
+                            <br/>
 
-                        <c:choose>
-                            <c:when test="${controladorAdministrador.prefeiturasAtivas().size() > 0}">
-                                <div align="right">
+                            <c:choose>
+                                <c:when test="${controladorAdmin.prefeiturasAtivas().size() > 0}">
                                     <h:form>
-                                        <h:commandButton class="btn btn-link" value="download" action="#{controladorAdministrador.downloadRealatorio()}"/>
+                                        <h:dataTable value="#{controladorAdmin.prefeiturasAtivas()}" var="prefeitura" class="table table-striped" columnClasses="cDescricao">
+
+                                            <h:column id="cDescricao">
+                                                <f:facet name="header">
+                                                    <h:outputText value="Nome"/>
+                                                </f:facet>
+                                                <h:outputText value="#{prefeitura.nome}"/>
+                                            </h:column>
+
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="local"/>
+                                                </f:facet>
+                                                <h:outputText value="#{prefeitura.cidade.cidadePK.nomeCidade} - #{prefeitura.cidade.cidadePK.siglaEstado}"/>
+                                            </h:column>
+
+
+
+                                            <h:column>
+                                                <div align="center">
+                                                    <div class="btn-group">
+
+                                                        <h:commandButton value="Avaliar" class="btn btn-info" action="#{controladorAdmin.avaliarSolicitacao(prefeitura)}" />
+                                                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                            <span class="caret"></span>
+                                                            <span class="sr-only">Menu</span>
+                                                        </button>
+
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li>
+                                                                <h:commandLink value="Bloquear" action="#{controladorAdmin.mostraModalAceitar(prefeitura)}"/>
+                                                            </li>
+
+                                                            <li>
+                                                                <h:commandLink value="Excluir" action="#{controladorAdmin.mostraModalRecusar(prefeitura)}"/>
+                                                            </li>
+
+                                                            <li class="divider"></li>
+                                                            <li>
+                                                                <a class="test-popup-link" href="documentos-de-solicitacao/#{prefeitura.documento}" >Documento</a>
+                                                            </li>
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </h:column>
+                                        </h:dataTable>
                                     </h:form>
+
+                                </c:when>
+                                <c:otherwise>
+                                    <h1>Nenhuma prefeitura ativa.</h1>
+                                </c:otherwise>
+                            </c:choose>
+
+
+
+                            <br/><br/>
+
+                            <!-- Modal Aceitar -->
+                            <div style="position: fixed; padding-top: 200px" class="modal fade" id="myModalAceitar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel"><h2>Notificação</h2></h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            Deseja bloquear a <h:outputText value="#{controladorAdmin.prefeituraAx.nome}"/>?
+                                            <br/>
+                                        </div>
+                                        <div class="modal-footer">
+
+
+                                            <h:form>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                                <h:commandButton class="btn btn-primary" value="Bloquear" action="#{controladorAdmin.bloquearPrefeitura()}" />
+                                            </h:form>
+                                        </div>
+                                    </div>
                                 </div>
-                                <h:form>
-                                    <h:dataTable value="#{controladorAdministrador.prefeiturasAtivas()}" var="prefeitura" class="table table-striped" columnClasses="cDescricao">
-
-                                        <h:column id="cDescricao">
-                                            <f:facet name="header">
-                                                <h:outputText value="Nome"/>
-                                            </f:facet>
-                                            <h:outputText value="#{prefeitura.nome}"/>
-                                        </h:column>
-
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="local"/>
-                                            </f:facet>
-                                            <h:outputText value="#{prefeitura.cidade.cidadePK.nomeCidade} - #{prefeitura.cidade.cidadePK.siglaEstado}"/>
-                                        </h:column>
-
-                                        <h:column>
-                                            <h:commandButton value="Excluir" class="btn btn-danger" action="#{controladorAdministrador.excluirPrefeitura(prefeitura)}" />                                    
-                                        </h:column>
-
-                                        <h:column>
-                                            <h:commandButton value="Bloquear" class="btn btn-success" action="#{controladorAdministrador.atualizarSituacao(prefeitura, 'inativo')}" />
-                                        </h:column>
+                            </div>
 
 
+                            <!-- Modal Recusar -->
+                            <div style="position: fixed; padding-top: 200px" class="modal fade" id="myModalRecusar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel"><h2>Notificação</h2></h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            Deseja excluir a <h:outputText value="#{controladorAdmin.prefeituraAx.nome}"/>?
+                                            <br/>
+                                        </div>
+                                        <div class="modal-footer">
 
-                                    </h:dataTable>
-                                </h:form>
-                            </c:when>
-                            <c:otherwise>
-                                <h1>Nenhuma prefeitura ativa.</h1>
-                            </c:otherwise>
-                        </c:choose>
 
-                        <br/><br/>
+                                            <h:form>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                                <h:commandButton class="btn btn-primary" value="Excluir" action="#{controladorAdmin.excluirPrefeituraAtiva()}" />
+                                            </h:form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--Fim Modal-->
+
+
+                        </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
+            <c:choose>
+                <c:when test="${controladorAdmin.mostrarModalRecusar == true }">
+                    <script>
+                        mostraModalSolicitacao("myModalRecusar");
+                    </script>
+
+                    ${controladorAdmin.setMostrarModalRecusar(false)}
+
+                </c:when>
+
+                <c:when test="${controladorAdmin.mostrarModalAceitar == true }">
+                    <script>
+                        mostraModalSolicitacao("myModalAceitar");
+                    </script>
+
+                    ${controladorAdmin.setMostrarModalAceitar(false)}
+
+                </c:when>
+            </c:choose>
 
         </div>
-
     </h:body>
 </html>
 

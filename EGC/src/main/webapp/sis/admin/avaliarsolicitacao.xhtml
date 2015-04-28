@@ -4,11 +4,14 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>EGC - Administrador</title>
     </h:head>
     <h:body>
+        #{controladorAdmin.mostrapaginaavaliacao()}
         <div class="tudo">
 
             <div id="menu">
@@ -20,11 +23,214 @@
             </div>
 
             <div class="area-titulo-pagina">
-                <div class="titulo-pagina">Bem Vindo!</div>
+                <div class="titulo-pagina">Avaliar Solicitação - #{controladorAdmin.prefeituraAx.nome}</div>
             </div>
-            
-            
-            
+
+            <div class="container centro">
+                <div class="conteudo">
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-10">
+                            <br/>
+                            <br/>
+
+                            <div class="row">
+                                <div class="col-md-8">
+                                    Nome:
+                                    <h4><h:outputText value="#{controladorAdmin.prefeituraAx.nome}"/></h4>
+                                    <br/>
+                                    Email:
+                                    <h4><h:outputText value="#{controladorAdmin.prefeituraAx.email}"/></h4>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    Estado:
+                                    <h4><h:outputText value="#{controladorAdmin.prefeituraAx.cidade.cidadePK.siglaEstado}"/></h4>
+                                </div>
+                                <div class="col-md-4">
+                                    CEP:
+                                    <h4><h:outputText value="#{controladorAdmin.prefeituraAx.enderecoPrefeitura.cep}"/></h4>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    Cidade:
+                                    <h4><h:outputText value="#{controladorAdmin.prefeituraAx.cidade.cidadePK.nomeCidade}"/></h4>
+                                    <br/>
+                                    Rua:
+                                    <h4>
+                                        <h:outputText value="#{controladorAdmin.prefeituraAx.enderecoPrefeitura.rua}"/> - 
+                                        <h:outputText value="#{controladorAdmin.prefeituraAx.enderecoPrefeitura.numero}"/>
+                                    </h4>
+                                </div>
+                            </div>
+
+                            <br/>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target=".bs-example-modal-lg">Documento</button>
+
+
+                                    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title" id="myModalLabel">Documento</h4>
+                                                </div>
+                                                <img src="documentos-de-solicitacao/#{controladorAdmin.prefeituraAx.documento}" width="100%" title="Documento"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <c:choose>
+                                        <c:when test="#{controladorAdmin.prefeituraAx.ativo == false}">
+                                            <div class="col-md-offset-9 col-md-2">
+                                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalRecusar">
+                                                    Recusar
+                                                </button>
+                                                <!-- Modal Recusar -->
+                                                <div style="position: fixed; padding-top: 200px" class="modal fade" id="myModalRecusar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                <h4 class="modal-title" id="myModalLabel"><h2>Notificação</h2></h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                Deseja recusar a solicitação de <h:outputText value="#{controladorAdmin.prefeituraAx.nome}"/>?
+                                                                <br/>
+                                                            </div>
+                                                            <div class="modal-footer">
+
+
+                                                                <h:form>
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                                                    <h:commandButton class="btn btn-primary" value="Recusar" action="#{controladorAdmin.excluirPrefeitura()}" />
+                                                                </h:form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!--Fim Modal-->
+
+                                            </div>
+                                            <div class="col-md-1">
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalAceitar">
+                                                    Aceitar
+                                                </button>
+                                                <!-- Modal Aceitar -->
+                                                <div style="position: fixed; padding-top: 200px" class="modal fade" id="myModalAceitar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                <h4 class="modal-title" id="myModalLabel"><h2>Notificação</h2></h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                Deseja aceitar a solicitação de <h:outputText value="#{controladorAdmin.prefeituraAx.nome}"/>?
+                                                                <br/>
+                                                            </div>
+                                                            <div class="modal-footer">
+
+
+                                                                <h:form>
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                                                    <h:commandButton class="btn btn-primary" value="Aceitar" action="#{controladorAdmin.aceitarSolicitacao()}" />
+                                                                </h:form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Modal Aceitar -->
+                                            </div>
+                                        </c:when>
+
+
+                                        <c:when test="#{controladorAdmin.prefeituraAx.ativo == true}">
+                                            <div class="col-md-offset-9 col-md-2">
+                                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalExcluir">
+                                                    Excluir
+                                                </button>
+                                                <!-- Modal Recusar -->
+                                                <div style="position: fixed; padding-top: 200px" class="modal fade" id="myModalExcluir" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                <h4 class="modal-title" id="myModalLabel"><h2>Notificação</h2></h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                Deseja excluir a <h:outputText value="#{controladorAdmin.prefeituraAx.nome}"/>?
+                                                                <br/>
+                                                            </div>
+                                                            <div class="modal-footer">
+
+
+                                                                <h:form>
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                                                    <h:commandButton class="btn btn-primary" value="Excluir" action="#{controladorAdmin.excluirPrefeituraAtiva()}" />
+                                                                </h:form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!--Fim Modal-->
+
+                                            </div>
+                                            <div class="col-md-1">
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalBloquear">
+                                                    Bloquear
+                                                </button>
+                                                <!-- Modal Aceitar -->
+                                                <div style="position: fixed; padding-top: 200px" class="modal fade" id="myModalBloquear" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                <h4 class="modal-title" id="myModalLabel"><h2>Notificação</h2></h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                Deseja bloquear a <h:outputText value="#{controladorAdmin.prefeituraAx.nome}"/>?
+                                                                <br/>
+                                                            </div>
+                                                            <div class="modal-footer">
+
+
+                                                                <h:form>
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                                                    <h:commandButton class="btn btn-primary" value="Bloquear" action="#{controladorAdmin.bloquearPrefeitura()}" />
+                                                                </h:form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Modal Aceitar -->
+                                            </div>
+
+
+                                        </c:when>
+
+                                    </c:choose>
+
+
+
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
     </h:body>
 </html>

@@ -49,6 +49,13 @@ public class ControladorAdmin implements Serializable {
 
     }
 
+    public void mostrapaginaavaliacao() throws IOException {
+        if (this.prefeituraAx.getEmail() == null) {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("index.jsf");
+        }
+
+    }
+
     public String login() {
 
         this.administrador = fachada.loginAdmin(administrador.getEmail(), administrador.getSenha());
@@ -71,21 +78,38 @@ public class ControladorAdmin implements Serializable {
         return fachada.prefeiturasPendentes();
     }
 
+    public List<Prefeitura> prefeiturasAtivas() {
+        return fachada.todasPrefeiturasAtivas();
+    }
+
+    public String avaliarSolicitacao(Prefeitura p) {
+        this.prefeituraAx = p;
+        return "avaliarsolicitacao.jsf?faces-redirect=true";
+    }
+
     public String excluirPrefeitura() {
         fachada.excluirPrefeitura(prefeituraAx);
-        return null;
+        this.prefeituraAx = new Prefeitura();
+        return "solicitacoes.jsf?faces-redirect=true";
+    }
+
+    public String excluirPrefeituraAtiva() {
+        fachada.excluirPrefeitura(prefeituraAx);
+        this.prefeituraAx = new Prefeitura();
+        return "prefeiturasativas.jsf?faces-redirect=true";
     }
 
     public String aceitarSolicitacao() {
         fachada.atualizarSituacaoPrefeitura(prefeituraAx, true);
-        return null;
+        this.prefeituraAx = new Prefeitura();
+        return "solicitacoes.jsf?faces-redirect=true";
     }
-    
+
     public String bloquearPrefeitura() {
         fachada.atualizarSituacaoPrefeitura(prefeituraAx, false);
-        return null;
+        this.prefeituraAx = new Prefeitura();
+        return "prefeiturasativas.jsf?faces-redirect=true";
     }
-    
 
     public static void info(String s) {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", s));

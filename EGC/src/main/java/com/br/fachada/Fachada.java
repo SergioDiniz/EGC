@@ -155,6 +155,10 @@ public class Fachada{
         return as.atualizarSituacao(prefeitura, situacao);
     }
     
+    public List<Prefeitura> todasPrefeiturasAtivas(){
+        return as.todasPrefeituras();
+    }
+    
     //
     //
     //
