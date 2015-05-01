@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>EGC - Configurações</title>
+    </h:head>
+    <h:body>
+
+
+        <div class="tudo">
+
+            <div id="menu">
+                <ui:include src="topo.xhtml"/>
+            </div>
+
+            <div id="menu-lateral">
+                <ui:include src="menulateral.xhtml"/>
+            </div>
+
+            <div class="area-titulo-pagina">
+                <div class="titulo-pagina">Configurações</div>
+            </div>
+
+
+            <div class="container centro">
+
+                <div class="row">
+                    <div class="col-md-offset-1 col-md-9">
+                        <br/>
+                        <br/>
+
+                        <h:form>
+
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-7"> 
+
+                                    Nome <br/>
+                                    <h:inputText value="#{controladorPrefeitura.prefeitura.nome}" class="form-control input-lg campos-formulario" id="nome" required="required" pt:placeholder="email"/> 
+                                    <br/>
+                                    Email <br/>
+                                    <h:inputText value="#{controladorPrefeitura.prefeitura.email}" class="form-control input-lg campos-formulario" id="email" required="required" pt:placeholder="email"/> 
+                                    <br/>
+                                    Senha <br/>
+                                    <h:inputSecret redisplay="true" value="#{controladorPrefeitura.prefeitura.senha}" class="form-control input-lg campos-formulario" id="senha" required="required" pt:placeholder="senha"/> 
+                                    <br/>
+                                    <p:messages showDetail="true" autoUpdate="true" closable="true" style="position: absolute; width: 408px"/>
+
+                                </div>
+
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-4"> 
+                                    Estado <br/>
+                                    <h:inputText value="#{controladorPrefeitura.prefeitura.enderecoPrefeitura.estado}" class="form-control input-lg campos-formulario" id="estado" required="required" pt:placeholder="email" disabled="true"/> 
+                                </div>
+                                <div class="col-md-3"> 
+                                    CEP <br/>
+                                    <h:inputText value="#{controladorPrefeitura.prefeitura.enderecoPrefeitura.cep}" class="form-control input-lg campos-formulario" id="cep" required="required" pt:placeholder="email"/> 
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-7"> 
+                                    <br/>
+                                    Cidade <br/>
+                                    <h:inputText value="#{controladorPrefeitura.prefeitura.enderecoPrefeitura.cidade}" class="form-control input-lg campos-formulario" id="cidade" required="required" pt:placeholder="email" disabled="true"/> 
+                                    <br/>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-5"> 
+                                    Rua <br/>
+                                    <h:inputText value="#{controladorPrefeitura.prefeitura.enderecoPrefeitura.estado}" class="form-control input-lg campos-formulario" id="rua" required="required" pt:placeholder="email"/> 
+                                </div>
+                                <div class="col-md-2"> 
+                                    Numero <br/>
+                                    <h:inputText value="#{controladorPrefeitura.prefeitura.enderecoPrefeitura.cep}" class="form-control input-lg campos-formulario" id="numero" required="required" pt:placeholder="email"/> 
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-7"> 
+                                    <br/><br/><br/><br/>
+                                    <div align="center"><h:commandButton value="Atualizar Dados" action="#{controladorPrefeitura.atualizarDados()}" class="btn btn-primary btn-lg"/></div>
+                                </div>
+
+                            </div>
+
+
+
+                        </h:form>
+                        <br/><br/>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </h:body>
+</html>
+
+

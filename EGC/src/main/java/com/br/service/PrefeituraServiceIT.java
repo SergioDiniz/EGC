@@ -21,4 +21,13 @@ public interface PrefeituraServiceIT {
     
     public List<Prefeitura> prefeiturasPendentes();
     
+    public Funcionario pesquisarFuncionario(Prefeitura prefeitura, String cpf);
+    
+    public String vincular(Prefeitura prefeitura, Funcionario funcionario);
+    
+    public String desvincular(Prefeitura prefeitura, String cpf);
+    
+    public List<Funcionario> funcionarios(Prefeitura prefeitura);
+
+    
 }

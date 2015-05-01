@@ -20,6 +20,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -41,9 +43,11 @@ public class ControladorPrefeitura implements Serializable {
     Cidade cidade;
     CidadePK cidadePK;
     Funcionario funcionario;
+    Funcionario funcionarioAux;
     boolean funcionarioCadastrado;
     boolean funcionarioVinculado;
     boolean funcionarioNovo;
+    boolean mostrarModalDesvincular;
     String CPFPesquisaF;
 
     @EJB
@@ -54,6 +58,13 @@ public class ControladorPrefeitura implements Serializable {
         this.prefeitura.setEnderecoPrefeitura(new EnderecoPrefeitura());
         this.cidade = new Cidade();
         this.cidadePK = new CidadePK();
+        this.funcionarioCadastrado = false;
+        this.funcionarioNovo = false;
+        this.funcionarioVinculado = false;
+        this.mostrarModalDesvincular = false;
+        this.CPFPesquisaF = "";
+        this.funcionario = new Funcionario();
+        this.funcionarioAux = new Funcionario();
     }
 
     public void mostrapagina() throws IOException {
@@ -85,8 +96,6 @@ public class ControladorPrefeitura implements Serializable {
 
     }
 
-    
-    
     public String logout() {
         this.cidade = new Cidade();
         this.cidadePK = new CidadePK();
@@ -155,6 +164,71 @@ public class ControladorPrefeitura implements Serializable {
 
     }
 
+    public String atualizarDados() {
+        fachada.atualizar(prefeitura);
+        return null;
+    }
+
+    public void pesquisarCPFFuncionario() {
+
+        Funcionario f = fachada.buscarFuncionarioPorCPF(CPFPesquisaF);
+
+        if (f != null) {
+            funcionarioNovo = false;
+            funcionarioCadastrado = true;
+        } else {
+            funcionarioNovo = true;
+            funcionarioCadastrado = false;
+        }
+
+    }
+
+    public String cadastrarNovoFuncionario() {
+        funcionario.setCpf(CPFPesquisaF);
+        fachada.cadastrar(funcionario);
+        funcionario = fachada.buscarFuncionarioPorCPF(CPFPesquisaF);
+        fachada.cadastrarNaPrefeitura(prefeitura, funcionario);
+        this.prefeitura.setFuncionarios(funcionarios());
+        funcionario = new Funcionario();
+        CPFPesquisaF = "";
+        funcionarioNovo = false;
+        return "funcionarios.jsf";
+    }
+
+    public List<Funcionario> funcionarioPesquisaCPF() {
+        List<Funcionario> fus = new ArrayList<>();
+        fus.add(fachada.buscarFuncionarioPorCPF(CPFPesquisaF));
+        return fus;
+    }
+
+    public String vincularFuncionario() {
+        Funcionario f = fachada.buscarFuncionarioPorCPF(CPFPesquisaF);
+        fachada.vincularFuncionarioPrefeitura(prefeitura, f);
+        this.prefeitura.setFuncionarios(funcionarios());
+        CPFPesquisaF = "";
+        funcionarioCadastrado = false;
+        return "funcionarios.jsf";
+    }
+
+    public List<Funcionario> funcionarios() {
+        return fachada.funcionariosPrefeitura(prefeitura);
+    }
+
+    public String desvincularFuncionario() {
+        System.out.println("desvinculando: " + funcionarioAux.getNome());
+        fachada.desvincularFuncionario(this.prefeitura, funcionarioAux.getCpf());
+        this.prefeitura.getFuncionarios().remove(funcionarioAux);
+        this.funcionarioAux = new Funcionario();
+
+        return null;
+    }
+
+    public void modalDesvincular(Funcionario f) {
+        this.funcionarioAux = f;
+        this.mostrarModalDesvincular = true;
+        System.out.println("funcionario: " + funcionarioAux.getNome());
+    }
+
     // gets and setes
     public Prefeitura getPrefeitura() {
         return prefeitura;
@@ -186,6 +260,62 @@ public class ControladorPrefeitura implements Serializable {
 
     public void setFile(UploadedFile file) {
         this.file = file;
+    }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
+    public boolean isFuncionarioCadastrado() {
+        return funcionarioCadastrado;
+    }
+
+    public void setFuncionarioCadastrado(boolean funcionarioCadastrado) {
+        this.funcionarioCadastrado = funcionarioCadastrado;
+    }
+
+    public boolean isFuncionarioVinculado() {
+        return funcionarioVinculado;
+    }
+
+    public void setFuncionarioVinculado(boolean funcionarioVinculado) {
+        this.funcionarioVinculado = funcionarioVinculado;
+    }
+
+    public boolean isFuncionarioNovo() {
+        return funcionarioNovo;
+    }
+
+    public void setFuncionarioNovo(boolean funcionarioNovo) {
+        this.funcionarioNovo = funcionarioNovo;
+    }
+
+    public String getCPFPesquisaF() {
+        return CPFPesquisaF;
+    }
+
+    public void setCPFPesquisaF(String CPFPesquisaF) {
+        this.CPFPesquisaF = CPFPesquisaF;
+    }
+
+    public Funcionario getFuncionarioAux() {
+        return funcionarioAux;
+    }
+
+    public void setFuncionarioAux(Funcionario funcionarioAux) {
+        this.funcionarioAux = funcionarioAux;
+    }
+
+    public boolean isMostrarModalDesvincular() {
+        return mostrarModalDesvincular;
+    }
+
+    public void setMostrarModalDesvincular(boolean mostrarModalDesvincular) {
+        this.mostrarModalDesvincular = mostrarModalDesvincular;
     }
 
 }

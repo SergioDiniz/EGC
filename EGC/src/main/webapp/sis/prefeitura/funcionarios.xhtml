@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>EGC - Configurações</title>
+    </h:head>
+    <h:body>
+
+
+        <div class="tudo">
+
+            <div id="menu">
+                <ui:include src="topo.xhtml"/>
+            </div>
+
+            <div id="menu-lateral">
+                <ui:include src="menulateral.xhtml"/>
+            </div>
+
+            <div class="area-titulo-pagina">
+                <div class="titulo-pagina">Funcionarios</div>
+            </div>
+
+
+            <div class="container centro">
+
+                <div class="row">
+                    <div class="col-md-offset-1 col-md-9">
+                        <br/>
+                        <br/>
+
+
+                        <c:choose>
+                            <c:when test="${controladorPrefeitura.funcionarios().size() > 0}">
+
+                                <h:form>
+                                    <h:dataTable value="#{controladorPrefeitura.funcionarios()}" var="funcionario" class="table table-striped" columnClasses="cDescricao">
+
+                                        <h:column id="cDescricao">
+                                            <f:facet name="header">
+                                                <h:outputText value="Nome"/>
+                                            </f:facet>
+                                            <h:outputText value="#{funcionario.nome}"/>
+                                        </h:column>
+
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Email"/>
+                                            </f:facet>
+                                            <h:outputText value="#{funcionario.email}"/>
+                                        </h:column>
+
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="CPF"/>
+                                            </f:facet>
+                                            <h:outputText value="#{funcionario.cpf}"/>
+                                        </h:column>
+
+                                        <h:column>
+                                            <div align="center">
+                                                <h:commandButton class="btn btn-danger" value="desvincular" action="#{controladorPrefeitura.modalDesvincular(funcionario)}"/>
+                                            </div>
+
+                                            <!-- Modal Aceitar -->
+                                            <div style="padding-top: 200px" class="modal fade" id="myModalDesvincular" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                            <h4 class="modal-title" id="myModalLabel"><h2>Notificação</h2></h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Deseja desvincular o funcionario <h:outputText value="#{controladorPrefeitura.funcionarioAux.nome}"/>?
+                                                            <br/>
+                                                        </div>
+                                                        <div class="modal-footer">
+
+
+                                                            <h:form>
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                                                <h:commandButton value="desvincular" class="btn btn-danger" action="#{controladorPrefeitura.desvincularFuncionario()}" />
+                                                            </h:form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        </h:column>
+                                    </h:dataTable>
+                                </h:form>
+                            </c:when>
+                            <c:otherwise>
+                                <h1>Nenhum funcionario vinculado.</h1>
+                            </c:otherwise>
+                        </c:choose>
+
+
+                        <br/><br/>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <c:choose>
+            <c:when test="${controladorPrefeitura.mostrarModalDesvincular == true }">
+                <script>
+                    mostraModalSolicitacao("myModalDesvincular");
+                </script>
+
+                ${controladorPrefeitura.setMostrarModalDesvincular(false)}
+
+            </c:when>
+        </c:choose>
+
+    </h:body>
+</html>
+
+

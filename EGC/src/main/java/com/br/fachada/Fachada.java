@@ -90,6 +90,23 @@ public class Fachada{
     }
     
     
+    public Funcionario pesquisarFuncionarioPorCPF(Prefeitura prefeitura, String cpf){
+        return ps.pesquisarFuncionario(prefeitura, cpf);
+    }
+    
+    public String vincularFuncionarioPrefeitura(Prefeitura prefeitura, Funcionario funcionario){
+        return ps.vincular(prefeitura, funcionario);
+    }
+    
+    public List<Funcionario> funcionariosPrefeitura(Prefeitura prefeitura) {
+        return ps.funcionarios(prefeitura);
+    }
+    
+    public String desvincularFuncionario(Prefeitura prefeitura, String cpf){
+        return ps.desvincular(prefeitura, cpf);
+    }
+    
+    
     // FIM PrefeituraServices
     //
     //

@@ -65,12 +65,11 @@ $(function () {
 
 
 function notificacaoSolicicatacao() {
-    
     $.notify({
         title: '<strong>Bem-Vindo!</strong><br/>',
         message: "Exitem novas solicitações a serem visualizadas! <br/> Clique Aqui.",
         url: "solicitacoes.jsf",
         target: "_self",
-        delay: 10000,
+        delay: 10000
     });
 }

@@ -1,0 +1,186 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>EGC - Configurações</title>
+    </h:head>
+    <h:body>
+
+
+        <div class="tudo">
+
+            <div id="menu">
+                <ui:include src="topo.xhtml"/>
+            </div>
+
+            <div id="menu-lateral">
+                <ui:include src="menulateral.xhtml"/>
+            </div>
+
+            <div class="area-titulo-pagina">
+                <div class="titulo-pagina">Novo Funcionario</div>
+            </div>
+
+
+            <div class="container centro">
+
+                <div class="row">
+                    <div class="col-md-offset-1 col-md-9">
+                        <br/>
+                        <br/>
+
+
+                        <h:form>
+                            <div class="row">
+                                <div class="col-md-offset-1 col-md-6">
+                                    CPF: <br/>
+                                    <h:inputText class="form-control input-lg" pt:placeholder="CPF" value="#{controladorPrefeitura.CPFPesquisaF}"/>
+                                </div>
+                                <div class="col-md-1">
+                                    <br/>
+                                    <h:commandButton class="btn btn-primary btn-lg" value="Pesquisar" action="#{controladorPrefeitura.pesquisarCPFFuncionario()}"/>
+                                </div>
+                            </div>
+                        </h:form>
+
+                        <br/>
+                        <h:outputText rendered="#{controladorPrefeitura.funcionarioVinculado}" value="Funcionario ja vinculado!"/>
+                        <br/>
+
+                        <h:form rendered="#{controladorPrefeitura.funcionarioCadastrado}">
+                            <hr/>
+                            <h3>Resultado:</h3>
+                            <h:dataTable value="#{controladorPrefeitura.funcionarioPesquisaCPF()}" var="funcionario" class="table table-striped" columnClasses="cDescricao">
+
+                                <h:column id="cDescricao">
+                                    <f:facet name="header">
+                                        <h:outputText value="Nome"/>
+                                    </f:facet>
+                                    <h:outputText value="#{funcionario.nome}"/>
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Email"/>
+                                    </f:facet>
+                                    <h:outputText value="#{funcionario.email}"/>
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="CPF"/>
+                                    </f:facet>
+                                    <h:outputText value="#{funcionario.cpf}"/>
+                                </h:column>
+
+                                <h:column>
+
+
+                                    <!-- Button trigger modal -->
+                                    <div align="center">
+                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalVincular">
+                                            vincular
+                                        </button>
+                                    </div>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="ModalVincular" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="padding-top: 200px">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title" id="myModalLabel"><h2>Confirmação</h2></h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Deseja vincular <h:outputText value="#{funcionario.nome}"/>?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <h:commandButton value="vincular" class="btn btn-primary" action="#{controladorPrefeitura.vincularFuncionario()}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+
+
+                        <h:form rendered="#{controladorPrefeitura.funcionarioNovo}">
+                            <hr/>
+                            <h3>Novo Cadastro: </h3> <br/><br/>
+                            <div class="col-md-offset-1 col-md-6">
+
+                                <div class="row">
+                                    Nome: <br/>
+                                    <h:inputText class="form-control input-lg" pt:placeholder="nome" value="#{controladorPrefeitura.funcionario.nome}"/>
+                                </div>
+                                <br/>
+                                <div class="row">
+                                    Email: <br/>
+                                    <h:inputText class="form-control input-lg" pt:placeholder="email" value="#{controladorPrefeitura.funcionario.email}"/>
+                                </div>
+                                <br/>
+                                <div class="row">
+                                    Senha <br/>
+                                    <h:inputSecret class="form-control input-lg" pt:placeholder="senha" value="#{controladorPrefeitura.funcionario.senha}"/>
+                                </div>
+                                <br/>
+                                <div class="row">
+
+
+                                    <!-- Button trigger modal -->
+
+                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalVincular">
+                                        Cadastrar
+                                    </button>
+
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="ModalVincular" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="padding-top: 200px">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title" id="myModalLabel"><h2>Confirmação</h2></h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Confirme para realizar o cadastro.
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <h:commandButton class="btn btn-primary" value="Cadastrar" action="#{controladorPrefeitura.cadastrarNovoFuncionario()}"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    
+                                </div>
+                                <br/><br/>
+                            </div>
+                        </h:form>
+
+
+                        <br/><br/>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </h:body>
+</html>
+
+
