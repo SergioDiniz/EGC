@@ -45,56 +45,65 @@
 
                             <c:choose>
                                 <c:when test="${controladorAdmin.prefeiturasAtivas().size() > 0}">
-                                    <h:form>
-                                        <h:dataTable value="#{controladorAdmin.prefeiturasAtivas()}" var="prefeitura" class="table table-striped" columnClasses="cDescricao">
 
-                                            <h:column id="cDescricao">
-                                                <f:facet name="header">
-                                                    <h:outputText value="Nome"/>
-                                                </f:facet>
-                                                <h:outputText value="#{prefeitura.nome}"/>
-                                            </h:column>
+                                    <div class="bg-formulario">
 
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="local"/>
-                                                </f:facet>
-                                                <h:outputText value="#{prefeitura.cidade.cidadePK.nomeCidade} - #{prefeitura.cidade.cidadePK.siglaEstado}"/>
-                                            </h:column>
+                                        <div class="titulo-formulario">
+                                            Todas as Prefeituras Ativas
+                                        </div>
+
+                                        <div class="tabela-formulario">
+                                            <h:form>
+                                                <h:dataTable value="#{controladorAdmin.prefeiturasAtivas()}" var="prefeitura" class="table table-hover" columnClasses="cDescricao">
+
+                                                    <h:column id="cDescricao">
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Nome"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{prefeitura.nome}"/>
+                                                    </h:column>
+
+                                                    <h:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="local"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{prefeitura.cidade.cidadePK.nomeCidade} - #{prefeitura.cidade.cidadePK.siglaEstado}"/>
+                                                    </h:column>
 
 
 
-                                            <h:column>
-                                                <div align="center">
-                                                    <div class="btn-group">
+                                                    <h:column>
+                                                        <div align="center">
+                                                            <div class="btn-group">
 
-                                                        <h:commandButton value="Avaliar" class="btn btn-info" action="#{controladorAdmin.avaliarSolicitacao(prefeitura)}" />
-                                                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                            <span class="caret"></span>
-                                                            <span class="sr-only">Menu</span>
-                                                        </button>
+                                                                <h:commandButton value="Avaliar" class="btn btn-info" action="#{controladorAdmin.avaliarSolicitacao(prefeitura)}" />
+                                                                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                                    <span class="caret"></span>
+                                                                    <span class="sr-only">Menu</span>
+                                                                </button>
 
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li>
-                                                                <h:commandLink value="Bloquear" action="#{controladorAdmin.mostraModalAceitar(prefeitura)}"/>
-                                                            </li>
+                                                                <ul class="dropdown-menu" role="menu">
+                                                                    <li>
+                                                                        <h:commandLink value="Bloquear" action="#{controladorAdmin.mostraModalAceitar(prefeitura)}"/>
+                                                                    </li>
 
-                                                            <li>
-                                                                <h:commandLink value="Excluir" action="#{controladorAdmin.mostraModalRecusar(prefeitura)}"/>
-                                                            </li>
+                                                                    <li>
+                                                                        <h:commandLink value="Excluir" action="#{controladorAdmin.mostraModalRecusar(prefeitura)}"/>
+                                                                    </li>
 
-                                                            <li class="divider"></li>
-                                                            <li>
-                                                                <a class="test-popup-link" href="documentos-de-solicitacao/#{prefeitura.documento}" >Documento</a>
-                                                            </li>
+                                                                    <li class="divider"></li>
+                                                                    <li>
+                                                                        <a class="test-popup-link" href="documentos-de-solicitacao/#{prefeitura.documento}" >Documento</a>
+                                                                    </li>
 
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </h:column>
-                                        </h:dataTable>
-                                    </h:form>
-
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </h:column>
+                                                </h:dataTable>
+                                            </h:form>
+                                        </div>
+                                    </div>
                                 </c:when>
                                 <c:otherwise>
                                     <h1>Nenhuma prefeitura ativa.</h1>

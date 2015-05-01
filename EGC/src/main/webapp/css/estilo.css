@@ -242,3 +242,115 @@ body{
 .show{
     display: block;
 }
+
+
+.bg-formulario{
+    background-color: #fff;
+    border: #dfdfdf 1px solid;
+    border-radius: 1px;
+
+}
+
+.titulo-formulario{
+    padding-top: 16px;
+    padding-left: 20px;
+    margin-bottom: 15px;
+    padding-bottom: 16px;
+    border-bottom: solid 1px #dfdfdf;
+    font-weight: bold;
+    font-size: 16px;    
+    color: #555;
+}
+
+.tabela-formulario{
+    padding: 10px 30px 0px 30px;
+}
+
+
+
+
+
+.todas-denuncias, .denuncia-visualizada{
+    background-color: #fff;
+    border: #dfdfdf 1px solid;
+    border-radius: 1px;
+    padding: 10px;
+}
+
+.icone-denuncia{
+    text-align: right;
+}
+
+.rua-denuncia{
+    font-weight: bold;
+    color: #09587b;
+    font-size: 12px;
+}
+
+.conteudo-denuncia{
+    color: #575757;
+}
+
+.hora-denuncia{
+    font-size: 10px;
+    color: #808080;
+    background-image: url(../img/icones-denuncia/ic-relogio.png);
+    background-repeat: no-repeat;
+}
+
+.denuncia{
+    border-bottom:  solid 1px #dfdfdf;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+
+
+.area-denuncias{
+    background-color: #f9f9f9;
+}
+
+
+.denuncia-visualizada{
+    padding: 20px;
+    padding-bottom: 0px;
+}
+
+.link-mapa-denuncia{
+    text-decoration: underline;
+    font-size: 12px;
+    color: #575757;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+.img-denuncia{
+    max-width: 520px;
+    padding-left: 20px;
+    padding-bottom: 10px;
+    padding-top: 5px;
+}
+
+.rodape-denuncia{
+    background-color: #5a91f7;
+    height: 50px;
+    margin-left: -20px;
+    margin-right: -20px;
+}
+
+.hora-denuncia-visualizada{
+    color: #fff;
+    font-size: 12px;
+    padding-top: 17px;
+    padding-left: 25px;
+    background-image: url(../img/icones-denuncia/ic-relogio-branco.png);
+    background-repeat: no-repeat;
+    background-position-x: 10px;
+    background-position-y: 18px;
+}
+
+.impucionar-denuncia{
+    color: #fff;
+    padding-top: 15px;
+    
+}
