@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>EGC - Configurações</title>
+    </h:head>
+    <h:body>
+
+
+        <div class="tudo">
+
+            <div id="menu">
+                <ui:include src="topo.xhtml"/>
+            </div>
+
+            <div id="menu-lateral">
+                <ui:include src="menulateral.xhtml"/>
+            </div>
+
+            <div class="area-titulo-pagina">
+                <div class="titulo-pagina">Configurações</div>
+            </div>
+
+
+            <div class="container centro">
+
+                <div class="row">
+                    <div class="col-md-offset-1 col-md-9">
+                        <br/>
+                        <br/>
+
+                        <h:form>
+
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-7"> 
+
+                                    Nome <br/>
+                                    <h:inputText value="#{controladorFuncionario.funcionario.nome}" class="form-control input-lg campos-formulario" id="nome" required="required" pt:placeholder="nome"/> 
+                                    <br/>
+                                    Email <br/>
+                                    <h:inputText value="#{controladorFuncionario.funcionario.email}" class="form-control input-lg campos-formulario" id="email" required="required" pt:placeholder="email"/> 
+                                    <br/>
+                                    CPF <br/>
+                                    <h:inputText value="#{controladorFuncionario.funcionario.cpf}" class="form-control input-lg campos-formulario" id="cpf" required="required" pt:placeholder="CPF" disabled="true"/> 
+                                    <br/>
+                                    Senha <br/>
+                                    <h:inputSecret redisplay="true" value="#{controladorFuncionario.funcionario.senha}" class="form-control input-lg campos-formulario" id="senha" required="required" pt:placeholder="senha"/> 
+                                    <br/>
+                                    <p:messages showDetail="true" autoUpdate="true" closable="true" style="position: absolute; width: 408px"/>
+
+                                </div>
+
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-7"> 
+                                    <br/><br/><br/><br/>
+                                    <div align="center"><h:commandButton value="Atualizar Dados" action="#{controladorFuncionario.atualizarDados()}" class="btn btn-primary btn-lg"/></div>
+                                </div>
+
+                            </div>
+
+
+
+                        </h:form>
+                        
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </h:body>
+</html>
+
+

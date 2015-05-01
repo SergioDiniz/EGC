@@ -118,7 +118,6 @@ public class Fachada{
     // FuncionarioServices
     
     public Funcionario loginFuncionario(String email, String senha, String cidade, String estado){
-        System.out.println("entrou na fachada");
         return fs.login(email, senha, cidade, estado);
     }
     

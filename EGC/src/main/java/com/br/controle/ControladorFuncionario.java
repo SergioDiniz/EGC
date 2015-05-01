@@ -45,10 +45,8 @@ public class ControladorFuncionario implements Serializable {
     }
 
     public String login() {
-        System.out.println("entrou no login");
         this.funcionario = fachada.loginFuncionario(funcionario.getEmail(), funcionario.getSenha(),
                 cidadePK.getNomeCidade(), cidadePK.getSiglaEstado());
-        System.out.println("pegou funcionario");
         if (funcionario != null) {
 
             this.cidade = fachada.pesquisarCidade(cidadePK.getNomeCidade(), cidadePK.getSiglaEstado());
@@ -68,6 +66,16 @@ public class ControladorFuncionario implements Serializable {
         this.cidadePK = new CidadePK();
         return "/index.jsf?faces-redirect=true";
     }
+    
+    
+    public String atualizarDados(){
+        fachada.atualizar(this.funcionario);
+        return null;
+    }
+    
+    
+    
+    
 
     // geters and seters
     public Funcionario getFuncionario() {

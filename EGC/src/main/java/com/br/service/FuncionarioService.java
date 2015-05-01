@@ -27,7 +27,6 @@ public class FuncionarioService implements FuncionarioServiceIT {
     @Override
     public Funcionario login(String email, String senha, String cidade, String estado) {
         
-        System.out.println("entrou no service 1");
         
         Query query = em.createQuery("SELECT f FROM Funcionario f JOIN f.prefeituras fp WHERE f.email = :email "
                 + "AND f.senha = :senha AND fp.cidade.CidadePK.nomeCidade = :cidade "
