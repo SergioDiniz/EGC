@@ -273,7 +273,7 @@ body{
 
 
 .feed-usuario{
-    margin-left: -30px;
+    margin-left: 0px;
 }
 
 
@@ -296,6 +296,7 @@ body{
 }
 
 .conteudo-denuncia{
+    
     color: #575757;
 }
 
@@ -320,6 +321,7 @@ body{
 .denuncia-visualizada{
     padding: 20px;
     padding-bottom: 0px;
+    margin-bottom: 20px;
 }
 
 .link-mapa-denuncia{
@@ -331,32 +333,32 @@ body{
 }
 
 .img-denuncia{
-    max-width: 520px;
-    padding-left: 20px;
+    max-width: 440px;
+    padding-left: 6px;
     padding-bottom: 10px;
     padding-top: 5px;
 }
 
 .rodape-denuncia{
-    background-color: #3399ff;
-    height: 50px;
+    background-color: #fff;
+    height: 40px;
     margin-left: -20px;
     margin-right: -20px;
 }
 
 .hora-denuncia-visualizada{
-    color: #fff;
+    color: #555;
     font-size: 12px;
-    padding-top: 17px;
+    padding-top: 12px;
     padding-left: 25px;
-    background-image: url(../img/icones-denuncia/ic-relogio-branco.png);
+    background-image: url(../img/icones-denuncia/ic-relogio.png);
     background-repeat: no-repeat;
-    background-position: 10px 18px;
+    background-position: 10px 13px;
 }
 
 .impucionar-denuncia{
-    color: #fff;
-    padding-top: 15px;
+    color: #555;
+    padding-top: 11px;
 
 }
 
@@ -365,6 +367,22 @@ body{
     margin-right: 0;
     padding-right: 0;
 }
+
+.btn-img{
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+
+
+
+
+
+
+
+
 
 
 .btn-nova-denuncia{
@@ -404,4 +422,28 @@ body{
     font-size: 18px;
     color: #fff;
     padding-top: 27px;
+}
+
+
+.btn-fecha-modal{
+    border: none;
+}
+
+.conteudo-denuncia-modal{
+    padding: 10px;
+    padding-right: 30px;
+}
+
+
+.img-denuncia-modal{
+    width: 520px;  
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 120px;
+    padding-bottom: 110px;
+    background-color: #000;
+}
+
+.img-modal{
+    
 }
