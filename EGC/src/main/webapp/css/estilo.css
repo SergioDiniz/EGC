@@ -2,8 +2,10 @@
 body{
     margin: 0;
     padding: 0;
+    font-family: "Kozuka Gothic Pro";
     /*background-color: #eee;*/    
 }
+
 
 
 
@@ -121,7 +123,6 @@ body{
     padding-top: 26px;
     color: #1a7ab9;
     font-size: 30px;
-    font-family: "Kozuka Gothic Pro";
 
 }
 
@@ -166,6 +167,7 @@ body{
     min-width: 1140px;
     max-width: 1140px;
     padding-top: 50px;
+
     opacity: 0.2;
 
 }
@@ -270,6 +272,12 @@ body{
 
 
 
+.feed-usuario{
+    margin-left: -30px;
+}
+
+
+
 .todas-denuncias, .denuncia-visualizada{
     background-color: #fff;
     border: #dfdfdf 1px solid;
@@ -306,9 +314,7 @@ body{
 
 
 
-.area-denuncias{
-    background-color: #f9f9f9;
-}
+
 
 
 .denuncia-visualizada{
@@ -332,7 +338,7 @@ body{
 }
 
 .rodape-denuncia{
-    background-color: #5a91f7;
+    background-color: #3399ff;
     height: 50px;
     margin-left: -20px;
     margin-right: -20px;
@@ -345,12 +351,57 @@ body{
     padding-left: 25px;
     background-image: url(../img/icones-denuncia/ic-relogio-branco.png);
     background-repeat: no-repeat;
-    background-position-x: 10px;
-    background-position-y: 18px;
+    background-position: 10px 18px;
 }
 
 .impucionar-denuncia{
     color: #fff;
     padding-top: 15px;
+
+}
+
+
+.magin-btn-nd{
+    margin-right: 0;
+    padding-right: 0;
+}
+
+
+.btn-nova-denuncia{
+    background: none;
+    border: none;
+    height: 78px;
+    padding-left: 8px;
+    background-color: #3399ff;
+    width: 320px;
+    float: right;
+
     
+}
+
+
+.bnt-vd{
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    position: relative;
+    float: left;
+}
+
+.icon-btn-vd{
+    margin-top: -1px;
+    background-color: #0066cc;
+    height: 78px;
+    width: 78px;
+    text-align: center;
+    margin-left: -15px;
+    font-size: 25px;
+    color: #fff;
+    padding-top: 23px;
+}
+
+.text-bnt-vd{
+    font-size: 18px;
+    color: #fff;
+    padding-top: 27px;
 }

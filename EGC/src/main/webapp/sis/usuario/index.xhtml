@@ -12,7 +12,7 @@
 
     <h:body>
 
-        <div class="tudo area-denuncias">
+        <div class="tudo">
 
             <div id="menu">
                 <ui:include src="topo.xhtml"/>
@@ -21,15 +21,55 @@
             <div id="menu-lateral">
                 <ui:include src="menulateral.xhtml"/>
             </div>
+        </div>
 
-            <div class="area-titulo-pagina">
+        <div class="area-titulo-pagina">
+
+            <div class="col-md-5">
                 <div class="titulo-pagina">Bem Vindo!</div>
             </div>
 
+            <div class="tudo">
+                <div class="col-md-offset-4 col-md-3 magin-btn-nd">
+                    <div class="btn-nova-denuncia">
+                        <button class="btn-nova-denuncia" data-toggle="modal" data-target="#myModal">
+                            <div class="icon-btn-vd bnt-vd">
+                                +
+                            </div>
+                            <div class="text-bnt-vd bnt-vd">
+                                nova denuncia
+                            </div>
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel"><h2>Nova Denuncia</h2></h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        ...
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-primary">Denunciar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tudo">
+
             <div class="container">
-                <div class="conteudo">        
+                <div class="conteudo feed-usuario">        
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-offset-1 col-md-5">
                             <div class="todas-denuncias">
 
                                 <div class="denuncia">
@@ -234,26 +274,26 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="row link-mapa-denuncia">
                                     Rua Pedro Muniz Brito, 121-203, Santa Helena - PB, 58925-000, Brasil
                                 </div>
-                                
+
                                 <div class="row">
                                     <img src="denuncias/denuncia.jpg" class="img-denuncia" />
                                 </div>
-                                
+
                                 <div class="row rodape-denuncia">
                                     <div class="col-md-4 hora-denuncia-visualizada">
                                         14:50 - 01/05/2015
                                     </div>
-                                    
+
                                     <div class="col-md-offset-6 col-md-2 impucionar-denuncia">
                                         Ajudar
                                     </div>
-                                    
+
                                 </div>
-                                
+
                             </div>
                         </div>
 
@@ -262,6 +302,14 @@
             </div>
         </div>
     </h:body>
+    <style type="text/css">
+        body{
+            background-color: #f9f9f9;    
+            background-image: url(../../img/bng-btn.jpg);
+            background-repeat: repeat-x;
+            background-position: 0 50px;
+        }
+    </style>
 </html>
 
 
