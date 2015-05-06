@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
 
     <h:head>
         <title>EGC - Usuário</title>
@@ -32,33 +33,16 @@
             <div class="tudo">
                 <div class="col-md-offset-4 col-md-3 magin-btn-nd">
                     <div class="btn-nova-denuncia">
-                        <button class="btn-nova-denuncia" data-toggle="modal" data-target="#myModal">
-                            <div class="icon-btn-vd bnt-vd">
-                                +
-                            </div>
-                            <div class="text-bnt-vd bnt-vd">
-                                nova denuncia
-                            </div>
-                        </button>
-
-                        <!-- Modal -->
-                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="myModalLabel"><h2>Nova Denuncia</h2></h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        ...
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                        <button type="button" class="btn btn-primary">Denunciar</button>
-                                    </div>
+                        <a href="denuncia.jsf">
+                            <button class="btn-nova-denuncia" data-toggle="modal" data-target="#myModal" >
+                                <div class="icon-btn-vd bnt-vd">
+                                    +
                                 </div>
-                            </div>
-                        </div>
+                                <div class="text-bnt-vd bnt-vd">
+                                    nova denuncia
+                                </div>
+                            </button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -353,13 +337,13 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        
+
                                                         <div class="row conteudo-denuncia-modal">
                                                             asdasdas asd asd asd as da sda sd asdasdas dasda sdas das ds ds a ds da sd as da sd a sda s da sd as d as da sd a sd as da sd asd a sd as da s
                                                             asdasdas asd asd asd as da sda sd asdasdas dasda sdas das ds ds a ds da sd as da sd a sda s da sd as d as da sd a sd as da sd asd a sd as da s
                                                             asdasdas asd asd asd as da sda sd asdasdas dasda sdas das ds ds a ds da sd as da sd a sda s da sd as d as da sd a sd as da sd asd a sd as da s
                                                             asdasdas asd asd asd as da sda sd asdasdas dasda sdas das ds ds a ds da sd as da sd a sda s da sd as d as da sd a sd as da sd asd a sd as da s
-                                                            
+
                                                         </div>
                                                     </div>
                                                 </div>

@@ -56,10 +56,14 @@ public class Denuncia implements Serializable{
     public Denuncia() {
     }
 
-    public Denuncia(String descricao, String foto, EnderecoDenuncia enderecoDenuncia) {
+    public Denuncia(String descricao, String foto, EnderecoDenuncia enderecoDenuncia, TipoDeDenuncia tipoDeDenuncia) {
         this.descricao = descricao;
         this.foto = foto;
         this.enderecoDenuncia = enderecoDenuncia;
+        this.cidade = new Cidade(new CidadePK(enderecoDenuncia.getCidade(), enderecoDenuncia.getEstado()));
+        this.estadoDeAcompanhamento = EstadoDeAcompanhamento.AGUARDANDO;
+        this.tipoDeDenuncia = tipoDeDenuncia;
+        this.data = new Date();
     }
 
     
@@ -136,6 +140,20 @@ public class Denuncia implements Serializable{
         this.tipoDeDenuncia = tipoDeDenuncia;
     }
 
+    @Override
+    public String toString() {
+        return "Denuncia{" + "id=" + id + ", descricao=" + descricao + ", estadoDeAcompanhamento=" + estadoDeAcompanhamento + ", tipoDeDenuncia=" + tipoDeDenuncia + ", data=" + data + ", foto=" + foto + ", enderecoDenuncia=" + enderecoDenuncia + ", cidade=" + cidade + ", informacaoDeAtendida=" + informacaoDeAtendida + ", conteudoInapropriados=" + conteudoInapropriados + '}';
+    }
+
+    public List<ConteudoInapropriado> getConteudoInapropriados() {
+        return conteudoInapropriados;
+    }
+
+    public void setConteudoInapropriados(List<ConteudoInapropriado> conteudoInapropriados) {
+        this.conteudoInapropriados = conteudoInapropriados;
+    }
+
+    
     
     
     
@@ -160,6 +178,8 @@ public class Denuncia implements Serializable{
         }
         return true;
     }
+    
+    
     
     
     

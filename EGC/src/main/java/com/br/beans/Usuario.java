@@ -69,7 +69,9 @@ public class Usuario extends Pessoa implements Serializable{
         this.denuncias = denuncias;
     }
     
-    
+    public void novaDenuncia(Denuncia denuncia) {
+        this.denuncias.add(denuncia);
+    }   
     
     
 }

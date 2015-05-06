@@ -7,8 +7,10 @@ package com.br.fachada;
 
 import com.br.beans.Administrador;
 import com.br.beans.Cidade;
+import com.br.beans.EnderecoDenuncia;
 import com.br.beans.Funcionario;
 import com.br.beans.Prefeitura;
+import com.br.beans.TipoDeDenuncia;
 import com.br.beans.Usuario;
 import com.br.service.AdministradorService;
 import com.br.service.AdministradorServiceIT;
@@ -63,6 +65,11 @@ public class Fachada{
     
     public Usuario loginUsuario(Usuario usuario){
         return us.login(usuario.getEmail(), usuario.getSenha());
+    }
+    
+    
+    public String novaDenuncia(Usuario usuario, EnderecoDenuncia enderecoDenuncia, String denucia, String foto, TipoDeDenuncia tipoDeDenuncia){
+        return us.novaDenuncia(usuario, enderecoDenuncia, denucia, foto, tipoDeDenuncia);
     }
     
     

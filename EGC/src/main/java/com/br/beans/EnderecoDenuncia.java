@@ -13,29 +13,37 @@ import javax.persistence.*;
  * @author Sergio Diniz
  */
 @Entity
-public class EnderecoDenuncia implements Serializable{
-    
-    @Id @GeneratedValue
+public class EnderecoDenuncia implements Serializable {
+
+    @Id
+    @GeneratedValue
     private int id;
     @Column(nullable = false)
     private String rua;
     @Column(nullable = false)
-    private int numero;
+    private String numero;
+    
+    private String bairro;
     @Column(nullable = false)
     private String cidade;
     @Column(nullable = false)
     private String estado;
+    @Column(nullable = false)
     private String cep;
+    @Column(nullable = false)
     private String pais;
+    @Column(nullable = false)
     private String longitude;
+    @Column(nullable = false)
     private String latitude;
 
     public EnderecoDenuncia() {
     }
 
-    public EnderecoDenuncia(String rua, int numero, String cidade, String estado, String cep, String pais, String longitude, String latitude) {
+    public EnderecoDenuncia(String rua, String numero, String bairro, String cidade, String estado, String cep, String pais, String longitude, String latitude) {
         this.rua = rua;
         this.numero = numero;
+        this.bairro = bairro;
         this.cidade = cidade;
         this.estado = estado;
         this.cep = cep;
@@ -43,6 +51,7 @@ public class EnderecoDenuncia implements Serializable{
         this.longitude = longitude;
         this.latitude = latitude;
     }
+
 
 
     public String getRua() {
@@ -53,13 +62,23 @@ public class EnderecoDenuncia implements Serializable{
         this.rua = rua;
     }
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+
 
     public String getCidade() {
         return cidade;
@@ -116,7 +135,13 @@ public class EnderecoDenuncia implements Serializable{
     public void setId(int id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "EnderecoDenuncia{" + "id=" + id + ", rua=" + rua + ", numero=" + numero + ", bairro=" + bairro + ", cidade=" + cidade + ", estado=" + estado + ", cep=" + cep + ", pais=" + pais + ", longitude=" + longitude + ", latitude=" + latitude + '}';
+    }
     
     
     
+
 }

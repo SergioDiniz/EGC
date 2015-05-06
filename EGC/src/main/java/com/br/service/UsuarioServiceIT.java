@@ -5,7 +5,11 @@
  */
 package com.br.service;
 
+import com.br.beans.Denuncia;
+import com.br.beans.EnderecoDenuncia;
+import com.br.beans.TipoDeDenuncia;
 import com.br.beans.Usuario;
+import java.util.List;
 
 /**
  *
@@ -17,5 +21,9 @@ public interface UsuarioServiceIT{
     public Usuario login(String email, String senha);
     
     public boolean excluir(Usuario usuario);
+    
+    public List<Denuncia> minhasDenuncias(String email);
+    
+    public String novaDenuncia(Usuario usuario, EnderecoDenuncia enderecoDenuncia, String denucia, String foto, TipoDeDenuncia tipoDeDenuncia);
     
 }

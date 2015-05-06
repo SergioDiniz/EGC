@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>EGC - Usuário</title>
+    </h:head>
+
+    <h:body>
+
+        <div class="tudo">
+
+            <div id="menu">
+                <ui:include src="topo.xhtml"/>
+            </div>
+
+            <div id="menu-lateral">
+                <ui:include src="menulateral.xhtml"/>
+            </div>
+        </div>
+
+        <div class="area-titulo-pagina">
+
+            <div class="col-md-5">
+                <div class="titulo-pagina">Nova Denuncia</div>
+            </div>
+
+            
+        </div>
+
+        <div class="tudo">
+
+            <div class="container">
+                <div class="conteudo">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1">
+                                <form jsf:id="form">
+
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label for="txtEndereco">Endereço:</label>
+                                                <input type="text" id="txtEndereco" jsf:id="txtEndereco" name="txtEndereco" class="form-control"  jsf:value="${controladorUsuario.endMapa}"/>
+                                            </div>
+
+                                            <div>
+                                                <input type="hidden" id="btnEndereco" name="btnEndereco" value="Mostrar no mapa" onclick="posicaoAtual()" />
+                                            </div>
+
+                                            <div>
+                                                <div class="form-group">
+                                                    <label>Denuncia:</label>
+                                                    <textarea class="form-control" rows="6" jsf:value="${controladorUsuario.denuncia}">
+                                                
+                                                    </textarea>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <div class="form-group">
+                                                    <label>Tipo de Denuncia: </label>
+                                                    <h:selectOneListbox size="1" class="form-control" value="#{controladorUsuario.tipoDenuncia}">
+                                                        <f:selectItem itemValue="COLETA_DE_LIXO" itemLabel="Coleta de Lixo" />
+                                                        <f:selectItem itemValue="DISTRIBUICAO_E_QUALIDADE_DA_AGUA" itemLabel="Destribuição e Qualidade da Agua"/>
+                                                        <f:selectItem itemValue="ILUMINACAO_PUBLICA" itemLabel="Iluminação Publica"/>
+                                                        <f:selectItem itemValue="LIMPEZA_URBANA" itemLabel="Limpeza Urbana"/>
+                                                        <f:selectItem itemValue="MANUTENCAO_DE_CANAIS_E_REDES_DE_ESGOTOS" itemLabel="Manutenção de Canais e Redes de Esgotos"/>
+                                                        <f:selectItem itemValue="MANUTENCAO_E_CONSERVACAO_DE_VIAS_PUBLICAS" itemLabel="Manutenção e Conservação de Vias Publicas"/>
+                                                        <f:selectItem itemValue="PODA_E_MANUTENCAO_DAS_ARVORES" itemLabel="Poda e Manutenção das Arvores"/>
+                                                        <f:selectItem itemValue="POLUICAO_VISUAL" itemLabel="Poluição Visual"/>
+                                                        <f:selectItem itemValue="SINALIZACAO_E_PLACAS" itemLabel="Sinalização e Placas"/>
+                                                    </h:selectOneListbox>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <div class="row" id="btn-fd">
+                                                    <div class="col-md-12">
+                                                        <p:fileUpload
+                                                            label="Procurar"
+                                                            value="#{controladorUsuario.imgDenuncia}"
+                                                            allowTypes="/(\.|\/)(gif|jpg|jpeg|gif|png|PNG|GIF|JPG|JPEG)$/" 
+                                                            mode="simple" 
+                                                            skinSimple="true"
+                                                            required="true"
+
+                                                            />
+                                                    </div>
+                                                </div>
+
+
+                                                <br/>
+                                            </div>
+
+                                            <div>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <h:commandButton id="btn-enviar-d" value="Enviar" class="btn btn-lg btn-primary" action="#{controladorUsuario.fazerDenuncia()}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-7">
+                                            <div id="mapa" style="height: 450px; width: 100%"></div>
+                                        </div>
+
+                                    </div>
+
+
+
+
+
+
+
+                                    <input type="hidden" id="txtLatitude" name="txtLatitude" jsf:value="#{controladorUsuario.endLatitude}" />
+                                    <input type="hidden" id="txtLongitude" name="txtLongitude" jsf:value="#{controladorUsuario.endLogitude}" />
+                                </form>
+
+
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </h:body>
+    <style type="text/css">
+        body{
+            background-color: #f9f9f9;    
+            background-image: url(../../img/bng-btn.jpg);
+            background-repeat: repeat-x;
+            background-position: 0 50px;
+        }
+    </style>
+
+</html>
+
+

@@ -5,6 +5,11 @@
  */
 package com.br.service;
 
+import com.br.beans.Cidade;
+import com.br.beans.CidadePK;
+import com.br.beans.Denuncia;
+import com.br.beans.EnderecoDenuncia;
+import com.br.beans.TipoDeDenuncia;
 import com.br.beans.Usuario;
 import java.util.List;
 import javax.ejb.Remote;
@@ -52,6 +57,49 @@ public class UsuarioService implements UsuarioServiceIT{
         return false;
     }
 
+    
+    @Override
+    public String novaDenuncia(Usuario usuario, EnderecoDenuncia enderecoDenuncia, String denucia, String foto, TipoDeDenuncia tipoDeDenuncia){
+            
+            
+        try {
+            System.out.println("1");
+            Denuncia d = new Denuncia(denucia, foto, enderecoDenuncia, tipoDeDenuncia);
+            
+            usuario.novaDenuncia(d);
+            
+            em.persist(enderecoDenuncia);
+            em.persist(d);
+            em.merge(usuario);
+            
+            
+            
+            
+            
+            return "ok";
+        } catch (Exception e) {
+        }
+        
+        
+        return "ERRO";
+    }
+    
+    
+    @Override
+    public List<Denuncia> minhasDenuncias(String email){
+        
+        Query query = em.createQuery("SELECT d from Usuario u JOIN u.denuncias d WHERE u.email = :email");
+              query.setParameter("email", email);
+        
+        List<Denuncia> d = query.getResultList();
+        
+        if(d.size() > 0){
+            return d;
+        }
+        
+        return null;
+        
+    }
     
     
     

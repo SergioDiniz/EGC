@@ -2,7 +2,7 @@
 body{
     margin: 0;
     padding: 0;
-    font-family: "Kozuka Gothic Pro";
+    /*font-family: "Kozuka Gothic Pro";*/
     /*background-color: #eee;*/    
 }
 
@@ -168,7 +168,7 @@ body{
     max-width: 1140px;
     padding-top: 50px;
 
-    opacity: 0.2;
+    /*opacity: 0.2;*/
 
 }
 
@@ -447,3 +447,39 @@ body{
 .img-modal{
     
 }
+
+
+
+
+.ui-autocomplete { 
+	background: #fff; 
+	border-top: 1px solid #ccc;
+	cursor: pointer; 
+	font: 15px 'Open Sans',Arial;
+	margin-left: 3px;
+	width: 493px !important;
+	position: fixed;
+}
+
+.ui-autocomplete .ui-menu-item { 
+	list-style: none outside none;
+	padding: 7px 0 9px 10px;
+}
+
+.ui-autocomplete .ui-menu-item:hover, .ui-autocomplete a:hover { 
+    background: #eee;
+    border: none;
+    box-shadow: none;
+}
+
+.ui-autocomplete .ui-corner-all { 
+	color: #666 !important;
+	display: block;
+}
+
+
+#mapa{
+    border: 5px solid #dfdfdf;
+}
+
+

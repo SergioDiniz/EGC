@@ -1,47 +1,32 @@
 <html>
     <head>
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA7--w4nokUUqyxvIeuDh37KaIcLivbQHs&amp;sensor=false"></script>
+        <script src="js/jquery-1.11.2.js" type="text/javascript"></script>
 
-        <!-- Magnific Popup core CSS file -->
-        <link rel="stylesheet" href="js/rm/jquery.remodal.css"> 
-
-
-
-        <!-- Magnific Popup core JS file -->
-        <script src="js/jquery-1.11.2.js"></script>
-
-        <script>
-            window.REMODAL_GLOBALS = {
-                NAMESPACE: 'modal',
-                DEFAULTS: {
-                    hashTracking: false
-                }
-            };
-        </script>
-
-        <script src="js/rm/jquery.remodal.js"></script>
-        <script src="js/scripts.js"></script>
-
-
-        <title>Janela modal</title>
-
-
+        <script src="js/mapa.js" type="text/javascript"></script>
+        <script src="js/jquery-ui.custom.min.js" type="text/javascript"></script>
 
     </head>
     <body>
 
+        zxcx
+        <form method="post" action="Denuncia" >   
+            <div class="form-group">
+                <label for="txtEndereco">Endereço:</label>
+                <input type="text" id="txtEndereco" name="txtEndereco" class="form-control" />
+            </div>
+            <div>
+                <input type="button" id="btnEndereco" name="btnEndereco" value="Mostrar no mapa" onclick="posicaoAtual()" />
+            </div>
+            <div id="mapa" style="height: 300px; width: 560px"></div>
 
-        <a data-remodal-target="modal" href="#modal">Call the modal with data-remodal-id="modal"</a>
+            <div>
+                <input type="submit" value="Enviar" name="btnEnviar" class="btn btn-primary" />
+            </div>
 
-        <div class="remodal" data-remodal-id="modal" data-remodal-options="hashTracking: false">
-            <h1>Remodal</h1>
-            <p>
-                Flat, responsive, lightweight, fast, easy customizable modal window plugin
-                with declarative state notation and hash tracking.
-            </p>
-            <br>
-            <a class="remodal-cancel" href="https://www.google.com.br">Cancel</a>
-
-        </div>
+            <input type="hidden" id="txtLatitude" name="txtLatitude" />
+            <input type="hidden" id="txtLongitude" name="txtLongitude" />
+        </form>
 
 
 
