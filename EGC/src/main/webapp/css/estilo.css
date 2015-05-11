@@ -6,7 +6,9 @@ body{
     /*background-color: #eee;*/    
 }
 
-
+html, body{
+ height:100%; 
+}
 
 
 .menu{
@@ -17,6 +19,10 @@ body{
     background-color: #03a9f4;
     box-shadow: 0px 0px 10px 0.00px rgba(0, 0, 0, 0.43);
     position: fixed;
+    z-index: 1000;
+}
+
+#menu{
     z-index: 1000;
 }
 
@@ -274,6 +280,7 @@ body{
 
 .feed-usuario{
     margin-left: 0px;
+    z-index: 1;
 }
 
 
@@ -296,7 +303,7 @@ body{
 }
 
 .conteudo-denuncia{
-    
+
     color: #575757;
 }
 
@@ -322,43 +329,61 @@ body{
     padding: 20px;
     padding-bottom: 0px;
     margin-bottom: 20px;
+    border: none;
 }
 
 .link-mapa-denuncia{
     text-decoration: underline;
     font-size: 12px;
     color: #575757;
-    padding-left: 20px;
+    padding-left: 10px;
     padding-top: 20px;
 }
 
 .img-denuncia{
-    max-width: 440px;
+    
+    max-width: 100%;
+    max-height: 400px;
     padding-left: 6px;
+    padding-right: 6px;
     padding-bottom: 10px;
     padding-top: 5px;
+    
 }
 
 .rodape-denuncia{
-    background-color: #fff;
-    height: 40px;
+    background-color: #5a91f7;
+    height: 50px;
     margin-left: -20px;
     margin-right: -20px;
 }
 
 .hora-denuncia-visualizada{
-    color: #555;
+    color: #fff;
     font-size: 12px;
-    padding-top: 12px;
+    padding-top: 17px;
     padding-left: 25px;
-    background-image: url(../img/icones-denuncia/ic-relogio.png);
+    background-image: url(../img/icones-denuncia/ic-relogio-branco.png);
     background-repeat: no-repeat;
-    background-position: 10px 13px;
+    background-position: 10px 18px;
 }
 
 .impucionar-denuncia{
-    color: #555;
-    padding-top: 11px;
+    color: #fff;
+    padding-top: 7px;
+
+}
+
+.btn-ajudar-denuncia{
+    font-size: 10px;
+    background: none;
+    border: none;
+    color: #000;
+    background-color: #fff;
+    border-radius: 5px;
+    width: 35px;
+    height: 35px;
+
 
 }
 
@@ -369,6 +394,7 @@ body{
 }
 
 .btn-img{
+    
     margin: 0;
     padding: 0;
     border: none;
@@ -394,7 +420,7 @@ body{
     width: 320px;
     float: right;
 
-    
+
 }
 
 
@@ -436,34 +462,115 @@ body{
 
 
 .img-denuncia-modal{
-    width: 520px;  
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 120px;
-    padding-bottom: 110px;
-    background-color: #000;
+    max-width: 870px;
+    max-height: 600px;
+
+
+    position:absolute;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+    margin:auto;
+
+    padding: 10px;  
 }
 
 .img-modal{
+    text-align: center;
+    background-color: #000;
+    border-radius: 5px 0 0 5px;
+    min-height: 600px;
+}
+
+.bs-example-modal-lg > .modal-lg{
+    position: absolute;
+    width: 1300px;
+    left: 50%;
+    top:50%;
+    margin-left: -650px;
+    margin-top: -300px;
+}
+
+
+
+
+
+
+.menu-filtro{
+/*    position: fixed;
+    margin-left: calc(100% - 270px);*/
+    float: right;
+    width: 270px;
+    height:auto; 
+    min-height:550px;
+    margin-top: 0px;
+    background-color: #f0f0f0;
+    z-index: 100;
+    color: #5d5d5d;
+}
+
+.fixar-menu-filtro{
+    position: fixed;
+    margin-left: calc(100% - 270px);
+    margin-top: -79px !important;
     
+}
+
+.barra-pesquisa-usuario, 
+.cidade-atual,
+.info-denuncias,
+.info-atendidas{
+    padding: 10px;
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.barra-pesquisa-usuario  .form-control{
+    border-radius: 20px !important;
+    color: #999;
+    font-size: 17px;
+}
+
+.cidade-atual{
+    font-size: 18px;
+    padding-left: 15px;
+}
+
+.info-denuncias-atendidas{
+
+}
+
+.info-denuncias{
+    border-right: 1px solid #d8d8d8;;
+}
+
+.info-texto{
+    padding-top: 10px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.info-texto-numero{
+    text-align: center;
+    font-size: 40px;
 }
 
 
 
 
 .ui-autocomplete { 
-	background: #fff; 
-	border-top: 1px solid #ccc;
-	cursor: pointer; 
-	font: 15px 'Open Sans',Arial;
-	margin-left: 3px;
-	width: 493px !important;
-	position: fixed;
+    background: #fff; 
+    border-top: 1px solid #ccc;
+    cursor: pointer; 
+    font: 15px 'Open Sans',Arial;
+    margin-left: 3px;
+    width: 493px !important;
+    position: fixed;
 }
 
 .ui-autocomplete .ui-menu-item { 
-	list-style: none outside none;
-	padding: 7px 0 9px 10px;
+    list-style: none outside none;
+    padding: 7px 0 9px 10px;
 }
 
 .ui-autocomplete .ui-menu-item:hover, .ui-autocomplete a:hover { 
@@ -473,8 +580,8 @@ body{
 }
 
 .ui-autocomplete .ui-corner-all { 
-	color: #666 !important;
-	display: block;
+    color: #666 !important;
+    display: block;
 }
 
 

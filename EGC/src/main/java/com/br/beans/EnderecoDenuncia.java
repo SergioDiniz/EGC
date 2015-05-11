@@ -136,9 +136,11 @@ public class EnderecoDenuncia implements Serializable {
         this.id = id;
     }
 
+    //Rua Pedro Muniz Brito, 121-203, Santa Helena - PB, 58925-000, Brasil
+    
     @Override
     public String toString() {
-        return "EnderecoDenuncia{" + "id=" + id + ", rua=" + rua + ", numero=" + numero + ", bairro=" + bairro + ", cidade=" + cidade + ", estado=" + estado + ", cep=" + cep + ", pais=" + pais + ", longitude=" + longitude + ", latitude=" + latitude + '}';
+        return rua + ", " + numero + " - " + bairro + ", " + cidade + " - " + estado + ", " + cep + ", " + pais;
     }
     
     

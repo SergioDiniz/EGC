@@ -7,6 +7,7 @@ package com.br.fachada;
 
 import com.br.beans.Administrador;
 import com.br.beans.Cidade;
+import com.br.beans.Denuncia;
 import com.br.beans.EnderecoDenuncia;
 import com.br.beans.Funcionario;
 import com.br.beans.Prefeitura;
@@ -16,6 +17,7 @@ import com.br.service.AdministradorService;
 import com.br.service.AdministradorServiceIT;
 import com.br.service.CidadeServiceIT;
 import com.br.service.DaoIT;
+import com.br.service.DenunciaServiceIT;
 import com.br.service.FuncionarioServiceIT;
 import com.br.service.PrefeituraServiceIT;
 import com.br.service.UsuarioServiceIT;
@@ -44,6 +46,8 @@ public class Fachada{
     private AdministradorServiceIT as;
     @EJB
     private FuncionarioServiceIT fs;
+    @EJB
+    private DenunciaServiceIT ds;
     
     public boolean cadastrar(Object object) {
             return dao.salvar(object);
@@ -188,6 +192,19 @@ public class Fachada{
     //
     //
     
+    
+    
+    // DenunciaServices
+    
+    public List<Denuncia> pesquisarDenunciasPorCidade(String cidade, String estado){
+        return ds.pesquisarPorCidade(cidade, estado);
+    }
+    
+    // FIM DenunciaServices
+    //
+    //
+    //
+    //
     
     
 }

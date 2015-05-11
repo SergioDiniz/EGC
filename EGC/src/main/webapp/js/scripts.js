@@ -73,3 +73,15 @@ function notificacaoSolicicatacao() {
         delay: 10000
     });
 }
+
+
+$(document).ready(function () {
+    var nav = $('.menu-filtro');
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 80) {
+            nav.addClass("fixar-menu-filtro");
+        } else {
+            nav.removeClass("fixar-menu-filtro");
+        }
+    });
+});

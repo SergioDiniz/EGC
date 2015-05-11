@@ -15,6 +15,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -34,6 +35,9 @@ public class ControladorUsuario implements Serializable {
     String endMapa;
     String endLatitude;
     String endLogitude;
+    String cidadeDenuncia;
+    String ufDenuncia;
+    String teste;
     TipoDeDenuncia tipoDenuncia;
     private UploadedFile ImgDenuncia;
 
@@ -46,6 +50,9 @@ public class ControladorUsuario implements Serializable {
         this.endLatitude = "";
         this.endLogitude = "";
         this.denuncia = "";
+        this.cidadeDenuncia = "";
+        this.ufDenuncia = "";
+        this.teste = "";
     }
 
     public String cadastro() {
@@ -78,6 +85,8 @@ public class ControladorUsuario implements Serializable {
     public String login() {
         this.usuario = fachada.loginUsuario(this.usuario);
         if (usuario != null) {
+            this.cidadeDenuncia = this.usuario.getEndereco().getCidade();
+            this.ufDenuncia = this.usuario.getEndereco().getEstado();
             return "/sis/usuario/index.jsf?faces-redirect=true";
 //            FacesContext.getCurrentInstance().getExternalContext().redirect(null);
         } else {
@@ -94,15 +103,8 @@ public class ControladorUsuario implements Serializable {
     }
 
     public String fazerDenuncia() {
-        
-        System.out.println(tipoDenuncia);
-        
-        String end[] = this.endMapa.split(",");
-        
-        for (String e : end) {
-            System.out.println(e);
-        }
-        
+
+        String end[] = this.endMapa.split(", ");
         String numeroBairro[] = end[1].split(" - ");
         String cidadeEstado[] = end[2].split(" - ");
 
@@ -123,10 +125,9 @@ public class ControladorUsuario implements Serializable {
         enderecoDenuncia.setLongitude(this.endLogitude); //Longitude
 
         String nomeFoto = upload();
-        
-       
+
         fachada.novaDenuncia(this.usuario, enderecoDenuncia, this.denuncia, nomeFoto, tipoDenuncia);
-        
+
         this.endLatitude = "";
         this.endLogitude = "";
         this.endMapa = "";
@@ -169,6 +170,20 @@ public class ControladorUsuario implements Serializable {
 
     }
 
+    public List<Denuncia> pesquisarDenunciasPorCidade() {
+
+        return fachada.pesquisarDenunciasPorCidade(this.cidadeDenuncia, this.ufDenuncia);
+
+    }
+
+    
+
+    
+    public void teste(){
+        System.out.println("entrou: " + this.teste);
+    }
+    
+    
 //    
     public Usuario getUsuario() {
         return usuario;
@@ -226,7 +241,29 @@ public class ControladorUsuario implements Serializable {
         this.tipoDenuncia = tipoDenuncia;
     }
 
+    public String getCidadeDenuncia() {
+        return cidadeDenuncia;
+    }
 
+    public void setCidadeDenuncia(String cidadeDenuncia) {
+        this.cidadeDenuncia = cidadeDenuncia;
+    }
+
+    public String getUfDenuncia() {
+        return ufDenuncia;
+    }
+
+    public void setUfDenuncia(String ufDenuncia) {
+        this.ufDenuncia = ufDenuncia;
+    }
+
+    public String getTeste() {
+        return teste;
+    }
+
+    public void setTeste(String teste) {
+        this.teste = teste;
+    }
     
     
 

@@ -6,6 +6,7 @@
 package com.br.beans;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -27,32 +28,34 @@ import javax.persistence.TemporalType;
  * @author Sergio Diniz
  */
 @Entity
-public class Denuncia implements Serializable{
-    @Id @GeneratedValue
+public class Denuncia implements Serializable {
+
+    @Id
+    @GeneratedValue
     private int id;
     @Column(nullable = false)
     private String descricao;
-    @Column(nullable = false) @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private EstadoDeAcompanhamento estadoDeAcompanhamento;
-    @Column(nullable = false) @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private TipoDeDenuncia tipoDeDenuncia;
-    @Column(nullable = false) @Temporal(TemporalType.DATE)
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date data;
     @Column(nullable = false)
     private String foto;
 
-
-    
     @OneToOne(cascade = CascadeType.ALL)
     private EnderecoDenuncia enderecoDenuncia;
     @ManyToOne
     private Cidade cidade;
     @OneToOne(cascade = CascadeType.ALL)
     private InformacaoDeAtendida informacaoDeAtendida;
-    @OneToMany (cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<ConteudoInapropriado> conteudoInapropriados;
-    
-    
+
     public Denuncia() {
     }
 
@@ -66,8 +69,6 @@ public class Denuncia implements Serializable{
         this.data = new Date();
     }
 
-    
-    
     public int getId() {
         return id;
     }
@@ -139,6 +140,32 @@ public class Denuncia implements Serializable{
     public void setTipoDeDenuncia(TipoDeDenuncia tipoDeDenuncia) {
         this.tipoDeDenuncia = tipoDeDenuncia;
     }
+    
+    public String getTipoDaDenunciaFormatado(){
+        switch(getTipoDeDenuncia()){
+            case COLETA_DE_LIXO:
+                return "Coleta de Lixo";
+            case DISTRIBUICAO_E_QUALIDADE_DA_AGUA:
+                return "Distribuição e Qualidade da Agua";
+            case ILUMINACAO_PUBLICA:
+                return "Iluminação Publica";
+            case LIMPEZA_URBANA:
+                return "Limpeza Urbana";
+            case MANUTENCAO_DE_CANAIS_E_REDES_DE_ESGOTOS:
+                return "Manutenção de Canais e Redes de Esgotos";
+            case MANUTENCAO_E_CONSERVACAO_DE_VIAS_PUBLICAS:
+                return "Manuetenção e Conservação de Vias Publicas";
+            case PODA_E_MANUTENCAO_DAS_ARVORES:
+                return "Poda e Manutenção das Arvores";
+            case POLUICAO_VISUAL:
+                return "Poluição Visual";
+            case SINALIZACAO_E_PLACAS:
+                return "Sinalização e Placas";
+        }
+        
+        return "";
+        
+    }
 
     @Override
     public String toString() {
@@ -153,10 +180,11 @@ public class Denuncia implements Serializable{
         this.conteudoInapropriados = conteudoInapropriados;
     }
 
-    
-    
-    
-    
+    public String getDataDenuncaFormatado() {
+        SimpleDateFormat formato = new SimpleDateFormat("HH:mm - dd/MM/yyyy");
+        return formato.format(getData());
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -178,10 +206,5 @@ public class Denuncia implements Serializable{
         }
         return true;
     }
-    
-    
-    
-    
-    
-    
+
 }
