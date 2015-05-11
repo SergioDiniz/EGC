@@ -149,7 +149,7 @@ public class Denuncia implements Serializable {
                 return "Distribuição e Qualidade da Agua";
             case ILUMINACAO_PUBLICA:
                 return "Iluminação Publica";
-            case LIMPEZA_URBANA:
+            case OBRAS_PUBLICAS:
                 return "Limpeza Urbana";
             case MANUTENCAO_DE_CANAIS_E_REDES_DE_ESGOTOS:
                 return "Manutenção de Canais e Redes de Esgotos";
@@ -159,8 +159,14 @@ public class Denuncia implements Serializable {
                 return "Poda e Manutenção das Arvores";
             case POLUICAO_VISUAL:
                 return "Poluição Visual";
-            case SINALIZACAO_E_PLACAS:
-                return "Sinalização e Placas";
+            case TRANSITO_SINALIZACAO_E_PLACAS:
+                return "Trânsito, Sinalização e Placas";
+            case ACESSIBILIDADE:
+                return "Acessibilidade";
+            case EDUCACAO:
+                return "Educação";
+            case SAUDE:
+                return "Saude";
         }
         
         return "";
