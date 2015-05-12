@@ -38,6 +38,8 @@ public class ControladorUsuario implements Serializable {
     String cidadeDenuncia;
     String ufDenuncia;
     String teste;
+    String ordemDenuncia;
+    TipoDeDenuncia tipoDenunciaFeed;
     TipoDeDenuncia tipoDenuncia;
     private UploadedFile ImgDenuncia;
 
@@ -53,6 +55,8 @@ public class ControladorUsuario implements Serializable {
         this.cidadeDenuncia = "";
         this.ufDenuncia = "";
         this.teste = "";
+        this.tipoDenunciaFeed = TipoDeDenuncia.TODOS;
+        this.ordemDenuncia = "data";
     }
 
     public String cadastro() {
@@ -87,6 +91,8 @@ public class ControladorUsuario implements Serializable {
         if (usuario != null) {
             this.cidadeDenuncia = this.usuario.getEndereco().getCidade();
             this.ufDenuncia = this.usuario.getEndereco().getEstado();
+            this.tipoDenunciaFeed = TipoDeDenuncia.TODOS;
+            this.ordemDenuncia = "data";
             return "/sis/usuario/index.jsf?faces-redirect=true";
 //            FacesContext.getCurrentInstance().getExternalContext().redirect(null);
         } else {
@@ -170,20 +176,66 @@ public class ControladorUsuario implements Serializable {
 
     }
 
-    public List<Denuncia> pesquisarDenunciasPorCidade() {
+    public List<Denuncia> mostrarDenunicas() {
 
-        return fachada.pesquisarDenunciasPorCidade(this.cidadeDenuncia, this.ufDenuncia);
+        switch (tipoDenunciaFeed) {
+            case TODOS:
+                return denunciasTodos(this.ordemDenuncia);
+            case COLETA_DE_LIXO:
+                return denunciasColetaDeLixo(this.ordemDenuncia);
+        }
 
+        return null;
+    }
+
+    //
+    public String denunciasOrdemData() {
+        this.ordemDenuncia = "data";
+        return null;
+    }
+
+    public String denunciasOrdemReclamacao() {
+        this.ordemDenuncia = "reclamacao";
+        return null;
+    }
+
+    //
+    public String denunciasTodos() {
+        this.tipoDenunciaFeed = TipoDeDenuncia.TODOS;
+        return null;
+    }
+
+    public String denunciasColetaDeLixo() {
+        this.tipoDenunciaFeed = TipoDeDenuncia.COLETA_DE_LIXO;
+        return null;
+    }
+
+    //
+    public List<Denuncia> denunciasTodos(String ordem) {
+        return pesquisarTodasDenunciasPorCidade(TipoDeDenuncia.TODOS, ordem);
+    }
+
+    public List<Denuncia> denunciasColetaDeLixo(String ordem) {
+        return pesquisarPorCidadeComFiltro(TipoDeDenuncia.COLETA_DE_LIXO, ordem);
     }
 
     
 
+    //
+    public List<Denuncia> pesquisarTodasDenunciasPorCidade(TipoDeDenuncia tipoDeDenuncia, String ordem) {
+        return fachada.pesquisarTodasDenunciasPorCidade(this.cidadeDenuncia, this.ufDenuncia, ordem);
+    }
     
-    public void teste(){
+    public List<Denuncia> pesquisarPorCidadeComFiltro(TipoDeDenuncia tipoDeDenuncia, String ordem) {
+        return fachada.pesquisarDenunciaPorCidadeComFiltro(this.cidadeDenuncia, this.ufDenuncia, tipoDeDenuncia, ordem);
+    }
+
+    public void teste() {
         System.out.println("entrou: " + this.teste);
     }
+
     
-    
+
 //    
     public Usuario getUsuario() {
         return usuario;
@@ -264,7 +316,21 @@ public class ControladorUsuario implements Serializable {
     public void setTeste(String teste) {
         this.teste = teste;
     }
-    
-    
+
+    public String getOrdemDenuncia() {
+        return ordemDenuncia;
+    }
+
+    public void setOrdemDenuncia(String ordemDenuncia) {
+        this.ordemDenuncia = ordemDenuncia;
+    }
+
+    public TipoDeDenuncia getTipoDenunciaFeed() {
+        return tipoDenunciaFeed;
+    }
+
+    public void setTipoDenunciaFeed(TipoDeDenuncia tipoDenunciaFeed) {
+        this.tipoDenunciaFeed = tipoDenunciaFeed;
+    }
 
 }

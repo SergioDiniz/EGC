@@ -334,6 +334,7 @@ html, body{
     padding-bottom: 0px;
     margin-bottom: 20px;
     border: none;
+    border-top: 1px solid #f0f0f0;
 }
 
 .link-mapa-denuncia{

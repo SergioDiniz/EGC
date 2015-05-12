@@ -96,73 +96,83 @@
                 </div>
                 <div class="row">
                     <div class="filtro">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="texto-filtro">Filtro</div>
-                            </div>
-                            <div class="col-md-6 icone-organizar-denuncia">
-                                <div class="col-md-2">
-                                    <img src="../../img/icones-denuncia/icone-mostrar-todas.png"/>
-                                </div>
-                                <div class="col-md-2">
-                                    <img src="../../img/icones-denuncia/icon-organizar-por-data.png"/>
-                                </div>
-                                <div class="col-md-2">
-                                    <img src="../../img/icones-denuncia/icone-organizar-por-reclamacao.png"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="todos-icones-filtro">
+                        <h:form>
                             <div class="row">
-                                <div>
-                                    <div class="col-md-3 icone-filtro">
-                                        <img src="../../img/icones-denuncia/icone-lixo.png"/>
+                                <div class="col-md-6">
+                                    <div class="texto-filtro">Filtro</div>
+                                </div>
+                                <div class="col-md-6 icone-organizar-denuncia">
+                                    <div class="col-md-2">
+                                        <h:commandLink action="#{controladorUsuario.denunciasTodos()}">
+                                            <img src="../../img/icones-denuncia/icone-mostrar-todas.png"/>
+                                        </h:commandLink>
                                     </div>
-                                    <div class="col-md-3 icone-filtro">
-                                        <img src="../../img/icones-denuncia/icone-iluminação.png"/>
+                                    <div class="col-md-2">
+                                        <h:commandLink action="#{controladorUsuario.denunciasOrdemData()}">
+                                            <img src="../../img/icones-denuncia/icon-organizar-por-data.png"/>
+                                        </h:commandLink>
                                     </div>
-                                    <div class="col-md-3 icone-filtro">
-                                        <img src="../../img/icones-denuncia/icone-agua-esgoto.png"/>
-                                    </div>
-                                    <div class="col-md-3 icone-filtro">
-                                        <img src="../../img/icones-denuncia/icone-arvores.png"/>
+                                    <div class="col-md-2">
+                                        <h:commandLink action="#{controladorUsuario.denunciasOrdemReclamacao()}">
+                                            <img src="../../img/icones-denuncia/icone-organizar-por-reclamacao.png"/>
+                                        </h:commandLink>
                                     </div>
                                 </div>
                             </div>
+                            <div class="todos-icones-filtro">
+                                <div class="row">
+                                    <div>
+                                        <div class="col-md-3 icone-filtro">
+                                            <h:commandLink action="#{controladorUsuario.denunciasColetaDeLixo()}">
+                                                <img src="../../img/icones-denuncia/icone-lixo.png"/>
+                                            </h:commandLink>
+                                        </div>
+                                        <div class="col-md-3 icone-filtro">
+                                            <img src="../../img/icones-denuncia/icone-iluminação.png"/>
+                                        </div>
+                                        <div class="col-md-3 icone-filtro">
+                                            <img src="../../img/icones-denuncia/icone-agua-esgoto.png"/>
+                                        </div>
+                                        <div class="col-md-3 icone-filtro">
+                                            <img src="../../img/icones-denuncia/icone-arvores.png"/>
+                                        </div>
+                                    </div>
+                                </div>
 
-                            <div class="row">
-                                <div>
-                                    <div class="col-md-3 icone-filtro">
-                                        <img src="../../img/icones-denuncia/icone-obras-publicas.png"/>
+                                <div class="row">
+                                    <div>
+                                        <div class="col-md-3 icone-filtro">
+                                            <img src="../../img/icones-denuncia/icone-obras-publicas.png"/>
+                                        </div>
+                                        <div class="col-md-3 icone-filtro">
+                                            <img src="../../img/icones-denuncia/icone-pulicao-visual.png"/>
+                                        </div>
+                                        <div class="col-md-3 icone-filtro">
+                                            <img src="../../img/icones-denuncia/icone-transito.png"/>
+                                        </div>
+                                        <div class="col-md-3 icone-filtro">
+                                            <img src="../../img/icones-denuncia/icone-manutecao-esgoto.png"/>
+                                        </div>
                                     </div>
-                                    <div class="col-md-3 icone-filtro">
-                                        <img src="../../img/icones-denuncia/icone-pulicao-visual.png"/>
-                                    </div>
-                                    <div class="col-md-3 icone-filtro">
-                                        <img src="../../img/icones-denuncia/icone-transito.png"/>
-                                    </div>
-                                    <div class="col-md-3 icone-filtro">
-                                        <img src="../../img/icones-denuncia/icone-manutecao-esgoto.png"/>
+                                </div>
+                                <div class="row">
+                                    <div>
+                                        <div class="col-md-3 icone-filtro">
+                                            <img src="../../img/icones-denuncia/icone-saude.png"/>
+                                        </div>
+                                        <div class="col-md-3 icone-filtro">
+                                            <img src="../../img/icones-denuncia/icone-educacao.png"/>
+                                        </div>
+                                        <div class="col-md-3 icone-filtro">
+                                            <img src="../../img/icones-denuncia/icone-acessibilidade.png"/>
+                                        </div>
+                                        <div class="col-md-3 icone-filtro">
+                                            <img src="../../img/icones-denuncia/icone-manutencao-vias-publicas.png"/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div>
-                                    <div class="col-md-3 icone-filtro">
-                                        <img src="../../img/icones-denuncia/icone-saude.png"/>
-                                    </div>
-                                    <div class="col-md-3 icone-filtro">
-                                        <img src="../../img/icones-denuncia/icone-educacao.png"/>
-                                    </div>
-                                    <div class="col-md-3 icone-filtro">
-                                        <img src="../../img/icones-denuncia/icone-acessibilidade.png"/>
-                                    </div>
-                                    <div class="col-md-3 icone-filtro">
-                                        <img src="../../img/icones-denuncia/icone-manutencao-vias-publicas.png"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </h:form>
                     </div>
                 </div>
 
@@ -189,11 +199,11 @@
                             <!-- -->
 
 
-                            <c:forEach var="denuncia" items="#{controladorUsuario.pesquisarDenunciasPorCidade()}">
+                            <c:forEach var="denuncia" items="#{controladorUsuario.mostrarDenunicas()}">
                                 <div class="denuncia-visualizada">
                                     <div class="row">
                                         <div class="col-md-2 icone-denuncia">
-                                            <img src="../../img/icones-denuncia/icone-acessibilidade.png" />
+                                            <img src="../../img/icones-denuncia/#{denuncia.iconeDenunica}" />
                                         </div>
                                         <div class="col-md-8">
                                             <div class="row rua-denuncia">
@@ -234,11 +244,11 @@
 
                                                             <div class="row">
                                                                 <div class="col-md-2 icone-denuncia">
-                                                                    <img src="../../img/icones-denuncia/ic-lixo.png" />
+                                                                    <img src="../../img/icones-denuncia/#{denuncia.iconeDenunica}" />
                                                                 </div>
                                                                 <div class="col-md-8">
                                                                     <div class="row rua-denuncia">
-                                                                        #{denuncia.tipoDeDenuncia}
+                                                                        #{denuncia.tipoDaDenunciaFormatado}
                                                                     </div>
                                                                 </div>
                                                             </div>

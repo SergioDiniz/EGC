@@ -6,6 +6,7 @@
 package com.br.service;
 
 import com.br.beans.Denuncia;
+import com.br.beans.TipoDeDenuncia;
 import java.util.List;
 
 /**
@@ -14,6 +15,8 @@ import java.util.List;
  */
 public interface DenunciaServiceIT {
     
-    public List<Denuncia> pesquisarPorCidade(String cidade, String estado);
+    public List<Denuncia> pesquisarPorCidade(String cidade, String estado, String ordem);
+    
+    public List<Denuncia> pesquisarPorCidadeComFiltro(String cidade, String estado, TipoDeDenuncia tipoDeDenuncia, String ordem);
     
 }

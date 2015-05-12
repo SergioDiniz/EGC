@@ -6,6 +6,7 @@
 package com.br.service;
 
 import com.br.beans.Denuncia;
+import com.br.beans.TipoDeDenuncia;
 import java.util.List;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
@@ -19,24 +20,57 @@ import javax.persistence.Query;
  */
 @Stateless
 @Remote(DenunciaServiceIT.class)
-public class DenunciaService implements DenunciaServiceIT{
+public class DenunciaService implements DenunciaServiceIT {
 
     @PersistenceContext(unitName = "jdbc/EGC")
     private EntityManager em;
-    
+
     @Override
-    public List<Denuncia> pesquisarPorCidade(String cidade, String estado) {
-        Query query =  em.createQuery("SELECT d FROM Denuncia d WHERE d.cidade.CidadePK.nomeCidade = :cidade AND d.cidade.CidadePK.siglaEstado = :estado ORDER BY d.data DESC");
-              query.setParameter("cidade", cidade);
-              query.setParameter("estado", estado);
-        
+    public List<Denuncia> pesquisarPorCidade(String cidade, String estado, String ordem) {
+
+        Query query;
+
+        if (ordem.equals("data")) {
+            query = em.createQuery("SELECT d FROM Denuncia d WHERE d.cidade.CidadePK.nomeCidade = :cidade AND d.cidade.CidadePK.siglaEstado = :estado ORDER BY d.data DESC");
+        } else {
+            query = em.createQuery("SELECT d FROM Denuncia d WHERE d.cidade.CidadePK.nomeCidade = :cidade AND d.cidade.CidadePK.siglaEstado = :estado ORDER BY d.data ASC");
+        }
+
+        query.setParameter("cidade", cidade);
+        query.setParameter("estado", estado);
+
         List d = query.getResultList();
-        
-        if(d.size() > 0){
-           return d;
-        }         
-        
+
+        if (d.size() > 0) {
+            return d;
+        }
+
         return null;
     }
-    
+
+    @Override
+    public List<Denuncia> pesquisarPorCidadeComFiltro(String cidade, String estado, TipoDeDenuncia tipoDeDenuncia, String ordem) {
+
+        Query query;
+
+        if (ordem.equals("data")) {
+            query = em.createQuery("SELECT d FROM Denuncia d WHERE d.cidade.CidadePK.nomeCidade = :cidade AND d.cidade.CidadePK.siglaEstado = :estado AND d.tipoDeDenuncia = :tipo ORDER BY d.data DESC");
+        } else {
+            query = em.createQuery("SELECT d FROM Denuncia d WHERE d.cidade.CidadePK.nomeCidade = :cidade AND d.cidade.CidadePK.siglaEstado = :estado AND d.tipoDeDenuncia = :tipo ORDER BY d.data ASC");
+        }
+
+        query.setParameter("cidade", cidade);
+        query.setParameter("estado", estado);
+        query.setParameter("tipo", tipoDeDenuncia);
+
+        List d = query.getResultList();
+
+        if (d.size() > 0) {
+            return d;
+        }
+
+        return null;
+
+    }
+
 }

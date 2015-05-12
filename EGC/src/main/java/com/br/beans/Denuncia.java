@@ -172,6 +172,38 @@ public class Denuncia implements Serializable {
         return "";
         
     }
+    
+    
+    public String getIconeDenunica(){
+        switch(getTipoDeDenuncia()){
+            case COLETA_DE_LIXO:
+                return "icone-lixo.png";
+            case DISTRIBUICAO_E_QUALIDADE_DA_AGUA:
+                return "icone-agua-esgoto.png";
+            case ILUMINACAO_PUBLICA:
+                return "icone-iluminação.png";
+            case OBRAS_PUBLICAS:
+                return "icone-obras-publicas.png";
+            case MANUTENCAO_DE_CANAIS_E_REDES_DE_ESGOTOS:
+                return "icone-manutecao-esgoto.png";
+            case MANUTENCAO_E_CONSERVACAO_DE_VIAS_PUBLICAS:
+                return "icone-manutencao-vias-publicas.png";
+            case PODA_E_MANUTENCAO_DAS_ARVORES:
+                return "icone-arvores.png";
+            case POLUICAO_VISUAL:
+                return "icone-pulicao-visual.png";
+            case TRANSITO_SINALIZACAO_E_PLACAS:
+                return "icone-transito.png";
+            case ACESSIBILIDADE:
+                return "icone-acessibilidade.png";
+            case EDUCACAO:
+                return "icone-educacao.png";
+            case SAUDE:
+                return "icone-saude.png";
+        }
+        
+        return "";
+    }
 
     @Override
     public String toString() {

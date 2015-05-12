@@ -21,6 +21,7 @@ public enum TipoDeDenuncia {
     TRANSITO_SINALIZACAO_E_PLACAS,
     ACESSIBILIDADE,
     SAUDE,
-    EDUCACAO
+    EDUCACAO,
+    TODOS
     
 }

@@ -196,8 +196,12 @@ public class Fachada{
     
     // DenunciaServices
     
-    public List<Denuncia> pesquisarDenunciasPorCidade(String cidade, String estado){
-        return ds.pesquisarPorCidade(cidade, estado);
+    public List<Denuncia> pesquisarTodasDenunciasPorCidade(String cidade, String estado, String ordem){
+        return ds.pesquisarPorCidade(cidade, estado, ordem);
+    }
+    
+    public List<Denuncia> pesquisarDenunciaPorCidadeComFiltro(String cidade, String estado, TipoDeDenuncia tipoDeDenuncia, String ordem){
+        return ds.pesquisarPorCidadeComFiltro(cidade, estado, tipoDeDenuncia, ordem);
     }
     
     // FIM DenunciaServices
