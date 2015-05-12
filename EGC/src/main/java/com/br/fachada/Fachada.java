@@ -204,6 +204,14 @@ public class Fachada{
         return ds.pesquisarPorCidadeComFiltro(cidade, estado, tipoDeDenuncia, ordem);
     }
     
+    public long totalDeDenunciasNaCidade(String cidade, String estado){
+        return ds.totalDeDenunciasNaCidade(cidade, estado);
+    }
+    
+    public long totalDeDenunciasAtendidasNaCidade(String cidade, String estado){
+        return ds.totalDeDenunciasAtendidasNaCidade(cidade, estado);
+    }
+    
     // FIM DenunciaServices
     //
     //

@@ -19,4 +19,8 @@ public interface DenunciaServiceIT {
     
     public List<Denuncia> pesquisarPorCidadeComFiltro(String cidade, String estado, TipoDeDenuncia tipoDeDenuncia, String ordem);
     
+    public long totalDeDenunciasNaCidade(String cidade, String estado);
+    
+    public long totalDeDenunciasAtendidasNaCidade(String cidade, String estado);
+    
 }

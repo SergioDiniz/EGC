@@ -58,16 +58,18 @@
 
 
                     <div class="barra-pesquisa-usuario">         
-                        <h:form>
-                            <h:inputText class="form-control input-lg" value="#{controladorUsuario.teste}" pt:placeholder="Pesquisar Cidade"/>
-                            <h:commandButton value="teste" class="hidden" action="#{controladorUsuario.teste()}"/>
+                        <h:form acceptcharset="ISO-8859-1">
+                            <h:inputText class="form-control input-lg" value="#{controladorUsuario.strPesquisarCidadeFiltro}" pt:placeholder="Pesquisar Cidade"/>
+                            <h:commandButton value="teste" class="hidden" action="#{controladorUsuario.pesquisarCidadeFiltro()}"/>
                         </h:form>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="cidade-atual">
-                        <h:outputText value="#{controladorUsuario.cidadeDenuncia} - #{controladorUsuario.ufDenuncia}"/>
+                        
+                            <h:outputText value="#{controladorUsuario.cidadeDenuncia} - #{controladorUsuario.ufDenuncia}"/>
+                        
                     </div>
                 </div>
 
@@ -78,7 +80,7 @@
                             <div class="info-texto">DENUNCIAS</div>
 
                             <div class="info-texto-numero">
-                                6
+                                <h:outputText value="#{controladorUsuario.totalDeDenunciasNaCidade()}"/>
                             </div>
 
                         </div>
@@ -88,7 +90,7 @@
                             <div class="info-texto">ATENDIDAS</div>
 
                             <div class="info-texto-numero">
-                                6
+                                <h:outputText value="#{controladorUsuario.totalDeDenunciasAtendidasNaCidade()}"/>
                             </div>
 
                         </div>
@@ -150,30 +152,30 @@
                                     <div>
                                         <div class="col-md-3 icone-filtro">
                                             <span class="tooltips" title="Coleta de Lixo" rel="tooltip" data-placement="top" >
-                                            <h:commandLink action="#{controladorUsuario.denunciasColetaDeLixo()}">
-                                                <img src="../../img/icones-denuncia/icone-lixo.png"/>
-                                            </h:commandLink>
-                                                </span>
+                                                <h:commandLink action="#{controladorUsuario.denunciasColetaDeLixo()}">
+                                                    <img src="../../img/icones-denuncia/icone-lixo.png"/>
+                                                </h:commandLink>
+                                            </span>
                                         </div>
                                         <div class="col-md-3 icone-filtro">
                                             <span class="tooltips" title="Iluminação Publica" rel="tooltip" data-placement="top" >
-                                            <h:commandLink action="#{controladorUsuario.denunciasIluminacaoPublica()}">
-                                                <img src="../../img/icones-denuncia/icone-iluminação.png"/>
-                                            </h:commandLink>
+                                                <h:commandLink action="#{controladorUsuario.denunciasIluminacaoPublica()}">
+                                                    <img src="../../img/icones-denuncia/icone-iluminação.png"/>
+                                                </h:commandLink>
                                             </span>
                                         </div>
                                         <div class="col-md-3 icone-filtro">
                                             <span class="tooltips" title="Distribuição e Qualidade da Agua" rel="tooltip" data-placement="top" >
-                                            <h:commandLink action="#{controladorUsuario.denunciasQualidadeAgua()}">
-                                                <img src="../../img/icones-denuncia/icone-agua-esgoto.png"/>
-                                            </h:commandLink>
+                                                <h:commandLink action="#{controladorUsuario.denunciasQualidadeAgua()}">
+                                                    <img src="../../img/icones-denuncia/icone-agua-esgoto.png"/>
+                                                </h:commandLink>
                                             </span>
                                         </div>
                                         <div class="col-md-3 icone-filtro">
                                             <span class="tooltips" title="Poda e Manutenção de Arvores" rel="tooltip" data-placement="top" >
-                                            <h:commandLink action="#{controladorUsuario.denunciasPodaDeArvores()}">
-                                                <img src="../../img/icones-denuncia/icone-arvores.png"/>
-                                            </h:commandLink>
+                                                <h:commandLink action="#{controladorUsuario.denunciasPodaDeArvores()}">
+                                                    <img src="../../img/icones-denuncia/icone-arvores.png"/>
+                                                </h:commandLink>
                                             </span>
                                         </div>
                                     </div>
@@ -183,30 +185,30 @@
                                     <div>
                                         <div class="col-md-3 icone-filtro">
                                             <span class="tooltips" title="Obras Publicas" rel="tooltip" data-placement="top" >
-                                            <h:commandLink action="#{controladorUsuario.denunciasObrasPublicas()}">
-                                                <img src="../../img/icones-denuncia/icone-obras-publicas.png"/>
-                                            </h:commandLink>
+                                                <h:commandLink action="#{controladorUsuario.denunciasObrasPublicas()}">
+                                                    <img src="../../img/icones-denuncia/icone-obras-publicas.png"/>
+                                                </h:commandLink>
                                             </span>
                                         </div>
                                         <div class="col-md-3 icone-filtro">
                                             <span class="tooltips" title="Poluição Visual" rel="tooltip" data-placement="top" >
-                                            <h:commandLink action="#{controladorUsuario.denunciasPoluicaoVisual()}">
-                                                <img src="../../img/icones-denuncia/icone-pulicao-visual.png"/>
-                                            </h:commandLink>
+                                                <h:commandLink action="#{controladorUsuario.denunciasPoluicaoVisual()}">
+                                                    <img src="../../img/icones-denuncia/icone-pulicao-visual.png"/>
+                                                </h:commandLink>
                                             </span>
                                         </div>
                                         <div class="col-md-3 icone-filtro">
                                             <span class="tooltips" title="Transito, Sinalização e Placas" rel="tooltip" data-placement="top" >
-                                            <h:commandLink action="#{controladorUsuario.denunciasTransitoPlacas()}">
-                                                <img src="../../img/icones-denuncia/icone-transito.png"/>
-                                            </h:commandLink>
+                                                <h:commandLink action="#{controladorUsuario.denunciasTransitoPlacas()}">
+                                                    <img src="../../img/icones-denuncia/icone-transito.png"/>
+                                                </h:commandLink>
                                             </span>
                                         </div>
                                         <div class="col-md-3 icone-filtro">
                                             <span class="tooltips" title="Manutenção de Esgotos" rel="tooltip" data-placement="top" >
-                                            <h:commandLink action="#{controladorUsuario.denunciasManutencaoEsgoto()}">
-                                                <img src="../../img/icones-denuncia/icone-manutecao-esgoto.png"/>
-                                            </h:commandLink>
+                                                <h:commandLink action="#{controladorUsuario.denunciasManutencaoEsgoto()}">
+                                                    <img src="../../img/icones-denuncia/icone-manutecao-esgoto.png"/>
+                                                </h:commandLink>
                                             </span>
                                         </div>
                                     </div>
@@ -215,30 +217,30 @@
                                     <div>
                                         <div class="col-md-3 icone-filtro">
                                             <span class="tooltips" title="Saúde" rel="tooltip" data-placement="top" >
-                                            <h:commandLink action="#{controladorUsuario.denunciasSaude()}">
-                                                <img src="../../img/icones-denuncia/icone-saude.png"/>
-                                            </h:commandLink>
+                                                <h:commandLink action="#{controladorUsuario.denunciasSaude()}">
+                                                    <img src="../../img/icones-denuncia/icone-saude.png"/>
+                                                </h:commandLink>
                                             </span>
                                         </div>
                                         <div class="col-md-3 icone-filtro">
                                             <span class="tooltips" title="Educação" rel="tooltip" data-placement="top" >
-                                            <h:commandLink action="#{controladorUsuario.denunciasEducacao()}">
-                                                <img src="../../img/icones-denuncia/icone-educacao.png"/>
-                                            </h:commandLink>
+                                                <h:commandLink action="#{controladorUsuario.denunciasEducacao()}">
+                                                    <img src="../../img/icones-denuncia/icone-educacao.png"/>
+                                                </h:commandLink>
                                             </span>
                                         </div>
                                         <div class="col-md-3 icone-filtro">
                                             <span class="tooltips" title="Acessibilidade" rel="tooltip" data-placement="top" >
-                                            <h:commandLink action="#{controladorUsuario.denunciasAcessibilidade()}">
-                                                <img src="../../img/icones-denuncia/icone-acessibilidade.png"/>
-                                            </h:commandLink>
+                                                <h:commandLink action="#{controladorUsuario.denunciasAcessibilidade()}">
+                                                    <img src="../../img/icones-denuncia/icone-acessibilidade.png"/>
+                                                </h:commandLink>
                                             </span>
                                         </div>
                                         <div class="col-md-3 icone-filtro">
                                             <span class="tooltips" title="Manutenção de Vias Públicas" rel="tooltip" data-placement="top" >
-                                            <h:commandLink action="#{controladorUsuario.denunciasManutencaoViasPublicas()}">
-                                                <img src="../../img/icones-denuncia/icone-manutencao-vias-publicas.png"/>
-                                            </h:commandLink>
+                                                <h:commandLink action="#{controladorUsuario.denunciasManutencaoViasPublicas()}">
+                                                    <img src="../../img/icones-denuncia/icone-manutencao-vias-publicas.png"/>
+                                                </h:commandLink>
                                             </span>
                                         </div>
                                     </div>

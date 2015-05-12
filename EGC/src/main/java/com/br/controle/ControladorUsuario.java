@@ -37,11 +37,13 @@ public class ControladorUsuario implements Serializable {
     String endLogitude;
     String cidadeDenuncia;
     String ufDenuncia;
-    String teste;
     String ordemDenuncia;
+    String strPesquisarCidadeFiltro;
     TipoDeDenuncia tipoDenunciaFeed;
     TipoDeDenuncia tipoDenuncia;
     private UploadedFile ImgDenuncia;
+    int totalDenuncias;
+    int denunicasAtendidas;
 
     @EJB
     private Fachada fachada;
@@ -54,9 +56,11 @@ public class ControladorUsuario implements Serializable {
         this.denuncia = "";
         this.cidadeDenuncia = "";
         this.ufDenuncia = "";
-        this.teste = "";
         this.tipoDenunciaFeed = TipoDeDenuncia.TODOS;
         this.ordemDenuncia = "data";
+        this.strPesquisarCidadeFiltro = "";
+        this.totalDenuncias = 0;
+        this.denunicasAtendidas = 0;
     }
 
     public String cadastro() {
@@ -175,7 +179,25 @@ public class ControladorUsuario implements Serializable {
         return null;
 
     }
+    
+    
+    
+    public String pesquisarCidadeFiltro(){
+        String cidadeEstado[] = this.strPesquisarCidadeFiltro.split(" - ");
+        System.out.println(cidadeEstado[0] + " - " + cidadeEstado[1]);
+        
+        this.cidadeDenuncia = cidadeEstado[0];
+        this.ufDenuncia = cidadeEstado[1];
+        
+        this.strPesquisarCidadeFiltro = "";
+        this.ordemDenuncia = "data";
+        this.tipoDenunciaFeed = TipoDeDenuncia.TODOS;
+        return null;
+    }
+    
 
+    
+    
     public List<Denuncia> mostrarDenunicas() {
 
         switch (tipoDenunciaFeed) {
@@ -210,6 +232,17 @@ public class ControladorUsuario implements Serializable {
 
         return null;
     }
+    
+    
+    public long totalDeDenunciasNaCidade(){
+        return fachada.totalDeDenunciasNaCidade(this.cidadeDenuncia, this.ufDenuncia);
+    }
+    
+    
+    public long totalDeDenunciasAtendidasNaCidade(){
+        return fachada.totalDeDenunciasAtendidasNaCidade(this.cidadeDenuncia, this.ufDenuncia);
+    }
+    
 
     //
     public String denunciasOrdemData() {
@@ -350,9 +383,6 @@ public class ControladorUsuario implements Serializable {
         return fachada.pesquisarDenunciaPorCidadeComFiltro(this.cidadeDenuncia, this.ufDenuncia, tipoDeDenuncia, ordem);
     }
 
-    public void teste() {
-        System.out.println("entrou: " + this.teste);
-    }
 
 //    
     public Usuario getUsuario() {
@@ -427,13 +457,6 @@ public class ControladorUsuario implements Serializable {
         this.ufDenuncia = ufDenuncia;
     }
 
-    public String getTeste() {
-        return teste;
-    }
-
-    public void setTeste(String teste) {
-        this.teste = teste;
-    }
 
     public String getOrdemDenuncia() {
         return ordemDenuncia;
@@ -451,4 +474,32 @@ public class ControladorUsuario implements Serializable {
         this.tipoDenunciaFeed = tipoDenunciaFeed;
     }
 
+    public String getStrPesquisarCidadeFiltro() {
+        return strPesquisarCidadeFiltro;
+    }
+
+    public void setStrPesquisarCidadeFiltro(String strPesquisarCidadeFiltro) {
+        this.strPesquisarCidadeFiltro = strPesquisarCidadeFiltro;
+    }
+
+    public int getTotalDenuncias() {
+        return totalDenuncias;
+    }
+
+    public void setTotalDenuncias(int totalDenuncias) {
+        this.totalDenuncias = totalDenuncias;
+    }
+
+    public int getDenunicasAtendidas() {
+        return denunicasAtendidas;
+    }
+
+    public void setDenunicasAtendidas(int denunicasAtendidas) {
+        this.denunicasAtendidas = denunicasAtendidas;
+    }
+
+    
+    
+    
+    
 }
