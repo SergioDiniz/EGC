@@ -183,6 +183,29 @@ public class ControladorUsuario implements Serializable {
                 return denunciasTodos(this.ordemDenuncia);
             case COLETA_DE_LIXO:
                 return denunciasColetaDeLixo(this.ordemDenuncia);
+            case DISTRIBUICAO_E_QUALIDADE_DA_AGUA:
+                return denunciasQualidadeAgua(this.ordemDenuncia);
+            case ILUMINACAO_PUBLICA:
+                return denunciasIluminacaoPublica(this.ordemDenuncia);
+            case OBRAS_PUBLICAS:
+                return denunciasObrasPublicas(this.ordemDenuncia);
+            case MANUTENCAO_DE_CANAIS_E_REDES_DE_ESGOTOS:
+                return denunciasManutencaoEsgoto(this.ordemDenuncia);
+            case MANUTENCAO_E_CONSERVACAO_DE_VIAS_PUBLICAS:
+                return denunciasManutencaoViasPublicas(this.ordemDenuncia);
+            case PODA_E_MANUTENCAO_DAS_ARVORES:
+                return denunciasPodaDeArvores(this.ordemDenuncia);
+            case POLUICAO_VISUAL:
+                return denunciasPoluicaoVisual(this.ordemDenuncia);
+            case TRANSITO_SINALIZACAO_E_PLACAS:
+                return denunciasTransitoPlacas(this.ordemDenuncia);
+            case ACESSIBILIDADE:
+                return denunciasAcessibilidade(this.ordemDenuncia);
+            case SAUDE:
+                return denunciasSaude(this.ordemDenuncia);
+            case EDUCACAO:
+                return denunciasEducacao(this.ordemDenuncia);
+                    
         }
 
         return null;
@@ -210,6 +233,61 @@ public class ControladorUsuario implements Serializable {
         return null;
     }
 
+    public String denunciasQualidadeAgua() {
+        this.tipoDenunciaFeed = TipoDeDenuncia.DISTRIBUICAO_E_QUALIDADE_DA_AGUA;
+        return null;
+    }
+
+    public String denunciasIluminacaoPublica() {
+        this.tipoDenunciaFeed = TipoDeDenuncia.ILUMINACAO_PUBLICA;
+        return null;
+    }
+
+    public String denunciasObrasPublicas() {
+        this.tipoDenunciaFeed = TipoDeDenuncia.OBRAS_PUBLICAS;
+        return null;
+    }
+
+    public String denunciasManutencaoEsgoto() {
+        this.tipoDenunciaFeed = TipoDeDenuncia.MANUTENCAO_DE_CANAIS_E_REDES_DE_ESGOTOS;
+        return null;
+    }
+
+    public String denunciasManutencaoViasPublicas() {
+        this.tipoDenunciaFeed = TipoDeDenuncia.MANUTENCAO_E_CONSERVACAO_DE_VIAS_PUBLICAS;
+        return null;
+    }
+
+    public String denunciasPodaDeArvores() {
+        this.tipoDenunciaFeed = TipoDeDenuncia.PODA_E_MANUTENCAO_DAS_ARVORES;
+        return null;
+    }
+
+    public String denunciasPoluicaoVisual() {
+        this.tipoDenunciaFeed = TipoDeDenuncia.POLUICAO_VISUAL;
+        return null;
+    }
+
+    public String denunciasTransitoPlacas() {
+        this.tipoDenunciaFeed = TipoDeDenuncia.TRANSITO_SINALIZACAO_E_PLACAS;
+        return null;
+    }
+
+    public String denunciasAcessibilidade() {
+        this.tipoDenunciaFeed = TipoDeDenuncia.ACESSIBILIDADE;
+        return null;
+    }
+
+    public String denunciasSaude() {
+        this.tipoDenunciaFeed = TipoDeDenuncia.SAUDE;
+        return null;
+    }
+
+    public String denunciasEducacao() {
+        this.tipoDenunciaFeed = TipoDeDenuncia.EDUCACAO;
+        return null;
+    }
+
     //
     public List<Denuncia> denunciasTodos(String ordem) {
         return pesquisarTodasDenunciasPorCidade(TipoDeDenuncia.TODOS, ordem);
@@ -219,13 +297,55 @@ public class ControladorUsuario implements Serializable {
         return pesquisarPorCidadeComFiltro(TipoDeDenuncia.COLETA_DE_LIXO, ordem);
     }
 
-    
+    public List<Denuncia> denunciasQualidadeAgua(String ordem) {
+        return pesquisarPorCidadeComFiltro(TipoDeDenuncia.DISTRIBUICAO_E_QUALIDADE_DA_AGUA, ordem);
+    }
+
+    public List<Denuncia> denunciasIluminacaoPublica(String ordem) {
+        return pesquisarPorCidadeComFiltro(TipoDeDenuncia.ILUMINACAO_PUBLICA, ordem);
+    }
+
+    public List<Denuncia> denunciasObrasPublicas(String ordem) {
+        return pesquisarPorCidadeComFiltro(TipoDeDenuncia.OBRAS_PUBLICAS, ordem);
+    }
+
+    public List<Denuncia> denunciasManutencaoEsgoto(String ordem) {
+        return pesquisarPorCidadeComFiltro(TipoDeDenuncia.MANUTENCAO_DE_CANAIS_E_REDES_DE_ESGOTOS, ordem);
+    }
+
+    public List<Denuncia> denunciasManutencaoViasPublicas(String ordem) {
+        return pesquisarPorCidadeComFiltro(TipoDeDenuncia.MANUTENCAO_E_CONSERVACAO_DE_VIAS_PUBLICAS, ordem);
+    }
+
+    public List<Denuncia> denunciasPodaDeArvores(String ordem) {
+        return pesquisarPorCidadeComFiltro(TipoDeDenuncia.PODA_E_MANUTENCAO_DAS_ARVORES, ordem);
+    }
+
+    public List<Denuncia> denunciasPoluicaoVisual(String ordem) {
+        return pesquisarPorCidadeComFiltro(TipoDeDenuncia.POLUICAO_VISUAL, ordem);
+    }
+
+    public List<Denuncia> denunciasTransitoPlacas(String ordem) {
+        return pesquisarPorCidadeComFiltro(TipoDeDenuncia.TRANSITO_SINALIZACAO_E_PLACAS, ordem);
+    }
+
+    public List<Denuncia> denunciasAcessibilidade(String ordem) {
+        return pesquisarPorCidadeComFiltro(TipoDeDenuncia.ACESSIBILIDADE, ordem);
+    }
+
+    public List<Denuncia> denunciasSaude(String ordem) {
+        return pesquisarPorCidadeComFiltro(TipoDeDenuncia.SAUDE, ordem);
+    }
+
+    public List<Denuncia> denunciasEducacao(String ordem) {
+        return pesquisarPorCidadeComFiltro(TipoDeDenuncia.EDUCACAO, ordem);
+    }
 
     //
     public List<Denuncia> pesquisarTodasDenunciasPorCidade(TipoDeDenuncia tipoDeDenuncia, String ordem) {
         return fachada.pesquisarTodasDenunciasPorCidade(this.cidadeDenuncia, this.ufDenuncia, ordem);
     }
-    
+
     public List<Denuncia> pesquisarPorCidadeComFiltro(TipoDeDenuncia tipoDeDenuncia, String ordem) {
         return fachada.pesquisarDenunciaPorCidadeComFiltro(this.cidadeDenuncia, this.ufDenuncia, tipoDeDenuncia, ordem);
     }
@@ -233,8 +353,6 @@ public class ControladorUsuario implements Serializable {
     public void teste() {
         System.out.println("entrou: " + this.teste);
     }
-
-    
 
 //    
     public Usuario getUsuario() {
