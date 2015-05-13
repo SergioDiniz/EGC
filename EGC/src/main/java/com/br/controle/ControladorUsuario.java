@@ -179,25 +179,20 @@ public class ControladorUsuario implements Serializable {
         return null;
 
     }
-    
-    
-    
-    public String pesquisarCidadeFiltro(){
+
+    public String pesquisarCidadeFiltro() {
         String cidadeEstado[] = this.strPesquisarCidadeFiltro.split(" - ");
         System.out.println(cidadeEstado[0] + " - " + cidadeEstado[1]);
-        
+
         this.cidadeDenuncia = cidadeEstado[0];
         this.ufDenuncia = cidadeEstado[1];
-        
+
         this.strPesquisarCidadeFiltro = "";
         this.ordemDenuncia = "data";
         this.tipoDenunciaFeed = TipoDeDenuncia.TODOS;
         return null;
     }
-    
 
-    
-    
     public List<Denuncia> mostrarDenunicas() {
 
         switch (tipoDenunciaFeed) {
@@ -227,22 +222,21 @@ public class ControladorUsuario implements Serializable {
                 return denunciasSaude(this.ordemDenuncia);
             case EDUCACAO:
                 return denunciasEducacao(this.ordemDenuncia);
-                    
+            case BRASIL:
+                return denunciasBrasil(this.ordemDenuncia);
+
         }
 
         return null;
     }
-    
-    
-    public long totalDeDenunciasNaCidade(){
+
+    public long totalDeDenunciasNaCidade() {
         return fachada.totalDeDenunciasNaCidade(this.cidadeDenuncia, this.ufDenuncia);
     }
-    
-    
-    public long totalDeDenunciasAtendidasNaCidade(){
+
+    public long totalDeDenunciasAtendidasNaCidade() {
         return fachada.totalDeDenunciasAtendidasNaCidade(this.cidadeDenuncia, this.ufDenuncia);
     }
-    
 
     //
     public String denunciasOrdemData() {
@@ -256,8 +250,21 @@ public class ControladorUsuario implements Serializable {
     }
 
     //
+    public String denunciasBrasil() {
+        this.tipoDenunciaFeed = TipoDeDenuncia.BRASIL;
+        this.cidadeDenuncia = "Brasil";
+        this.ufDenuncia = "Brasil";
+        return null;
+    }
+
     public String denunciasTodos() {
         this.tipoDenunciaFeed = TipoDeDenuncia.TODOS;
+
+        if (this.cidadeDenuncia.equals("Brasil")) {
+            this.cidadeDenuncia = this.usuario.getEndereco().getCidade();
+            this.ufDenuncia = this.usuario.getEndereco().getEstado();
+        }
+
         return null;
     }
 
@@ -322,6 +329,10 @@ public class ControladorUsuario implements Serializable {
     }
 
     //
+    public List<Denuncia> denunciasBrasil(String ordem) {
+        return pesquisarPorCidadeComFiltro(TipoDeDenuncia.BRASIL, ordem);
+    }
+
     public List<Denuncia> denunciasTodos(String ordem) {
         return pesquisarTodasDenunciasPorCidade(TipoDeDenuncia.TODOS, ordem);
     }
@@ -382,7 +393,6 @@ public class ControladorUsuario implements Serializable {
     public List<Denuncia> pesquisarPorCidadeComFiltro(TipoDeDenuncia tipoDeDenuncia, String ordem) {
         return fachada.pesquisarDenunciaPorCidadeComFiltro(this.cidadeDenuncia, this.ufDenuncia, tipoDeDenuncia, ordem);
     }
-
 
 //    
     public Usuario getUsuario() {
@@ -457,7 +467,6 @@ public class ControladorUsuario implements Serializable {
         this.ufDenuncia = ufDenuncia;
     }
 
-
     public String getOrdemDenuncia() {
         return ordemDenuncia;
     }
@@ -498,8 +507,4 @@ public class ControladorUsuario implements Serializable {
         this.denunicasAtendidas = denunicasAtendidas;
     }
 
-    
-    
-    
-    
 }

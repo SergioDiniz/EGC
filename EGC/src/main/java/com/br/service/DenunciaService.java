@@ -33,10 +33,11 @@ public class DenunciaService implements DenunciaServiceIT {
 
         Query query;
 
-//        String sql = "SELECT d.* FROM denuncia d LEFT OUTER JOIN enderecodenuncia ed on d.enderecodenuncia_id = ed.id WHERE upper(TRANSLATE(d.nomecidade,'ÀÁáàÉÈéèÍíÓóÒòÚú','AAaaEEeeIiOoOoUu')) LIKE '%?1%' AND upper(TRANSLATE(d.siglaestado,'ÀÁáàÉÈéèÍíÓóÒòÚú','AAaaEEeeIiOoOoUu')) LIKE '%?2%' ORDER BY d.data DESC";
+//        String sql = "SELECT d.* FROM denuncia d LEFT OUTER JOIN enderecodenuncia ed on d.enderecodenuncia_id = ed.id WHERE upper(TRANSLATE(d.nomecidade,'ÀÁáàÉÈéèÍíÓóÒòÚú','AAaaEEeeIiOoOoUu')) = ?1 AND upper(TRANSLATE(d.siglaestado,'ÀÁáàÉÈéèÍíÓóÒòÚú','AAaaEEeeIiOoOoUu')) = ?2 ORDER BY d.data DESC";
         if (ordem.equals("data")) {
 //            query = em.createNativeQuery(sql);
             query = em.createQuery("SELECT d FROM Denuncia d WHERE d.cidade.CidadePK.nomeCidade = :cidade AND d.cidade.CidadePK.siglaEstado = :estado ORDER BY d.data DESC");
+//            query = em.createNativeQuery(sql, Denuncia.class);
         } else {
             query = em.createQuery("SELECT d FROM Denuncia d WHERE d.cidade.CidadePK.nomeCidade = :cidade AND d.cidade.CidadePK.siglaEstado = :estado ORDER BY d.data ASC");
         }
@@ -55,6 +56,10 @@ public class DenunciaService implements DenunciaServiceIT {
 
     @Override
     public List<Denuncia> pesquisarPorCidadeComFiltro(String cidade, String estado, TipoDeDenuncia tipoDeDenuncia, String ordem) {
+
+        if (cidade.equals("Brasil")) {
+            return pesquisarNoBrasil(cidade, tipoDeDenuncia, ordem);
+        }
 
         Query query;
 
@@ -78,12 +83,52 @@ public class DenunciaService implements DenunciaServiceIT {
 
     }
 
+    public List<Denuncia> pesquisarNoBrasil(String cidade, TipoDeDenuncia tipoDeDenuncia, String ordem) {
+        
+//        if (tipoDeDenuncia == TipoDeDenuncia.BRASIL){
+//            tipoDeDenuncia = TipoDeDenuncia.TODOS;
+//        }
+        
+        Query query;
+        if (ordem.equals("data")) {
+            if (tipoDeDenuncia == TipoDeDenuncia.BRASIL) {
+                query = em.createQuery("SELECT d FROM Denuncia d JOIN d.enderecoDenuncia ed WHERE ed.pais = 'Brasil' ORDER BY d.data DESC");
+            } else {
+                query = em.createQuery("SELECT d FROM Denuncia d JOIN d.enderecoDenuncia ed WHERE ed.pais = 'Brasil' AND d.tipoDeDenuncia = :tipo ORDER BY d.data DESC");
+                query.setParameter("tipo", tipoDeDenuncia);
+            }
+        } else {
+            if (tipoDeDenuncia == TipoDeDenuncia.BRASIL) {
+                query = em.createQuery("SELECT d FROM Denuncia d JOIN d.enderecoDenuncia ed WHERE ed.pais = 'Brasil' ORDER BY d.data ASC");
+            } else {
+                query = em.createQuery("SELECT d FROM Denuncia d JOIN d.enderecoDenuncia ed WHERE ed.pais = 'Brasil' AND d.tipoDeDenuncia = :tipo ORDER BY d.data ASC");
+                query.setParameter("tipo", tipoDeDenuncia);
+            }
+        }
+
+        
+
+        List d = query.getResultList();
+
+        if (d.size() > 0) {
+            return d;
+        }
+
+        return null;
+
+    }
+
     @Override
     public long totalDeDenunciasNaCidade(String cidade, String estado) {
-        Query query = em.createQuery("SELECT COUNT(d) FROM Denuncia d WHERE d.cidade.CidadePK.nomeCidade = :cidade AND d.cidade.CidadePK.siglaEstado = :estado");
+        Query query;
 
-        query.setParameter("cidade", cidade);
-        query.setParameter("estado", estado);
+        if (cidade.equals("Brasil")) {
+            query = em.createQuery("SELECT COUNT(d) FROM Denuncia d JOIN d.enderecoDenuncia ed WHERE ed.pais = 'Brasil'");
+        } else {
+            query = em.createQuery("SELECT COUNT(d) FROM Denuncia d WHERE d.cidade.CidadePK.nomeCidade = :cidade AND d.cidade.CidadePK.siglaEstado = :estado");
+            query.setParameter("cidade", cidade);
+            query.setParameter("estado", estado);
+        }
 
         List d = query.getResultList();
 
@@ -97,10 +142,16 @@ public class DenunciaService implements DenunciaServiceIT {
 
     @Override
     public long totalDeDenunciasAtendidasNaCidade(String cidade, String estado) {
-        Query query = em.createQuery("SELECT COUNT(d) FROM Denuncia d JOIN d.informacaoDeAtendida ia WHERE d.cidade.CidadePK.nomeCidade = :cidade AND d.cidade.CidadePK.siglaEstado = :estado AND ia.id > -1");
 
-        query.setParameter("cidade", cidade);
-        query.setParameter("estado", estado);
+        Query query;
+
+        if (cidade.equals("Brasil")) {
+            query = em.createQuery("SELECT COUNT(d) FROM Denuncia d JOIN d.enderecoDenuncia ed JOIN d.informacaoDeAtendida ia WHERE ed.pais = 'Brasil' AND ia.id > -1 ");
+        } else {
+            query = em.createQuery("SELECT COUNT(d) FROM Denuncia d JOIN d.informacaoDeAtendida ia WHERE d.cidade.CidadePK.nomeCidade = :cidade AND d.cidade.CidadePK.siglaEstado = :estado AND ia.id > -1");
+            query.setParameter("cidade", cidade);
+            query.setParameter("estado", estado);
+        }
 
         List d = query.getResultList();
 

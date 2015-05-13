@@ -100,12 +100,19 @@
                     <div class="filtro">
                         <h:form>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="texto-filtro">Filtro</div>
                                 </div>
-                                <div class="col-md-6 icone-organizar-denuncia">
+                                <div class="col-md-8 icone-organizar-denuncia">
                                     <div class="col-md-2">
-                                        <span class="tooltips" title="Todos" rel="tooltip" data-placement="top" >
+                                        <span class="tooltips" title="Brasil" rel="tooltip" data-placement="top" >
+                                            <h:commandLink action="#{controladorUsuario.denunciasBrasil()}">
+                                                <img src="../../img/icones-denuncia/icone-mundo.png"/>
+                                            </h:commandLink>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <span class="tooltips" title="Todas" rel="tooltip" data-placement="top" >
                                             <h:commandLink action="#{controladorUsuario.denunciasTodos()}">
                                                 <img src="../../img/icones-denuncia/icone-mostrar-todas.png"/>
                                             </h:commandLink>
@@ -263,7 +270,25 @@
             <!-- -->
 
             <div class="container">
-
+                
+                <div class="btns-numero-tipos-denuncia">
+                    <div class="btn-nd">
+                        <div class="col-md-6">
+                            1
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="row">
+                                2
+                            </div>
+                            <div class="row">
+                                3
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
                 <div class="conteudo feed-usuario">   
 
                     <div class="row">

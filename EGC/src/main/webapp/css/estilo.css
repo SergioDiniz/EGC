@@ -276,7 +276,14 @@ html, body{
 
 
 
+.btns-numero-tipos-denuncia{
+    margin-top: 20px;
+}
 
+
+.btn-nd{
+  width: 200px;
+}
 
 .feed-usuario{
     margin-left: 0px;
@@ -582,8 +589,13 @@ html, body{
     border-top: 2px solid #03a9f4;
 }
 
+.icone-organizar-denuncia{
+    padding-left: 30px;
+}
+
 .icone-organizar-denuncia img{
     width: 15px;
+    
 }
 
 .todos-icones-filtro{

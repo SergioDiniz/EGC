@@ -22,6 +22,7 @@ public enum TipoDeDenuncia {
     ACESSIBILIDADE,
     SAUDE,
     EDUCACAO,
-    TODOS
+    TODOS,
+    BRASIL
     
 }
