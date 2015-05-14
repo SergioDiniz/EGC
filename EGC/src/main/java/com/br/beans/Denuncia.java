@@ -92,6 +92,22 @@ public class Denuncia implements Serializable {
     public void setEstadoDeAcompanhamento(EstadoDeAcompanhamento estadoDeAcompanhamento) {
         this.estadoDeAcompanhamento = estadoDeAcompanhamento;
     }
+    
+    public boolean tagAtendida(){
+        if (estadoDeAcompanhamento == EstadoDeAcompanhamento.ATENDIDA){
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public boolean tagEmAndamento(){
+        if (estadoDeAcompanhamento == EstadoDeAcompanhamento.EM_TRABALHO){
+            return true;
+        }
+        
+        return false;
+    }
 
     public Date getData() {
         return data;

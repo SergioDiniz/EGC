@@ -339,10 +339,17 @@ html, body{
 .denuncia-visualizada{
     padding: 20px;
     padding-bottom: 0px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     border: none;
     border-top: 1px solid #f0f0f0;
 }
+
+.tag-info-atendimento{
+    position: absolute;
+    margin-top: -25px;
+    margin-left: 441px;
+}
+
 
 .link-mapa-denuncia{
     text-decoration: underline;
