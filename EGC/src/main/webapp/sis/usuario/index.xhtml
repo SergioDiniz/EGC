@@ -7,9 +7,11 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:c="http://java.sun.com/jsp/jstl/core"
-      >
+
+      xmlns:p="http://primefaces.org/ui">
 
     <h:head>
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
         <title>EGC - Usuário</title>
     </h:head>
 
@@ -303,16 +305,20 @@
                                     <c:if test="#{denuncia.informacaoDeAtendida.id > -1}">
                                         <div class="tag-info-atendimento">
                                             <c:choose>
-                                                
+
                                                 <c:when test="#{denuncia.tagEmAndamento()}">
-                                                    <img src="../../img/icones-denuncia/tag-em-trabalho.png"/>
-                                                </c:when>
-                                                
-                                                <c:when test="#{denuncia.tagAtendida()}">
-                                                    <img src="../../img/icones-denuncia/tag-atentida.png"/>
+                                                    <span class="tooltips" title="Denuncia em Trabalho" rel="tooltip" data-placement="top" >
+                                                        <img src="../../img/icones-denuncia/tag-em-trabalho-2.png"/>
+                                                    </span>
                                                 </c:when>
 
-                                                
+                                                <c:when test="#{denuncia.tagAtendida()}">
+                                                    <span class="tooltips" title="Denuncia Atendida" rel="tooltip" data-placement="top" >
+                                                        <img src="../../img/icones-denuncia/tag-atentida-2.png"/>    
+                                                    </span>
+                                                </c:when>
+
+
                                             </c:choose>    
                                         </div>
                                     </c:if>
@@ -328,6 +334,7 @@
                                             </div>
                                             <div class="row conteudo-denuncia">
                                                 #{denuncia.descricao}
+
                                             </div>
                                         </div>
                                     </div>
@@ -340,10 +347,11 @@
                                         <div align="center">
                                             <button data-toggle="modal" data-target=".denuncia#{denuncia.id}" class="btn-img">
                                                 <img src="../denuncias/#{denuncia.foto}" class="img-denuncia" />
-                                            </button>
+                                            </button>   
+
                                         </div>
 
-
+                                        <!--modal--> 
                                         <div class="modal fade bs-example-modal-lg denuncia#{denuncia.id}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-lg">
                                                 <div class="modal-content">
@@ -371,7 +379,36 @@
                                                             </div>
 
                                                             <div class="row conteudo-denuncia-modal">
-                                                                #{denuncia.descricao}
+                                                                <div class="scroll">
+                                                                    #{denuncia.descricao} 
+
+                                                                    <iframe src="mapa.jsf?latitude=#{denuncia.enderecoDenuncia.latitude}&amp;longitude=#{denuncia.enderecoDenuncia.longitude}&amp;" class="frame-mapa" width="100%" height="110px" style="border: none" scrolling="no"/>
+
+                                                                    <c:if test="#{denuncia.informacaoDeAtendida.id > -1}">
+                                                                        <c:choose>
+
+                                                                            <c:when test="#{denuncia.tagEmAndamento()}">
+                                                                                <span class="tooltips" title="Denuncia em Trabalho" rel="tooltip" data-placement="top" >
+                                                                                    <div class="modal-inf-em-trabalho">
+                                                                                        EM TRABALHO
+                                                                                    </div>
+                                                                                </span>
+                                                                            </c:when>
+
+                                                                            <c:when test="#{denuncia.tagAtendida()}">
+                                                                                <span class="tooltips" title="Denuncia Atendida" rel="tooltip" data-placement="top" >
+                                                                                    <div class="modal-inf-atendida">
+                                                                                        ATENDIDA
+                                                                                    </div>
+                                                                                </span>
+                                                                            </c:when>
+
+
+                                                                        </c:choose>    
+                                                                    </c:if>
+
+
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>

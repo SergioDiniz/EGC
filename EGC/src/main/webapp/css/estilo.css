@@ -16,7 +16,8 @@ html, body{
     width: 100%;
     min-width: 1300px;
     height: 50px;
-    background-color: #03a9f4;
+    /*background-color: #03a9f4;*/
+    background-color: #3498DB;
     box-shadow: 0px 0px 10px 0.00px rgba(0, 0, 0, 0.43);
     position: fixed;
     z-index: 1000;
@@ -282,7 +283,7 @@ html, body{
 
 
 .btn-nd{
-  width: 200px;
+    width: 200px;
 }
 
 .feed-usuario{
@@ -347,7 +348,8 @@ html, body{
 .tag-info-atendimento{
     position: absolute;
     margin-top: -25px;
-    margin-left: 441px;
+    /*margin-left: 441px;*/
+    margin-left: 462px;
 }
 
 
@@ -476,7 +478,36 @@ html, body{
 
 .conteudo-denuncia-modal{
     padding: 10px;
-    padding-right: 30px;
+    padding-right: 20px;
+
+
+}
+
+.scroll{
+    overflow: auto !important;
+    max-height: 500px !important;
+}
+
+.modal-inf-atendida,
+.modal-inf-em-trabalho{
+    font-family: "Arial", sans-serif !important;
+    width: 390px !important;
+    padding: 10px !important;
+    padding-left: 20px !important;
+    color: #f0f0f0;
+    font-size: 16px;
+}
+
+.modal-inf-atendida{
+    background-color: #2ECC71 !important;
+}
+
+.modal-inf-em-trabalho{
+    background-color: #3498DB !important;
+}
+
+.frame-mapa{
+    margin-left: -10px !important;
 }
 
 
@@ -538,7 +569,7 @@ html, body{
 
 
 .menu-filtro .row{
-  margin: 0px !important;
+    margin: 0px !important;
 }
 
 .barra-pesquisa-usuario, 
@@ -602,7 +633,7 @@ html, body{
 
 .icone-organizar-denuncia img{
     width: 15px;
-    
+
 }
 
 .todos-icones-filtro{
