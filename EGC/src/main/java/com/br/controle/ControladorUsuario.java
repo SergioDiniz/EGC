@@ -68,6 +68,8 @@ public class ControladorUsuario implements Serializable {
         try {
             fachada.cadastrar(usuario);
             this.usuario = fachada.loginUsuario(usuario);
+            this.cidadeDenuncia = this.usuario.getEndereco().getCidade();
+            this.ufDenuncia = this.usuario.getEndereco().getEstado();
             return "/sis/usuario/index.jsf?faces-redirect=true";
         } catch (Exception e) {
 
@@ -114,34 +116,37 @@ public class ControladorUsuario implements Serializable {
 
     public String fazerDenuncia() {
 
-        String end[] = this.endMapa.split(", ");
-        String numeroBairro[] = end[1].split(" - ");
-        String cidadeEstado[] = end[2].split(" - ");
+        try {
+            String end[] = this.endMapa.split(", ");
+            String numeroBairro[] = end[1].split(" - ");
+            String cidadeEstado[] = end[2].split(" - ");
 
-        EnderecoDenuncia enderecoDenuncia = new EnderecoDenuncia();
+            EnderecoDenuncia enderecoDenuncia = new EnderecoDenuncia();
 
-        enderecoDenuncia.setRua(end[0]); // rua
-        enderecoDenuncia.setNumero(numeroBairro[0]); //numero
-        if (numeroBairro.length > 1) { //bairro
-            enderecoDenuncia.setBairro(numeroBairro[1]);
-        } else {
-            enderecoDenuncia.setBairro("S/B");
+            enderecoDenuncia.setRua(end[0]); // rua
+            enderecoDenuncia.setNumero(numeroBairro[0]); //numero
+            if (numeroBairro.length > 1) { //bairro
+                enderecoDenuncia.setBairro(numeroBairro[1]);
+            } else {
+                enderecoDenuncia.setBairro("S/B");
+            }
+            enderecoDenuncia.setCidade(cidadeEstado[0]); // Cidade
+            enderecoDenuncia.setEstado(cidadeEstado[1]); // UF
+            enderecoDenuncia.setCep(end[3]); //CEP
+            enderecoDenuncia.setPais(end[4]); //Pais
+            enderecoDenuncia.setLatitude(this.endLatitude); //Latitude
+            enderecoDenuncia.setLongitude(this.endLogitude); //Longitude
+
+            String nomeFoto = upload();
+
+            fachada.novaDenuncia(this.usuario, enderecoDenuncia, this.denuncia, nomeFoto, tipoDenuncia);
+
+            this.endLatitude = "";
+            this.endLogitude = "";
+            this.endMapa = "";
+            this.denuncia = "";
+        } catch (Exception e) {
         }
-        enderecoDenuncia.setCidade(cidadeEstado[0]); // Cidade
-        enderecoDenuncia.setEstado(cidadeEstado[1]); // UF
-        enderecoDenuncia.setCep(end[3]); //CEP
-        enderecoDenuncia.setPais(end[4]); //Pais
-        enderecoDenuncia.setLatitude(this.endLatitude); //Latitude
-        enderecoDenuncia.setLongitude(this.endLogitude); //Longitude
-
-        String nomeFoto = upload();
-
-        fachada.novaDenuncia(this.usuario, enderecoDenuncia, this.denuncia, nomeFoto, tipoDenuncia);
-
-        this.endLatitude = "";
-        this.endLogitude = "";
-        this.endMapa = "";
-        this.denuncia = "";
 
         return "/sis/usuario/index.jsf?faces-redirect=true";
 

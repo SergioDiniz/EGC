@@ -348,7 +348,6 @@
                                             <button data-toggle="modal" data-target=".denuncia#{denuncia.id}" class="btn-img">
                                                 <img src="../denuncias/#{denuncia.foto}" class="img-denuncia" />
                                             </button>   
-
                                         </div>
 
                                         <!--modal--> 
@@ -382,7 +381,11 @@
                                                                 <div class="scroll">
                                                                     #{denuncia.descricao} 
 
-                                                                    <iframe src="mapa.jsf?latitude=#{denuncia.enderecoDenuncia.latitude}&amp;longitude=#{denuncia.enderecoDenuncia.longitude}&amp;" class="frame-mapa" width="100%" height="110px" style="border: none" scrolling="no"/>
+
+                                                                    <iframe src="mapa.jsf?latitude=#{denuncia.enderecoDenuncia.latitude}&amp;longitude=#{denuncia.enderecoDenuncia.longitude}&amp;" class="frame-mapa" width="100%" height="110px" style="border: none" scrolling="no"></iframe>
+
+
+
 
                                                                     <c:if test="#{denuncia.informacaoDeAtendida.id > -1}">
                                                                         <c:choose>
