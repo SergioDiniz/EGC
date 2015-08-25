@@ -66,7 +66,7 @@ public class UploaderBB {
                 
                 String tipoArquivo = file.getFileName();
                 tipoArquivo = tipoArquivo.substring(tipoArquivo.lastIndexOf("."), tipoArquivo.length());
-                System.out.println("tipo do arquivo: " + tipoArquivo);
+//                System.out.println("tipo do arquivo: " + tipoArquivo);
                 
                 OutputStream out = new FileOutputStream(new File(targetFolder,
                         "sergiodiniz@gmail.com"+tipoArquivo));

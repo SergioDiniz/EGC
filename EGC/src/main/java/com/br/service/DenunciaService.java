@@ -29,8 +29,6 @@ public class DenunciaService implements DenunciaServiceIT {
     @Override
     public List<Denuncia> pesquisarPorCidade(String cidade, String estado, String ordem) {
 
-        System.out.println(removerAcento(cidade));
-
         Query query;
 
 //        String sql = "SELECT d.* FROM denuncia d LEFT OUTER JOIN enderecodenuncia ed on d.enderecodenuncia_id = ed.id WHERE upper(TRANSLATE(d.nomecidade,'ÀÁáàÉÈéèÍíÓóÒòÚú','AAaaEEeeIiOoOoUu')) = ?1 AND upper(TRANSLATE(d.siglaestado,'ÀÁáàÉÈéèÍíÓóÒòÚú','AAaaEEeeIiOoOoUu')) = ?2 ORDER BY d.data DESC";
@@ -142,7 +140,6 @@ public class DenunciaService implements DenunciaServiceIT {
 
     @Override
     public long totalDeDenunciasAtendidasNaCidade(String cidade, String estado) {
-
         Query query;
 
         if (cidade.equals("Brasil")) {

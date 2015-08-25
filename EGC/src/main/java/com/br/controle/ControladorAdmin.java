@@ -138,7 +138,7 @@ public class ControladorAdmin implements Serializable {
         this.prefeituraAx = p;
         this.mostrarModalRecusar = true;
 
-        System.out.println("nome: " + p.getNome());
+//        System.out.println("nome: " + p.getNome());
 //        return "/sis/admin/solicitacoes.jsf?faces-redirect=true#modal";
 //        FacesContext.getCurrentInstance().getExternalContext().redirect("/EGC/sis/admin/solicitacoes.jsf#modal");
     }
@@ -147,7 +147,7 @@ public class ControladorAdmin implements Serializable {
         this.prefeituraAx = p;
         this.mostrarModalAceitar = true;
 
-        System.out.println("nome: " + p.getNome());
+//        System.out.println("nome: " + p.getNome());
 //        return "/sis/admin/solicitacoes.jsf?faces-redirect=true#modal";
 //        FacesContext.getCurrentInstance().getExternalContext().redirect("/EGC/sis/admin/solicitacoes.jsf#modal");
     }

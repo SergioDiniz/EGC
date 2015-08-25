@@ -306,18 +306,17 @@
                                         <div class="tag-info-atendimento">
                                             <c:choose>
 
+                                                <c:when test="#{denuncia.tagAtendida()}">
+                                                    <span class="tooltips" title="Denuncia Atendida" rel="tooltip" data-placement="top" >
+                                                        <img src="../../img/icones-denuncia/tag-atentida-2.png"/> 
+                                                    </span>
+                                                </c:when>
+                                                
                                                 <c:when test="#{denuncia.tagEmAndamento()}">
                                                     <span class="tooltips" title="Denuncia em Trabalho" rel="tooltip" data-placement="top" >
                                                         <img src="../../img/icones-denuncia/tag-em-trabalho-2.png"/>
                                                     </span>
                                                 </c:when>
-
-                                                <c:when test="#{denuncia.tagAtendida()}">
-                                                    <span class="tooltips" title="Denuncia Atendida" rel="tooltip" data-placement="top" >
-                                                        <img src="../../img/icones-denuncia/tag-atentida-2.png"/>    
-                                                    </span>
-                                                </c:when>
-
 
                                             </c:choose>    
                                         </div>

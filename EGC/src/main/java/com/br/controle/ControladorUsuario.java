@@ -187,7 +187,6 @@ public class ControladorUsuario implements Serializable {
 
     public String pesquisarCidadeFiltro() {
         String cidadeEstado[] = this.strPesquisarCidadeFiltro.split(" - ");
-        System.out.println(cidadeEstado[0] + " - " + cidadeEstado[1]);
 
         this.cidadeDenuncia = cidadeEstado[0];
         this.ufDenuncia = cidadeEstado[1];

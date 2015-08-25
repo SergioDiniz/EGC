@@ -141,8 +141,8 @@ public class ControladorPrefeitura implements Serializable {
                 String tipoArquivo = file.getFileName();
                 tipoArquivo = tipoArquivo.substring(tipoArquivo.lastIndexOf("."), tipoArquivo.length());
                 String nomeArquivo = prefeitura.getEmail() + tipoArquivo;
-                System.out.println("tipo do arquivo: " + tipoArquivo);
-                System.out.println("nome do arquivo: " + nomeArquivo);
+//                System.out.println("tipo do arquivo: " + tipoArquivo);
+//                System.out.println("nome do arquivo: " + nomeArquivo);
 
                 OutputStream out = new FileOutputStream(new File(targetFolder,
                         nomeArquivo));
@@ -215,7 +215,7 @@ public class ControladorPrefeitura implements Serializable {
     }
 
     public String desvincularFuncionario() {
-        System.out.println("desvinculando: " + funcionarioAux.getNome());
+//        System.out.println("desvinculando: " + funcionarioAux.getNome());
         fachada.desvincularFuncionario(this.prefeitura, funcionarioAux.getCpf());
         this.prefeitura.getFuncionarios().remove(funcionarioAux);
         this.funcionarioAux = new Funcionario();
@@ -226,7 +226,7 @@ public class ControladorPrefeitura implements Serializable {
     public void modalDesvincular(Funcionario f) {
         this.funcionarioAux = f;
         this.mostrarModalDesvincular = true;
-        System.out.println("funcionario: " + funcionarioAux.getNome());
+//        System.out.println("funcionario: " + funcionarioAux.getNome());
     }
 
     // gets and setes

@@ -63,7 +63,6 @@ public class UsuarioService implements UsuarioServiceIT{
             
             
         try {
-            System.out.println("1");
             Denuncia d = new Denuncia(denucia, foto, enderecoDenuncia, tipoDeDenuncia);
             
             usuario.novaDenuncia(d);
