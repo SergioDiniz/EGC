@@ -166,4 +166,26 @@ public class DenunciaService implements DenunciaServiceIT {
         return str.toUpperCase();
     }
 
+    @Override
+    public boolean setAjudarDenuncia(Denuncia denuncia) {
+        int valor = denuncia.getNumeroAjuda();
+        denuncia.setNumeroAjuda(++valor); 
+        
+        em.merge(denuncia);
+        
+        return true;
+    }
+
+    @Override
+    public int getAjudarDenuncia(Denuncia denuncia) {
+        Query query = em.createQuery("SELECT d.numeroAjuda FROM Denuncia d WHERE d.id = :id");
+        query.setParameter("id", denuncia.getId());
+        
+        int valor = (int) query.getSingleResult();
+        
+        return valor;
+    }
+
+    
+    
 }

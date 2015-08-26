@@ -46,6 +46,8 @@ public class Denuncia implements Serializable {
     private Date data;
     @Column(nullable = false)
     private String foto;
+    @Column(nullable = false)
+    private int numeroAjuda;
 
     @OneToOne(cascade = CascadeType.ALL)
     private EnderecoDenuncia enderecoDenuncia;
@@ -67,6 +69,7 @@ public class Denuncia implements Serializable {
         this.estadoDeAcompanhamento = EstadoDeAcompanhamento.AGUARDANDO;
         this.tipoDeDenuncia = tipoDeDenuncia;
         this.data = new Date();
+        this.numeroAjuda = 0;
     }
 
     public int getId() {
@@ -238,6 +241,17 @@ public class Denuncia implements Serializable {
         SimpleDateFormat formato = new SimpleDateFormat("HH:mm - dd/MM/yyyy");
         return formato.format(getData());
     }
+
+    public int getNumeroAjuda() {
+        return numeroAjuda;
+    }
+
+    public void setNumeroAjuda(int numeroAjuda) {
+        this.numeroAjuda = numeroAjuda;
+    }
+    
+    
+    
 
     @Override
     public int hashCode() {

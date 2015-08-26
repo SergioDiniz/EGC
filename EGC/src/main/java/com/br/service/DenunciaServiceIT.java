@@ -23,4 +23,8 @@ public interface DenunciaServiceIT {
     
     public long totalDeDenunciasAtendidasNaCidade(String cidade, String estado);
     
+    public boolean setAjudarDenuncia(Denuncia denuncia);
+    
+    public int getAjudarDenuncia(Denuncia denuncia);
+    
 }

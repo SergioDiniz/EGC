@@ -212,6 +212,14 @@ public class Fachada{
         return ds.totalDeDenunciasAtendidasNaCidade(cidade, estado);
     }
     
+    public boolean setAjudarDenuncia(Denuncia denuncia){
+        return ds.setAjudarDenuncia(denuncia);
+    }
+    
+    public int getAjudarDenuncia(Denuncia denuncia){
+        return ds.getAjudarDenuncia(denuncia);
+    }
+    
     // FIM DenunciaServices
     //
     //

@@ -431,7 +431,7 @@
                                                 <span class="tooltips" title="Ajudar" rel="tooltip" data-placement="top" >
                                                     <h:form>
                                                         <p:growl id="growl" life="2000"/>
-                                                        <p:commandButton value="+#{controladorDenuncia.numero}" id="n-ajuda#{denuncia.id}" update="growl" actionListener="#{controladorDenuncia.ajudarDenuncia(denuncia)}" styleClass="btn-ajudar-denuncia"/>
+                                                        <p:commandButton value="+#{controladorDenuncia.getAjudarDenuncia(denuncia)}" id="n-ajuda#{denuncia.id}" update="growl" actionListener="#{controladorDenuncia.setAjudarDenuncia(denuncia)}" styleClass="btn-ajudar-denuncia"/>
                                                         <p:poll update="n-ajuda#{denuncia.id}" />
                                                     </h:form>
                                                 </span>
