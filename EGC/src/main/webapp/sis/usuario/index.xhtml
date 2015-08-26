@@ -429,7 +429,11 @@
                                         <div class="col-md-offset-5 col-md-3 impucionar-denuncia">
                                             <div class="col-md-6">
                                                 <span class="tooltips" title="Ajudar" rel="tooltip" data-placement="top" >
-                                                    <button class="btn-ajudar-denuncia">+99</button>
+                                                    <h:form>
+                                                        <p:growl id="growl" life="2000"/>
+                                                        <p:commandButton value="+#{controladorDenuncia.numero}" id="n-ajuda#{denuncia.id}" update="growl" actionListener="#{controladorDenuncia.ajudarDenuncia(denuncia)}" styleClass="btn-ajudar-denuncia"/>
+                                                        <p:poll update="n-ajuda#{denuncia.id}" />
+                                                    </h:form>
                                                 </span>
                                             </div>
                                             <div class="col-md-6">
