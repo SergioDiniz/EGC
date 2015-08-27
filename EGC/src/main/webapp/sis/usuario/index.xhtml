@@ -439,16 +439,66 @@
                                                                 <p:commandButton value="+#{controladorUsuario.getAjudarDenuncia(denuncia)}" id="n-ajuda#{denuncia.id}" update="growl" actionListener="#{controladorUsuario.setAjudarDenuncia(denuncia)}" styleClass="btn-ajudar-denuncia" disabled="true"/>
                                                             </c:otherwise>
                                                         </c:choose>
-                                                            
-                                                        
+
+
                                                         <p:poll interval="3" update="n-ajuda#{denuncia.id}" />
                                                     </h:form>
                                                 </span>
                                             </div>
                                             <div class="col-md-6">
                                                 <span class="tooltips" title="Reclamar" rel="tooltip" data-placement="top" >
-                                                    <button class="btn-ajudar-denuncia">-0</button>
+                                                    <button data-toggle="modal" data-target=".denunciaReclamacao#{denuncia.id}" class="btn-ajudar-denuncia">
+                                                        -0
+                                                    </button>
                                                 </span>
+
+                                                <!--modal--> 
+                                                <div id="modal-reclamacao">
+                                                    <div class="modal fade bs-example-modal-lg denunciaReclamacao#{denuncia.id}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                    <h4 class="modal-title">O que está acontecendo?</h4>
+
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <p align="center" style="font-size: 16px">Nos ajude a identificar o que há de errado com esta denúncia.</p>
+                                                                    <br/>
+                                                                    <div class="row">
+                                                                        <div class="col-md-5">
+                                                                            <img src="../denuncias/#{denuncia.foto}" style="width: 100%; max-height: 100%;" />
+                                                                        </div>
+                                                                        <div class="col-md-7">
+                                                                            <h:form>
+                                                                                <div class="form-group">
+                                                                                    <label>Tipo de Conteúdo: </label>
+                                                                                    <h:selectOneListbox size="1" class="form-control" value="#{controladorUsuario.tipoDenuncia}">
+                                                                                        <f:selectItem itemValue="FALSA_DENUNCIA" itemLabel="Falsa Denúncia" />
+                                                                                        <f:selectItem itemValue="NUDEZ" itemLabel="Exposição de Nudez"/>
+                                                                                        <f:selectItem itemValue="SPAN" itemLabel="Span"/>
+                                                                                        <f:selectItem itemValue="IRRITANTE" itemLabel="Essa denúncia me irrita"/>
+                                                                                    </h:selectOneListbox>
+                                                                                </div>
+                                                                                
+                                                                                <div class="form-group">
+                                                                                    <label>Descrição:</label>
+                                                                                    <textarea class="form-control" rows="6" jsf:value="${controladorUsuario.denuncia}">
+                                                
+                                                                                    </textarea>
+                                                                                </div>
+                                                                            </h:form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                                                    <button type="button" class="btn btn-primary">Reclamar</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 

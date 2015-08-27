@@ -411,9 +411,14 @@ html, body{
     border-radius: 5px;
     width: 35px;
     height: 35px;
-
-
 }
+
+/*modal reclamação*/
+#modal-reclamacao .modal-content{
+    color: #000 !important;
+}
+
+
 
 .notificacao{
     position: fixed;
