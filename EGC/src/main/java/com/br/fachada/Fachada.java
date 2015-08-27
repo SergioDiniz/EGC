@@ -76,6 +76,9 @@ public class Fachada{
         return us.novaDenuncia(usuario, enderecoDenuncia, denucia, foto, tipoDeDenuncia);
     }
     
+    public List<Denuncia> minhasDenuncias(String email){
+        return us.minhasDenuncias(email);
+    }
     
     // FIM UsuarioServices
     //

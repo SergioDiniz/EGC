@@ -397,6 +397,10 @@ public class ControladorUsuario implements Serializable {
     public List<Denuncia> pesquisarPorCidadeComFiltro(TipoDeDenuncia tipoDeDenuncia, String ordem) {
         return fachada.pesquisarDenunciaPorCidadeComFiltro(this.cidadeDenuncia, this.ufDenuncia, tipoDeDenuncia, ordem);
     }
+    
+    public List<Denuncia> minhasDenunicas(){
+        return fachada.minhasDenuncias(this.usuario.getEmail());
+    }
 
 //    
     public Usuario getUsuario() {

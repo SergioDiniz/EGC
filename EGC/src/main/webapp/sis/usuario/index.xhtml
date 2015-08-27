@@ -43,7 +43,7 @@
                                     +
                                 </div>
                                 <div class="text-bnt-vd bnt-vd">
-                                    nova denuncia
+                                    nova denúncia
                                 </div>
                             </button>
                         </a>
@@ -299,8 +299,8 @@
 
                             <!-- -->
 
-
-                            <c:forEach var="denuncia" items="#{controladorUsuario.mostrarDenunicas()}">
+                            
+                            <c:forEach var="denuncia" items="#{controladorUsuario.mostrarDenunicas()}" id="id-denuncias">
                                 <div class="denuncia-visualizada">
                                     <c:if test="#{denuncia.informacaoDeAtendida.id > -1}">
                                         <div class="tag-info-atendimento">
@@ -430,9 +430,9 @@
                                             <div class="col-md-6">
                                                 <span class="tooltips" title="Ajudar" rel="tooltip" data-placement="top" >
                                                     <h:form>
-                                                        <p:growl id="growl" life="2000"/>
+                                                        <p:growl id="growl"/>
                                                         <p:commandButton value="+#{controladorDenuncia.getAjudarDenuncia(denuncia)}" id="n-ajuda#{denuncia.id}" update="growl" actionListener="#{controladorDenuncia.setAjudarDenuncia(denuncia)}" styleClass="btn-ajudar-denuncia"/>
-                                                        <p:poll update="n-ajuda#{denuncia.id}" />
+                                                        <p:poll interval="3" update="n-ajuda#{denuncia.id}" />
                                                     </h:form>
                                                 </span>
                                             </div>
@@ -446,8 +446,11 @@
                                     </div>
 
                                 </div>
+                                
+                                
                             </c:forEach>
 
+                            
 
                             <!-- -->
 
