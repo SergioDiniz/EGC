@@ -12,6 +12,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
 /**
@@ -29,6 +31,11 @@ public class Usuario extends Pessoa implements Serializable{
     @OneToMany(cascade = CascadeType.ALL)
     private List<Denuncia> denuncias;
     
+    
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "usuario_denunciasajudadas")
+    private List<Denuncia> denunciasAjudadas;
+    
     public Usuario() {
     }
 
@@ -37,6 +44,7 @@ public class Usuario extends Pessoa implements Serializable{
         this.endereco = endereco;
         this.nickname = nickname;
         this.denuncias = new ArrayList<>();
+        this.denunciasAjudadas = new ArrayList<>();
     }
 
     public Usuario(EnderecoUsuario endereco) {
@@ -72,6 +80,14 @@ public class Usuario extends Pessoa implements Serializable{
     public void novaDenuncia(Denuncia denuncia) {
         this.denuncias.add(denuncia);
     }   
+
+    public List<Denuncia> getDenunciasAjudadas() {
+        return denunciasAjudadas;
+    }
+
+    public void setDenunciasAjudadas(List<Denuncia> denunciasAjudadas) {
+        this.denunciasAjudadas = denunciasAjudadas;
+    }
     
     
 }

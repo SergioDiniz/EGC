@@ -299,7 +299,7 @@
 
                             <!-- -->
 
-                            
+
                             <c:forEach var="denuncia" items="#{controladorUsuario.mostrarDenunicas()}" id="id-denuncias">
                                 <div class="denuncia-visualizada">
                                     <c:if test="#{denuncia.informacaoDeAtendida.id > -1}">
@@ -311,7 +311,7 @@
                                                         <img src="../../img/icones-denuncia/tag-atentida-2.png"/> 
                                                     </span>
                                                 </c:when>
-                                                
+
                                                 <c:when test="#{denuncia.tagEmAndamento()}">
                                                     <span class="tooltips" title="Denuncia em Trabalho" rel="tooltip" data-placement="top" >
                                                         <img src="../../img/icones-denuncia/tag-em-trabalho-2.png"/>
@@ -431,7 +431,16 @@
                                                 <span class="tooltips" title="Ajudar" rel="tooltip" data-placement="top" >
                                                     <h:form>
                                                         <p:growl id="growl"/>
-                                                        <p:commandButton value="+#{controladorDenuncia.getAjudarDenuncia(denuncia)}" id="n-ajuda#{denuncia.id}" update="growl" actionListener="#{controladorDenuncia.setAjudarDenuncia(denuncia)}" styleClass="btn-ajudar-denuncia"/>
+                                                        <c:choose>
+                                                            <c:when test="#{!controladorUsuario.denunciasQueAjudei().contains(denuncia)}">
+                                                                <p:commandButton value="+#{controladorUsuario.getAjudarDenuncia(denuncia)}" id="n-ajuda#{denuncia.id}" update="growl" actionListener="#{controladorUsuario.setAjudarDenuncia(denuncia)}" styleClass="btn-ajudar-denuncia"/>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <p:commandButton value="+#{controladorUsuario.getAjudarDenuncia(denuncia)}" id="n-ajuda#{denuncia.id}" update="growl" actionListener="#{controladorUsuario.setAjudarDenuncia(denuncia)}" styleClass="btn-ajudar-denuncia" disabled="true"/>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                            
+                                                        
                                                         <p:poll interval="3" update="n-ajuda#{denuncia.id}" />
                                                     </h:form>
                                                 </span>
@@ -446,11 +455,11 @@
                                     </div>
 
                                 </div>
-                                
-                                
+
+
                             </c:forEach>
 
-                            
+
 
                             <!-- -->
 

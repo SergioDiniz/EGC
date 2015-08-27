@@ -67,13 +67,6 @@ public class ControladorDenuncia implements Serializable {
         return simpleModel;
     }
 
-    public void setAjudarDenuncia(Denuncia denuncia) {
-        System.out.println("denuncia: " + denuncia.getDescricao());
-        fachada.setAjudarDenuncia(denuncia);
-    }
 
-    public int getAjudarDenuncia(Denuncia denuncia) {
-        return fachada.getAjudarDenuncia(denuncia);
-    }
 
 }

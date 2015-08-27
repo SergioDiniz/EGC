@@ -39,6 +39,7 @@ public class UsuarioService implements UsuarioServiceIT{
         
         if(u.size() > 0){
             u.get(0).getDenuncias().size();
+            u.get(0).getDenunciasAjudadas().size();
            return u.get(0);
         } 
         
@@ -87,7 +88,7 @@ public class UsuarioService implements UsuarioServiceIT{
     @Override
     public List<Denuncia> minhasDenuncias(String email){
         
-        Query query = em.createQuery("SELECT d from Usuario u JOIN u.denuncias d WHERE u.email = :email");
+        Query query = em.createQuery("SELECT d from Usuario u JOIN u.denuncias d WHERE u.email = :email ORDER BY d.data DESC");
               query.setParameter("email", email);
         
         List<Denuncia> d = query.getResultList();
@@ -99,9 +100,24 @@ public class UsuarioService implements UsuarioServiceIT{
         return null;
         
     }
+
+    @Override
+    public List<Denuncia> denunciasQueAjudei(String email) {
+        Query query = em.createQuery("SELECT d from Usuario u JOIN u.denunciasAjudadas d WHERE u.email = :email ORDER BY d.data DESC");
+              query.setParameter("email", email);
+              
+        List<Denuncia> d = query.getResultList();
+        
+        if(d.size() > 0){
+            return d;
+        } 
+        
+        return null;
+    }
     
     
     
 
+    
     
 }

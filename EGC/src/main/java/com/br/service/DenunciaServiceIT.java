@@ -7,6 +7,7 @@ package com.br.service;
 
 import com.br.beans.Denuncia;
 import com.br.beans.TipoDeDenuncia;
+import com.br.beans.Usuario;
 import java.util.List;
 
 /**
@@ -23,7 +24,7 @@ public interface DenunciaServiceIT {
     
     public long totalDeDenunciasAtendidasNaCidade(String cidade, String estado);
     
-    public boolean setAjudarDenuncia(Denuncia denuncia);
+    public boolean setAjudarDenuncia(Denuncia denuncia, Usuario usuario);
     
     public int getAjudarDenuncia(Denuncia denuncia);
     

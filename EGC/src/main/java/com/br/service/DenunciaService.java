@@ -7,6 +7,7 @@ package com.br.service;
 
 import com.br.beans.Denuncia;
 import com.br.beans.TipoDeDenuncia;
+import com.br.beans.Usuario;
 import java.text.Normalizer;
 import java.util.List;
 import javax.ejb.Remote;
@@ -82,11 +83,10 @@ public class DenunciaService implements DenunciaServiceIT {
     }
 
     public List<Denuncia> pesquisarNoBrasil(String cidade, TipoDeDenuncia tipoDeDenuncia, String ordem) {
-        
+
 //        if (tipoDeDenuncia == TipoDeDenuncia.BRASIL){
 //            tipoDeDenuncia = TipoDeDenuncia.TODOS;
 //        }
-        
         Query query;
         if (ordem.equals("data")) {
             if (tipoDeDenuncia == TipoDeDenuncia.BRASIL) {
@@ -103,8 +103,6 @@ public class DenunciaService implements DenunciaServiceIT {
                 query.setParameter("tipo", tipoDeDenuncia);
             }
         }
-
-        
 
         List d = query.getResultList();
 
@@ -167,25 +165,30 @@ public class DenunciaService implements DenunciaServiceIT {
     }
 
     @Override
-    public boolean setAjudarDenuncia(Denuncia denuncia) {
-        int valor = denuncia.getNumeroAjuda();
-        denuncia.setNumeroAjuda(++valor); 
-        
-        em.merge(denuncia);
-        
-        return true;
+    public boolean setAjudarDenuncia(Denuncia denuncia, Usuario usuario) {
+
+        if (!usuario.getDenunciasAjudadas().contains(denuncia)) {
+            int valor = denuncia.getNumeroAjuda();
+            denuncia.setNumeroAjuda(++valor);
+
+            usuario.getDenunciasAjudadas().add(denuncia);
+            em.merge(denuncia);
+            em.merge(usuario);
+            return true;
+
+        }
+        return false;
+
     }
 
     @Override
     public int getAjudarDenuncia(Denuncia denuncia) {
         Query query = em.createQuery("SELECT d.numeroAjuda FROM Denuncia d WHERE d.id = :id");
         query.setParameter("id", denuncia.getId());
-        
+
         int valor = (int) query.getSingleResult();
-        
+
         return valor;
     }
 
-    
-    
 }

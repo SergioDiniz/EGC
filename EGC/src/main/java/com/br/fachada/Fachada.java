@@ -80,6 +80,10 @@ public class Fachada{
         return us.minhasDenuncias(email);
     }
     
+    public List<Denuncia> denunciasQueAjudei(String email){
+        return us.denunciasQueAjudei(email);
+    }
+    
     // FIM UsuarioServices
     //
     //
@@ -215,8 +219,8 @@ public class Fachada{
         return ds.totalDeDenunciasAtendidasNaCidade(cidade, estado);
     }
     
-    public boolean setAjudarDenuncia(Denuncia denuncia){
-        return ds.setAjudarDenuncia(denuncia);
+    public boolean setAjudarDenuncia(Denuncia denuncia, Usuario usuario){
+        return ds.setAjudarDenuncia(denuncia, usuario);
     }
     
     public int getAjudarDenuncia(Denuncia denuncia){

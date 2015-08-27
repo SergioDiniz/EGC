@@ -17,6 +17,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -397,10 +398,25 @@ public class ControladorUsuario implements Serializable {
     public List<Denuncia> pesquisarPorCidadeComFiltro(TipoDeDenuncia tipoDeDenuncia, String ordem) {
         return fachada.pesquisarDenunciaPorCidadeComFiltro(this.cidadeDenuncia, this.ufDenuncia, tipoDeDenuncia, ordem);
     }
-    
-    public List<Denuncia> minhasDenunicas(){
+
+    public List<Denuncia> minhasDenunicas() {
         return fachada.minhasDenuncias(this.usuario.getEmail());
     }
+
+    public void setAjudarDenuncia(Denuncia denuncia) {
+        fachada.setAjudarDenuncia(denuncia, this.usuario);
+    }
+
+    public int getAjudarDenuncia(Denuncia denuncia) {
+        return fachada.getAjudarDenuncia(denuncia);
+    }
+    
+    public List<Denuncia> denunciasQueAjudei(){
+        return fachada.denunciasQueAjudei(this.usuario.getEmail());
+    }
+    
+    
+    
 
 //    
     public Usuario getUsuario() {

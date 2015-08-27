@@ -31,7 +31,7 @@
         <div class="area-titulo-pagina">
 
             <div class="col-md-5">
-                <div class="titulo-pagina">Minhas Denúncias</div>
+                <div class="titulo-pagina">Denúncias que Ajudei</div>
             </div>
 
             <div class="tudo">
@@ -55,7 +55,7 @@
                             <!-- -->
 
 
-                            <c:forEach var="denuncia" items="#{controladorUsuario.minhasDenunicas()}" id="id-denuncias">
+                            <c:forEach var="denuncia" items="#{controladorUsuario.denunciasQueAjudei()}" id="id-denuncias">
                                 <div class="denuncia-visualizada">
                                     <c:if test="#{denuncia.informacaoDeAtendida.id > -1}">
                                         <div class="tag-info-atendimento">
