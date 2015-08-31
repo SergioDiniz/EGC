@@ -5,6 +5,7 @@
  */
 package com.br.controle;
 
+import com.br.beans.ConteudoInapropriado;
 import com.br.beans.Denuncia;
 import com.br.fachada.Fachada;
 import java.io.Serializable;
@@ -29,6 +30,13 @@ import javax.ejb.EJB;
 public class ControladorDenuncia implements Serializable {
 
     private MapModel simpleModel;
+    private ConteudoInapropriado conteudoInapropriado;
+
+    public ControladorDenuncia() {
+        this.conteudoInapropriado = new ConteudoInapropriado();
+    }
+    
+    
     @EJB
     private Fachada fachada;
 
@@ -68,5 +76,36 @@ public class ControladorDenuncia implements Serializable {
     }
 
 
+    public String setReclamarDenuncia(Denuncia denuncia){
+        
+        fachada.setReclamarDenuncia(denuncia, conteudoInapropriado);
+        
+        this.conteudoInapropriado = new ConteudoInapropriado();
+        return "";
+    }
+    
+    public long getReclamarDenuncia(Denuncia denuncia){
+        return fachada.getReclamarDenuncia(denuncia);
+    }
+    
+//
+//
+//
+//
+//
+//
+//
+
+    public ConteudoInapropriado getConteudoInapropriado() {
+        return conteudoInapropriado;
+    }
+
+    public void setConteudoInapropriado(ConteudoInapropriado conteudoInapropriado) {
+        this.conteudoInapropriado = conteudoInapropriado;
+    }
+    
+    
+    
+    
 
 }

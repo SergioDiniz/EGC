@@ -5,6 +5,7 @@
  */
 package com.br.service;
 
+import com.br.beans.ConteudoInapropriado;
 import com.br.beans.Denuncia;
 import com.br.beans.TipoDeDenuncia;
 import com.br.beans.Usuario;
@@ -131,7 +132,6 @@ public class DenunciaService implements DenunciaServiceIT {
         if (d.size() > 0) {
             return (long) d.get(0);
         }
-
         return 0;
 
     }
@@ -189,6 +189,43 @@ public class DenunciaService implements DenunciaServiceIT {
         int valor = (int) query.getSingleResult();
 
         return valor;
+    }
+
+    @Override
+    public boolean setReclamarDenuncia(Denuncia denuncia, ConteudoInapropriado conteudoInapropriado) {
+
+//        try {
+            denuncia.getConteudoInapropriados().size();
+            denuncia.getConteudoInapropriados().add(conteudoInapropriado);
+            em.merge(conteudoInapropriado);
+            em.merge(denuncia);
+            
+            System.out.println("descrição: " + conteudoInapropriado.getDescricao());
+            System.out.println("n: " + denuncia.getConteudoInapropriados().size());
+            
+            return true;
+//        } catch (Exception e){
+//            System.out.println("erro ao atualizar reclamação de denunica: " + e.getMessage());
+//        }
+//
+//        return false;
+    }
+
+    @Override
+    public long getReclamarDenuncia(Denuncia denuncia) {
+        Query query = em.createQuery("SELECT COUNT(c) from Denuncia d JOIN d.conteudoInapropriados c WHERE d.id = :id");
+              query.setParameter("id", denuncia.getId());
+
+        List e = query.getResultList();
+        
+        if(e.size() > 0){
+            return (long) e.get(0);
+        }
+              
+        
+        
+        
+        return 0;
     }
 
 }

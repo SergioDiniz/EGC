@@ -7,11 +7,13 @@ package com.br.service;
 
 import com.br.beans.Cidade;
 import com.br.beans.CidadePK;
+import java.util.List;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -42,6 +44,21 @@ public class CidadeService implements CidadeServiceIT{
         }
 
         return null;
+    }
+
+    @Override
+    public long totalDeUsuariosNaCidade(String cidade, String estado) {
+        Query query = em.createQuery("SELECT COUNT(u) FROM Usuario u WHERE u.endereco.cidade = :cidade AND u.endereco.estado = :estado");
+            query.setParameter("cidade", cidade);
+            query.setParameter("estado", estado);
+            
+        List u = query.getResultList();
+        
+        if (u.size() > 0){
+            return (long) u.get(0);
+        }
+        
+        return 0;
     }
     
 }

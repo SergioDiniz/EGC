@@ -5,6 +5,7 @@
  */
 package com.br.service;
 
+import com.br.beans.ConteudoInapropriado;
 import com.br.beans.Denuncia;
 import com.br.beans.TipoDeDenuncia;
 import com.br.beans.Usuario;
@@ -27,5 +28,10 @@ public interface DenunciaServiceIT {
     public boolean setAjudarDenuncia(Denuncia denuncia, Usuario usuario);
     
     public int getAjudarDenuncia(Denuncia denuncia);
+    
+    public boolean setReclamarDenuncia(Denuncia denuncia, ConteudoInapropriado conteudoInapropriado);
+    
+    public long getReclamarDenuncia(Denuncia denuncia);
+    
     
 }

@@ -7,6 +7,7 @@ package com.br.fachada;
 
 import com.br.beans.Administrador;
 import com.br.beans.Cidade;
+import com.br.beans.ConteudoInapropriado;
 import com.br.beans.Denuncia;
 import com.br.beans.EnderecoDenuncia;
 import com.br.beans.Funcionario;
@@ -124,6 +125,9 @@ public class Fachada{
         return ps.desvincular(prefeitura, cpf);
     }
     
+    public long totalDeFuncionariosNaPrefeitura(int id){
+        return ps.totalDeFuncionariosNaPrefeitura(id);
+    }
     
     // FIM PrefeituraServices
     //
@@ -161,6 +165,10 @@ public class Fachada{
     
     public Cidade pesquisarCidade(String nome, String estado){
         return cs.pesquisarCidade(nome, estado);
+    }
+    
+    public long totalDeUsuariosNaCidade(String cidade, String estado){
+        return cs.totalDeUsuariosNaCidade(cidade, estado);
     }
     
     // FIM CidadeServices
@@ -225,6 +233,14 @@ public class Fachada{
     
     public int getAjudarDenuncia(Denuncia denuncia){
         return ds.getAjudarDenuncia(denuncia);
+    }
+    
+    public boolean setReclamarDenuncia(Denuncia denuncia, ConteudoInapropriado conteudoInapropriado){
+        return ds.setReclamarDenuncia(denuncia, conteudoInapropriado);
+    }
+    
+    public long getReclamarDenuncia(Denuncia denuncia){
+        return ds.getReclamarDenuncia(denuncia);
     }
     
     // FIM DenunciaServices

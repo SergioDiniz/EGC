@@ -15,6 +15,7 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -55,7 +56,7 @@ public class Denuncia implements Serializable {
     private Cidade cidade;
     @OneToOne(cascade = CascadeType.ALL)
     private InformacaoDeAtendida informacaoDeAtendida;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<ConteudoInapropriado> conteudoInapropriados;
 
     public Denuncia() {

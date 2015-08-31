@@ -15,4 +15,6 @@ public interface CidadeServiceIT {
  
     public Cidade pesquisarCidade(String nome, String estado);
     
+    public long totalDeUsuariosNaCidade(String cidade, String estado);
+    
 }

@@ -288,6 +288,49 @@ html, body{
     margin-top: 20px;
 }
 
+.btn-1,
+.btn-2,
+.btn-3,
+.btn-4{
+    margin: 10px;
+    width: 23.199% !important;
+    padding-bottom: 15px;
+    padding-top: 23px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.btn-1 .col-md-6:nth-child(2),
+.btn-2 .col-md-6:nth-child(2),
+.btn-3 .col-md-6:nth-child(2),
+.btn-4 .col-md-6:nth-child(2){
+    text-align: right;
+}
+
+.btn-1 .col-md-6:nth-child(2) .row:nth-child(2),
+.btn-2 .col-md-6:nth-child(2) .row:nth-child(2),
+.btn-3 .col-md-6:nth-child(2) .row:nth-child(2),
+.btn-4 .col-md-6:nth-child(2) .row:nth-child(2){
+    font-size: 30px;
+}
+
+.btn-1{
+    background-color: #03a9f4;
+}
+
+.btn-2{
+    background-color: #8bc34a;
+}
+
+.btn-3{
+    background-color: #e84e40;
+}
+
+.btn-4{
+    background-color: #9c27b0;
+}
+
 
 .btn-nd{
     width: 200px;

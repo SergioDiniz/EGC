@@ -228,7 +228,35 @@ public class ControladorPrefeitura implements Serializable {
         this.mostrarModalDesvincular = true;
 //        System.out.println("funcionario: " + funcionarioAux.getNome());
     }
-
+    
+    public long totalDeDenunciasAtendidasNaCidade() {
+        return fachada.totalDeDenunciasAtendidasNaCidade(this.prefeitura.getCidade().getCidadePK().getNomeCidade(), 
+                                                         this.prefeitura.getCidade().getCidadePK().getSiglaEstado());
+    }
+    
+    public long totalDeDenunciasNaCidade() {
+        return fachada.totalDeDenunciasNaCidade(this.prefeitura.getCidade().getCidadePK().getNomeCidade(), 
+                                                this.prefeitura.getCidade().getCidadePK().getSiglaEstado());
+    }
+    
+    public long totalDeFuncionariosNaPrefeitura() {
+        return fachada.totalDeFuncionariosNaPrefeitura(this.prefeitura.getId());
+    }
+    
+    public long totalDeUsuariosNaCidade(){
+        return fachada.totalDeUsuariosNaCidade(this.prefeitura.getCidade().getCidadePK().getNomeCidade(), 
+                                                this.prefeitura.getCidade().getCidadePK().getSiglaEstado());
+    }
+    
+    
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
     // gets and setes
     public Prefeitura getPrefeitura() {
         return prefeitura;

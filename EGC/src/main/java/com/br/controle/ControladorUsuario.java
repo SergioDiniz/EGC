@@ -42,6 +42,7 @@ public class ControladorUsuario implements Serializable {
     String strPesquisarCidadeFiltro;
     TipoDeDenuncia tipoDenunciaFeed;
     TipoDeDenuncia tipoDenuncia;
+    ConteudoInapropriado conteudoInapropriado;
     private UploadedFile ImgDenuncia;
     int totalDenuncias;
     int denunicasAtendidas;
@@ -62,6 +63,7 @@ public class ControladorUsuario implements Serializable {
         this.strPesquisarCidadeFiltro = "";
         this.totalDenuncias = 0;
         this.denunicasAtendidas = 0;
+        this.conteudoInapropriado = new ConteudoInapropriado();
     }
 
     public String cadastro() {
@@ -415,9 +417,23 @@ public class ControladorUsuario implements Serializable {
         return fachada.denunciasQueAjudei(this.usuario.getEmail());
     }
     
-    
+    public String reclamarDenuncia(Denuncia denuncia){
+        
+        
+        this.conteudoInapropriado = new ConteudoInapropriado();
+        return "";
+        
+    }
     
 
+//    
+//
+//
+//
+//    
+//    
+//
+//
 //    
     public Usuario getUsuario() {
         return usuario;
@@ -531,4 +547,13 @@ public class ControladorUsuario implements Serializable {
         this.denunicasAtendidas = denunicasAtendidas;
     }
 
+    public ConteudoInapropriado getConteudoInapropriado() {
+        return conteudoInapropriado;
+    }
+
+    public void setConteudoInapropriado(ConteudoInapropriado conteudoInapropriado) {
+        this.conteudoInapropriado = conteudoInapropriado;
+    }
+
+    
 }

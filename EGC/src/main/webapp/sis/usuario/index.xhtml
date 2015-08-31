@@ -448,7 +448,10 @@
                                             <div class="col-md-6">
                                                 <span class="tooltips" title="Reclamar" rel="tooltip" data-placement="top" >
                                                     <button data-toggle="modal" data-target=".denunciaReclamacao#{denuncia.id}" class="btn-ajudar-denuncia">
-                                                        -0
+                                                        <h:form>
+                                                            <h:outputText value="-#{controladorDenuncia.getReclamarDenuncia(denuncia)}" id="n-reclamar#{denuncia.id}"/>
+                                                            <p:poll interval="3" update="n-reclamar#{denuncia.id}"/>
+                                                        </h:form>
                                                     </button>
                                                 </span>
 
@@ -462,39 +465,46 @@
                                                                     <h4 class="modal-title">O que está acontecendo?</h4>
 
                                                                 </div>
-                                                                <div class="modal-body">
-                                                                    <p align="center" style="font-size: 16px">Nos ajude a identificar o que há de errado com esta denúncia.</p>
-                                                                    <br/>
-                                                                    <div class="row">
-                                                                        <div class="col-md-5">
-                                                                            <img src="../denuncias/#{denuncia.foto}" style="width: 100%; max-height: 100%;" />
-                                                                        </div>
-                                                                        <div class="col-md-7">
-                                                                            <h:form>
+
+                                                                <h:form>
+
+                                                                    <div class="modal-body">
+                                                                        <p align="center" style="font-size: 16px">Nos ajude a identificar o que há de errado com esta denúncia.</p>
+                                                                        <br/>
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-5">
+                                                                                <img src="../denuncias/#{denuncia.foto}" style="width: 100%; max-height: 100%;" />
+                                                                            </div>
+                                                                            <div class="col-md-7">
+
                                                                                 <div class="form-group">
                                                                                     <label>Tipo de Conteúdo: </label>
-                                                                                    <h:selectOneListbox size="1" class="form-control" value="#{controladorUsuario.tipoDenuncia}">
+                                                                                    <h:selectOneListbox size="1" class="form-control" value="#{controladorDenuncia.conteudoInapropriado.tipoDeConteudo}">
                                                                                         <f:selectItem itemValue="FALSA_DENUNCIA" itemLabel="Falsa Denúncia" />
                                                                                         <f:selectItem itemValue="NUDEZ" itemLabel="Exposição de Nudez"/>
                                                                                         <f:selectItem itemValue="SPAN" itemLabel="Span"/>
                                                                                         <f:selectItem itemValue="IRRITANTE" itemLabel="Essa denúncia me irrita"/>
                                                                                     </h:selectOneListbox>
                                                                                 </div>
-                                                                                
+
                                                                                 <div class="form-group">
                                                                                     <label>Descrição:</label>
-                                                                                    <textarea class="form-control" rows="6" jsf:value="${controladorUsuario.denuncia}">
+                                                                                    <textarea class="form-control" rows="6" jsf:value="${controladorDenuncia.conteudoInapropriado.descricao}">
                                                 
                                                                                     </textarea>
                                                                                 </div>
-                                                                            </h:form>
+
+                                                                            </div>
+
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                                                    <button type="button" class="btn btn-primary">Reclamar</button>
-                                                                </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                                                        <h:commandButton value="Reclamar" action="#{controladorDenuncia.setReclamarDenuncia(denuncia)}" class="btn btn-primary"/>
+                                                                    </div>
+
+                                                                </h:form>
                                                             </div>
                                                         </div>
                                                     </div>

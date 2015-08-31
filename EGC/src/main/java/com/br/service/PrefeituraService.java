@@ -135,4 +135,18 @@ public class PrefeituraService implements PrefeituraServiceIT {
 
     }
 
+    @Override
+    public long totalDeFuncionariosNaPrefeitura(int id) {
+        Query query = em.createQuery("SELECT COUNT(f) FROM Prefeitura p JOIN p.funcionarios f WHERE p.id = :id");
+            query.setParameter("id", id);
+            
+            List f = query.getResultList();
+            
+            if(f.size() > 0){
+                return (long) f.get(0);
+            }
+            
+            return 0;
+    }
+
 }

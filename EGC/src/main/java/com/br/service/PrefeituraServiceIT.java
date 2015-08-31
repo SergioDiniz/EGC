@@ -28,6 +28,8 @@ public interface PrefeituraServiceIT {
     public String desvincular(Prefeitura prefeitura, String cpf);
     
     public List<Funcionario> funcionarios(Prefeitura prefeitura);
+    
+    public long totalDeFuncionariosNaPrefeitura(int id);
 
     
 }
