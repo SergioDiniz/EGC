@@ -300,8 +300,9 @@ html, body{
 .btn-2,
 .btn-3,
 .btn-4{
-    margin: 10px;
-    width: 23.199% !important;
+    margin: 15px;
+    margin-right: 0;
+    width: calc(25% - 17px) !important;
     padding-bottom: 15px;
     padding-top: 23px;
     color: #fff;
@@ -347,7 +348,7 @@ html, body{
 
 .resumo > .col-md-12,
 .resumo-meio > .col-md-12 > .col-md-6{
-    width: 95.6%;
+    width: calc(100% - 40px);
     margin-left: 25px;
     margin-bottom: 30px;
     border: solid 1px #dfdfdf;
@@ -358,16 +359,19 @@ html, body{
 }
 
 .resumo-meio > .col-md-12 > .col-md-6{
-    width: 48.35%;
+    width: calc(50% - 13px);
     margin-left: 13px;
     background-color: #fff;
+    padding-left: 12px;
 }
 
 .resumo > .col-md-12{
     background-color: #fff;
 }
 
-.denuncias-mais-ajudadas > .row:nth-child(1){
+.denuncias-mais-ajudadas > .row:nth-child(1),
+.ultimas-denuncias > .row:nth-child(1),
+.ultimas-atendidas > .row:nth-child(1){
     font-size: 17px;
     padding-bottom: 15px;
     padding-left: 8px;

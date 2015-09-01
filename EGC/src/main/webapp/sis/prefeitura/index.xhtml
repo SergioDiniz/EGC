@@ -5,7 +5,8 @@
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>EGC - Prefeitura</title>
     </h:head>
@@ -107,116 +108,119 @@
                             <div class="row">
                                 <div class="col-md-12">
 
-                                    <h:dataTable value="#{controladorPrefeitura.denunciasComMaisAjudas()}" var="denuncia" styleClass="table table-hover">
-                                        <h:column>
-                                            <f:facet name="header">TOTAL</f:facet>
-                                                #{denuncia.numeroAjuda}
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">DESCRIÇÃO</f:facet>
-                                                #{denuncia.descricao}
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">TIPO</f:facet>
-                                                #{denuncia.descricao}
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">ENDEREÇO</f:facet>
-                                            <div class="link-mapa-denuncia">
-                                                #{denuncia.enderecoDenuncia.rua} - #{denuncia.enderecoDenuncia.numero}, #{denuncia.enderecoDenuncia.bairro}
-                                            </div>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">DATA</f:facet>
-                                                #{denuncia.dataDenuncaFormatado}
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">STATUS</f:facet>
-                                            <h:outputText value="ATENDIDA" styleClass="label label-success" rendered="#{denuncia.tagAtendida()}"/>
-                                            <h:outputText value="AGUARDANDO" styleClass="label label-primary" rendered="#{denuncia.tagAguardando()}"/>
-                                            <h:outputText value="EM ENDAMENTO" styleClass="label label-warning" rendered="#{denuncia.tagEmAndamento()}"/>
+                                    <h:form>
+                                        <p:poll interval="3" update="maisAjudadas" listener="#{controladorPrefeitura.denunciasComMaisAjudas()}"/>
+                                        <h:dataTable value="#{controladorPrefeitura.denunciaComMaisAjuda}" var="denuncia" styleClass="table table-hover" id="maisAjudadas">
+                                            <h:column>
+                                                <f:facet name="header">TOTAL</f:facet>
+                                                    #{denuncia.numeroAjuda}
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">DESCRIÇÃO</f:facet>
+                                                    #{denuncia.descricao}
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">TIPO</f:facet>
+                                                    #{denuncia.descricao}
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">ENDEREÇO</f:facet>
+                                                <div class="link-mapa-denuncia">
+                                                    #{denuncia.enderecoDenuncia.rua} - #{denuncia.enderecoDenuncia.numero}, #{denuncia.enderecoDenuncia.bairro}
+                                                </div>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">DATA</f:facet>
+                                                    #{denuncia.dataDenuncaFormatado}
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">STATUS</f:facet>
+                                                <h:outputText value="ATENDIDA" styleClass="label label-success" rendered="#{denuncia.tagAtendida()}"/>
+                                                <h:outputText value="AGUARDANDO" styleClass="label label-primary" rendered="#{denuncia.tagAguardando()}"/>
+                                                <h:outputText value="EM ENDAMENTO" styleClass="label label-warning" rendered="#{denuncia.tagEmAndamento()}"/>
 
 
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header"></f:facet>
-                                            <button class="btn btn-visualizar-denuncia" data-toggle="modal" data-target=".denunciaComMaisAjuda#{denuncia.id}">
-                                                <span class="glyphicon glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
-                                            </button>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header"></f:facet>
+                                                <button class="btn btn-visualizar-denuncia" data-toggle="modal" data-target=".denunciaComMaisAjuda#{denuncia.id}">
+                                                    <span class="glyphicon glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+                                                </button>
 
-                                            <!--modal--> 
-                                            <!--
-                                            <div class="modal fade bs-example-modal-lg denunciaComMaisAjuda#{denuncia.id}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg">
-                                                    <div class="modal-content">
-
-
-                                                        <div class="row">
-                                                            <div class="col-md-8 img-modal">
-                                                                <img src="../denuncias/#{denuncia.foto}" class="img-denuncia-modal" />
-                                                            </div>
-                                                            <div class="col-md-4">
-
-                                                                <div class="modal-header btn-fecha-modal">
-                                                                    <button type="button" class="close " data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <!--modal--> 
+                                                <!--
+                                                <div class="modal fade bs-example-modal-lg denunciaComMaisAjuda#{denuncia.id}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+    
+    
+                                                            <div class="row">
+                                                                <div class="col-md-8 img-modal">
+                                                                    <img src="../denuncias/#{denuncia.foto}" class="img-denuncia-modal" />
                                                                 </div>
-
-                                                                <div class="row">
-                                                                    <div class="col-md-2 icone-denuncia">
-                                                                        <img src="../../img/icones-denuncia/#{denuncia.iconeDenunica}" />
+                                                                <div class="col-md-4">
+    
+                                                                    <div class="modal-header btn-fecha-modal">
+                                                                        <button type="button" class="close " data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                                     </div>
-                                                                    <div class="col-md-8">
-                                                                        <div class="row rua-denuncia">
-                                            #{denuncia.tipoDaDenunciaFormatado}
+    
+                                                                    <div class="row">
+                                                                        <div class="col-md-2 icone-denuncia">
+                                                                            <img src="../../img/icones-denuncia/#{denuncia.iconeDenunica}" />
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <div class="row rua-denuncia">
+                                                #{denuncia.tipoDaDenunciaFormatado}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="row conteudo-denuncia-modal">
-                                    <div class="scroll">
-                                            #{denuncia.descricao} 
-
-
-                                            <iframe src="mapa.jsf?latitude=#{denuncia.enderecoDenuncia.latitude}&amp;longitude=#{denuncia.enderecoDenuncia.longitude}&amp;" class="frame-mapa" width="100%" height="110px" style="border: none" scrolling="no"></iframe>
-
-
-
-
-                                            <c:if test="#{denuncia.informacaoDeAtendida.id > -1}">
-                                                <c:choose>
-
-                                                    <c:when test="#{denuncia.tagEmAndamento()}">
-                                                        <span class="tooltips" title="Denuncia em Trabalho" rel="tooltip" data-placement="top" >
-                                                            <div class="modal-inf-em-trabalho">
-                                                                EM TRABALHO
-                                                            </div>
-                                                        </span>
-                                                    </c:when>
-
-                                                    <c:when test="#{denuncia.tagAtendida()}">
-                                                        <span class="tooltips" title="Denuncia Atendida" rel="tooltip" data-placement="top" >
-                                                            <div class="modal-inf-atendida">
-                                                                ATENDIDA
-                                                            </div>
-                                                        </span>
-                                                    </c:when>
-
-
-                                                </c:choose>    
-                                            </c:if>
-
-
+    
+                                    <div class="row conteudo-denuncia-modal">
+                                        <div class="scroll">
+                                                #{denuncia.descricao} 
+    
+    
+                                                <iframe src="mapa.jsf?latitude=#{denuncia.enderecoDenuncia.latitude}&amp;longitude=#{denuncia.enderecoDenuncia.longitude}&amp;" class="frame-mapa" width="100%" height="110px" style="border: none" scrolling="no"></iframe>
+    
+    
+    
+    
+                                                <c:if test="#{denuncia.informacaoDeAtendida.id > -1}">
+                                                    <c:choose>
+    
+                                                        <c:when test="#{denuncia.tagEmAndamento()}">
+                                                            <span class="tooltips" title="Denuncia em Trabalho" rel="tooltip" data-placement="top" >
+                                                                <div class="modal-inf-em-trabalho">
+                                                                    EM TRABALHO
+                                                                </div>
+                                                            </span>
+                                                        </c:when>
+    
+                                                        <c:when test="#{denuncia.tagAtendida()}">
+                                                            <span class="tooltips" title="Denuncia Atendida" rel="tooltip" data-placement="top" >
+                                                                <div class="modal-inf-atendida">
+                                                                    ATENDIDA
+                                                                </div>
+                                                            </span>
+                                                        </c:when>
+    
+    
+                                                    </c:choose>    
+                                                </c:if>
+    
+    
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                                            -->
+                                                -->
 
-                                        </h:column>
-                                    </h:dataTable>
+                                            </h:column>
+                                        </h:dataTable>
+                                    </h:form>
 
                                 </div>
                             </div>
@@ -229,13 +233,21 @@
             <div class="resumo-meio">
                 <div class="col-md-12">
                     <div class="col-md-6">
-                        <div class="ultimas-denuncias">
-                            1
+                        <div class="col-md-12">
+                            <div class="ultimas-denuncias">
+                                <div class="row">
+                                    Últimas Denúncias Realizadas
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="ultimas-atendidas">
-                            2
+                        <div class="col-md-12">
+                            <div class="ultimas-atendidas">
+                                <div class="row">
+                                    Últimas Denúncias Atendidas
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

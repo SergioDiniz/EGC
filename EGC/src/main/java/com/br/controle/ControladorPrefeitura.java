@@ -15,6 +15,7 @@ import com.br.beans.Prefeitura;
 import static com.br.controle.ControladorAdmin.info;
 import static com.br.controle.ControladorAdmin.infoUsuarioInvalido;
 import com.br.fachada.Fachada;
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -51,6 +52,7 @@ public class ControladorPrefeitura implements Serializable {
     boolean funcionarioNovo;
     boolean mostrarModalDesvincular;
     String CPFPesquisaF;
+    private List<Denuncia> denunciaComMaisAjuda;
 
     @EJB
     private Fachada fachada;
@@ -67,6 +69,7 @@ public class ControladorPrefeitura implements Serializable {
         this.CPFPesquisaF = "";
         this.funcionario = new Funcionario();
         this.funcionarioAux = new Funcionario();
+        this.denunciaComMaisAjuda = new ArrayList<>();
     }
 
     public void mostrapagina() throws IOException {
@@ -82,7 +85,7 @@ public class ControladorPrefeitura implements Serializable {
         if (this.prefeitura != null) {
 
             if (prefeitura.isAtivo() == true) {
-
+                denunciasComMaisAjudas();
                 return "/sis/prefeitura/index.jsf?faces-redirect=true";
             }
             info("Conta aguardando confirmação!");
@@ -251,9 +254,15 @@ public class ControladorPrefeitura implements Serializable {
     }
     
     
-    public List<Denuncia> denunciasComMaisAjudas(){
-        return fachada.denunciasComMaisAjudasPorCidade(this.prefeitura.getCidade().getCidadePK().getNomeCidade(), 
-                                                       this.prefeitura.getCidade().getCidadePK().getSiglaEstado());
+    public void denunciasComMaisAjudas(){
+        this.denunciaComMaisAjuda = new ArrayList<>();
+        this.denunciaComMaisAjuda.addAll(fachada.denunciasComMaisAjudasPorCidade(this.prefeitura.getCidade().getCidadePK().getNomeCidade(), 
+                                                                                 this.prefeitura.getCidade().getCidadePK().getSiglaEstado()));
+        
+        
+        for (Denuncia denunciaComMaisAjuda1 : denunciaComMaisAjuda) {
+            System.out.println(denunciaComMaisAjuda1.getDescricao());
+        }
     }
     
     
@@ -355,4 +364,15 @@ public class ControladorPrefeitura implements Serializable {
         this.mostrarModalDesvincular = mostrarModalDesvincular;
     }
 
+    public List<Denuncia> getDenunciaComMaisAjuda() {
+        return denunciaComMaisAjuda;
+    }
+
+    public void setDenunciaComMaisAjuda(List<Denuncia> denunciaComMaisAjuda) {
+        this.denunciaComMaisAjuda = denunciaComMaisAjuda;
+    }
+
+
+
+    
 }

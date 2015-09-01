@@ -10,6 +10,7 @@ import com.br.beans.Denuncia;
 import com.br.beans.TipoDeDenuncia;
 import com.br.beans.Usuario;
 import java.text.Normalizer;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
@@ -241,7 +242,7 @@ public class DenunciaService implements DenunciaServiceIT {
             return r;
         }
         
-        return null;
+        return new ArrayList<>();
         
     }
 
