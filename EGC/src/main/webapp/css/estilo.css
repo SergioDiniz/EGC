@@ -345,7 +345,8 @@ html, body{
     margin-top: 160px !important;
 }
 
-.resumo > .col-md-12{
+.resumo > .col-md-12,
+.resumo-meio > .col-md-12 > .col-md-6{
     width: 95.6%;
     margin-left: 25px;
     margin-bottom: 30px;
@@ -356,11 +357,17 @@ html, body{
     
 }
 
+.resumo-meio > .col-md-12 > .col-md-6{
+    width: 48.35%;
+    margin-left: 13px;
+    background-color: #fff;
+}
+
 .resumo > .col-md-12{
     background-color: #fff;
 }
 
-.denuncias-mais-ajudadas .row:nth-child(1){
+.denuncias-mais-ajudadas > .row:nth-child(1){
     font-size: 17px;
     padding-bottom: 15px;
     padding-left: 8px;
@@ -474,6 +481,7 @@ html, body{
     font-weight: bold;
     color: #09587b;
     font-size: 12px;
+    text-align: left;
 }
 
 .conteudo-denuncia{
@@ -652,7 +660,7 @@ html, body{
 .conteudo-denuncia-modal{
     padding: 10px;
     padding-right: 20px;
-
+    text-align: left;
 
 }
 
