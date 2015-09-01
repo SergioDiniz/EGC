@@ -7,7 +7,9 @@ package com.br.controle;
 
 import com.br.beans.Cidade;
 import com.br.beans.CidadePK;
+import com.br.beans.Denuncia;
 import com.br.beans.EnderecoPrefeitura;
+import com.br.beans.EstadoDeAcompanhamento;
 import com.br.beans.Funcionario;
 import com.br.beans.Prefeitura;
 import static com.br.controle.ControladorAdmin.info;
@@ -247,6 +249,13 @@ public class ControladorPrefeitura implements Serializable {
         return fachada.totalDeUsuariosNaCidade(this.prefeitura.getCidade().getCidadePK().getNomeCidade(), 
                                                 this.prefeitura.getCidade().getCidadePK().getSiglaEstado());
     }
+    
+    
+    public List<Denuncia> denunciasComMaisAjudas(){
+        return fachada.denunciasComMaisAjudasPorCidade(this.prefeitura.getCidade().getCidadePK().getNomeCidade(), 
+                                                       this.prefeitura.getCidade().getCidadePK().getSiglaEstado());
+    }
+    
     
     
     //

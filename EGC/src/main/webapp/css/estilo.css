@@ -288,6 +288,14 @@ html, body{
     margin-top: 20px;
 }
 
+.area-administrativa{
+    margin: 0;
+    padding: 0;
+    margin-left: 60px;
+    width: calc(100% - 60px);
+    
+}
+
 .btn-1,
 .btn-2,
 .btn-3,
@@ -299,6 +307,7 @@ html, body{
     color: #fff;
     font-size: 14px;
     font-weight: bold;
+    border-radius: 3px;
 }
 
 .btn-1 .col-md-6:nth-child(2),
@@ -329,6 +338,109 @@ html, body{
 
 .btn-4{
     background-color: #9c27b0;
+}
+
+
+.resumo{
+    margin-top: 160px !important;
+}
+
+.resumo > .col-md-12{
+    width: 95.6%;
+    margin-left: 25px;
+    margin-bottom: 30px;
+    border: solid 1px #dfdfdf;
+    border-radius: 3px;
+    padding: 0;
+    padding-top: 20px;
+    
+}
+
+.resumo > .col-md-12{
+    background-color: #fff;
+}
+
+.denuncias-mais-ajudadas .row:nth-child(1){
+    font-size: 17px;
+    padding-bottom: 15px;
+    padding-left: 8px;
+}
+
+.denuncias-mais-ajudadas .table th{
+    border-top: none;
+}
+
+.denuncias-mais-ajudadas .table td{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    vertical-align: middle;
+}
+
+/* TOTAL */
+.denuncias-mais-ajudadas .table td:nth-child(1),
+.denuncias-mais-ajudadas .table th:nth-child(1){
+    width: 80px;
+    text-align: center;
+}
+
+.denuncias-mais-ajudadas .table td:nth-child(1){
+    color: #42aef4;
+}
+
+/* DESCRIÇÃO */
+.denuncias-mais-ajudadas .table td:nth-child(2),
+.denuncias-mais-ajudadas .table th:nth-child(2){
+    width: 35% !important;
+}
+
+/* TIPO */
+.denuncias-mais-ajudadas .table td:nth-child(3),
+.denuncias-mais-ajudadas .table th:nth-child(3){
+    width: 110px;
+}
+
+.denuncias-mais-ajudadas .table td:nth-child(3){
+    color: #42aef4;
+    font-size: 12px;
+}
+
+/* DATA */
+.denuncias-mais-ajudadas .table td:nth-child(5),
+.denuncias-mais-ajudadas .table th:nth-child(5){
+    width: 140px;
+    text-align: center;
+}
+
+.denuncias-mais-ajudadas .table td:nth-child(5){
+    font-size: 12px;
+}
+
+/* STATUS */
+.denuncias-mais-ajudadas .table td:nth-child(6),
+.denuncias-mais-ajudadas .table th:nth-child(6){
+    width: 120px;
+    text-align: center;
+}
+
+/* VISUALIZAR */
+.denuncias-mais-ajudadas .table td:nth-child(7){
+    width: 50px;
+    text-align: right;
+}
+
+.btn-visualizar-denuncia{
+    height: 28px;
+    width: 28px;
+    background-color: #03a9f4;
+    color: #fff;
+    padding: 0;
+    text-align: center;
+}
+
+.btn-visualizar-denuncia:hover,
+.btn-visualizar-denuncia:focus{
+    background-color: #2980b9;
+    color: #fff;
 }
 
 

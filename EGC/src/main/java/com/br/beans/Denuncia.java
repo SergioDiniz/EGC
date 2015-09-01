@@ -112,6 +112,14 @@ public class Denuncia implements Serializable {
         
         return false;
     }
+    
+    public boolean tagAguardando(){
+        if (estadoDeAcompanhamento == EstadoDeAcompanhamento.AGUARDANDO){
+            return true;
+        }
+        
+        return false;
+    }
 
     public Date getData() {
         return data;

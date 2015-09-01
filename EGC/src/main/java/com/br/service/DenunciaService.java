@@ -228,4 +228,21 @@ public class DenunciaService implements DenunciaServiceIT {
         return 0;
     }
 
+    @Override
+    public List<Denuncia> denunciasComMaisAjudasPorCidade(String cidade, String estado) {
+        Query query = em.createQuery("SELECT d from Denuncia d JOIN d.enderecoDenuncia ed WHERE ed.cidade = :cidade and ed.estado = :estado ORDER BY d.numeroAjuda DESC");
+              query.setParameter("cidade", cidade);
+              query.setParameter("estado", estado);
+              query.setMaxResults(6);
+              
+        List<Denuncia> r = query.getResultList();
+        
+        if(r.size() > 0){
+            return r;
+        }
+        
+        return null;
+        
+    }
+
 }

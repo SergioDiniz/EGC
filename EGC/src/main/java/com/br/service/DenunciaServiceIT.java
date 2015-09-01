@@ -33,5 +33,6 @@ public interface DenunciaServiceIT {
     
     public long getReclamarDenuncia(Denuncia denuncia);
     
+    public List<Denuncia> denunciasComMaisAjudasPorCidade(String cidade, String estado);
     
 }
