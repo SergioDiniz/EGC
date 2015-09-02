@@ -125,9 +125,7 @@
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">ENDEREÇO</f:facet>
-                                                <div class="link-mapa-denuncia">
-                                                    #{denuncia.enderecoDenuncia.rua} - #{denuncia.enderecoDenuncia.numero}, #{denuncia.enderecoDenuncia.bairro}
-                                                </div>
+                                                <span class="link-mapa-denuncia">#{denuncia.enderecoDenuncia.rua} - #{denuncia.enderecoDenuncia.numero}, #{denuncia.enderecoDenuncia.bairro}</span>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">DATA</f:facet>
@@ -232,21 +230,96 @@
 
             <div class="resumo-meio">
                 <div class="col-md-12">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="col-md-12">
                             <div class="ultimas-denuncias">
                                 <div class="row">
                                     Últimas Denúncias Realizadas
                                 </div>
+                                <h:form>
+                                    <p:poll interval="10" listener="#{controladorPrefeitura.denunciasMaisRecentes()}" update="teste123"/>
+                                    <h:panelGroup id="teste123">
+                                        <c:forEach var="ultimasDenuncia" items="#{controladorPrefeitura.denunciaMaisRecentes}" >
+                                            <div class="ud-denuncia">
+
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <img src="../../img/icones-denuncia/#{ultimasDenuncia.iconeDenunica}" height="50px"/>
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <div class="row">
+                                                            <div class="col-md-7 rua-denuncia">
+                                                                #{ultimasDenuncia.tipoDaDenunciaFormatado}
+                                                            </div>
+                                                            <div class="col-md-5 hora-denuncia">
+                                                                #{ultimasDenuncia.dataDenuncaFormatado}
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12 conteudo-denuncia">
+                                                                #{ultimasDenuncia.descricao}
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <span class="link-mapa-denuncia">#{ultimasDenuncia.enderecoDenuncia.rua} - #{ultimasDenuncia.enderecoDenuncia.numero}, #{ultimasDenuncia.enderecoDenuncia.bairro}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <img src="../denuncias/#{ultimasDenuncia.foto}" class="img-denuncia" height="130px"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                        </c:forEach>
+                                    </h:panelGroup>
+                                </h:form>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <div class="col-md-12">
                             <div class="ultimas-atendidas">
                                 <div class="row">
                                     Últimas Denúncias Atendidas
                                 </div>
+                                <c:forEach var="ultimasDenuncia" items="#{controladorPrefeitura.denunciaMaisRecentes}" id="id-denuncias">
+                                    <div class="ud-denuncia">
+
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                                <img src="../../img/icones-denuncia/#{ultimasDenuncia.iconeDenunica}" height="50px"/>
+                                            </div>
+                                            <div class="col-md-11">
+                                                <div class="row">
+                                                    <div class="col-md-7 rua-denuncia">
+                                                        #{ultimasDenuncia.tipoDaDenunciaFormatado}
+                                                    </div>
+                                                    <div class="col-md-5 hora-denuncia">
+                                                        #{ultimasDenuncia.dataDenuncaFormatado}
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 conteudo-denuncia">
+                                                        #{ultimasDenuncia.descricao}
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <span class="link-mapa-denuncia">#{ultimasDenuncia.enderecoDenuncia.rua} - #{ultimasDenuncia.enderecoDenuncia.numero}, #{ultimasDenuncia.enderecoDenuncia.bairro}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <img src="../denuncias/#{ultimasDenuncia.foto}" class="img-denuncia" height="130px"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </c:forEach>
                             </div>
                         </div>
                     </div>

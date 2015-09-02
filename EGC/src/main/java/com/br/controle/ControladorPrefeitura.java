@@ -53,6 +53,7 @@ public class ControladorPrefeitura implements Serializable {
     boolean mostrarModalDesvincular;
     String CPFPesquisaF;
     private List<Denuncia> denunciaComMaisAjuda;
+    private List<Denuncia> denunciaMaisRecentes;
 
     @EJB
     private Fachada fachada;
@@ -70,6 +71,7 @@ public class ControladorPrefeitura implements Serializable {
         this.funcionario = new Funcionario();
         this.funcionarioAux = new Funcionario();
         this.denunciaComMaisAjuda = new ArrayList<>();
+        this.denunciaMaisRecentes = new ArrayList<>();
     }
 
     public void mostrapagina() throws IOException {
@@ -86,6 +88,7 @@ public class ControladorPrefeitura implements Serializable {
 
             if (prefeitura.isAtivo() == true) {
                 denunciasComMaisAjudas();
+                denunciasMaisRecentes();
                 return "/sis/prefeitura/index.jsf?faces-redirect=true";
             }
             info("Conta aguardando confirmação!");
@@ -258,13 +261,14 @@ public class ControladorPrefeitura implements Serializable {
         this.denunciaComMaisAjuda = new ArrayList<>();
         this.denunciaComMaisAjuda.addAll(fachada.denunciasComMaisAjudasPorCidade(this.prefeitura.getCidade().getCidadePK().getNomeCidade(), 
                                                                                  this.prefeitura.getCidade().getCidadePK().getSiglaEstado()));
-        
-        
-        for (Denuncia denunciaComMaisAjuda1 : denunciaComMaisAjuda) {
-            System.out.println(denunciaComMaisAjuda1.getDescricao());
-        }
+
     }
     
+    public void denunciasMaisRecentes(){
+        this.denunciaMaisRecentes = new ArrayList<>();
+        this.denunciaMaisRecentes.addAll(fachada.denunciasMaisRecentesPorCidade(this.prefeitura.getCidade().getCidadePK().getNomeCidade(), 
+                                                                                this.prefeitura.getCidade().getCidadePK().getSiglaEstado()));
+    }
     
     
     //
@@ -370,6 +374,14 @@ public class ControladorPrefeitura implements Serializable {
 
     public void setDenunciaComMaisAjuda(List<Denuncia> denunciaComMaisAjuda) {
         this.denunciaComMaisAjuda = denunciaComMaisAjuda;
+    }
+
+    public List<Denuncia> getDenunciaMaisRecentes() {
+        return denunciaMaisRecentes;
+    }
+
+    public void setDenunciaMaisRecentes(List<Denuncia> denunciaMaisRecentes) {
+        this.denunciaMaisRecentes = denunciaMaisRecentes;
     }
 
 

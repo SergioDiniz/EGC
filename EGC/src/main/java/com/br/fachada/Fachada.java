@@ -247,6 +247,10 @@ public class Fachada{
         return ds.denunciasComMaisAjudasPorCidade(cidade, estado);
     }
     
+    public List<Denuncia> denunciasMaisRecentesPorCidade(String cidade, String estado){
+        return ds.denunciasMaisRecentesPorCidade(cidade, estado);
+    }
+    
     // FIM DenunciaServices
     //
     //

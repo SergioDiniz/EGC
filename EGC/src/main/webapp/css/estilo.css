@@ -293,7 +293,7 @@ html, body{
     padding: 0;
     margin-left: 60px;
     width: calc(100% - 60px);
-    
+
 }
 
 .btn-1,
@@ -347,7 +347,8 @@ html, body{
 }
 
 .resumo > .col-md-12,
-.resumo-meio > .col-md-12 > .col-md-6{
+.resumo-meio > .col-md-12 > .col-md-4,
+.resumo-meio > .col-md-12 > .col-md-8{
     width: calc(100% - 40px);
     margin-left: 25px;
     margin-bottom: 30px;
@@ -355,14 +356,20 @@ html, body{
     border-radius: 3px;
     padding: 0;
     padding-top: 20px;
-    
+
 }
 
-.resumo-meio > .col-md-12 > .col-md-6{
-    width: calc(50% - 13px);
+.resumo-meio > .col-md-12 > .col-md-4,
+.resumo-meio > .col-md-12 > .col-md-8{
+    width: calc(33.33333333% - 13px);
     margin-left: 13px;
     background-color: #fff;
     padding-left: 12px;
+    padding-bottom: 30px;
+}
+
+.resumo-meio > .col-md-12 > .col-md-8{
+    width: calc(66.66666667% - 13px);
 }
 
 .resumo > .col-md-12{
@@ -454,6 +461,40 @@ html, body{
     color: #fff;
 }
 
+.ultimas-denuncias{
+    font-size: 11px !important;
+}
+
+.ultimas-denuncias .conteudo-denuncia{
+    font-size: 12px
+}
+
+
+.borda-denuncia{
+    width: calc(100% - 1px); 
+    border: solid 3px #ebebeb;
+    text-align: left;
+    padding: 0;
+    margin-left: -8px;
+    margin-bottom: 15px;
+    margin-top: 7px;
+}
+
+.ud-denuncia{
+    border-top: solid 2px #ebebeb;
+    padding-top: 17px;
+    padding-bottom: 7px;
+}
+
+.ultimas-denuncias + .ud-denuncia{
+    border-top: solid 10px #ebebeb;
+}
+
+.ultimas-denuncias .hora-denuncia,
+.ultimas-atendidas .hora-denuncia{
+    text-align: right;
+    background-position: calc(100% - 110px);
+}
 
 .btn-nd{
     width: 200px;
@@ -533,6 +574,12 @@ html, body{
     color: #575757;
     padding-left: 10px;
     padding-top: 20px;
+}
+
+.ultimas-denuncias .link-mapa-denuncia,
+.denuncias-mais-ajudadas .link-mapa-denuncia,
+.ultimas-atendidas .link-mapa-denuncia{
+    padding: 0;
 }
 
 .img-denuncia{
