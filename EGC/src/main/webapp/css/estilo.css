@@ -510,19 +510,52 @@ html, body{
 }
 
 .ultimas-atendidas table tr:nth-child(1) td:nth-child(2){
-    background-color: #000;
+    border-left: solid 10px;
+    border-color: #fff;
     width: 60%;
+    background-position: center;
+    background-size: 100%;
 }
 
+.ultimas-atendidas .reposta-denuncia{
+    color: #fff;
+    padding: 30px;
+    padding-left: 70px;
+    padding-right: 70px;
+    text-align: center;
+    font-family: serif;
+    font-size: 21px;
+    background-color: #000; 
+    opacity: 0.7;
+
+    
+}
+
+
 .ultimas-atendidas table tr:nth-child(1) td:nth-child(1){
-    background-color: #0066cc;
     width: 40%;
 }
 
-.ultimas-atendidas table tr:nth-child(2) td:nth-child(1){
-    background-color: #2ECC71;
+.ultimas-atendidas .denuncia-feita{
+    height: 140px;
+    max-height: 140px;
+    background-size: 100%;
+    background-position: center;
 }
 
+.ultimas-atendidas table tr:nth-child(2) td:nth-child(1){
+    background-color: #44a0dd;
+    
+}
+
+.ultimas-atendidas .denuncia-feita-descricao{
+    text-align: center;
+    color: #fff;
+    padding: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+
+}
 
 .btn-nd{
     width: 200px;
