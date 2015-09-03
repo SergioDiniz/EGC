@@ -470,6 +470,7 @@ html, body{
 }
 
 
+
 .borda-denuncia{
     width: calc(100% - 1px); 
     border: solid 3px #ebebeb;
@@ -495,6 +496,33 @@ html, body{
     text-align: right;
     background-position: calc(100% - 110px);
 }
+
+.col-md-mesmo-tamanho{
+    display: table;
+    height: 100%;
+    /* fix overflow */
+    table-layout: fixed;
+    border: 1px solid;
+}
+
+.ultimas-atendidas table{
+    width: 100%;
+}
+
+.ultimas-atendidas table tr:nth-child(1) td:nth-child(2){
+    background-color: #000;
+    width: 60%;
+}
+
+.ultimas-atendidas table tr:nth-child(1) td:nth-child(1){
+    background-color: #0066cc;
+    width: 40%;
+}
+
+.ultimas-atendidas table tr:nth-child(2) td:nth-child(1){
+    background-color: #2ECC71;
+}
+
 
 .btn-nd{
     width: 200px;
