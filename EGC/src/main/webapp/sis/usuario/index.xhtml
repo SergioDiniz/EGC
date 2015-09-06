@@ -300,7 +300,7 @@
                             <!-- -->
 
 
-                            <c:forEach var="denuncia" items="#{controladorUsuario.mostrarDenunicas()}" id="id-denuncias">
+                            <c:forEach var="denuncia" items="#{controladorUsuario.feedDenuncias}" id="id-denuncias">
                                 <div class="denuncia-visualizada">
                                     <c:if test="#{denuncia.informacaoDeAtendida.id > -1}">
                                         <div class="tag-info-atendimento">

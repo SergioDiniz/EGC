@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
@@ -31,21 +32,22 @@ import org.primefaces.model.UploadedFile;
 @SessionScoped
 public class ControladorUsuario implements Serializable {
 
-    Usuario usuario;
-    String denuncia;
-    String endMapa;
-    String endLatitude;
-    String endLogitude;
-    String cidadeDenuncia;
-    String ufDenuncia;
-    String ordemDenuncia;
-    String strPesquisarCidadeFiltro;
-    TipoDeDenuncia tipoDenunciaFeed;
-    TipoDeDenuncia tipoDenuncia;
-    ConteudoInapropriado conteudoInapropriado;
+    private Usuario usuario;
+    private String denuncia;
+    private String endMapa;
+    private String endLatitude;
+    private String endLogitude;
+    private String cidadeDenuncia;
+    private String ufDenuncia;
+    private String ordemDenuncia;
+    private String strPesquisarCidadeFiltro;
+    private TipoDeDenuncia tipoDenunciaFeed;
+    private TipoDeDenuncia tipoDenuncia;
+    private ConteudoInapropriado conteudoInapropriado;
     private UploadedFile ImgDenuncia;
-    int totalDenuncias;
-    int denunicasAtendidas;
+    private int totalDenuncias;
+    private int denunicasAtendidas;
+    private List<Denuncia> feedDenuncias;
 
     @EJB
     private Fachada fachada;
@@ -64,6 +66,7 @@ public class ControladorUsuario implements Serializable {
         this.totalDenuncias = 0;
         this.denunicasAtendidas = 0;
         this.conteudoInapropriado = new ConteudoInapropriado();
+        this.feedDenuncias = new ArrayList<>();
     }
 
     public String cadastro() {
@@ -102,6 +105,7 @@ public class ControladorUsuario implements Serializable {
             this.ufDenuncia = this.usuario.getEndereco().getEstado();
             this.tipoDenunciaFeed = TipoDeDenuncia.TODOS;
             this.ordemDenuncia = "data";
+            setDenunicasFeed();
             return "/sis/usuario/index.jsf?faces-redirect=true";
 //            FacesContext.getCurrentInstance().getExternalContext().redirect(null);
         } else {
@@ -159,8 +163,9 @@ public class ControladorUsuario implements Serializable {
         if (ImgDenuncia != null) {
 
             try {
-
-                File targetFolder = new File("D:\\Sergio\\Documentos\\ADS\\P6\\TCC\\Sistema\\EGC\\EGC\\src\\main\\webapp\\sis\\denuncias");
+//                /Volumes/Untitled/Sergio/Documentos/ADS/P6/TCC/Sistema/EGC/EGC/src/main/webapp/sis/denuncias
+                File targetFolder = new File("/Volumes/Untitled/Sergio/Documentos/ADS/P6/TCC/Sistema/EGC/EGC/src/main/webapp/sis/denuncias");
+//                File targetFolder = new File("D:\\Sergio\\Documentos\\ADS\\P6\\TCC\\Sistema\\EGC\\EGC\\src\\main\\webapp\\sis\\denuncias");
                 InputStream inputStream = ImgDenuncia.getInputstream();
                 String tipoArquivo = ImgDenuncia.getFileName();
                 tipoArquivo = tipoArquivo.substring(tipoArquivo.lastIndexOf("."), tipoArquivo.length());
@@ -199,42 +204,61 @@ public class ControladorUsuario implements Serializable {
         this.tipoDenunciaFeed = TipoDeDenuncia.TODOS;
         return null;
     }
-
-    public List<Denuncia> mostrarDenunicas() {
-
+    
+    
+    public void setDenunicasFeed() {
+        
+        this.feedDenuncias = new ArrayList<>();
+        
         switch (tipoDenunciaFeed) {
             case TODOS:
-                return denunciasTodos(this.ordemDenuncia);
+                this.getFeedDenuncias().addAll (denunciasTodos(this.ordemDenuncia));
+                break;
             case COLETA_DE_LIXO:
-                return denunciasColetaDeLixo(this.ordemDenuncia);
+                this.getFeedDenuncias().addAll (denunciasColetaDeLixo(this.ordemDenuncia));
+                break;
             case DISTRIBUICAO_E_QUALIDADE_DA_AGUA:
-                return denunciasQualidadeAgua(this.ordemDenuncia);
+                this.getFeedDenuncias().addAll (denunciasQualidadeAgua(this.ordemDenuncia));
+                break;
             case ILUMINACAO_PUBLICA:
-                return denunciasIluminacaoPublica(this.ordemDenuncia);
+                this.getFeedDenuncias().addAll (denunciasIluminacaoPublica(this.ordemDenuncia));
+                break;
             case OBRAS_PUBLICAS:
-                return denunciasObrasPublicas(this.ordemDenuncia);
+                this.getFeedDenuncias().addAll (denunciasObrasPublicas(this.ordemDenuncia));
+                break;
             case MANUTENCAO_DE_CANAIS_E_REDES_DE_ESGOTOS:
-                return denunciasManutencaoEsgoto(this.ordemDenuncia);
+                this.getFeedDenuncias().addAll (denunciasManutencaoEsgoto(this.ordemDenuncia));
+                break;
             case MANUTENCAO_E_CONSERVACAO_DE_VIAS_PUBLICAS:
-                return denunciasManutencaoViasPublicas(this.ordemDenuncia);
+                this.getFeedDenuncias().addAll (denunciasManutencaoViasPublicas(this.ordemDenuncia));
+                break;
             case PODA_E_MANUTENCAO_DAS_ARVORES:
-                return denunciasPodaDeArvores(this.ordemDenuncia);
+                this.getFeedDenuncias().addAll (denunciasPodaDeArvores(this.ordemDenuncia));
+                break;
             case POLUICAO_VISUAL:
-                return denunciasPoluicaoVisual(this.ordemDenuncia);
+                this.getFeedDenuncias().addAll (denunciasPoluicaoVisual(this.ordemDenuncia));
+                break;
             case TRANSITO_SINALIZACAO_E_PLACAS:
-                return denunciasTransitoPlacas(this.ordemDenuncia);
+                this.getFeedDenuncias().addAll (denunciasTransitoPlacas(this.ordemDenuncia));
+                break;
             case ACESSIBILIDADE:
-                return denunciasAcessibilidade(this.ordemDenuncia);
+                this.getFeedDenuncias().addAll (denunciasAcessibilidade(this.ordemDenuncia));
+                break;
             case SAUDE:
-                return denunciasSaude(this.ordemDenuncia);
+                this.getFeedDenuncias().addAll (denunciasSaude(this.ordemDenuncia));
+                break;
             case EDUCACAO:
-                return denunciasEducacao(this.ordemDenuncia);
+                this.getFeedDenuncias().addAll (denunciasEducacao(this.ordemDenuncia));
+                break;
             case BRASIL:
-                return denunciasBrasil(this.ordemDenuncia);
+                this.getFeedDenuncias().addAll (denunciasBrasil(this.ordemDenuncia));
+                break;
+            default:
+                this.getFeedDenuncias().add(new Denuncia());
+                break;
 
         }
-
-        return null;
+        
     }
 
     public long totalDeDenunciasNaCidade() {
@@ -555,5 +579,14 @@ public class ControladorUsuario implements Serializable {
         this.conteudoInapropriado = conteudoInapropriado;
     }
 
+    public List<Denuncia> getFeedDenuncias() {
+        return feedDenuncias;
+    }
+
+    public void setFeedDenuncias(List<Denuncia> feedDenuncias) {
+        this.feedDenuncias = feedDenuncias;
+    }
+
+    
     
 }

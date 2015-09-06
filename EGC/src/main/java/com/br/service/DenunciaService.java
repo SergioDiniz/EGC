@@ -195,21 +195,19 @@ public class DenunciaService implements DenunciaServiceIT {
     @Override
     public boolean setReclamarDenuncia(Denuncia denuncia, ConteudoInapropriado conteudoInapropriado) {
 
-//        try {
+        try {
             denuncia.getConteudoInapropriados().size();
             denuncia.getConteudoInapropriados().add(conteudoInapropriado);
             em.merge(conteudoInapropriado);
             em.merge(denuncia);
-            
-            System.out.println("descrição: " + conteudoInapropriado.getDescricao());
-            System.out.println("n: " + denuncia.getConteudoInapropriados().size());
+        
             
             return true;
-//        } catch (Exception e){
-//            System.out.println("erro ao atualizar reclamação de denunica: " + e.getMessage());
-//        }
-//
-//        return false;
+        } catch (Exception e){
+            System.out.println("erro ao atualizar reclamação de denunica: " + e.getMessage());
+        }
+
+        return false;
     }
 
     @Override
@@ -223,9 +221,6 @@ public class DenunciaService implements DenunciaServiceIT {
             return (long) e.get(0);
         }
               
-        
-        
-        
         return 0;
     }
 
