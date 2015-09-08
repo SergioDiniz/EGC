@@ -143,7 +143,8 @@ public class ControladorPrefeitura implements Serializable {
     public String upload() {
         if (file != null) {
             try {
-                File targetFolder = new File("D:\\Sergio\\Documentos\\ADS\\P6\\TCC\\Sistema\\EGC\\EGC\\src\\main\\webapp\\sis\\admin\\documentos-de-solicitacao");
+                File targetFolder = new File("/Volumes/Untitled/Sergio/Documentos/ADS/P6/TCC/Sistema/EGC/EGC/src/main/webapp/sis/admin/documentos-de-solicitacao");
+//                File targetFolder = new File("D:\\Sergio\\Documentos\\ADS\\P6\\TCC\\Sistema\\EGC\\EGC\\src\\main\\webapp\\sis\\admin\\documentos-de-solicitacao");
                 InputStream inputStream = file.getInputstream();
 
                 String tipoArquivo = file.getFileName();
