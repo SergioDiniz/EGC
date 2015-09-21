@@ -52,7 +52,7 @@ public class DenunciaService implements DenunciaServiceIT {
             return d;
         }
 
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
@@ -80,7 +80,7 @@ public class DenunciaService implements DenunciaServiceIT {
             return d;
         }
 
-        return null;
+        return new ArrayList<>();
 
     }
 
