@@ -66,6 +66,8 @@ public class UsuarioService implements UsuarioServiceIT{
         try {
             Denuncia d = new Denuncia(denucia, foto, enderecoDenuncia, tipoDeDenuncia);
             
+            usuario = em.find(Usuario.class, usuario.getId());
+            
             usuario.novaDenuncia(d);
             
             em.persist(enderecoDenuncia);

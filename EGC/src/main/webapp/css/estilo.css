@@ -646,6 +646,7 @@ html, body{
 .img-denuncia{
 
     max-width: 100%;
+    width: 100%;
     max-height: 400px;
     padding-left: 6px;
     padding-right: 6px;
