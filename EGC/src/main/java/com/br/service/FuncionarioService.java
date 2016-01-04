@@ -75,6 +75,31 @@ public class FuncionarioService implements FuncionarioServiceIT {
         return "ERRO!";
     }
     
+    @Override
+    public List<Funcionario> todosFuncionarios(){
+        Query query = em.createQuery("SELECT f FROM Funcionario f ORDER BY f.nome ASC");
+
+        List<Funcionario> f = query.getResultList();
+
+        if (f.size() > 0) {
+            return f;
+        }
+
+        return null;
+    }
+    
+    @Override
+    public int numeroDeFuncionarios(){
+        Query query = em.createQuery("SELECT f FROM Funcionario f");
+
+        List<Funcionario> f = query.getResultList();
+
+        if (f.size() > 0) {
+            return f.size();
+        }
+
+        return 0;
+    }
     
     
 

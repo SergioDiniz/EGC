@@ -23,6 +23,11 @@ public class Funcionario extends Pessoa implements Serializable{
     private String nome;
     @Column (nullable = false, unique = true)
     private String cpf;
+    @Column (nullable = false, unique = true)
+    private String telefone;
+    @Column (nullable = false)
+    private boolean sexo;
+    // true = masculino, false = feminino
     
     @ManyToMany(mappedBy = "funcionarios", cascade = CascadeType.ALL)
     private List<Prefeitura> prefeituras;
@@ -38,6 +43,8 @@ public class Funcionario extends Pessoa implements Serializable{
         this.cpf = cpf;
         this.prefeituras = new ArrayList<>();
     }
+    
+    
 
     public Funcionario(String nome, String cpf, List<Prefeitura> prefeituras, String email, String senha) {
         super(email, senha);
@@ -71,6 +78,23 @@ public class Funcionario extends Pessoa implements Serializable{
     public void setPrefeituras(List<Prefeitura> prefeituras) {
         this.prefeituras = prefeituras;
     }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public boolean isSexo() {
+        return sexo;
+    }
+
+    public void setSexo(boolean sexo) {
+        this.sexo = sexo;
+    }
+    
     
     
     

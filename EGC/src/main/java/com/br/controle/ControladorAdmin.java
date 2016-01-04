@@ -6,6 +6,7 @@
 package com.br.controle;
 
 import com.br.beans.Administrador;
+import com.br.beans.Funcionario;
 import com.br.beans.Prefeitura;
 import com.br.fachada.Fachada;
 import java.io.IOException;
@@ -152,6 +153,17 @@ public class ControladorAdmin implements Serializable {
 //        FacesContext.getCurrentInstance().getExternalContext().redirect("/EGC/sis/admin/solicitacoes.jsf#modal");
     }
 
+    
+    public int numeroDeFuncionarios(){
+        return fachada.numeroDeFuncionarios();
+    }
+    
+    public List<Funcionario> todosFuncionarios(){
+        return fachada.todosFuncionarios();
+    }
+    
+    
+    
     //getes and seters
     public Administrador getAdministrador() {
         return administrador;

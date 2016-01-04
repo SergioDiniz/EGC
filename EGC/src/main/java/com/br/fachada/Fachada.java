@@ -151,6 +151,14 @@ public class Fachada{
         return fs.excluir(funcionario);
     }
     
+    public List<Funcionario> todosFuncionarios(){
+        return fs.todosFuncionarios();
+    }
+    
+    public int numeroDeFuncionarios(){
+        return fs.numeroDeFuncionarios();
+    }
+    
     // FIM FuncionarioServices
     //
     //

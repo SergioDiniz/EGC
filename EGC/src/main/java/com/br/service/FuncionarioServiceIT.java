@@ -7,6 +7,7 @@ package com.br.service;
 
 import com.br.beans.Funcionario;
 import com.br.beans.Prefeitura;
+import java.util.List;
 
 /**
  *
@@ -19,6 +20,10 @@ public interface FuncionarioServiceIT {
     public Funcionario buscarPorCPF(String cpf);
 
     public String excluir(Funcionario funcionario);
+    
+    public List<Funcionario> todosFuncionarios();
+    
+    public int numeroDeFuncionarios();
     
     
 
