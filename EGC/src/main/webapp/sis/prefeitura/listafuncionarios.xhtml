@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>EGC - Prefeitura</title>
+    </h:head>
+    <h:body>
+        <div class="tudo">
+
+            <div id="menu">
+                <ui:include src="topo.xhtml"/>
+            </div>
+
+            <div id="menu-lateral">
+                <ui:include src="menulateral.xhtml"/>
+            </div>
+
+            <div class="area-titulo-pagina">
+                <div class="titulo-pagina">Lista de Funcionários</div>
+            </div>
+
+            <!-- -->
+            <div class="container">
+
+                <div class="lista-de-funcionarios">
+
+                    <c:forEach items="#{controladorPrefeitura.funcionarios()}" var="funcionario" varStatus="indexFuncionario">
+                        <div class="col-md-4">
+                            <div class="funcionario">
+                                <div class="topo">
+                                    <div class="nome-funcionario">
+                                        #{funcionario.nome}
+                                    </div>
+                                </div>
+                                <div class="foto">
+                                    <c:choose>
+                                        <c:when test="#{funcionario.sexo == true}">
+                                            <img src="../../img/h-funcionario.png"/>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <img src="../../img/m-funcionario.png"/>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+                                <div class="dados">
+
+                                    <div class="row">
+                                        <div class="col-md-offset-1 col-md-10">
+                                            <div class="col-md-1">
+                                                <img src="../../img/icon-cpf.png"/>
+                                            </div>
+                                            <div class="col-md-9">
+                                                #{funcionario.cpf}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-offset-1 col-md-10">
+                                            <div class="col-md-1">
+                                                <img src="../../img/icon-email.png"/>
+                                            </div>
+                                            <div class="col-md-9">
+                                                #{funcionario.email}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-offset-1 col-md-10">
+                                            <div class="col-md-1">
+                                                <img src="../../img/icon-telefone.png"/>
+                                            </div>
+                                            <div class="col-md-9">
+                                                #{funcionario.telefone}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-offset-1 col-md-10">
+                                            <div class="col-md-1">
+                                                <img src="../../img/icon-mensagem.png"/>
+                                            </div>
+                                            <div class="col-md-9">
+                                                mensagem
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-offset-1 col-md-10">
+                                            <div>
+                                                <div class="dropup">
+                                                    <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <img src="../../img/icon-configuracoes.png"/>
+                                                    </button>
+                                                    <ul class="lista dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+                                                        <li>
+
+                                                            <a href="#" type="button" class="btn btn-link" data-toggle="modal" data-target="#myModalDesvincular#{indexFuncionario.index}">
+                                                                Desvincular
+                                                            </a>
+
+                                                            <!-- Modal Aceitar -->
+                                                            <div style="padding-top: 200px" class="modal fade" id="myModalDesvincular#{indexFuncionario.index}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                            <h4 class="modal-title" id="myModalLabel"><h2>Notificação</h2></h4>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            Deseja desvincular o funcionario <b><h:outputText value="#{funcionario.nome}"/></b>?
+                                                                            <br/>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+
+
+                                                                            <h:form>
+                                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                                                                <h:commandButton value="desvincular" class="btn btn-primary" action="#{controladorPrefeitura.desvincularFuncionario(funcionario)}" />
+                                                                            </h:form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </h:body>
+</html>
+

@@ -128,7 +128,7 @@ public class PrefeituraService implements PrefeituraServiceIT {
 
     @Override
     public List<Funcionario> funcionarios(Prefeitura prefeitura) {
-        Query query = em.createQuery("SELECT f FROM Prefeitura p JOIN p.funcionarios f WHERE p.id = :id");
+        Query query = em.createQuery("SELECT f FROM Prefeitura p JOIN p.funcionarios f WHERE p.id = :id ORDER BY f.nome ASC");
         query.setParameter("id", prefeitura.getId());
 
         return query.getResultList();

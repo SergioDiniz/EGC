@@ -143,7 +143,7 @@ public class ControladorPrefeitura implements Serializable {
     public String upload() {
         if (file != null) {
             try {
-                File targetFolder = new File("/Volumes/Untitled/Sergio/Documentos/ADS/P6/TCC/Sistema/EGC/EGC/src/main/webapp/sis/admin/documentos-de-solicitacao");
+                File targetFolder = new File("/Volumes/Arquivos/Sergio/Documentos/ADS/P6/TCC/Sistema/EGC/EGC/src/main/webapp/sis/admin/documentos-de-solicitacao");
 //                File targetFolder = new File("D:\\Sergio\\Documentos\\ADS\\P6\\TCC\\Sistema\\EGC\\EGC\\src\\main\\webapp\\sis\\admin\\documentos-de-solicitacao");
                 InputStream inputStream = file.getInputstream();
 
@@ -201,7 +201,7 @@ public class ControladorPrefeitura implements Serializable {
         funcionario = new Funcionario();
         CPFPesquisaF = "";
         funcionarioNovo = false;
-        return "funcionarios.jsf";
+        return "listafuncionarios.jsf";
     }
 
     public List<Funcionario> funcionarioPesquisaCPF() {
@@ -216,7 +216,7 @@ public class ControladorPrefeitura implements Serializable {
         this.prefeitura.setFuncionarios(funcionarios());
         CPFPesquisaF = "";
         funcionarioCadastrado = false;
-        return "funcionarios.jsf";
+        return "listafuncionarios.jsf";
     }
 
     public List<Funcionario> funcionarios() {
@@ -228,6 +228,14 @@ public class ControladorPrefeitura implements Serializable {
         fachada.desvincularFuncionario(this.prefeitura, funcionarioAux.getCpf());
         this.prefeitura.getFuncionarios().remove(funcionarioAux);
         this.funcionarioAux = new Funcionario();
+
+        return null;
+    }
+    
+    public String desvincularFuncionario(Funcionario funcionario) {
+//        System.out.println("desvinculando: " + funcionarioAux.getNome());
+        fachada.desvincularFuncionario(this.prefeitura, funcionario.getCpf());
+        this.prefeitura.getFuncionarios().remove(funcionario);
 
         return null;
     }

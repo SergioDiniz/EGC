@@ -130,6 +130,20 @@
                                 </div>
                                 <br/>
                                 <div class="row">
+                                    Telefone: <br/>
+                                    <h:inputText class="form-control input-lg" pt:placeholder="(83) 55555-5555" value="#{controladorPrefeitura.funcionario.telefone}"/>
+                                </div>
+                                <br/>
+                                <div class="row">
+                                    Sexo <br/>
+                                    <h:selectOneRadio value="#{controladorPrefeitura.funcionario.sexo}">
+                                        <f:selectItem itemValue="false" itemLabel="&nbsp;Mulher&nbsp;&nbsp;" />
+                                        <f:selectItem itemValue="true" itemLabel="&nbsp;Homem" />
+                                        
+                                    </h:selectOneRadio>
+                                </div>
+                                <br/>
+                                <div class="row">
                                     Senha <br/>
                                     <h:inputSecret class="form-control input-lg" pt:placeholder="senha" value="#{controladorPrefeitura.funcionario.senha}"/>
                                 </div>
@@ -164,7 +178,7 @@
                                     </div>
 
 
-                                    
+
                                 </div>
                                 <br/><br/>
                             </div>

@@ -85,3 +85,15 @@ $(document).ready(function () {
         }
     });
 });
+
+
+// abrir model dentro de dropdown-menu
+$(document).ready(function () {
+    $('.dropdown-menu').click(function (e) {
+        e.stopPropagation();
+        if ($(e.target).is('[data-toggle=modal]')) {
+            $($(e.target).data('target')).modal();
+        }
+    });
+});
+

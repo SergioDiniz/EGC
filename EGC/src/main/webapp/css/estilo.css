@@ -528,7 +528,7 @@ html, body{
     background-color: #000; 
     opacity: 0.7;
 
-    
+
 }
 
 
@@ -545,7 +545,7 @@ html, body{
 
 .ultimas-atendidas table tr:nth-child(2) td:nth-child(1){
     background-color: #44a0dd;
-    
+
 }
 
 .ultimas-atendidas .denuncia-feita-descricao{
@@ -993,7 +993,7 @@ html, body{
     -webkit-box-shadow: 0px 3px 3px 0px rgba(50, 50, 50, 0.35);
     -moz-box-shadow:    0px 3px 3px 0px rgba(50, 50, 50, 0.35);
     box-shadow:         0px 3px 3px 0px rgba(50, 50, 50, 0.35);
-    
+
     margin-bottom: 30px;
 }
 
@@ -1007,8 +1007,8 @@ html, body{
     text-align: center;
     font-size: 25px;
     font-weight: 200;
-    
-    
+
+
 }
 
 .lista-de-funcionarios .funcionario .foto{
@@ -1017,7 +1017,7 @@ html, body{
     width: 87px;
     margin: 0 auto;
     margin-top: -43px;
-    
+
 }
 
 .lista-de-funcionarios .funcionario .dados{
@@ -1038,9 +1038,12 @@ html, body{
     position: absolute;
     margin-top: -20px !important;
     margin-left: 305px;
-    
+
 }
 
 .lista-de-funcionarios .funcionario .dados .row:nth-child(5) button{
 
 }
+
+
+
