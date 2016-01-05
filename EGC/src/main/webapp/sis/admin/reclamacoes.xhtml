@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>EGC - Administrador</title>
+    </h:head>
+    <h:body>
+        <div class="tudo">
+
+            <div id="menu">
+                <ui:include src="topo.xhtml"/>
+            </div>
+
+            <div id="menu-lateral">
+                <ui:include src="menulateral.xhtml"/>
+            </div>
+
+            <div class="area-titulo-pagina">
+                <div class="titulo-pagina">Denuncias com Reclamações!</div>
+            </div>
+
+
+            <!-- -->
+            <div class="container">
+
+                <div class="lista-de-denuncias">
+
+                    <c:forEach items="#{controladorAdmin.denunciasComReclamacoes()}" var="denuncia">
+                        <div class="col-md-4">
+                            <div class="denuncia-com-reclamacao">
+                                <div class="topo" style="background-image: url(../denuncias/#{denuncia.foto}); background-size: 100%;">
+                                    <div class="nome-funcionario" >
+
+                                    </div>
+                                </div>
+                                <div class="foto">
+                                    <img src="../../img/icones-denuncia/#{denuncia.iconeDenunica}" style="width: 87px"/>
+                                </div>
+                                <div class="dados">
+
+                                    <div class="row">
+                                        <div class="col-md-offset-1 col-md-10">
+                                            <div class="col-md-9">
+                                                <b>Descrição: </b> <br/>
+                                                #{denuncia.descricao}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-offset-1 col-md-10">
+                                            <div class="col-md-12">
+                                                <b>Cidade:</b>
+                                                <div class="link-mapa-denuncia" style="padding: 0">
+                                                    #{denuncia.enderecoDenuncia.cidade} - #{denuncia.enderecoDenuncia.estado}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-offset-1 col-md-10">
+                                            <div>
+                                                <button class="btn-link"><img src="../../img/icon-configuracoes.png"/></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </h:body>
+</html>
+

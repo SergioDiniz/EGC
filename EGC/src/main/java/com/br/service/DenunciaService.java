@@ -256,5 +256,19 @@ public class DenunciaService implements DenunciaServiceIT {
         
         return new ArrayList<>();
     }
+    
+    @Override
+    public List<Denuncia> denunciasComReclamacoes(){
+        
+        Query query = em.createQuery("SELECT d FROM Denuncia d INNER JOIN d.conteudoInapropriados c");
+        
+        List<Denuncia> d = query.getResultList();
+        
+        if(d.size() > 0){
+            return d;
+        }
+        
+        return null;
+    }
 
 }

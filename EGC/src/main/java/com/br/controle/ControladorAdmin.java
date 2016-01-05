@@ -6,6 +6,7 @@
 package com.br.controle;
 
 import com.br.beans.Administrador;
+import com.br.beans.Denuncia;
 import com.br.beans.Funcionario;
 import com.br.beans.Prefeitura;
 import com.br.fachada.Fachada;
@@ -162,6 +163,10 @@ public class ControladorAdmin implements Serializable {
         return fachada.todosFuncionarios();
     }
     
+    
+    public List<Denuncia> denunciasComReclamacoes(){
+        return fachada.denunciasComReclamacoes();
+    }
     
     
     //getes and seters

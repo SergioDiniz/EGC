@@ -984,10 +984,12 @@ html, body{
 }
 
 
-.lista-de-funcionarios{
+.lista-de-funcionarios,
+.lista-de-denuncias{
     margin-top: 50px;
 }
 
+.lista-de-denuncias .denuncia-com-reclamacao,
 .lista-de-funcionarios .funcionario{
     height: 333px;
     -webkit-box-shadow: 0px 3px 3px 0px rgba(50, 50, 50, 0.35);
@@ -997,10 +999,17 @@ html, body{
     margin-bottom: 30px;
 }
 
+.lista-de-denuncias .denuncia-com-reclamacao{
+    min-height: 333px;
+}
+
+.lista-de-denuncias .denuncia-com-reclamacao .topo,
 .lista-de-funcionarios .funcionario .topo{
     height: 157px;
     background-color: #0d9bd0;
 }
+
+.lista-de-denuncias .denuncia-com-reclamacao .topo .nome-funcionario,
 .lista-de-funcionarios .funcionario .topo .nome-funcionario{
     padding-top: 60px;
     color: #FFF;
@@ -1011,6 +1020,7 @@ html, body{
 
 }
 
+.lista-de-denuncias .denuncia-com-reclamacao .foto,
 .lista-de-funcionarios .funcionario .foto{
     /*background-image: url(../img/h-funcionario.png);*/
     height: 87px;
@@ -1020,12 +1030,14 @@ html, body{
 
 }
 
+.lista-de-denuncias .denuncia-com-reclamacao .dados,
 .lista-de-funcionarios .funcionario .dados{
     font-weight: 200;
     padding-top: 10px;
     margin-left: -20px !important;
 }
 
+.lista-de-denuncias .denuncia-com-reclamacao .dados .row,
 .lista-de-funcionarios .funcionario .dados .row{
     padding-bottom: 5px;
 }
@@ -1034,6 +1046,7 @@ html, body{
     color: #0d9bd0;
 }
 
+.lista-de-denuncias .denuncia-com-reclamacao .dados .row:nth-child(3),
 .lista-de-funcionarios .funcionario .dados .row:nth-child(5){
     position: absolute;
     margin-top: -20px !important;
@@ -1041,6 +1054,7 @@ html, body{
 
 }
 
+.lista-de-denuncias .denuncia-com-reclamacao .row:nth-child(3),
 .lista-de-funcionarios .funcionario .dados .row:nth-child(5) button{
 
 }
