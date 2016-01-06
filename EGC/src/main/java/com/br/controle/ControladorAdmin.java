@@ -30,6 +30,7 @@ public class ControladorAdmin implements Serializable {
 
     Administrador administrador;
     Prefeitura prefeituraAx;
+    Denuncia denunciaReclamacao;
 
     boolean mostrarModalRecusar;
     boolean mostrarModalAceitar;
@@ -169,6 +170,12 @@ public class ControladorAdmin implements Serializable {
     }
     
     
+    public String selecionarDenunciaReclamacao(Denuncia denuncia){
+        this.denunciaReclamacao = new Denuncia();
+        this.denunciaReclamacao = denuncia;
+        return "gerenciar-reclamacao.jsf?faces-redirect=true";
+    }
+    
     //getes and seters
     public Administrador getAdministrador() {
         return administrador;
@@ -201,5 +208,15 @@ public class ControladorAdmin implements Serializable {
     public void setMostrarModalAceitar(boolean mostrarModalAceitar) {
         this.mostrarModalAceitar = mostrarModalAceitar;
     }
+
+    public Denuncia getDenunciaReclamacao() {
+        return denunciaReclamacao;
+    }
+
+    public void setDenunciaReclamacao(Denuncia denunciaReclamacao) {
+        this.denunciaReclamacao = denunciaReclamacao;
+    }
+    
+    
 
 }

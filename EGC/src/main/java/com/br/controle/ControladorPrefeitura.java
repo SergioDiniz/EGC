@@ -201,7 +201,7 @@ public class ControladorPrefeitura implements Serializable {
         funcionario = new Funcionario();
         CPFPesquisaF = "";
         funcionarioNovo = false;
-        return "listafuncionarios.jsf";
+        return "listafuncionarios.jsf?faces-redirect=true";
     }
 
     public List<Funcionario> funcionarioPesquisaCPF() {
@@ -216,7 +216,7 @@ public class ControladorPrefeitura implements Serializable {
         this.prefeitura.setFuncionarios(funcionarios());
         CPFPesquisaF = "";
         funcionarioCadastrado = false;
-        return "listafuncionarios.jsf";
+        return "listafuncionarios.jsf?faces-redirect=true";
     }
 
     public List<Funcionario> funcionarios() {

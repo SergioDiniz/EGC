@@ -995,7 +995,7 @@ html, body{
 
 .lista-de-denuncias .denuncia-com-reclamacao,
 .lista-de-funcionarios .funcionario{
-    
+
     -webkit-box-shadow: 0px 3px 3px 0px rgba(50, 50, 50, 0.35);
     -moz-box-shadow:    0px 3px 3px 0px rgba(50, 50, 50, 0.35);
     box-shadow:         0px 3px 3px 0px rgba(50, 50, 50, 0.35);
@@ -1054,7 +1054,7 @@ html, body{
     position: absolute;
     margin-top: -20px !important;
     margin-left: 305px;
-    
+
 }
 
 .lista-de-denuncias .denuncia-com-reclamacao .dados .row:nth-child(2){
@@ -1062,21 +1062,23 @@ html, body{
 }
 
 .lista-de-funcionarios .funcionario .dados .row:nth-child(5) button{
-    
+
 }
 
-
+.denuncia-reclamacao .rodape-info-dr,
 .lista-de-denuncias .denuncia-com-reclamacao .rodape-info{
     /*height: 50px;*/
     /*background-color: #0d9bd0;*/
     border-top: 1px solid #ccc;
 }
-
+.denuncia-reclamacao .rodape-info-dr .hora-denuncia,
 .lista-de-denuncias .denuncia-com-reclamacao .rodape-info .hora-denuncia{
     margin: 10px;
     margin-left: 25px;
 }
 
+.denuncia-reclamacao .rodape-info-dr .numero-denuncias,
+.denuncia-reclamacao .rodape-info-dr .numero-ajuda,
 .lista-de-denuncias .denuncia-com-reclamacao .rodape-info .numero-denuncias{
     font-size: 12px;
     margin-top: 8px;
@@ -1085,6 +1087,45 @@ html, body{
 }
 
 .lista-de-denuncias .denuncia-com-reclamacao .rodape-info .btn-opcoes{
-    padding-top: 2px;
+    padding-top: 7px;
     padding-left: 30px;
+}
+
+.denuncia-reclamacao{
+    margin-top: 50px;
+    
+    /*background-color:#0066cc;*/ 
+    -webkit-box-shadow: 0px 3px 3px 0px rgba(50, 50, 50, 0.35);
+    -moz-box-shadow:    0px 3px 3px 0px rgba(50, 50, 50, 0.35);
+    box-shadow:         0px 3px 3px 0px rgba(50, 50, 50, 0.35);
+
+    margin-bottom: 30px;
+}
+
+.denuncia-reclamacao .foto-dr img{
+    width: 100%;
+}
+
+.denuncia-reclamacao .conteudo-dr{
+    margin-top: 20px;
+}
+
+.denuncia-reclamacao .conteudo-dr img{
+    width: 60px;
+}
+
+.denuncia-reclamacao .link-mapa-denuncia{
+    padding-top: 30px;
+    padding-bottom: 5px;
+    text-decoration: underline !important;
+}
+
+.denuncia-reclamacao .rodape-info-dr .numero-denuncias,
+.denuncia-reclamacao .rodape-info-dr .numero-ajuda{
+    text-align: right;
+}
+
+.denuncia-reclamacao .mapa-dr{
+    /*opacity: 0.5;*/
+    padding-bottom: 2px;
 }

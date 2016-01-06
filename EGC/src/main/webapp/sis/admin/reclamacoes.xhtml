@@ -5,7 +5,8 @@
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
     <h:head>
         <title>EGC - Administrador</title>
     </h:head>
@@ -30,7 +31,7 @@
 
                 <div class="lista-de-denuncias">
 
-                    <c:forEach items="#{controladorAdmin.denunciasComReclamacoes()}" var="denuncia">
+                    <c:forEach items="#{controladorAdmin.denunciasComReclamacoes()}" var="denuncia" varStatus="index">
                         <div class="col-md-4">
                             <div class="denuncia-com-reclamacao">
                                 <div class="topo" style="background-image: url(../denuncias/#{denuncia.foto}); background-size: 100%;">
@@ -74,7 +75,10 @@
                                         </div>
                                         <div class="col-md-2 btn-opcoes">
                                             <div>
-                                                <button class="btn-link"><img src="../../img/icon-configuracoes.png"/></button>
+                                                <h:form>
+                                                    <h:commandButton action="#{controladorAdmin.selecionarDenunciaReclamacao(denuncia)}" class="btn-link" image="../../img/icon-configuracoes.png" />
+                                                </h:form>
+                                                <!--<button class="btn-link"><img src="../../img/icon-configuracoes.png"/></button>-->
                                             </div>
                                         </div>
                                     </div>
