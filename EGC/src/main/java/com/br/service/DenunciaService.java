@@ -37,10 +37,10 @@ public class DenunciaService implements DenunciaServiceIT {
 //        String sql = "SELECT d.* FROM denuncia d LEFT OUTER JOIN enderecodenuncia ed on d.enderecodenuncia_id = ed.id WHERE upper(TRANSLATE(d.nomecidade,'ÀÁáàÉÈéèÍíÓóÒòÚú','AAaaEEeeIiOoOoUu')) = ?1 AND upper(TRANSLATE(d.siglaestado,'ÀÁáàÉÈéèÍíÓóÒòÚú','AAaaEEeeIiOoOoUu')) = ?2 ORDER BY d.data DESC";
         if (ordem.equals("data")) {
 //            query = em.createNativeQuery(sql);
-            query = em.createQuery("SELECT d FROM Denuncia d WHERE d.cidade.CidadePK.nomeCidade = :cidade AND d.cidade.CidadePK.siglaEstado = :estado ORDER BY d.data DESC");
+            query = em.createQuery("SELECT d FROM Denuncia d WHERE d.ativo = true AND d.cidade.CidadePK.nomeCidade = :cidade AND d.cidade.CidadePK.siglaEstado = :estado ORDER BY d.data DESC");
 //            query = em.createNativeQuery(sql, Denuncia.class);
         } else {
-            query = em.createQuery("SELECT d FROM Denuncia d WHERE d.cidade.CidadePK.nomeCidade = :cidade AND d.cidade.CidadePK.siglaEstado = :estado ORDER BY d.data ASC");
+            query = em.createQuery("SELECT d FROM Denuncia d WHERE d.ativo = true AND d.cidade.CidadePK.nomeCidade = :cidade AND d.cidade.CidadePK.siglaEstado = :estado ORDER BY d.data ASC");
         }
 
         query.setParameter("cidade", cidade);
@@ -65,9 +65,9 @@ public class DenunciaService implements DenunciaServiceIT {
         Query query;
 
         if (ordem.equals("data")) {
-            query = em.createQuery("SELECT d FROM Denuncia d WHERE d.cidade.CidadePK.nomeCidade = :cidade AND d.cidade.CidadePK.siglaEstado = :estado AND d.tipoDeDenuncia = :tipo ORDER BY d.data DESC");
+            query = em.createQuery("SELECT d FROM Denuncia d WHERE d.ativo = true AND d.cidade.CidadePK.nomeCidade = :cidade AND d.cidade.CidadePK.siglaEstado = :estado AND d.tipoDeDenuncia = :tipo ORDER BY d.data DESC");
         } else {
-            query = em.createQuery("SELECT d FROM Denuncia d WHERE d.cidade.CidadePK.nomeCidade = :cidade AND d.cidade.CidadePK.siglaEstado = :estado AND d.tipoDeDenuncia = :tipo ORDER BY d.data ASC");
+            query = em.createQuery("SELECT d FROM Denuncia d WHERE d.ativo = true AND d.cidade.CidadePK.nomeCidade = :cidade AND d.cidade.CidadePK.siglaEstado = :estado AND d.tipoDeDenuncia = :tipo ORDER BY d.data ASC");
         }
 
         query.setParameter("cidade", cidade);
@@ -92,16 +92,16 @@ public class DenunciaService implements DenunciaServiceIT {
         Query query;
         if (ordem.equals("data")) {
             if (tipoDeDenuncia == TipoDeDenuncia.BRASIL) {
-                query = em.createQuery("SELECT d FROM Denuncia d JOIN d.enderecoDenuncia ed WHERE ed.pais = 'Brasil' ORDER BY d.data DESC");
+                query = em.createQuery("SELECT d FROM Denuncia d JOIN d.enderecoDenuncia ed WHERE d.ativo = true AND ed.pais = 'Brasil' ORDER BY d.data DESC");
             } else {
-                query = em.createQuery("SELECT d FROM Denuncia d JOIN d.enderecoDenuncia ed WHERE ed.pais = 'Brasil' AND d.tipoDeDenuncia = :tipo ORDER BY d.data DESC");
+                query = em.createQuery("SELECT d FROM Denuncia d JOIN d.enderecoDenuncia ed WHERE d.ativo = true AND ed.pais = 'Brasil' AND d.tipoDeDenuncia = :tipo ORDER BY d.data DESC");
                 query.setParameter("tipo", tipoDeDenuncia);
             }
         } else {
             if (tipoDeDenuncia == TipoDeDenuncia.BRASIL) {
-                query = em.createQuery("SELECT d FROM Denuncia d JOIN d.enderecoDenuncia ed WHERE ed.pais = 'Brasil' ORDER BY d.data ASC");
+                query = em.createQuery("SELECT d FROM Denuncia d JOIN d.enderecoDenuncia ed WHERE d.ativo = true AND ed.pais = 'Brasil' ORDER BY d.data ASC");
             } else {
-                query = em.createQuery("SELECT d FROM Denuncia d JOIN d.enderecoDenuncia ed WHERE ed.pais = 'Brasil' AND d.tipoDeDenuncia = :tipo ORDER BY d.data ASC");
+                query = em.createQuery("SELECT d FROM Denuncia d JOIN d.enderecoDenuncia ed WHERE d.ativo = true AND ed.pais = 'Brasil' AND d.tipoDeDenuncia = :tipo ORDER BY d.data ASC");
                 query.setParameter("tipo", tipoDeDenuncia);
             }
         }
@@ -121,9 +121,9 @@ public class DenunciaService implements DenunciaServiceIT {
         Query query;
 
         if (cidade.equals("Brasil")) {
-            query = em.createQuery("SELECT COUNT(d) FROM Denuncia d JOIN d.enderecoDenuncia ed WHERE ed.pais = 'Brasil'");
+            query = em.createQuery("SELECT COUNT(d) FROM Denuncia d JOIN d.enderecoDenuncia ed WHERE d.ativo = true AND ed.pais = 'Brasil'");
         } else {
-            query = em.createQuery("SELECT COUNT(d) FROM Denuncia d WHERE d.cidade.CidadePK.nomeCidade = :cidade AND d.cidade.CidadePK.siglaEstado = :estado");
+            query = em.createQuery("SELECT COUNT(d) FROM Denuncia d WHERE d.ativo = true AND d.cidade.CidadePK.nomeCidade = :cidade AND d.cidade.CidadePK.siglaEstado = :estado");
             query.setParameter("cidade", cidade);
             query.setParameter("estado", estado);
         }
@@ -142,9 +142,9 @@ public class DenunciaService implements DenunciaServiceIT {
         Query query;
 
         if (cidade.equals("Brasil")) {
-            query = em.createQuery("SELECT COUNT(d) FROM Denuncia d JOIN d.enderecoDenuncia ed JOIN d.informacaoDeAtendida ia WHERE ed.pais = 'Brasil' AND ia.id > -1 ");
+            query = em.createQuery("SELECT COUNT(d) FROM Denuncia d JOIN d.enderecoDenuncia ed JOIN d.informacaoDeAtendida ia WHERE d.ativo = true AND ed.pais = 'Brasil' AND ia.id > -1 ");
         } else {
-            query = em.createQuery("SELECT COUNT(d) FROM Denuncia d JOIN d.informacaoDeAtendida ia WHERE d.cidade.CidadePK.nomeCidade = :cidade AND d.cidade.CidadePK.siglaEstado = :estado AND ia.id > -1");
+            query = em.createQuery("SELECT COUNT(d) FROM Denuncia d JOIN d.informacaoDeAtendida ia WHERE d.ativo = true AND d.cidade.CidadePK.nomeCidade = :cidade AND d.cidade.CidadePK.siglaEstado = :estado AND ia.id > -1");
             query.setParameter("cidade", cidade);
             query.setParameter("estado", estado);
         }
@@ -226,7 +226,7 @@ public class DenunciaService implements DenunciaServiceIT {
 
     @Override
     public List<Denuncia> denunciasComMaisAjudasPorCidade(String cidade, String estado) {
-        Query query = em.createQuery("SELECT d from Denuncia d JOIN d.enderecoDenuncia ed WHERE ed.cidade = :cidade and ed.estado = :estado ORDER BY d.numeroAjuda DESC");
+        Query query = em.createQuery("SELECT d from Denuncia d JOIN d.enderecoDenuncia ed WHERE d.ativo = true AND ed.cidade = :cidade and ed.estado = :estado ORDER BY d.numeroAjuda DESC");
               query.setParameter("cidade", cidade);
               query.setParameter("estado", estado);
               query.setMaxResults(6);
@@ -243,7 +243,7 @@ public class DenunciaService implements DenunciaServiceIT {
 
     @Override
     public List<Denuncia> denunciasMaisRecentesPorCidade(String cidade, String estado) {
-        Query query = em.createQuery("SELECT d from Denuncia d JOIN d.enderecoDenuncia ed WHERE ed.cidade = :cidade and ed.estado = :estado ORDER BY d.data DESC");
+        Query query = em.createQuery("SELECT d from Denuncia d JOIN d.enderecoDenuncia ed WHERE d.ativo = true AND ed.cidade = :cidade and ed.estado = :estado ORDER BY d.data DESC");
               query.setParameter("cidade", cidade);
               query.setParameter("estado", estado);
               query.setMaxResults(6);

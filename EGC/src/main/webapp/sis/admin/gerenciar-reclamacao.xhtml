@@ -29,6 +29,34 @@
 
             <!-- -->
             <div class="container">
+
+                <div class="opcoes-denuncia-dr">
+                    <div class="col-md-offset-2 col-md-8">
+                        <c:choose>
+                            <c:when test="#{controladorAdmin.denunciaReclamacao.ativo == true}">
+                                <div class="btn-denuncia-dr">
+                                    <!--<button type="button" class="btn btn-danger">Bloquear</button>-->
+                                    <h:form>
+                                        <h:commandButton value="Bloquear" class="btn btn-danger" action="#{controladorAdmin.bloquearDenuncia(controladorAdmin.denunciaReclamacao)}"/>
+                                    </h:form>
+                                    
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="mensagem">
+                                    Denúncia Bloqueada
+                                </div>
+                                <div class="btn-denuncia-dr">
+                                    <!--<button type="button" class="btn btn-default">Desbloquear</button>-->
+                                    <h:form>
+                                        <h:commandButton value="Desbloquear" class="btn btn-default" action="#{controladorAdmin.desbloquearDenuncia(controladorAdmin.denunciaReclamacao)}"/>
+                                    </h:form>
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+                </div>
+
                 <div class="col-md-offset-2 col-md-8">
                     <div class="denuncia-reclamacao">
                         <div class="foto-dr">
@@ -74,6 +102,9 @@
                         </div>
                     </div>
                 </div>
+
+
+
 
             </div>
 

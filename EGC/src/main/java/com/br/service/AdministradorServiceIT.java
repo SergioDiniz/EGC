@@ -6,6 +6,7 @@
 package com.br.service;
 
 import com.br.beans.Administrador;
+import com.br.beans.Denuncia;
 import com.br.beans.Prefeitura;
 import java.util.List;
 
@@ -22,5 +23,9 @@ public interface AdministradorServiceIT {
     public String atualizarSituacao(Prefeitura prefeitura, boolean situacao);
     
     public List<Prefeitura> todasPrefeituras();
+    
+    public boolean bloquearDenuncia(Denuncia denuncia);
+    
+    public boolean desbloquearDenuncia(Denuncia denuncia);
     
 }

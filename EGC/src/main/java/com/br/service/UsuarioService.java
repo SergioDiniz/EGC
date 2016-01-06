@@ -68,7 +68,11 @@ public class UsuarioService implements UsuarioServiceIT{
             
             usuario = em.find(Usuario.class, usuario.getId());
             
-            usuario.novaDenuncia(d);
+            usuario.getDenuncias().size();
+            usuario.getDenuncias().add(d);
+            
+//            usuario.novaDenuncia(d);
+            
             
             em.persist(enderecoDenuncia);
             em.persist(d);
@@ -105,7 +109,7 @@ public class UsuarioService implements UsuarioServiceIT{
 
     @Override
     public List<Denuncia> denunciasQueAjudei(String email) {
-        Query query = em.createQuery("SELECT d from Usuario u JOIN u.denunciasAjudadas d WHERE u.email = :email ORDER BY d.data DESC");
+        Query query = em.createQuery("SELECT d from Usuario u JOIN u.denunciasAjudadas d WHERE d.ativo = true AND u.email = :email ORDER BY d.data DESC");
               query.setParameter("email", email);
               
         List<Denuncia> d = query.getResultList();

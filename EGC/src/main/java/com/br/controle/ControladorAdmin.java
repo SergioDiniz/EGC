@@ -173,7 +173,18 @@ public class ControladorAdmin implements Serializable {
     public String selecionarDenunciaReclamacao(Denuncia denuncia){
         this.denunciaReclamacao = new Denuncia();
         this.denunciaReclamacao = denuncia;
+
         return "gerenciar-reclamacao.jsf?faces-redirect=true";
+    }
+    
+    public void bloquearDenuncia(Denuncia denuncia){
+        fachada.bloquearDenuncia(denuncia);
+        this.denunciaReclamacao.setAtivo(false);
+    }
+    
+    public void desbloquearDenuncia(Denuncia denuncia){
+        fachada.desbloquearDenuncia(denuncia);
+        this.denunciaReclamacao.setAtivo(true);
     }
     
     //getes and seters

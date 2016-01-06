@@ -49,6 +49,8 @@ public class Denuncia implements Serializable {
     private String foto;
     @Column(nullable = false)
     private int numeroAjuda;
+    
+    private boolean ativo = true;
 
     @OneToOne(cascade = CascadeType.ALL)
     private EnderecoDenuncia enderecoDenuncia;
@@ -258,6 +260,15 @@ public class Denuncia implements Serializable {
     public void setNumeroAjuda(int numeroAjuda) {
         this.numeroAjuda = numeroAjuda;
     }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+    
     
     
     

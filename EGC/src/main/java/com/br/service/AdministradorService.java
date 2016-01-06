@@ -6,6 +6,7 @@
 package com.br.service;
 
 import com.br.beans.Administrador;
+import com.br.beans.Denuncia;
 import com.br.beans.Prefeitura;
 import java.util.List;
 import javax.ejb.Remote;
@@ -81,6 +82,36 @@ public class AdministradorService implements AdministradorServiceIT {
         }
 
         return null;
+    }
+
+    @Override
+    public boolean bloquearDenuncia(Denuncia denuncia) {
+        
+        try {
+            denuncia = em.find(Denuncia.class, denuncia.getId());
+            denuncia.setAtivo(false);
+            em.merge(denuncia);
+            return true;
+        }catch (Exception e) {
+            
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean desbloquearDenuncia(Denuncia denuncia) {
+
+        try {
+            denuncia = em.find(Denuncia.class, denuncia.getId());
+            denuncia.setAtivo(true);
+            em.merge(denuncia);
+            return true;
+        }catch (Exception e) {
+            
+        }
+
+        return false;
     }
 
 }

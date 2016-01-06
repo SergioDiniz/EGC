@@ -1091,9 +1091,26 @@ html, body{
     padding-left: 30px;
 }
 
-.denuncia-reclamacao{
+.opcoes-denuncia-dr{
     margin-top: 50px;
-    
+}
+
+.opcoes-denuncia-dr .mensagem{
+    text-align: center;
+    font-size: 30px;
+    font-weight: 200;
+    padding-bottom: 20px;
+}
+
+
+.opcoes-denuncia-dr .btn-denuncia-dr{
+    text-align: right !important;
+}
+
+
+.denuncia-reclamacao{
+    margin-top: 0px;
+
     /*background-color:#0066cc;*/ 
     -webkit-box-shadow: 0px 3px 3px 0px rgba(50, 50, 50, 0.35);
     -moz-box-shadow:    0px 3px 3px 0px rgba(50, 50, 50, 0.35);
@@ -1103,7 +1120,7 @@ html, body{
 }
 
 .denuncia-reclamacao .foto-dr img{
-    width: 100%;
+    max-width: 100%;
 }
 
 .denuncia-reclamacao .conteudo-dr{
@@ -1112,6 +1129,7 @@ html, body{
 
 .denuncia-reclamacao .conteudo-dr img{
     width: 60px;
+
 }
 
 .denuncia-reclamacao .link-mapa-denuncia{
