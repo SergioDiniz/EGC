@@ -12,6 +12,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -32,7 +33,8 @@ public class Funcionario extends Pessoa implements Serializable{
     @ManyToMany(mappedBy = "funcionarios", cascade = CascadeType.ALL)
     private List<Prefeitura> prefeituras;
 
-    
+    @OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL)
+    private List<InformacaoDeAtendida> informacaoDeAtendidas;
     
     public Funcionario() {
     }
@@ -93,6 +95,14 @@ public class Funcionario extends Pessoa implements Serializable{
 
     public void setSexo(boolean sexo) {
         this.sexo = sexo;
+    }
+
+    public List<InformacaoDeAtendida> getInformacaoDeAtendidas() {
+        return informacaoDeAtendidas;
+    }
+
+    public void setInformacaoDeAtendidas(List<InformacaoDeAtendida> informacaoDeAtendidas) {
+        this.informacaoDeAtendidas = informacaoDeAtendidas;
     }
     
     

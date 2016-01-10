@@ -197,13 +197,14 @@ public class ControladorAdmin implements Serializable {
     public String selecionarFuncionarioGerenciar(Funcionario funcionario){
         this.gerenciarFuncionario = new Funcionario();
         this.gerenciarFuncionario = funcionario;
-        return "gerenciar-funcionario.jsf?faces-redirect=true";
+        return "perfil-funcionario.jsf?faces-redirect=true";
     }
     
+   
     public String atualizarDadosFuncionario(){
         infoDadosAtualizados();
         fachada.atualizar(this.gerenciarFuncionario);
-        return null;
+        return "perfil-funcionario.jsf?faces-redirect=true";
     }
     
     

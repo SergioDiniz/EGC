@@ -23,6 +23,8 @@ public class InformacaoDeAtendida implements Serializable{
     private Date data;
     @Column (nullable = false)
     private String foto;
+    @ManyToOne
+    private Funcionario funcionario;
 
     public InformacaoDeAtendida() {
         this.data = new Date();

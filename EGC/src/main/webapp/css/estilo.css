@@ -1148,3 +1148,85 @@ html, body{
     /*opacity: 0.5;*/
     padding-bottom: 2px;
 }
+
+.perfil-funcionario{
+    /*width: 100%;*/
+    /*min-width: 1300px;*/
+    /*padding-left: 65px !important;*/
+    /*margin-top: 50px;*/
+    height: 340px !important;
+    border-bottom: solid 2px #dfdfdf;
+    background-color: #f3f5f6;
+}
+
+.perfil-topo{
+    width: 100%;
+    height: 250px !important;
+    background-image: url(../img/bg-perfil-funcionario.png);
+    background-size: 100%;
+    background-position: 0 -250px ;
+}
+
+.perfil-topo .nome-perfil{
+    color: #fff;
+    font-size: 30px;
+    font-weight: 100;
+    margin-top: 200px;
+    margin-left: -30px;
+}
+
+.perfil-topo .nome-perfil .btn-default{
+    background: none;
+    color: #fff;
+    font-weight: 100;
+    text-shadow: none;
+    background-image: none;
+    letter-spacing: 2px;
+    margin-left: 15px;
+}
+
+.perfil-info{
+    width: 100%;
+    background-color: #fff;
+    height: 90px;
+    border-bottom: solid 2px #dfdfdf;
+    padding-top: 20px;
+}
+
+.perfil-info .dados-funcionario{
+    margin-left: -85px;
+    font-weight: 200;
+}
+
+.perfil-info .col-md-3,
+.perfil-info .col-md-4{
+    border-right: 1px solid #ccc;
+}
+
+.perfil-info .dado{
+    font-size: 20px;
+}
+
+.perfil-info .tipo{
+    color: #999;
+    font-size: 13px;
+}
+
+
+
+.perfil-info .dados-funcionario .btn-vincular .btn-primary{
+    letter-spacing: 1px;
+    
+    font-weight: 200;
+    margin-top: 5px;
+    background-color: #03a4f7;
+    border-color: #058cd2;
+}
+
+.perfil-foto{
+    height: 130px;
+    width: 130px;
+    position: absolute;
+    margin-top: -65px;
+    margin-left: 100px
+}
