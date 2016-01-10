@@ -102,7 +102,9 @@
                                     <div class="row">
                                         <div class="col-md-offset-1 col-md-10">
                                             <div>
-                                                <button class="btn-link"><img src="../../img/icon-configuracoes.png"/></button>
+                                                <h:form>
+                                                    <h:commandButton class="btn-link" image="../../img/icon-configuracoes.png" action="#{controladorAdmin.selecionarFuncionarioGerenciar(funcionario)}" />
+                                                </h:form>
                                             </div>
                                         </div>
                                     </div>

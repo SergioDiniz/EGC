@@ -29,12 +29,13 @@ import javax.servlet.http.HttpSession;
 @SessionScoped
 public class ControladorAdmin implements Serializable {
 
-    Administrador administrador;
-    Prefeitura prefeituraAx;
-    Denuncia denunciaReclamacao;
-
-    boolean mostrarModalRecusar;
-    boolean mostrarModalAceitar;
+    private Administrador administrador;
+    private Prefeitura prefeituraAx;
+    private Denuncia denunciaReclamacao;
+    private Funcionario gerenciarFuncionario;
+    
+    private boolean mostrarModalRecusar;
+    private boolean mostrarModalAceitar;
 
     @EJB
     private Fachada fachada;
@@ -193,6 +194,18 @@ public class ControladorAdmin implements Serializable {
         return fachada.comentariosDeConteudoInapropriadoEmDenuncia(this.denunciaReclamacao);
     }
     
+    public String selecionarFuncionarioGerenciar(Funcionario funcionario){
+        this.gerenciarFuncionario = new Funcionario();
+        this.gerenciarFuncionario = funcionario;
+        return "gerenciar-funcionario.jsf?faces-redirect=true";
+    }
+    
+    public String atualizarDadosFuncionario(){
+        infoDadosAtualizados();
+        fachada.atualizar(this.gerenciarFuncionario);
+        return null;
+    }
+    
     
     //getes and seters
     public Administrador getAdministrador() {
@@ -233,6 +246,14 @@ public class ControladorAdmin implements Serializable {
 
     public void setDenunciaReclamacao(Denuncia denunciaReclamacao) {
         this.denunciaReclamacao = denunciaReclamacao;
+    }
+
+    public Funcionario getGerenciarFuncionario() {
+        return gerenciarFuncionario;
+    }
+
+    public void setGerenciarFuncionario(Funcionario gerenciarFuncionario) {
+        this.gerenciarFuncionario = gerenciarFuncionario;
     }
     
     

@@ -5,7 +5,8 @@
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>EGC - Administrador</title>
     </h:head>
@@ -21,13 +22,51 @@
             </div>
 
             <div class="area-titulo-pagina">
-                <div class="titulo-pagina">Bem Vindo!</div>
+                <div class="titulo-pagina">Gerenciar Funcionário</div>
             </div>
 
             <!-- -->
             <div class="container">
-                
-                
+
+                <br/><br/>
+
+                <h:form>
+
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-7"> 
+
+                            Nome <br/>
+                            <h:inputText value="#{controladorAdmin.gerenciarFuncionario.nome}" class="form-control input-lg campos-formulario" id="nome" required="required" pt:placeholder="nome"/> 
+                            <br/>
+                            Email <br/>
+                            <h:inputText value="#{controladorAdmin.gerenciarFuncionario.email}" class="form-control input-lg campos-formulario" id="email" required="required" pt:placeholder="email"/> 
+                            <br/>
+                            CPF <br/>
+                            <h:inputText value="#{controladorAdmin.gerenciarFuncionario.cpf}" class="form-control input-lg campos-formulario" id="cpf" required="required" pt:placeholder="CPF" disabled="true"/> 
+                            <br/>
+                            Senha <br/>
+                            <h:inputSecret redisplay="true" value="#{controladorAdmin.gerenciarFuncionario.senha}" class="form-control input-lg campos-formulario" id="senha" required="required" pt:placeholder="senha"/> 
+                            <br/>
+                            <p:messages showDetail="true" autoUpdate="true" closable="true" style=" width: 100%"/>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-7"> 
+                            <br/><br/><br/>
+                            <div align="center"><h:commandButton value="Atualizar Dados" action="#{controladorAdmin.atualizarDadosFuncionario()}" class="btn btn-primary btn-lg"/></div>
+                            <br/><br/>
+                        </div>
+
+                    </div>
+
+
+
+                </h:form>
+
             </div>
 
         </div>
