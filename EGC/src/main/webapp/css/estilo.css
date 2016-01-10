@@ -1095,6 +1095,7 @@ html, body{
     margin-top: 50px;
 }
 
+.comentarios-dr .mensagem,
 .opcoes-denuncia-dr .mensagem{
     text-align: center;
     font-size: 30px;

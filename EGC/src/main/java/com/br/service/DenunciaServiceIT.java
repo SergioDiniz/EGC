@@ -39,4 +39,6 @@ public interface DenunciaServiceIT {
     
     public List<Denuncia> denunciasComReclamacoes();
     
+    public List<ConteudoInapropriado> comentariosDeConteudoInapropriadoEmDenuncia(Denuncia denuncia);
+    
 }

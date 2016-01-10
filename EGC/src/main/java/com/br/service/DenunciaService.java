@@ -167,7 +167,9 @@ public class DenunciaService implements DenunciaServiceIT {
 
     @Override
     public boolean setAjudarDenuncia(Denuncia denuncia, Usuario usuario) {
-
+        
+        System.out.println("Denuncia ID DS: " + denuncia.getId());
+        
         if (!usuario.getDenunciasAjudadas().contains(denuncia)) {
             int valor = denuncia.getNumeroAjuda();
             denuncia.setNumeroAjuda(++valor);
@@ -260,7 +262,7 @@ public class DenunciaService implements DenunciaServiceIT {
     @Override
     public List<Denuncia> denunciasComReclamacoes(){
         
-        Query query = em.createQuery("SELECT d FROM Denuncia d INNER JOIN d.conteudoInapropriados c");
+        Query query = em.createQuery("SELECT DISTINCT d FROM Denuncia d INNER JOIN d.conteudoInapropriados c");
         
         List<Denuncia> d = query.getResultList();
         
@@ -270,5 +272,21 @@ public class DenunciaService implements DenunciaServiceIT {
         
         return null;
     }
+    
+    @Override
+    public List<ConteudoInapropriado> comentariosDeConteudoInapropriadoEmDenuncia(Denuncia denuncia){
+        
+        Query query = em.createQuery("SELECT c from Denuncia d JOIN d.conteudoInapropriados c WHERE d.id = :id");
+        query.setParameter("id", denuncia.getId());
+        
+        List<ConteudoInapropriado> c = query.getResultList();
+        
+        if(c.size() > 0){
+            return c;
+        }
+        
+        return null;
+    }
+    
 
 }

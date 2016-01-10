@@ -39,7 +39,7 @@
                                     <h:form>
                                         <h:commandButton value="Bloquear" class="btn btn-danger" action="#{controladorAdmin.bloquearDenuncia(controladorAdmin.denunciaReclamacao)}"/>
                                     </h:form>
-                                    
+
                                 </div>
                             </c:when>
                             <c:otherwise>
@@ -100,10 +100,25 @@
                                 </div>
                             </div>
                         </div>
+
+
+
                     </div>
                 </div>
+                <div class="col-md-offset-2 col-md-8">
+                    <div class="comentarios-dr">
+                        <div class="mensagem">
+                            Comentários
+                        </div>
+                        <c:forEach var="comentario" items="#{controladorAdmin.comentariosDeConteudoInapropriadoEmDenuncia()}" varStatus="cIndex">
+                            <div class="well well-sm">
+                                <b>#{comentario.tipoDeConteudoFormatado}</b> <br/>
+                                #{comentario.descricao}
+                            </div>
 
-
+                        </c:forEach>
+                    </div>
+                </div>
 
 
             </div>

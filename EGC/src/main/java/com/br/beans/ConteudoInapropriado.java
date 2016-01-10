@@ -54,7 +54,20 @@ public class ConteudoInapropriado implements Serializable{
         this.tipoDeConteudo = tipoDeConteudo;
     }
     
-    
+    public String getTipoDeConteudoFormatado() {
+        switch(getTipoDeConteudo()){
+            case FALSA_DENUNCIA:
+                return "Falsa Denuncia";
+            case NUDEZ:
+                return "Nudez";
+            case SPAN:
+                return "Span";
+            case IRRITANTE:
+                return "Irritante";
+        }
+        
+        return "";
+    }
     
     
 }

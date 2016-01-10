@@ -218,7 +218,7 @@ public class ControladorUsuario implements Serializable {
 
         this.feedDenuncias = new ArrayList<>();
 
-        switch (tipoDenunciaFeed) {
+        switch (this.tipoDenunciaFeed) {
             case TODOS:
                 this.getFeedDenuncias().addAll(denunciasTodos(this.ordemDenuncia));
                 break;
@@ -477,6 +477,7 @@ public class ControladorUsuario implements Serializable {
     }
 
     public void setAjudarDenuncia(Denuncia denuncia) {
+        System.out.println("denuncia id CU: " + denuncia.getId());
         fachada.setAjudarDenuncia(denuncia, this.usuario);
     }
 
@@ -494,6 +495,8 @@ public class ControladorUsuario implements Serializable {
         return "";
 
     }
+    
+    
 
 //    
 //

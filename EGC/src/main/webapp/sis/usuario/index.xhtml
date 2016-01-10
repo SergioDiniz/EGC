@@ -17,6 +17,8 @@
 
     <h:body>
 
+
+
         <div class="tudo">
 
             <div id="menu">
@@ -300,226 +302,233 @@
                             <!-- -->
 
 
-                            <c:forEach var="denuncia" items="#{controladorUsuario.feedDenuncias}" id="id-denuncias">
-                                <div class="denuncia-visualizada">
-                                    <c:if test="#{denuncia.informacaoDeAtendida.id > -1}">
-                                        <div class="tag-info-atendimento">
-                                            <c:choose>
+<!--                            <h:form>
+                                <p:poll interval="10" listener="#{controladorUsuario.setDenunicasFeed()}" update="feed"/>-->
+                                <h:panelGroup id="feed">
+                                    <c:forEach var="denuncia" items="#{controladorUsuario.feedDenuncias}" id="id-denuncias">
+                                        <div class="denuncia-visualizada">
+                                            <c:if test="#{denuncia.informacaoDeAtendida.id > -1}">
+                                                <div class="tag-info-atendimento">
+                                                    <c:choose>
 
-                                                <c:when test="#{denuncia.tagAtendida()}">
-                                                    <span class="tooltips" title="Denuncia Atendida" rel="tooltip" data-placement="top" >
-                                                        <img src="../../img/icones-denuncia/tag-atentida-2.png"/> 
-                                                    </span>
-                                                </c:when>
+                                                        <c:when test="#{denuncia.tagAtendida()}">
+                                                            <span class="tooltips" title="Denuncia Atendida" rel="tooltip" data-placement="top" >
+                                                                <img src="../../img/icones-denuncia/tag-atentida-2.png"/> 
+                                                            </span>
+                                                        </c:when>
 
-                                                <c:when test="#{denuncia.tagEmAndamento()}">
-                                                    <span class="tooltips" title="Denuncia em Trabalho" rel="tooltip" data-placement="top" >
-                                                        <img src="../../img/icones-denuncia/tag-em-trabalho-2.png"/>
-                                                    </span>
-                                                </c:when>
+                                                        <c:when test="#{denuncia.tagEmAndamento()}">
+                                                            <span class="tooltips" title="Denuncia em Trabalho" rel="tooltip" data-placement="top" >
+                                                                <img src="../../img/icones-denuncia/tag-em-trabalho-2.png"/>
+                                                            </span>
+                                                        </c:when>
 
-                                            </c:choose>    
-                                        </div>
-                                    </c:if>
-
-
-                                    <div class="row">
-                                        <div class="col-md-2 icone-denuncia">
-                                            <img src="../../img/icones-denuncia/#{denuncia.iconeDenunica}" />
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="row rua-denuncia">
-                                                #{denuncia.tipoDaDenunciaFormatado}
-                                            </div>
-                                            <div class="row conteudo-denuncia">
-                                                #{denuncia.descricao}
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row link-mapa-denuncia">
-                                        #{denuncia.enderecoDenuncia.toString()} <br/>
-                                    </div>
-
-                                    <div class="row">
-                                        <div align="center">
-                                            <button data-toggle="modal" data-target=".denuncia#{denuncia.id}" class="btn-img">
-                                                <img src="../denuncias/#{denuncia.foto}" class="img-denuncia" />
-                                            </button>   
-                                        </div>
-
-                                        <!--modal--> 
-                                        <!--
-                                        <div class="modal fade bs-example-modal-lg denuncia#{denuncia.id}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg">
-                                                <div class="modal-content">
+                                                    </c:choose>    
+                                                </div>
+                                            </c:if>
 
 
-                                                    <div class="row">
-                                                        <div class="col-md-8 img-modal">
-                                                            <img src="../denuncias/#{denuncia.foto}" class="img-denuncia-modal" />
-                                                        </div>
-                                                        <div class="col-md-4">
+                                            <div class="row">
+                                                <div class="col-md-2 icone-denuncia">
+                                                    <img src="../../img/icones-denuncia/#{denuncia.iconeDenunica}" />
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="row rua-denuncia">
+                                                        #{denuncia.tipoDaDenunciaFormatado}
+                                                    </div>
+                                                    <div class="row conteudo-denuncia">
+                                                        #{denuncia.descricao}
 
-                                                            <div class="modal-header btn-fecha-modal">
-                                                                <button type="button" class="close " data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                            </div>
-
-                                                            <div class="row">
-                                                                <div class="col-md-2 icone-denuncia">
-                                                                    <img src="../../img/icones-denuncia/#{denuncia.iconeDenunica}" />
-                                                                </div>
-                                                                <div class="col-md-8">
-                                                                    <div class="row rua-denuncia">
-                                                                        #{denuncia.tipoDaDenunciaFormatado}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="row conteudo-denuncia-modal">
-                                                                <div class="scroll">
-                                                                    #{denuncia.descricao} 
-
-
-                                                                    <iframe src="mapa.jsf?latitude=#{denuncia.enderecoDenuncia.latitude}&amp;longitude=#{denuncia.enderecoDenuncia.longitude}&amp;" class="frame-mapa" width="100%" height="110px" style="border: none" scrolling="no"></iframe>
-
-
-
-
-                                                                    <c:if test="#{denuncia.informacaoDeAtendida.id > -1}">
-                                                                        <c:choose>
-
-                                                                            <c:when test="#{denuncia.tagEmAndamento()}">
-                                                                                <span class="tooltips" title="Denuncia em Trabalho" rel="tooltip" data-placement="top" >
-                                                                                    <div class="modal-inf-em-trabalho">
-                                                                                        EM TRABALHO
-                                                                                    </div>
-                                                                                </span>
-                                                                            </c:when>
-
-                                                                            <c:when test="#{denuncia.tagAtendida()}">
-                                                                                <span class="tooltips" title="Denuncia Atendida" rel="tooltip" data-placement="top" >
-                                                                                    <div class="modal-inf-atendida">
-                                                                                        ATENDIDA
-                                                                                    </div>
-                                                                                </span>
-                                                                            </c:when>
-
-
-                                                                        </c:choose>    
-                                                                    </c:if>
-
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        -->
 
-
-                                    </div>
-
-                                    <div class="row rodape-denuncia">
-                                        <div class="col-md-4 hora-denuncia-visualizada">
-                                            #{denuncia.dataDenuncaFormatado}
-                                        </div>
-
-                                        <div class="col-md-offset-5 col-md-3 impucionar-denuncia">
-                                            <div class="col-md-6">
-                                                <span class="tooltips" title="Ajudar" rel="tooltip" data-placement="top" >
-                                                    <h:form>
-                                                        <p:growl id="growl"/>
-                                                        <c:choose>
-                                                            <c:when test="#{!controladorUsuario.denunciasQueAjudei().contains(denuncia)}">
-                                                                <p:commandButton value="+#{controladorUsuario.getAjudarDenuncia(denuncia)}" id="n-ajuda#{denuncia.id}" update="growl" actionListener="#{controladorUsuario.setAjudarDenuncia(denuncia)}" styleClass="btn-ajudar-denuncia"/>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <p:commandButton value="+#{controladorUsuario.getAjudarDenuncia(denuncia)}" id="n-ajuda#{denuncia.id}" update="growl" actionListener="#{controladorUsuario.setAjudarDenuncia(denuncia)}" styleClass="btn-ajudar-denuncia" disabled="true"/>
-                                                            </c:otherwise>
-                                                        </c:choose>
-
-
-                                                        <p:poll interval="3" update="n-ajuda#{denuncia.id}" />
-                                                    </h:form>
-                                                </span>
+                                            <div class="row link-mapa-denuncia">
+                                                #{denuncia.enderecoDenuncia.toString()} <br/>
                                             </div>
-                                            <div class="col-md-6">
-                                                <span class="tooltips" title="Reclamar" rel="tooltip" data-placement="top" >
-                                                    <button data-toggle="modal" data-target=".denunciaReclamacao#{denuncia.id}" class="btn-ajudar-denuncia">
-                                                        <h:form>
-                                                            <h:outputText value="-#{controladorDenuncia.getReclamarDenuncia(denuncia)}" id="n-reclamar#{denuncia.id}"/>
-                                                            <p:poll interval="3" update="n-reclamar#{denuncia.id}"/>
-                                                        </h:form>
-                                                    </button>
-                                                </span>
+
+                                            <div class="row">
+                                                <div align="center">
+                                                    <button data-toggle="modal" data-target=".denuncia#{denuncia.id}" class="btn-img">
+                                                        <img src="../denuncias/#{denuncia.foto}" class="img-denuncia" />
+                                                    </button>   
+                                                </div>
 
                                                 <!--modal--> 
-                                                <div id="modal-reclamacao">
-                                                    <div class="modal fade bs-example-modal-lg denunciaReclamacao#{denuncia.id}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                                    <h4 class="modal-title">O que está acontecendo?</h4>
-
+                                                <!--
+                                                <div class="modal fade bs-example-modal-lg denuncia#{denuncia.id}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+        
+        
+                                                            <div class="row">
+                                                                <div class="col-md-8 img-modal">
+                                                                    <img src="../denuncias/#{denuncia.foto}" class="img-denuncia-modal" />
                                                                 </div>
+                                                                <div class="col-md-4">
+        
+                                                                    <div class="modal-header btn-fecha-modal">
+                                                                        <button type="button" class="close " data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                    </div>
+        
+                                                                    <div class="row">
+                                                                        <div class="col-md-2 icone-denuncia">
+                                                                            <img src="../../img/icones-denuncia/#{denuncia.iconeDenunica}" />
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <div class="row rua-denuncia">
+                                                #{denuncia.tipoDaDenunciaFormatado}
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                                                <h:form>
+                                    <div class="row conteudo-denuncia-modal">
+                                        <div class="scroll">
+                                                #{denuncia.descricao} 
 
-                                                                    <div class="modal-body">
-                                                                        <p align="center" style="font-size: 16px">Nos ajude a identificar o que há de errado com esta denúncia.</p>
-                                                                        <br/>
-                                                                        <div class="row">
 
-                                                                            <div class="col-md-5">
-                                                                                <img src="../denuncias/#{denuncia.foto}" style="width: 100%; max-height: 100%;" />
-                                                                            </div>
-                                                                            <div class="col-md-7">
+                                                <iframe src="mapa.jsf?latitude=#{denuncia.enderecoDenuncia.latitude}&amp;longitude=#{denuncia.enderecoDenuncia.longitude}&amp;" class="frame-mapa" width="100%" height="110px" style="border: none" scrolling="no"></iframe>
 
-                                                                                <div class="form-group">
-                                                                                    <label>Tipo de Conteúdo: </label>
-                                                                                    <h:selectOneListbox size="1" class="form-control" value="#{controladorDenuncia.conteudoInapropriado.tipoDeConteudo}">
-                                                                                        <f:selectItem itemValue="FALSA_DENUNCIA" itemLabel="Falsa Denúncia" />
-                                                                                        <f:selectItem itemValue="NUDEZ" itemLabel="Exposição de Nudez"/>
-                                                                                        <f:selectItem itemValue="SPAN" itemLabel="Span"/>
-                                                                                        <f:selectItem itemValue="IRRITANTE" itemLabel="Essa denúncia me irrita"/>
-                                                                                    </h:selectOneListbox>
-                                                                                </div>
 
-                                                                                <div class="form-group">
-                                                                                    <label>Descrição:</label>
-                                                                                    <textarea class="form-control" rows="6" jsf:value="${controladorDenuncia.conteudoInapropriado.descricao}">
-                                                
-                                                                                    </textarea>
-                                                                                </div>
 
-                                                                            </div>
+
+                                                <c:if test="#{denuncia.informacaoDeAtendida.id > -1}">
+                                                    <c:choose>
+
+                                                        <c:when test="#{denuncia.tagEmAndamento()}">
+                                                            <span class="tooltips" title="Denuncia em Trabalho" rel="tooltip" data-placement="top" >
+                                                                <div class="modal-inf-em-trabalho">
+                                                                    EM TRABALHO
+                                                                </div>
+                                                            </span>
+                                                        </c:when>
+
+                                                        <c:when test="#{denuncia.tagAtendida()}">
+                                                            <span class="tooltips" title="Denuncia Atendida" rel="tooltip" data-placement="top" >
+                                                                <div class="modal-inf-atendida">
+                                                                    ATENDIDA
+                                                                </div>
+                                                            </span>
+                                                        </c:when>
+
+
+                                                    </c:choose>    
+                                                </c:if>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                                -->
+
+
+                                            </div>
+
+                                            <div class="row rodape-denuncia">
+                                                <div class="col-md-4 hora-denuncia-visualizada">
+                                                    #{denuncia.dataDenuncaFormatado} - #{denuncia.id}
+                                                </div>
+
+                                                <div class="col-md-offset-5 col-md-3 impucionar-denuncia">
+                                                    <div class="col-md-6">
+                                                        <span class="tooltips" title="Ajudar" rel="tooltip" data-placement="top" >
+                                                            <h:form>
+                                                                <p:growl id="growl"/>
+                                                                <c:choose>
+                                                                    <c:when test="#{!controladorUsuario.denunciasQueAjudei().contains(denuncia)}">
+                                                                        <p:commandButton value="+#{controladorUsuario.getAjudarDenuncia(denuncia)}" id="n-ajuda#{denuncia.id}" actionListener="#{controladorUsuario.setAjudarDenuncia(denuncia)}" styleClass="btn-ajudar-denuncia"/>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <p:commandButton value="+#{controladorUsuario.getAjudarDenuncia(denuncia)}" id="n-ajuda#{denuncia.id}"  actionListener="#{controladorUsuario.setAjudarDenuncia(denuncia)}" styleClass="btn-ajudar-denuncia" disabled="true"/>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+
+
+                                                                <p:poll interval="3" update="n-ajuda#{denuncia.id}" />
+                                                            </h:form>
+                                                        </span>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <span class="tooltips" title="Reclamar" rel="tooltip" data-placement="top" >
+
+                                                            <h:form >
+                                                                <button data-toggle="modal" data-target=".denunciaReclamacao#{denuncia.id}" class="btn-ajudar-denuncia">
+                                                                    <h:outputText value="-#{controladorDenuncia.getReclamarDenuncia(denuncia)}" id="n-reclamar#{denuncia.id}"/>
+                                                                    <p:poll interval="3" update="n-reclamar#{denuncia.id}"/>
+                                                                </button>
+                                                            </h:form>
+
+                                                        </span>
+
+                                                        <!--modal--> 
+                                                        <div id="modal-reclamacao">
+                                                            <div class="modal fade bs-example-modal-lg denunciaReclamacao#{denuncia.id}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                            <h4 class="modal-title">O que está acontecendo?</h4>
 
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                                                        <h:commandButton value="Reclamar" action="#{controladorDenuncia.setReclamarDenuncia(denuncia)}" class="btn btn-primary"/>
-                                                                    </div>
 
-                                                                </h:form>
+                                                                        <h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1">
+
+                                                                            <div class="modal-body">
+                                                                                <p align="center" style="font-size: 16px">Nos ajude a identificar o que há de errado com esta denúncia.</p>
+                                                                                <br/>
+                                                                                <div class="row">
+
+                                                                                    <div class="col-md-5">
+                                                                                        <img src="../denuncias/#{denuncia.foto}" style="width: 100%; max-height: 100%;" />
+                                                                                    </div>
+                                                                                    <div class="col-md-7">
+
+                                                                                        <div class="form-group">
+                                                                                            <label>Tipo de Conteúdo: </label>
+                                                                                            <h:selectOneListbox size="1" class="form-control" value="#{controladorDenuncia.conteudoInapropriado.tipoDeConteudo}">
+                                                                                                <f:selectItem itemValue="FALSA_DENUNCIA" itemLabel="Falsa Denúncia" />
+                                                                                                <f:selectItem itemValue="NUDEZ" itemLabel="Exposição de Nudez"/>
+                                                                                                <f:selectItem itemValue="SPAN" itemLabel="Span"/>
+                                                                                                <f:selectItem itemValue="IRRITANTE" itemLabel="Essa denúncia me irrita"/>
+                                                                                            </h:selectOneListbox>
+                                                                                        </div>
+
+                                                                                        <div class="form-group">
+                                                                                            <label>Descrição:</label>
+                                                                                            <textarea class="form-control" rows="6" jsf:value="${controladorDenuncia.conteudoInapropriado.descricao}">
+                                                
+                                                                                            </textarea>
+                                                                                        </div>
+
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                                                                <h:commandButton value="Reclamar" action="#{controladorDenuncia.setReclamarDenuncia(denuncia)}" class="btn btn-primary"/>
+                                                                            </div>
+
+                                                                        </h:form>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+
                                             </div>
+
                                         </div>
 
-                                    </div>
 
-                                </div>
-
-
-                            </c:forEach>
+                                    </c:forEach>
+                                </h:panelGroup>
+                            <!--</h:form>-->
 
 
 

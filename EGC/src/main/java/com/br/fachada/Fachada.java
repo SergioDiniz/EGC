@@ -232,6 +232,10 @@ public class Fachada {
         return ds.denunciasComReclamacoes();
     }
 
+    public List<ConteudoInapropriado> comentariosDeConteudoInapropriadoEmDenuncia(Denuncia denuncia){
+        return ds.comentariosDeConteudoInapropriadoEmDenuncia(denuncia);
+    }
+    
     // FIM DenunciaServices
     //
     //

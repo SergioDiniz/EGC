@@ -6,6 +6,7 @@
 package com.br.controle;
 
 import com.br.beans.Administrador;
+import com.br.beans.ConteudoInapropriado;
 import com.br.beans.Denuncia;
 import com.br.beans.Funcionario;
 import com.br.beans.Prefeitura;
@@ -186,6 +187,12 @@ public class ControladorAdmin implements Serializable {
         fachada.desbloquearDenuncia(denuncia);
         this.denunciaReclamacao.setAtivo(true);
     }
+    
+    
+    public List<ConteudoInapropriado> comentariosDeConteudoInapropriadoEmDenuncia(){
+        return fachada.comentariosDeConteudoInapropriadoEmDenuncia(this.denunciaReclamacao);
+    }
+    
     
     //getes and seters
     public Administrador getAdministrador() {
