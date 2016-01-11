@@ -36,6 +36,9 @@ public class Funcionario extends Pessoa implements Serializable{
     @OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL)
     private List<InformacaoDeAtendida> informacaoDeAtendidas;
     
+    @OneToMany
+    private List<Registro> registros;
+    
     public Funcionario() {
     }
 
@@ -103,6 +106,14 @@ public class Funcionario extends Pessoa implements Serializable{
 
     public void setInformacaoDeAtendidas(List<InformacaoDeAtendida> informacaoDeAtendidas) {
         this.informacaoDeAtendidas = informacaoDeAtendidas;
+    }
+
+    public List<Registro> getRegistros() {
+        return registros;
+    }
+
+    public void setRegistros(List<Registro> registros) {
+        this.registros = registros;
     }
     
     

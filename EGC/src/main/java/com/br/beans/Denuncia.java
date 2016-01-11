@@ -49,7 +49,9 @@ public class Denuncia implements Serializable {
     private String foto;
     @Column(nullable = false)
     private int numeroAjuda;
-    
+    @Column(nullable = false)
+    private String codigo;
+    @Column(nullable = false)
     private boolean ativo = true;
 
     @OneToOne(cascade = CascadeType.ALL)
