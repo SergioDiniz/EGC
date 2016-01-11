@@ -1162,9 +1162,9 @@ html, body{
 .perfil-topo{
     width: 100%;
     height: 250px !important;
-    background-image: url(../img/bg-perfil-funcionario.png);
+    background-image: url(../img/40.jpg);
     background-size: 100%;
-    background-position: 0 -250px ;
+    background-position: 0 -420px ;
 }
 
 .perfil-topo .nome-perfil{
@@ -1173,7 +1173,7 @@ html, body{
     font-weight: 100;
     margin-top: 200px;
     margin-left: -30px;
-}
+} 
 
 .perfil-topo .nome-perfil .btn-default{
     background: none;
@@ -1324,3 +1324,67 @@ html, body{
     padding: 0;
 }
 
+.menu-cidades .cidade{
+    background-color: #fff;
+    border-bottom: 3px solid #f1f1f1;
+    margin-bottom: 20px;
+}
+
+.menu-cidades .cidade .row{
+    background: none;
+}
+
+
+.menu-cidades .cidade-info{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.menu-cidades .cidade-info .info-foto .foto{
+    width: 100px;
+    height: 100px;
+    border-radius: 90px;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 18px;
+}
+
+
+.menu-cidades .cidade-info .info{
+    font-weight: 200;
+}
+
+.menu-cidades .cidade-info .info .nome-prefeitura{
+    font-size: 25px;
+}
+
+.menu-cidades .cidade-info .info .nome-cidade{
+    font-size: 12px;
+    color: #999;
+    padding-bottom: 15px;
+}
+
+.menu-cidades .cidade-dados td{
+    width: 150px;
+    height: 75px;
+    text-align: center;
+    color: #fff;
+}
+
+
+.menu-cidades .cidade-dados td:nth-child(1){
+    background-color: #f45655;
+}
+
+.menu-cidades .cidade-dados td:nth-child(2){
+    background-color: #f09635;
+}
+
+.menu-cidades .cidade-dados td:nth-child(3){
+    background-color: #21b9aa;
+}
+
+.menu-cidades .cidade-dados td:nth-child(4){
+    background-color: #5c97bf;
+}

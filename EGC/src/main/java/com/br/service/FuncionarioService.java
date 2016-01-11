@@ -6,6 +6,7 @@
 package com.br.service;
 
 import com.br.beans.Funcionario;
+import com.br.beans.Prefeitura;
 import com.br.beans.Registro;
 import java.util.List;
 import javax.ejb.Remote;
@@ -112,6 +113,21 @@ public class FuncionarioService implements FuncionarioServiceIT {
         
         if(r.size() > 0){
             return r;
+        }
+        
+        return null;
+    }
+    
+    @Override
+    public List<Prefeitura> prefeiturasDoFuncionario(String email){
+        
+        Query query = em.createQuery("SELECT p FROM Funcionario f JOIN f.prefeituras p WHERE f.email = :email");
+        query.setParameter("email", email);
+        
+        List<Prefeitura> p = query.getResultList();
+        
+        if(p.size() > 0){
+            return p;
         }
         
         return null;

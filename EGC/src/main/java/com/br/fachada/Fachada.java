@@ -141,6 +141,10 @@ public class Fachada {
     public List<Registro> registrosDoFuncionario(String email){
         return fs.registrosDoFuncionario(email);
     }
+    
+    public List<Prefeitura> prefeiturasDoFuncionario(String email){
+        return  fs.prefeiturasDoFuncionario(email);
+    }
 
     // FIM FuncionarioServices
     //

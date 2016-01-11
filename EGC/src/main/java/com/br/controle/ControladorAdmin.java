@@ -207,6 +207,10 @@ public class ControladorAdmin implements Serializable {
         return "perfil-funcionario.jsf?faces-redirect=true";
     }
     
+    public List<Prefeitura> prefeiturasDoFuncionario(String email){
+        return fachada.prefeiturasDoFuncionario(email);
+    }
+    
     
     //getes and seters
     public Administrador getAdministrador() {

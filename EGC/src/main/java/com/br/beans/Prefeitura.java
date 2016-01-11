@@ -32,6 +32,10 @@ public class Prefeitura implements Serializable{
     private String senha;
     @Column(nullable = false)
     private String documento;
+//    @Column (nullable = false, unique = true)
+//    private String telefone;
+//    @Column(nullable = false)
+//    private String foto = "brasao.jpg";
     @Embedded @Column(nullable = false)
     private EnderecoPrefeitura enderecoPrefeitura;
     

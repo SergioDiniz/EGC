@@ -28,6 +28,8 @@ public interface FuncionarioServiceIT {
     
     public List<Registro> registrosDoFuncionario(String email);
     
+    public List<Prefeitura> prefeiturasDoFuncionario(String email);
+    
     
 
 }

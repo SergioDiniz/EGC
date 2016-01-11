@@ -159,93 +159,157 @@
                                     </tr>
 
                                 </table>
-                                
-                                <table class="tb-registro">
-                                    <tr>
-                                        <td>
-                                            <img src="../../img/icon-calendario.png" width="40px"/>
-                                        </td>
-
-                                        <td>
-                                            <div class="td-dia-semana">
-                                                #{registro.diaDaSemana()} 
-                                            </div>
-                                            <div class="td-data-semana">
-                                                #{registro.dataFormatada()}
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <div class="td-hora">
-                                                #{registro.horaFormatada()}h
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <div class="td-registro">
-                                                <c:choose>
-                                                    <c:when test="#{registro.tipoDeRegistro == 'DENUNCIA_EM_TRABALHO'}">
-                                                        <a href="#">denúncia</a> recebeu uma <span class="label label-danger">Reclamação</span>, <span class="link-mapa-denuncia">#{registro.prefeitura.cidade.cidadePK.nomeCidade}, #{registro.prefeitura.cidade.cidadePK.siglaEstado}</span>
-                                                    </c:when>
-                                                    <c:when test="#{registro.tipoDeRegistro == 'DENUNCIA_ATENDIDA'}">
-                                                        <a href="#">denúncia</a> atualizada para o estado <span class="label label-success">Atendida</span>, <span class="link-mapa-denuncia">#{registro.prefeitura.cidade.cidadePK.nomeCidade}, #{registro.prefeitura.cidade.cidadePK.siglaEstado}</span>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <a href="#">denúncia</a> recebeu uma <span class="label label-danger">Reclamação</span>, <span class="link-mapa-denuncia">#{registro.prefeitura.cidade.cidadePK.nomeCidade}, #{registro.prefeitura.cidade.cidadePK.siglaEstado}</span>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </div>
-                                        </td>
-
-                                    </tr>
-
-                                </table>
-                                
-                                <table class="tb-registro">
-                                    <tr>
-                                        <td>
-                                            <img src="../../img/icon-calendario.png" width="40px"/>
-                                        </td>
-
-                                        <td>
-                                            <div class="td-dia-semana">
-                                                #{registro.diaDaSemana()} 
-                                            </div>
-                                            <div class="td-data-semana">
-                                                #{registro.dataFormatada()}
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <div class="td-hora">
-                                                #{registro.horaFormatada()}h
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <div class="td-registro">
-                                                <c:choose>
-                                                    <c:when test="#{registro.tipoDeRegistro == 'DENUNCIA_EM_TRABALHO'}">
-                                                        <a href="#">denúncia</a> atualizada para o estado <span class="label label-success">Atendida</span>, <span class="link-mapa-denuncia">#{registro.prefeitura.cidade.cidadePK.nomeCidade}, #{registro.prefeitura.cidade.cidadePK.siglaEstado}</span>
-                                                    </c:when>
-                                                    <c:when test="#{registro.tipoDeRegistro == 'DENUNCIA_ATENDIDA'}">
-                                                        <a href="#">denúncia</a> atualizada para o estado <span class="label label-success">Atendida</span>, <span class="link-mapa-denuncia">#{registro.prefeitura.cidade.cidadePK.nomeCidade}, #{registro.prefeitura.cidade.cidadePK.siglaEstado}</span>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <a href="#">denúncia</a> recebeu uma <span class="label label-danger">Reclamação</span>, <span class="link-mapa-denuncia">#{registro.prefeitura.cidade.cidadePK.nomeCidade}, #{registro.prefeitura.cidade.cidadePK.siglaEstado}</span>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </div>
-                                        </td>
-
-                                    </tr>
-
-                                </table>
                             </c:forEach>
                         </div>
 
                         <div role="tabpanel" class="tab-pane" id="tab2">
-                            cidades
+                            <div class="menu-cidades">
+                                <c:forEach var="prefeitura" items="#{controladorAdmin.prefeiturasDoFuncionario(controladorAdmin.gerenciarFuncionario.email)}" >
+                                    <div class="row">
+                                        <div class="col-md-offset-1 col-md-10">
+                                            <div class="cidade">
+                                                <div class="row">
+                                                    <div class="col-md-12 cidade-info">
+                                                        <div class="col-md-3 info-foto">
+                                                            <div class="foto" style="background-image: url(../../img/brasao.jpg)">
+                                                                
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-9 info">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="nome-prefeitura">
+                                                                        #{prefeitura.nome}
+                                                                    </div>
+                                                                    <div class="nome-cidade">
+                                                                        #{prefeitura.cidade.cidadePK.nomeCidade}, #{prefeitura.cidade.cidadePK.siglaEstado}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="col-md-1">
+                                                                        <img src="../../img/icon-telefone.png"/>
+                                                                    </div>
+                                                                    <div class="col-md-9">
+                                                                        (83) 96551478
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="col-md-1">
+                                                                        <img src="../../img/icon-email.png"/>
+                                                                    </div>
+                                                                    <div class="col-md-9">
+                                                                        #{prefeitura.email}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="col-md-1">
+                                                                        <img src="../../img/icon-endereco.png"/>
+                                                                    </div>
+                                                                    <div class="col-md-9">
+                                                                        #{prefeitura.enderecoPrefeitura.rua} - #{prefeitura.enderecoPrefeitura.numero}, #{prefeitura.enderecoPrefeitura.cep}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 cidade-dados">
+                                                        <table>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <div class="col-md-5">
+                                                                                <img src="../../img/total-denuncias.png" height="40px" />
+                                                                            </div>
+
+                                                                            <div class="col-md-6">
+                                                                                <div class="row" align="right">
+                                                                                    Denúncias
+                                                                                </div>
+                                                                                <div class="row" align="right">
+                                                                                    0
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <div class="col-md-5">
+                                                                                <img src="../../img/denuncia-atendida.png" height="40px" />
+                                                                            </div>
+
+                                                                            <div class="col-md-6">
+                                                                                <div class="row" align="right">
+                                                                                    Atendidas
+                                                                                </div>
+                                                                                <div class="row" align="right">
+                                                                                    0
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <div class="col-md-5">
+                                                                                <img src="../../img/total-usuario.png" height="40px" />
+                                                                            </div>
+
+                                                                            <div class="col-md-6">
+                                                                                <div class="row" align="right">
+                                                                                    Usuários
+                                                                                </div>
+                                                                                <div class="row" align="right">
+                                                                                    0
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <div class="col-md-5">
+                                                                                <img src="../../img/total-funcionarios.png" height="40px" />
+                                                                            </div>
+
+                                                                            <div class="col-md-6">
+                                                                                <div class="row" align="right">
+                                                                                    Funcionários
+                                                                                </div>
+                                                                                <div class="row" align="right">
+                                                                                    0
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- -->
+
+                                </c:forEach>
+                            </div>
                         </div>
                     </div>
                 </div>

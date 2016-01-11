@@ -28,6 +28,8 @@ public class Funcionario extends Pessoa implements Serializable{
     private String telefone;
     @Column (nullable = false)
     private boolean sexo;
+//    @Column(nullable = false)
+//    private String foto;
     // true = masculino, false = feminino
     
     @ManyToMany(mappedBy = "funcionarios", cascade = CascadeType.ALL)
