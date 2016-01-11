@@ -1216,7 +1216,7 @@ html, body{
 
 .perfil-info .dados-funcionario .btn-vincular .btn-primary{
     letter-spacing: 1px;
-    
+
     font-weight: 200;
     margin-top: 5px;
     background-color: #03a4f7;
@@ -1230,3 +1230,97 @@ html, body{
     margin-top: -65px;
     margin-left: 100px
 }
+
+
+.opcoes-registro-cidade{
+    margin-top: 30px;
+    padding-bottom: 50px;
+}
+
+.opcoes-registro-cidade .menu-opcoes{
+    margin-left: 120px;
+    padding-bottom: 30px;
+}
+
+.opcoes-registro-cidade .menu-opcoes .nav-tabs{
+    border: none;
+}
+
+
+/*.nav-tabs > li.active > a, 
+.nav-tabs > li.active > a:hover, 
+.nav-tabs > li.active > a:focus*/
+.opcoes-registro-cidade .menu-opcoes .nav-tabs li a:hover{
+    background: transparent;
+    border-color: transparent;
+}   
+
+.opcoes-registro-cidade .menu-opcoes .nav-tabs li a{
+    font-size: 25px;
+    font-weight: 100;
+    color: #999;
+}
+
+.opcoes-registro-cidade .menu-opcoes .nav-tabs li.active a{
+    border: none !important;
+    color: #df8d91;
+    background-color: transparent;
+}
+
+.tb-registro{
+    margin-bottom: 10px !important;   
+}
+
+.tb-registro td:nth-child(1){
+    width: 50px;
+}
+
+.tb-registro td:nth-child(2){
+    padding-left: 15px;
+    padding-right: 30px;
+}
+
+.tb-registro td:nth-child(3){
+    background-color: #fbfbfb;
+    border-bottom: 2px solid #f1f1f1;
+    border-radius: 5px 0 0 5px;
+    border-right: none;
+    color: #a6a6a6;
+    font-size: 12px;
+}
+
+.tb-registro td:nth-child(4){
+    border-bottom: 2px solid #f1f1f1;
+    padding-left: 15px;
+    background-color: #fff;
+    width: 100%;
+    border-radius: 0  5px 5px 0;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    font-size: 12px;
+}
+
+.tb-registro .td-dia-semana{
+    font-size: 12px;
+    font-weight:bold;
+}
+
+.tb-registro .td-data-semana{
+    font-size: 10px;
+    color: #999;
+}
+
+.tb-registro .td-hora{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.tb-registro .td-registro .label{
+    font-size: 12px;
+}
+
+.tb-registro .td-registro .link-mapa-denuncia{
+    margin: 0;
+    padding: 0;
+}
+

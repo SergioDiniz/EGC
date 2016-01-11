@@ -9,7 +9,7 @@
     <h:head>
         <title>EGC - Administrador</title>
     </h:head>
-    <h:body>
+    <h:body style="background-color: #f7f7f7;">
         <div class="tudo">
 
             <div id="menu">
@@ -91,12 +91,12 @@
                                     </div>
                                 </div>
 
-<!--                                <div class="col-md-2">
-                                    <div class="btn-vincular">
-                                        <button class="btn btn-primary">Vincular</button>
-                                    </div>
-                                </div>-->
-                                
+                                <!--                                <div class="col-md-2">
+                                                                    <div class="btn-vincular">
+                                                                        <button class="btn btn-primary">Vincular</button>
+                                                                    </div>
+                                                                </div>-->
+
                             </div>
                         </div>
                     </div>
@@ -106,7 +106,150 @@
 
             <!-- -->
             <div class="container">
-                oi
+
+                <div class="col-md-offset-2 col-md-8 opcoes-registro-cidade">
+                    <div class="menu-opcoes">
+                        <ul class="nav nav-tabs">
+                            <li role="presentation" class="active"><a href="#tab1" data-toggle="tab">Ultimas Ações</a></li>
+                            <li role="presentation"><a href="#tab2" data-toggle="tab">Cidades</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="tab1">
+
+                            <c:forEach var="registro" items="#{controladorFuncionario.registrosDoFuncionario(controladorAdmin.gerenciarFuncionario.email)}" >
+                                <table class="tb-registro">
+                                    <tr>
+                                        <td>
+                                            <img src="../../img/icon-calendario.png" width="40px"/>
+                                        </td>
+
+                                        <td>
+                                            <div class="td-dia-semana">
+                                                #{registro.diaDaSemana()} 
+                                            </div>
+                                            <div class="td-data-semana">
+                                                #{registro.dataFormatada()}
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="td-hora">
+                                                #{registro.horaFormatada()}h
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="td-registro">
+                                                <c:choose>
+                                                    <c:when test="#{registro.tipoDeRegistro == 'DENUNCIA_EM_TRABALHO'}">
+                                                        <a href="#">denúncia</a> atualizada para o estado <span class="label label-info">Em trabalho</span>, <span class="link-mapa-denuncia">#{registro.prefeitura.cidade.cidadePK.nomeCidade}, #{registro.prefeitura.cidade.cidadePK.siglaEstado}</span>
+                                                    </c:when>
+                                                    <c:when test="#{registro.tipoDeRegistro == 'DENUNCIA_ATENDIDA'}">
+                                                        <a href="#">denúncia</a> atualizada para o estado <span class="label label-success">Atendida</span>, <span class="link-mapa-denuncia">#{registro.prefeitura.cidade.cidadePK.nomeCidade}, #{registro.prefeitura.cidade.cidadePK.siglaEstado}</span>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <a href="#">denúncia</a> recebeu uma <span class="label label-danger">Reclamação</span>, <span class="link-mapa-denuncia">#{registro.prefeitura.cidade.cidadePK.nomeCidade}, #{registro.prefeitura.cidade.cidadePK.siglaEstado}</span>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+
+                                </table>
+                                
+                                <table class="tb-registro">
+                                    <tr>
+                                        <td>
+                                            <img src="../../img/icon-calendario.png" width="40px"/>
+                                        </td>
+
+                                        <td>
+                                            <div class="td-dia-semana">
+                                                #{registro.diaDaSemana()} 
+                                            </div>
+                                            <div class="td-data-semana">
+                                                #{registro.dataFormatada()}
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="td-hora">
+                                                #{registro.horaFormatada()}h
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="td-registro">
+                                                <c:choose>
+                                                    <c:when test="#{registro.tipoDeRegistro == 'DENUNCIA_EM_TRABALHO'}">
+                                                        <a href="#">denúncia</a> recebeu uma <span class="label label-danger">Reclamação</span>, <span class="link-mapa-denuncia">#{registro.prefeitura.cidade.cidadePK.nomeCidade}, #{registro.prefeitura.cidade.cidadePK.siglaEstado}</span>
+                                                    </c:when>
+                                                    <c:when test="#{registro.tipoDeRegistro == 'DENUNCIA_ATENDIDA'}">
+                                                        <a href="#">denúncia</a> atualizada para o estado <span class="label label-success">Atendida</span>, <span class="link-mapa-denuncia">#{registro.prefeitura.cidade.cidadePK.nomeCidade}, #{registro.prefeitura.cidade.cidadePK.siglaEstado}</span>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <a href="#">denúncia</a> recebeu uma <span class="label label-danger">Reclamação</span>, <span class="link-mapa-denuncia">#{registro.prefeitura.cidade.cidadePK.nomeCidade}, #{registro.prefeitura.cidade.cidadePK.siglaEstado}</span>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+
+                                </table>
+                                
+                                <table class="tb-registro">
+                                    <tr>
+                                        <td>
+                                            <img src="../../img/icon-calendario.png" width="40px"/>
+                                        </td>
+
+                                        <td>
+                                            <div class="td-dia-semana">
+                                                #{registro.diaDaSemana()} 
+                                            </div>
+                                            <div class="td-data-semana">
+                                                #{registro.dataFormatada()}
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="td-hora">
+                                                #{registro.horaFormatada()}h
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="td-registro">
+                                                <c:choose>
+                                                    <c:when test="#{registro.tipoDeRegistro == 'DENUNCIA_EM_TRABALHO'}">
+                                                        <a href="#">denúncia</a> atualizada para o estado <span class="label label-success">Atendida</span>, <span class="link-mapa-denuncia">#{registro.prefeitura.cidade.cidadePK.nomeCidade}, #{registro.prefeitura.cidade.cidadePK.siglaEstado}</span>
+                                                    </c:when>
+                                                    <c:when test="#{registro.tipoDeRegistro == 'DENUNCIA_ATENDIDA'}">
+                                                        <a href="#">denúncia</a> atualizada para o estado <span class="label label-success">Atendida</span>, <span class="link-mapa-denuncia">#{registro.prefeitura.cidade.cidadePK.nomeCidade}, #{registro.prefeitura.cidade.cidadePK.siglaEstado}</span>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <a href="#">denúncia</a> recebeu uma <span class="label label-danger">Reclamação</span>, <span class="link-mapa-denuncia">#{registro.prefeitura.cidade.cidadePK.nomeCidade}, #{registro.prefeitura.cidade.cidadePK.siglaEstado}</span>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+
+                                </table>
+                            </c:forEach>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane" id="tab2">
+                            cidades
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </div>

@@ -7,6 +7,7 @@ package com.br.service;
 
 import com.br.beans.Funcionario;
 import com.br.beans.Prefeitura;
+import com.br.beans.Registro;
 import java.util.List;
 
 /**
@@ -24,6 +25,8 @@ public interface FuncionarioServiceIT {
     public List<Funcionario> todosFuncionarios();
     
     public int numeroDeFuncionarios();
+    
+    public List<Registro> registrosDoFuncionario(String email);
     
     
 

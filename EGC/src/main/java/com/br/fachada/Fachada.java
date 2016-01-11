@@ -12,6 +12,7 @@ import com.br.beans.Denuncia;
 import com.br.beans.EnderecoDenuncia;
 import com.br.beans.Funcionario;
 import com.br.beans.Prefeitura;
+import com.br.beans.Registro;
 import com.br.beans.TipoDeDenuncia;
 import com.br.beans.Usuario;
 import com.br.service.AdministradorService;
@@ -135,6 +136,10 @@ public class Fachada {
 
     public int numeroDeFuncionarios() {
         return fs.numeroDeFuncionarios();
+    }
+    
+    public List<Registro> registrosDoFuncionario(String email){
+        return fs.registrosDoFuncionario(email);
     }
 
     // FIM FuncionarioServices

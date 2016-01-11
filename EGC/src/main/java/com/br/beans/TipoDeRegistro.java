@@ -10,7 +10,7 @@ package com.br.beans;
  * @author sergiodiniz
  */
 public enum TipoDeRegistro {
-    ATUALIZACAO_DENUNCIA_AGUARDANDO,
-    ATUALIZACAO_DENUNCIA_ATENDIDA,
-    ATUALIZACAO_DENUNCIA_EM_TRABALH
+    RECLAMACAO,
+    DENUNCIA_ATENDIDA,
+    DENUNCIA_EM_TRABALHO
 }

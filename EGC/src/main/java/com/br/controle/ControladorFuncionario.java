@@ -8,9 +8,11 @@ package com.br.controle;
 import com.br.beans.Cidade;
 import com.br.beans.CidadePK;
 import com.br.beans.Funcionario;
+import com.br.beans.Registro;
 import com.br.fachada.Fachada;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -73,7 +75,9 @@ public class ControladorFuncionario implements Serializable {
         return null;
     }
     
-    
+    public List<Registro> registrosDoFuncionario(String email){
+        return fachada.registrosDoFuncionario(email);
+    }
     
     
 

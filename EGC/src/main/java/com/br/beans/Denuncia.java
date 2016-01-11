@@ -50,7 +50,7 @@ public class Denuncia implements Serializable {
     @Column(nullable = false)
     private int numeroAjuda;
     @Column(nullable = false)
-    private String codigo;
+    private String codigo = "0";
     @Column(nullable = false)
     private boolean ativo = true;
 
