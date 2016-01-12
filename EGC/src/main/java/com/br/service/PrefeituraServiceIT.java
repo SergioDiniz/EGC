@@ -29,7 +29,10 @@ public interface PrefeituraServiceIT {
     
     public List<Funcionario> funcionarios(Prefeitura prefeitura);
     
-    public long totalDeFuncionariosNaPrefeitura(int id);
+    public long totalDeFuncionariosNaPrefeitura(String email);
+    
+    public List<Long> dadosGeraisPrefeitura(String emailPrefeitura, String cidade, String estado);
 
+    
     
 }

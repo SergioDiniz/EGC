@@ -108,10 +108,14 @@ public class Fachada {
         return ps.desvincular(prefeitura, cpf);
     }
 
-    public long totalDeFuncionariosNaPrefeitura(int id) {
-        return ps.totalDeFuncionariosNaPrefeitura(id);
+    public long totalDeFuncionariosNaPrefeitura(String email) {
+        return ps.totalDeFuncionariosNaPrefeitura(email);
     }
 
+    public List<Long> dadosGeraisPrefeitura(String emailPrefeitura, String cidade, String estado){
+        return ps.dadosGeraisPrefeitura(emailPrefeitura, cidade, estado);
+    }
+    
     // FIM PrefeituraServices
     //
     //

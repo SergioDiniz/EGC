@@ -42,18 +42,19 @@ public class ControladorPrefeitura implements Serializable {
 
     private UploadedFile file;
 
-    Prefeitura prefeitura;
-    Cidade cidade;
-    CidadePK cidadePK;
-    Funcionario funcionario;
-    Funcionario funcionarioAux;
-    boolean funcionarioCadastrado;
-    boolean funcionarioVinculado;
-    boolean funcionarioNovo;
-    boolean mostrarModalDesvincular;
-    String CPFPesquisaF;
+    private Prefeitura prefeitura;
+    private Cidade cidade;
+    private CidadePK cidadePK;
+    private Funcionario funcionario;
+    private Funcionario funcionarioAux;
+    private boolean funcionarioCadastrado;
+    private boolean funcionarioVinculado;
+    private boolean funcionarioNovo;
+    private boolean mostrarModalDesvincular;
+    private String CPFPesquisaF;
     private List<Denuncia> denunciaComMaisAjuda;
     private List<Denuncia> denunciaMaisRecentes;
+    private List<Long> dadosPrefeitura;
 
     @EJB
     private Fachada fachada;
@@ -262,7 +263,7 @@ public class ControladorPrefeitura implements Serializable {
     }
     
     public long totalDeFuncionariosNaPrefeitura() {
-        return fachada.totalDeFuncionariosNaPrefeitura(this.prefeitura.getId());
+        return fachada.totalDeFuncionariosNaPrefeitura(this.prefeitura.getEmail());
     }
     
     public long totalDeUsuariosNaCidade(){
@@ -284,6 +285,20 @@ public class ControladorPrefeitura implements Serializable {
                                                                                 this.prefeitura.getCidade().getCidadePK().getSiglaEstado()));
     }
     
+    
+    public void dadosGeraisPrefeitura(String emailPrefeitura, String cidade, String estado){
+        this.dadosPrefeitura = new ArrayList<>();
+        
+        long denuncias = fachada.totalDeDenunciasNaCidade(cidade, estado);
+        long denunciasAtendidas = fachada.totalDeDenunciasAtendidasNaCidade(cidade, estado);
+        long usuarios = fachada.totalDeUsuariosNaCidade(cidade, estado);
+        long funcionarios = fachada.totalDeFuncionariosNaPrefeitura(emailPrefeitura);
+        
+        this.dadosPrefeitura.add(0, denuncias);
+        this.dadosPrefeitura.add(1, denunciasAtendidas);
+        this.dadosPrefeitura.add(2, usuarios);
+        this.dadosPrefeitura.add(3, funcionarios);
+    }
     
     //
     //
@@ -396,6 +411,14 @@ public class ControladorPrefeitura implements Serializable {
 
     public void setDenunciaMaisRecentes(List<Denuncia> denunciaMaisRecentes) {
         this.denunciaMaisRecentes = denunciaMaisRecentes;
+    }
+
+    public List<Long> getDadosPrefeitura() {
+        return dadosPrefeitura;
+    }
+
+    public void setDadosPrefeitura(List<Long> dadosPrefeitura) {
+        this.dadosPrefeitura = dadosPrefeitura;
     }
 
 

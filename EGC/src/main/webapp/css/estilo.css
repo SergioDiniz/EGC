@@ -106,7 +106,7 @@ html, body{
 
 .menu-lateral{
     float: left;
-    min-width: 65px;
+    width: 65px;
     height: calc(100% - 50px);
     margin-top: 0px;
     border-right: solid 2px #dfdfdf;

@@ -7,6 +7,7 @@ package com.br.service;
 
 import com.br.beans.Funcionario;
 import com.br.beans.Prefeitura;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -136,9 +137,9 @@ public class PrefeituraService implements PrefeituraServiceIT {
     }
 
     @Override
-    public long totalDeFuncionariosNaPrefeitura(int id) {
-        Query query = em.createQuery("SELECT COUNT(f) FROM Prefeitura p JOIN p.funcionarios f WHERE p.id = :id");
-            query.setParameter("id", id);
+    public long totalDeFuncionariosNaPrefeitura(String email) {
+        Query query = em.createQuery("SELECT COUNT(f) FROM Prefeitura p JOIN p.funcionarios f WHERE p.email = :email");
+            query.setParameter("email", email);
             
             List f = query.getResultList();
             
@@ -149,4 +150,24 @@ public class PrefeituraService implements PrefeituraServiceIT {
             return 0;
     }
 
+    @Override
+    public List<Long> dadosGeraisPrefeitura(String emailPrefeitura, String cidade, String estado){
+        long funcionarios = totalDeFuncionariosNaPrefeitura(emailPrefeitura);
+        long usuarios =  new CidadeService().totalDeUsuariosNaCidade(cidade, estado);
+        long denuncias = new DenunciaService().totalDeDenunciasNaCidade(cidade, estado);
+        long denunciasAtendidas = new DenunciaService().totalDeDenunciasAtendidasNaCidade(cidade, estado);
+        
+        List<Long> dados = new ArrayList<>();
+        dados.add(0, denuncias);
+        dados.add(1, denunciasAtendidas);
+        dados.add(2, usuarios);
+        dados.add(3, funcionarios);
+        
+        for (Long dado : dados) {
+            System.out.println(dado);
+        }
+        
+        return dados;
+    }
+    
 }
