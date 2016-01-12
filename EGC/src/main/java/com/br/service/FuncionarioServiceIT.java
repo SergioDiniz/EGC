@@ -30,6 +30,10 @@ public interface FuncionarioServiceIT {
     
     public List<Prefeitura> prefeiturasDoFuncionario(String email);
     
+    public List<Funcionario> funcionariosOnline(String email);
     
+    public boolean tornaFuncionarioOnline(String email);
+    
+    public boolean tornaFuncionarioOffline(String email);
 
 }

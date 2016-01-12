@@ -150,6 +150,18 @@ public class Fachada {
         return  fs.prefeiturasDoFuncionario(email);
     }
 
+    public List<Funcionario> funcionariosOnline(String email){
+        return fs.funcionariosOnline(email);
+    }
+    
+    public boolean tornaFuncionarioOnline(String email){
+        return fs.tornaFuncionarioOnline(email);
+    }
+    
+    public boolean tornaFuncionarioOffline(String email){
+        return fs.tornaFuncionarioOffline(email);
+    }
+    
     // FIM FuncionarioServices
     //
     //

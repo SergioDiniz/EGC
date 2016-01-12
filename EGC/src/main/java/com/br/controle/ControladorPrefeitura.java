@@ -55,6 +55,7 @@ public class ControladorPrefeitura implements Serializable {
     private List<Denuncia> denunciaComMaisAjuda;
     private List<Denuncia> denunciaMaisRecentes;
     private List<Long> dadosPrefeitura;
+    private List<Funcionario> funcionariosOnline;
 
     @EJB
     private Fachada fachada;
@@ -73,6 +74,7 @@ public class ControladorPrefeitura implements Serializable {
         this.funcionarioAux = new Funcionario();
         this.denunciaComMaisAjuda = new ArrayList<>();
         this.denunciaMaisRecentes = new ArrayList<>();
+        this.funcionariosOnline = new ArrayList<>();
     }
 
     public void mostrapagina() throws IOException {
@@ -300,6 +302,12 @@ public class ControladorPrefeitura implements Serializable {
         this.dadosPrefeitura.add(3, funcionarios);
     }
     
+    
+    public void funcionariosQueEstaoOnline(){
+        this.funcionariosOnline = new ArrayList<>();
+        this.funcionariosOnline.addAll(fachada.funcionariosOnline(this.prefeitura.getEmail()));
+    }
+    
     //
     //
     //
@@ -421,7 +429,15 @@ public class ControladorPrefeitura implements Serializable {
         this.dadosPrefeitura = dadosPrefeitura;
     }
 
+    public List<Funcionario> getFuncionariosOnline() {
+        return funcionariosOnline;
+    }
 
+    public void setFuncionariosOnline(List<Funcionario> funcionariosOnline) {
+        this.funcionariosOnline = funcionariosOnline;
+    }
+
+    
 
     
 }

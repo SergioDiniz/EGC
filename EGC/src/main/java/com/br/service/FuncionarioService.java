@@ -8,6 +8,7 @@ package com.br.service;
 import com.br.beans.Funcionario;
 import com.br.beans.Prefeitura;
 import com.br.beans.Registro;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
@@ -133,6 +134,51 @@ public class FuncionarioService implements FuncionarioServiceIT {
         return null;
     }
     
+    @Override
+    public List<Funcionario> funcionariosOnline(String email){
+        Query query = em.createQuery("SELECT f FROM Prefeitura p JOIN p.funcionarios f WHERE p.email = :email and f.ativo = true ORDER BY f.nome");
+        query.setParameter("email", email);
+        
+        List<Funcionario> f = query.getResultList();
+        
+        if(f.size() > 0){
+            return f;
+        }
+        
+        return new ArrayList<>();
+    }
+    
+    @Override
+    public boolean tornaFuncionarioOnline(String email){
+        Query query = em.createQuery("SELECT f FROM Funcionario f WHERE f.email = :email");
+        query.setParameter("email", email);
+        
+        List<Funcionario> f = query.getResultList();
+        
+        if(f.size() > 0){
+            f.get(0).setAtivo(true);
+            em.merge(f.get(0));
+            return true;
+        }
+        
+        return false;
+    }
+    
+    @Override
+    public boolean tornaFuncionarioOffline(String email){
+        Query query = em.createQuery("SELECT f FROM Funcionario f WHERE f.email = :email");
+        query.setParameter("email", email);
+        
+        List<Funcionario> f = query.getResultList();
+        
+        if(f.size() > 0){
+            f.get(0).setAtivo(false);
+            em.merge(f.get(0));
+            return true;
+        }
+        
+        return false;
+    }
     
 
 }

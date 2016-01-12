@@ -52,6 +52,9 @@ public class ControladorFuncionario implements Serializable {
         if (funcionario != null) {
 
             this.cidade = fachada.pesquisarCidade(cidadePK.getNomeCidade(), cidadePK.getSiglaEstado());
+            
+            fachada.tornaFuncionarioOnline(this.funcionario.getEmail());
+            
             return "/sis/funcionario/index.jsf?faces-redirect=true";
 
         } else {
@@ -64,6 +67,9 @@ public class ControladorFuncionario implements Serializable {
     }
 
     public String logout() {
+        
+        fachada.tornaFuncionarioOffline(this.funcionario.getEmail());
+        
         this.funcionario = new Funcionario();
         this.cidadePK = new CidadePK();
         return "/index.jsf?faces-redirect=true";

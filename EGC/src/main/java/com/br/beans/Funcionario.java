@@ -31,7 +31,7 @@ public class Funcionario extends Pessoa implements Serializable {
     private boolean sexo;
     //true = masculino , false = feminino
     @Column(nullable = false)
-    private boolean ativo = false;
+    private boolean ativo;
     @Column(nullable = false)
     private String foto;
 
