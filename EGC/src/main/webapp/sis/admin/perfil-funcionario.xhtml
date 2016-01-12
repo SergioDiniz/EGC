@@ -46,14 +46,7 @@
                     <div class="perfil-foto">
                         <div class="row">
                             <div class="col-md-12">
-                                <c:choose>
-                                    <c:when test="#{controladorAdmin.gerenciarFuncionario.sexo == true}">
-                                        <img src="../../img/h-funcionario.png" width="130px" height="130px"/>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <img src="../../img/m-funcionario.png" width="130px" height="130px"/>
-                                    </c:otherwise>
-                                </c:choose>
+                                <img src="../../img/#{controladorAdmin.gerenciarFuncionario.foto}" width="130px" height="130px"/>
                             </div>
                         </div>
                     </div>
@@ -171,7 +164,7 @@
                                                 <div class="row">
                                                     <div class="col-md-12 cidade-info">
                                                         <div class="col-md-3 info-foto">
-                                                            <div class="foto" style="background-image: url(../../img/brasao.jpg)">
+                                                            <div class="foto" style="background-image: url(../../img/#{prefeitura.foto})">
                                                                 
                                                             </div>
                                                         </div>

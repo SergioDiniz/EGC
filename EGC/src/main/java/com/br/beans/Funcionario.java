@@ -19,28 +19,31 @@ import javax.persistence.OneToMany;
  * @author Sergio Diniz
  */
 @Entity
-public class Funcionario extends Pessoa implements Serializable{
-    @Column (nullable = false)
+public class Funcionario extends Pessoa implements Serializable {
+
+    @Column(nullable = false)
     private String nome;
-    @Column (nullable = false, unique = true)
+    @Column(nullable = false, unique = true)
     private String cpf;
-    @Column (nullable = false, unique = true)
+    @Column(nullable = false, unique = true)
     private String telefone;
-    @Column (nullable = false)
+    @Column(nullable = false)
     private boolean sexo;
-//    @Column(nullable = false)
-//    private String foto;
-    // true = masculino, false = feminino
-    
+    //true = masculino , false = feminino
+    @Column(nullable = false)
+    private boolean ativo = false;
+    @Column(nullable = false)
+    private String foto;
+
     @ManyToMany(mappedBy = "funcionarios", cascade = CascadeType.ALL)
     private List<Prefeitura> prefeituras;
 
     @OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL)
     private List<InformacaoDeAtendida> informacaoDeAtendidas;
-    
+
     @OneToMany
     private List<Registro> registros;
-    
+
     public Funcionario() {
     }
 
@@ -50,8 +53,6 @@ public class Funcionario extends Pessoa implements Serializable{
         this.cpf = cpf;
         this.prefeituras = new ArrayList<>();
     }
-    
-    
 
     public Funcionario(String nome, String cpf, List<Prefeitura> prefeituras, String email, String senha) {
         super(email, senha);
@@ -59,8 +60,6 @@ public class Funcionario extends Pessoa implements Serializable{
         this.cpf = cpf;
         this.prefeituras = prefeituras;
     }
-    
-    
 
     public String getNome() {
         return nome;
@@ -117,9 +116,23 @@ public class Funcionario extends Pessoa implements Serializable{
     public void setRegistros(List<Registro> registros) {
         this.registros = registros;
     }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
     
     
-    
-    
-    
+
 }

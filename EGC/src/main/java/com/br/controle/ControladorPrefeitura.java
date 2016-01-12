@@ -194,6 +194,11 @@ public class ControladorPrefeitura implements Serializable {
 
     public String cadastrarNovoFuncionario() {
         funcionario.setCpf(CPFPesquisaF);
+        if(this.funcionario.isSexo()){
+            this.funcionario.setFoto("h-funcionario.png");
+        } else{
+            this.funcionario.setFoto("m-funcionario.png");
+        }
         fachada.cadastrar(funcionario);
         funcionario = fachada.buscarFuncionarioPorCPF(CPFPesquisaF);
         fachada.cadastrarNaPrefeitura(prefeitura, funcionario);

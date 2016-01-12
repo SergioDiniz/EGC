@@ -38,14 +38,7 @@
                                     </div>
                                 </div>
                                 <div class="foto">
-                                    <c:choose>
-                                        <c:when test="#{funcionario.sexo == true}">
-                                            <img src="../../img/h-funcionario.png"/>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <img src="../../img/m-funcionario.png"/>
-                                        </c:otherwise>
-                                    </c:choose>
+                                    <img src="../../img/#{funcionario.foto}"/>
                                 </div>
                                 <div class="dados">
 

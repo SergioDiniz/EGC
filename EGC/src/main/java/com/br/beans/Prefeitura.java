@@ -32,10 +32,10 @@ public class Prefeitura implements Serializable{
     private String senha;
     @Column(nullable = false)
     private String documento;
-//    @Column (nullable = false, unique = true)
-//    private String telefone;
-//    @Column(nullable = false)
-//    private String foto = "brasao.jpg";
+    @Column (nullable = false, unique = true)
+    private String telefone;
+    @Column(nullable = false)
+    private String foto = "brasao.jpg";
     @Embedded @Column(nullable = false)
     private EnderecoPrefeitura enderecoPrefeitura;
     
@@ -148,6 +148,21 @@ public class Prefeitura implements Serializable{
         this.funcionarios = funcionarios;
     }
 
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
     
     
     @Override
