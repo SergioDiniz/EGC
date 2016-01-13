@@ -96,12 +96,30 @@ html, body{
     float: right;
 }
 
+.area-sair .foto-topo{
+    width: 40px;
+    height: 40px;
+    border-radius: 90px;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    float: left;
+    margin-right: 18px;
+    margin-top: -10px;
+}
+
 .nome-usuario{
     padding-top: 15px;
     padding-right: 50px;
     color: #fff;
     font-weight: bold;
     float: left;
+}
+
+.nome-usuario img{
+
+    margin-top: -5px;
+    margin-right: 15px;
 }
 
 .menu-lateral{
@@ -128,18 +146,18 @@ html, body{
 }
 
 .menu-lateral .user-online{
-    
+
     text-align: center;
     margin-bottom: 5px;
     text-decoration: none !important; 
-/*    color: #5c97bf;
-    text-decoration: none !important;
-    font-size: 12px;*/
+    /*    color: #5c97bf;
+        text-decoration: none !important;
+        font-size: 12px;*/
     /*font-weight: 100;*/
 }
 
 .menu-lateral .user-online .label{
-    
+
 }
 
 .area-titulo-pagina{
@@ -1061,6 +1079,20 @@ html, body{
 
 }
 
+.lista-de-denuncias .denuncia-com-reclamacao .foto .foto,
+.lista-de-funcionarios .funcionario .foto .foto{
+    height: 87px;
+    width: 87px;
+    border-radius: 90px;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+}
+
+
+
+
 .lista-de-denuncias .denuncia-com-reclamacao .dados,
 .lista-de-funcionarios .funcionario .dados{
     font-weight: 200;
@@ -1258,6 +1290,16 @@ html, body{
     margin-left: 100px
 }
 
+.perfil-foto .foto{
+    height: 130px;
+    width: 130px;
+    border-radius: 90px;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+}
+
 
 .opcoes-registro-cidade{
     margin-top: 30px;
@@ -1414,4 +1456,83 @@ html, body{
 
 .menu-cidades .cidade-dados td:nth-child(4){
     background-color: #5c97bf;
+}
+
+.foto-perfil-conf{
+    margin-left: 100px;
+}
+
+.foto-perfil-conf .foto{
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 18px;
+}
+
+.foto-perfil-conf .btn-mudar-foto-perfil{
+    margin-top: 15px;
+    margin-left: 60px;
+    width: 120px;
+}
+
+.foto-perfil-conf .btn-mudar-foto-perfil .ui-fileupload-simple{
+    background: none !important;
+} 
+
+.foto-perfil-conf .btn-mudar-foto-perfil .ui-widget{
+    background: none !important;
+}
+
+.foto-perfil-conf .btn-mudar-foto-perfil .ui-button ui-widget{
+    background: none !important;
+} 
+
+.foto-perfil-conf .btn-mudar-foto-perfil .ui-state-default{
+    background: none !important;
+} 
+
+.foto-perfil-conf .btn-mudar-foto-perfil .ui-corner-all{
+    background: none !important;
+}
+
+.foto-perfil-conf .btn-mudar-foto-perfil .ui-button-text-icon-left{
+    background: none !important;
+}
+
+
+.foto-perfil-conf .btn-mudar-foto-perfil .ui-button-icon-left{
+
+} 
+
+.foto-perfil-conf .btn-mudar-foto-perfil .ui-icon {
+
+}
+
+.foto-perfil-conf .btn-mudar-foto-perfil .ui-c{
+
+} 
+
+.foto-perfil-conf .btn-mudar-foto-perfil .ui-icon-plusthick{
+
+}
+
+.foto-perfil-conf .btn-mudar-foto-perfil input[type="file"]{
+    background: none !important;
+    width: 120px !important;
+    height: 27px !important;
+    padding: 0;
+    margin: 0;
+
+}
+
+
+.btn-atualizardados{
+    padding-left: 50px;
+    padding-right: 50px;
+    letter-spacing: 1px;
+    border-radius: 3px;
+    font-weight: 200;
 }

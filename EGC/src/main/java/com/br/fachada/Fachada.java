@@ -15,24 +15,27 @@ import com.br.beans.Prefeitura;
 import com.br.beans.Registro;
 import com.br.beans.TipoDeDenuncia;
 import com.br.beans.Usuario;
-import com.br.service.AdministradorService;
+import com.br.controle.UploadType;
 import com.br.service.AdministradorServiceIT;
 import com.br.service.CidadeServiceIT;
 import com.br.service.DaoIT;
 import com.br.service.DenunciaServiceIT;
 import com.br.service.FuncionarioServiceIT;
 import com.br.service.PrefeituraServiceIT;
+import com.br.service.UploadServiceIT;
 import com.br.service.UsuarioServiceIT;
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import org.primefaces.model.UploadedFile;
 
 /**
  *
  * @author Sergio Diniz
  */
 @Stateless
-public class Fachada {
+public class Fachada implements Serializable{
 
     @EJB
     private DaoIT dao;
@@ -48,6 +51,8 @@ public class Fachada {
     private FuncionarioServiceIT fs;
     @EJB
     private DenunciaServiceIT ds;
+    @EJB
+    private UploadServiceIT ups;
 
     public boolean cadastrar(Object object) {
         return dao.salvar(object);
@@ -266,4 +271,8 @@ public class Fachada {
     //
     //
     //
+    // UploadService
+    public String upload(UploadType uploadType, String email, UploadedFile file) {
+        return ups.upload(uploadType, email, file);
+    }
 }

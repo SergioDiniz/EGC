@@ -96,6 +96,10 @@ public class Funcionario extends Pessoa implements Serializable {
     public boolean isSexo() {
         return sexo;
     }
+    
+    public boolean getSexo() {
+        return sexo;
+    }
 
     public void setSexo(boolean sexo) {
         this.sexo = sexo;

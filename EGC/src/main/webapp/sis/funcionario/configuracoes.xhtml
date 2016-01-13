@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>EGC - Configurações</title>
     </h:head>
@@ -29,11 +30,31 @@
             <div class="container centro">
 
                 <div class="row">
-                    <div class="col-md-offset-1 col-md-9">
-                        <br/>
-                        <br/>
+                    <h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1">
+                        <div class="col-md-offset-1 col-md-2">
+                            <br/>
+                            <br/>
+                            <div class="foto-perfil-conf">
+                                <div class="foto" style="background-image: url(foto/#{controladorFuncionario.funcionario.foto})">
 
-                        <h:form>
+                                </div>
+                                <div class="btn-mudar-foto-perfil">
+                                    <p:fileUpload
+                                        label="Procurar"
+                                        value="#{controladorFuncionario.file}"
+                                        allowTypes="/(\.|\/)(gif|jpg|jpeg|gif|png|PNG|GIF|JPG|JPEG)$/" 
+                                        mode="simple" 
+                                        skinSimple="true"
+                                        
+                                        />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <br/>
+                            <br/>
+
+
 
                             <div class="row">
                                 <div class="col-md-offset-3 col-md-7"> 
@@ -41,11 +62,20 @@
                                     Nome <br/>
                                     <h:inputText value="#{controladorFuncionario.funcionario.nome}" class="form-control input-lg campos-formulario" id="nome" required="required" pt:placeholder="nome"/> 
                                     <br/>
+                                    Telefone <br/>
+                                    <h:inputText value="#{controladorFuncionario.funcionario.telefone}" class="form-control input-lg campos-formulario" id="telefone" required="required" pt:placeholder="telefone"/> 
+                                    <br/>
                                     Email <br/>
                                     <h:inputText value="#{controladorFuncionario.funcionario.email}" class="form-control input-lg campos-formulario" id="email" required="required" pt:placeholder="email"/> 
                                     <br/>
                                     CPF <br/>
                                     <h:inputText value="#{controladorFuncionario.funcionario.cpf}" class="form-control input-lg campos-formulario" id="cpf" required="required" pt:placeholder="CPF" disabled="true"/> 
+                                    <br/>
+                                    Sexo <br/>
+                                    <h:selectOneRadio value="#{controladorFuncionario.funcionario.sexo}">
+                                        <f:selectItem itemValue="FALSE" itemLabel="&nbsp;Mulher&nbsp;&nbsp;" />
+                                        <f:selectItem itemValue="TRUE" itemLabel="&nbsp;Homem" />
+                                    </h:selectOneRadio>
                                     <br/>
                                     Senha <br/>
                                     <h:inputSecret redisplay="true" value="#{controladorFuncionario.funcionario.senha}" class="form-control input-lg campos-formulario" id="senha" required="required" pt:placeholder="senha"/> 
@@ -59,17 +89,14 @@
 
                             <div class="row">
                                 <div class="col-md-offset-3 col-md-7"> 
-                                    <br/><br/><br/><br/>
-                                    <div align="center"><h:commandButton value="Atualizar Dados" action="#{controladorFuncionario.atualizarDados()}" class="btn btn-primary btn-lg"/></div>
+                                    <br/><br/>
+                                    <div align="center"><h:commandButton value="Atualizar Dados" action="#{controladorFuncionario.atualizarDados()}" class="btn btn-info btn-lg btn-atualizardados"/></div>
                                 </div>
 
                             </div>
-
-
-
-                        </h:form>
-                        
-                    </div>
+                            <br/><br/><br/>
+                        </div>
+                    </h:form>
                 </div>
 
             </div>

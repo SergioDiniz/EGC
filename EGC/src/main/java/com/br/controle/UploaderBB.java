@@ -23,17 +23,54 @@ public class UploaderBB {
 
     private UploadedFile file;
 
-    
-
-    
-    
-    
     public UploadedFile getFile() {
         return file;
     }
 
     public void setFile(UploadedFile file) {
         this.file = file;
+    }
+
+    public String upload(UploadType uploadType, String email) {
+        if (file != null) {
+            try {
+
+                File targetFolder;
+
+                if (uploadType == UploadType.PERFIL_FUNCIONARIO) {
+                    targetFolder = new File("/Volumes/Arquivos/Sergio/Documentos/ADS/P6/TCC/Sistema/EGC/EGC/src/main/webapp/sis/funcionario/foto");
+                } else if (uploadType == UploadType.DOCUMENTO_SOLICITACAO) {
+                    targetFolder = new File("/Volumes/Arquivos/Sergio/Documentos/ADS/P6/TCC/Sistema/EGC/EGC/src/main/webapp/sis/admin/documentos-de-solicitacao");
+                } else {
+                    targetFolder = new File("/Volumes/Arquivos/Sergio/Documentos/ADS/P6/TCC/Sistema/EGC/EGC/src/main/webapp/sis/prefeitura/brasao");
+                }
+
+//                File targetFolder = new File("D:\\Sergio\\Documentos\\ADS\\P6\\TCC\\Sistema\\EGC\\EGC\\src\\main\\webapp\\sis\\admin\\documentos-de-solicitacao");
+                InputStream inputStream = file.getInputstream();
+
+                String tipoArquivo = file.getFileName();
+                tipoArquivo = tipoArquivo.substring(tipoArquivo.lastIndexOf("."), tipoArquivo.length());
+                String nomeArquivo = email + tipoArquivo;
+
+                OutputStream out = new FileOutputStream(new File(targetFolder, nomeArquivo));
+
+                int read = 0;
+                byte[] bytes = new byte[1024];
+
+                while ((read = inputStream.read(bytes)) != -1) {
+                    out.write(bytes, 0, read);
+                }
+                inputStream.close();
+                out.flush();
+                out.close();
+                this.file = null;
+                return nomeArquivo;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+
     }
 
     //faz upload automatico
@@ -58,32 +95,31 @@ public class UploaderBB {
     }
 
     //precisa aperta o botão
-    public void upload() {
-        if (file != null) {
-            try {
-                File targetFolder = new File("D:\\Sergio\\Documentos\\ADS\\P6\\TCC\\Sistema\\EGC\\EGC\\src\\main\\webapp");
-                InputStream inputStream = file.getInputstream();
-                
-                String tipoArquivo = file.getFileName();
-                tipoArquivo = tipoArquivo.substring(tipoArquivo.lastIndexOf("."), tipoArquivo.length());
-//                System.out.println("tipo do arquivo: " + tipoArquivo);
-                
-                OutputStream out = new FileOutputStream(new File(targetFolder,
-                        "sergiodiniz@gmail.com"+tipoArquivo));
-                int read = 0;
-                byte[] bytes = new byte[1024];
-
-                while ((read = inputStream.read(bytes)) != -1) {
-                    out.write(bytes, 0, read);
-                }
-                inputStream.close();
-                out.flush();
-                out.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
-
+//    public void upload() {
+//        if (file != null) {
+//            try {
+//                File targetFolder = new File("D:\\Sergio\\Documentos\\ADS\\P6\\TCC\\Sistema\\EGC\\EGC\\src\\main\\webapp");
+//                InputStream inputStream = file.getInputstream();
+//                
+//                String tipoArquivo = file.getFileName();
+//                tipoArquivo = tipoArquivo.substring(tipoArquivo.lastIndexOf("."), tipoArquivo.length());
+////                System.out.println("tipo do arquivo: " + tipoArquivo);
+//                
+//                OutputStream out = new FileOutputStream(new File(targetFolder,
+//                        "sergiodiniz@gmail.com"+tipoArquivo));
+//                int read = 0;
+//                byte[] bytes = new byte[1024];
+//
+//                while ((read = inputStream.read(bytes)) != -1) {
+//                    out.write(bytes, 0, read);
+//                }
+//                inputStream.close();
+//                out.flush();
+//                out.close();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//
+//    }
 }

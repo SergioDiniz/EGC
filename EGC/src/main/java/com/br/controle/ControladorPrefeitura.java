@@ -132,7 +132,7 @@ public class ControladorPrefeitura implements Serializable {
         prefeitura.setCidade(cidade);
         prefeitura.getEnderecoPrefeitura().setCidade(cidade.getCidadePK().getNomeCidade());
         prefeitura.getEnderecoPrefeitura().setEstado(cidade.getCidadePK().getSiglaEstado());
-        prefeitura.setDocumento(upload());
+        prefeitura.setDocumento(upload(UploadType.DOCUMENTO_SOLICITACAO));
         fachada.atualizar(prefeitura);
 
         cidade = new Cidade();
@@ -143,24 +143,24 @@ public class ControladorPrefeitura implements Serializable {
 
     }
 
-    public String upload() {
+    public String upload(UploadType uploadType) {
         if (file != null) {
             try {
-                File targetFolder = new File("/Volumes/Arquivos/Sergio/Documentos/ADS/P6/TCC/Sistema/EGC/EGC/src/main/webapp/sis/admin/documentos-de-solicitacao");
-//                File targetFolder = new File("D:\\Sergio\\Documentos\\ADS\\P6\\TCC\\Sistema\\EGC\\EGC\\src\\main\\webapp\\sis\\admin\\documentos-de-solicitacao");
-                InputStream inputStream = file.getInputstream();
 
+                File targetFolder;
+                if (uploadType == UploadType.BRASAO_PREFEITURA) {
+                    targetFolder = new File("/Volumes/Arquivos/Sergio/Documentos/ADS/P6/TCC/Sistema/EGC/EGC/src/main/webapp/sis/prefeitura/brasao");
+                } else {
+                    targetFolder = new File("/Volumes/Arquivos/Sergio/Documentos/ADS/P6/TCC/Sistema/EGC/EGC/src/main/webapp/sis/admin/documentos-de-solicitacao");
+                }
+
+                InputStream inputStream = file.getInputstream();
                 String tipoArquivo = file.getFileName();
                 tipoArquivo = tipoArquivo.substring(tipoArquivo.lastIndexOf("."), tipoArquivo.length());
                 String nomeArquivo = prefeitura.getEmail() + tipoArquivo;
-//                System.out.println("tipo do arquivo: " + tipoArquivo);
-//                System.out.println("nome do arquivo: " + nomeArquivo);
-
-                OutputStream out = new FileOutputStream(new File(targetFolder,
-                        nomeArquivo));
+                OutputStream out = new FileOutputStream(new File(targetFolder, nomeArquivo));
                 int read = 0;
                 byte[] bytes = new byte[1024];
-
                 while ((read = inputStream.read(bytes)) != -1) {
                     out.write(bytes, 0, read);
                 }
@@ -177,6 +177,20 @@ public class ControladorPrefeitura implements Serializable {
     }
 
     public String atualizarDados() {
+
+        if (file != null) {
+
+            try {
+
+                this.prefeitura.setFoto(upload(UploadType.BRASAO_PREFEITURA));
+                this.file = null;
+
+                Thread.sleep(2000);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         fachada.atualizar(prefeitura);
         return null;
     }
@@ -197,9 +211,9 @@ public class ControladorPrefeitura implements Serializable {
 
     public String cadastrarNovoFuncionario() {
         funcionario.setCpf(CPFPesquisaF);
-        if(this.funcionario.isSexo()){
+        if (this.funcionario.isSexo()) {
             this.funcionario.setFoto("h-funcionario.png");
-        } else{
+        } else {
             this.funcionario.setFoto("m-funcionario.png");
         }
         fachada.cadastrar(funcionario);
@@ -239,7 +253,7 @@ public class ControladorPrefeitura implements Serializable {
 
         return null;
     }
-    
+
     public String desvincularFuncionario(Funcionario funcionario) {
 //        System.out.println("desvinculando: " + funcionarioAux.getNome());
         fachada.desvincularFuncionario(this.prefeitura, funcionario.getCpf());
@@ -253,61 +267,58 @@ public class ControladorPrefeitura implements Serializable {
         this.mostrarModalDesvincular = true;
 //        System.out.println("funcionario: " + funcionarioAux.getNome());
     }
-    
+
     public long totalDeDenunciasAtendidasNaCidade() {
-        return fachada.totalDeDenunciasAtendidasNaCidade(this.prefeitura.getCidade().getCidadePK().getNomeCidade(), 
-                                                         this.prefeitura.getCidade().getCidadePK().getSiglaEstado());
+        return fachada.totalDeDenunciasAtendidasNaCidade(this.prefeitura.getCidade().getCidadePK().getNomeCidade(),
+                this.prefeitura.getCidade().getCidadePK().getSiglaEstado());
     }
-    
+
     public long totalDeDenunciasNaCidade() {
-        return fachada.totalDeDenunciasNaCidade(this.prefeitura.getCidade().getCidadePK().getNomeCidade(), 
-                                                this.prefeitura.getCidade().getCidadePK().getSiglaEstado());
+        return fachada.totalDeDenunciasNaCidade(this.prefeitura.getCidade().getCidadePK().getNomeCidade(),
+                this.prefeitura.getCidade().getCidadePK().getSiglaEstado());
     }
-    
+
     public long totalDeFuncionariosNaPrefeitura() {
         return fachada.totalDeFuncionariosNaPrefeitura(this.prefeitura.getEmail());
     }
-    
-    public long totalDeUsuariosNaCidade(){
-        return fachada.totalDeUsuariosNaCidade(this.prefeitura.getCidade().getCidadePK().getNomeCidade(), 
-                                                this.prefeitura.getCidade().getCidadePK().getSiglaEstado());
+
+    public long totalDeUsuariosNaCidade() {
+        return fachada.totalDeUsuariosNaCidade(this.prefeitura.getCidade().getCidadePK().getNomeCidade(),
+                this.prefeitura.getCidade().getCidadePK().getSiglaEstado());
     }
-    
-    
-    public void denunciasComMaisAjudas(){
+
+    public void denunciasComMaisAjudas() {
         this.denunciaComMaisAjuda = new ArrayList<>();
-        this.denunciaComMaisAjuda.addAll(fachada.denunciasComMaisAjudasPorCidade(this.prefeitura.getCidade().getCidadePK().getNomeCidade(), 
-                                                                                 this.prefeitura.getCidade().getCidadePK().getSiglaEstado()));
+        this.denunciaComMaisAjuda.addAll(fachada.denunciasComMaisAjudasPorCidade(this.prefeitura.getCidade().getCidadePK().getNomeCidade(),
+                this.prefeitura.getCidade().getCidadePK().getSiglaEstado()));
 
     }
-    
-    public void denunciasMaisRecentes(){
+
+    public void denunciasMaisRecentes() {
         this.denunciaMaisRecentes = new ArrayList<>();
-        this.denunciaMaisRecentes.addAll(fachada.denunciasMaisRecentesPorCidade(this.prefeitura.getCidade().getCidadePK().getNomeCidade(), 
-                                                                                this.prefeitura.getCidade().getCidadePK().getSiglaEstado()));
+        this.denunciaMaisRecentes.addAll(fachada.denunciasMaisRecentesPorCidade(this.prefeitura.getCidade().getCidadePK().getNomeCidade(),
+                this.prefeitura.getCidade().getCidadePK().getSiglaEstado()));
     }
-    
-    
-    public void dadosGeraisPrefeitura(String emailPrefeitura, String cidade, String estado){
+
+    public void dadosGeraisPrefeitura(String emailPrefeitura, String cidade, String estado) {
         this.dadosPrefeitura = new ArrayList<>();
-        
+
         long denuncias = fachada.totalDeDenunciasNaCidade(cidade, estado);
         long denunciasAtendidas = fachada.totalDeDenunciasAtendidasNaCidade(cidade, estado);
         long usuarios = fachada.totalDeUsuariosNaCidade(cidade, estado);
         long funcionarios = fachada.totalDeFuncionariosNaPrefeitura(emailPrefeitura);
-        
+
         this.dadosPrefeitura.add(0, denuncias);
         this.dadosPrefeitura.add(1, denunciasAtendidas);
         this.dadosPrefeitura.add(2, usuarios);
         this.dadosPrefeitura.add(3, funcionarios);
     }
-    
-    
-    public void funcionariosQueEstaoOnline(){
+
+    public void funcionariosQueEstaoOnline() {
         this.funcionariosOnline = new ArrayList<>();
         this.funcionariosOnline.addAll(fachada.funcionariosOnline(this.prefeitura.getEmail()));
     }
-    
+
     //
     //
     //
@@ -437,7 +448,4 @@ public class ControladorPrefeitura implements Serializable {
         this.funcionariosOnline = funcionariosOnline;
     }
 
-    
-
-    
 }
