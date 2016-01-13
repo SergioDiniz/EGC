@@ -7,6 +7,7 @@ package com.br.service;
 
 import com.br.beans.Cidade;
 import com.br.beans.CidadePK;
+import com.br.beans.Registro;
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -59,6 +60,25 @@ public class CidadeService implements CidadeServiceIT{
         }
         
         return 0;
+    }
+    
+    
+    @Override
+    public List<Registro> registrosDaCidade(String cidade, String estado){
+        
+        Query query = em.createQuery("SELECT r FROM Registro r WHERE r.prefeitura.enderecoPrefeitura.cidade = :cidade and r.prefeitura.enderecoPrefeitura.estado = :estado ORDER BY r.data DESC");
+        query.setParameter("cidade", cidade);
+        query.setParameter("estado", estado);
+        
+        query.setMaxResults(6);
+        
+        List<Registro> r = query.getResultList();
+        
+        if(r.size() > 0){
+            return r;
+        }
+        
+        return null;
     }
     
 }

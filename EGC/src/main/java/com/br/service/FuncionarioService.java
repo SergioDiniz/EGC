@@ -107,7 +107,7 @@ public class FuncionarioService implements FuncionarioServiceIT {
     @Override
     public List<Registro> registrosDoFuncionario(String email){
         
-        Query query = em.createQuery("SELECT r FROM Funcionario f JOIN f.registros r WHERE f.email = :email");
+        Query query = em.createQuery("SELECT r FROM Funcionario f JOIN f.registros r WHERE f.email = :email ORDER BY r.data DESC");
         query.setParameter("email", email);
         
         List<Registro> r = query.getResultList();

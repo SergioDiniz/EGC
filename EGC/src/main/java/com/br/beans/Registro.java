@@ -14,6 +14,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -38,6 +39,9 @@ public class Registro implements Serializable {
 
     @OneToOne
     private Prefeitura prefeitura;
+    
+    @ManyToOne
+    private Funcionario funcionario;
 
     public Registro() {
     }
@@ -81,7 +85,7 @@ public class Registro implements Serializable {
     }
     
     public String horaFormatada(){
-        String h = new SimpleDateFormat("mm:HH").format(this.data);
+        String h = new SimpleDateFormat("HH:mm").format(this.data);
         return h;
     }
     
@@ -126,5 +130,37 @@ public class Registro implements Serializable {
     public void setPrefeitura(Prefeitura prefeitura) {
         this.prefeitura = prefeitura;
     }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + this.id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Registro other = (Registro) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 
 }

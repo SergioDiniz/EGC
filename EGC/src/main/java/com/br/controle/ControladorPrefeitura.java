@@ -12,6 +12,7 @@ import com.br.beans.EnderecoPrefeitura;
 import com.br.beans.EstadoDeAcompanhamento;
 import com.br.beans.Funcionario;
 import com.br.beans.Prefeitura;
+import com.br.beans.Registro;
 import static com.br.controle.ControladorAdmin.info;
 import static com.br.controle.ControladorAdmin.infoUsuarioInvalido;
 import com.br.fachada.Fachada;
@@ -319,6 +320,10 @@ public class ControladorPrefeitura implements Serializable {
         this.funcionariosOnline.addAll(fachada.funcionariosOnline(this.prefeitura.getEmail()));
     }
 
+    
+    
+    
+    
     //
     //
     //

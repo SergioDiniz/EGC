@@ -6,6 +6,8 @@
 package com.br.service;
 
 import com.br.beans.Cidade;
+import com.br.beans.Registro;
+import java.util.List;
 
 /**
  *
@@ -16,5 +18,7 @@ public interface CidadeServiceIT {
     public Cidade pesquisarCidade(String nome, String estado);
     
     public long totalDeUsuariosNaCidade(String cidade, String estado);
+    
+    public List<Registro> registrosDaCidade(String cidade, String estado);
     
 }

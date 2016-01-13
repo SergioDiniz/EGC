@@ -37,77 +37,125 @@
 
                         <div class="row">
                             <!--<div class="col-md-12">-->
-                                <div class="col-md-6 btn-1">
-                                    <div class="col-md-6">
-                                        <img src="../../img/total-denuncias.png" height="60px" />
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="row">
-                                            Denúncias
-                                        </div>
-                                        <div class="row">
-                                            <h:outputText value="#{controladorPrefeitura.totalDeDenunciasNaCidade()}"/>
-                                        </div>
-                                    </div>
+                            <div class="col-md-6 btn-1">
+                                <div class="col-md-6">
+                                    <img src="../../img/total-denuncias.png" height="60px" />
                                 </div>
 
-                                <div class="col-md-6 btn-2">
-                                    <div class="col-md-6">
-                                        <img src="../../img/denuncia-atendida.png" height="60px" />
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        Denúncias
                                     </div>
-
-                                    <div class="col-md-6">
-                                        <div class="row">
-                                            Atendidas
-                                        </div>
-                                        <div class="row">
-                                            <h:outputText value="#{controladorPrefeitura.totalDeDenunciasAtendidasNaCidade()}"/>
-                                        </div>
+                                    <div class="row">
+                                        <h:outputText value="#{controladorPrefeitura.totalDeDenunciasNaCidade()}"/>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="col-md-6 btn-2">
+                                <div class="col-md-6">
+                                    <img src="../../img/denuncia-atendida.png" height="60px" />
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        Atendidas
+                                    </div>
+                                    <div class="row">
+                                        <h:outputText value="#{controladorPrefeitura.totalDeDenunciasAtendidasNaCidade()}"/>
+                                    </div>
+                                </div>
+                            </div>
                             <!--</div>-->
                         </div>
 
 
                         <div class="row">
                             <!--<div class="col-md-12">-->
-                                <div class="col-md-6 btn-3">
-                                    <div class="col-md-6">
-                                        <img src="../../img/total-funcionarios.png" height="60px" />
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="row">
-                                            Funcionários
-                                        </div>
-                                        <div class="row">
-                                            <h:outputText value="#{controladorPrefeitura.totalDeFuncionariosNaPrefeitura()}"/>
-                                        </div>
-                                    </div>
+                            <div class="col-md-6 btn-3">
+                                <div class="col-md-6">
+                                    <img src="../../img/total-funcionarios.png" height="60px" />
                                 </div>
 
-                                <div class="col-md-6 btn-4">
-                                    <div class="col-md-6">
-                                        <img src="../../img/total-usuario.png" height="60px" />
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        Funcionários
                                     </div>
-
-                                    <div class="col-md-6">
-                                        <div class="row">
-                                            Usuários
-                                        </div>
-                                        <div class="row">
-                                            <h:outputText value="#{controladorPrefeitura.totalDeUsuariosNaCidade()}"/>
-                                        </div>
+                                    <div class="row">
+                                        <h:outputText value="#{controladorPrefeitura.totalDeFuncionariosNaPrefeitura()}"/>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="col-md-6 btn-4">
+                                <div class="col-md-6">
+                                    <img src="../../img/total-usuario.png" height="60px" />
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        Usuários
+                                    </div>
+                                    <div class="row">
+                                        <h:outputText value="#{controladorPrefeitura.totalDeUsuariosNaCidade()}"/>
+                                    </div>
+                                </div>
+                            </div>
                             <!--</div>-->
                         </div>
 
                     </div>
 
                     <div class="col-md-6">
-                        oi
+                        <div class="ultimos-registros">
+                            <div class="row titulo-area">
+                                Últimos Registros
+                            </div>
+
+                            <c:forEach var="registro" items="#{controladorCidade.registrosDaCidade(controladorPrefeitura.prefeitura.cidade.cidadePK.nomeCidade, controladorPrefeitura.prefeitura.cidade.cidadePK.siglaEstado)}" >
+                                <table class="tb-registro">
+                                    <tr>
+                                        <td>
+                                            <img src="../../img/icon-calendario.png" width="40px"/>
+                                        </td>
+
+                                        <td>
+                                            <div class="td-dia-semana">
+                                                #{registro.diaDaSemana()} 
+                                            </div>
+                                            <div class="td-data-semana">
+                                                #{registro.dataFormatada()}
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="td-hora">
+                                                #{registro.horaFormatada()}h
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="td-registro">
+                                                <c:choose>
+                                                    <c:when test="#{registro.tipoDeRegistro == 'DENUNCIA_EM_TRABALHO'}">
+                                                        <a href="#">denúncia</a> atualizada para o estado <span class="label label-info">Em trabalho</span>, <span class="link-mapa-denuncia">#{registro.funcionario.nome}</span>
+                                                    </c:when>
+                                                    <c:when test="#{registro.tipoDeRegistro == 'DENUNCIA_ATENDIDA'}">
+                                                        <a href="#">denúncia</a> atualizada para o estado <span class="label label-success">Atendida</span>, <span class="link-mapa-denuncia">#{registro.funcionario.nome}</span>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <a href="#">denúncia</a> recebeu uma <span class="label label-danger">Reclamação</span>, <span class="link-mapa-denuncia">#{registro.funcionario.nome}</span>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+
+                                </table>
+
+                            </c:forEach>
+                        </div>
                     </div>
 
                 </div>
@@ -154,7 +202,7 @@
                                                 <f:facet name="header">STATUS</f:facet>
                                                 <h:outputText value="ATENDIDA" styleClass="label label-success" rendered="#{denuncia.tagAtendida()}"/>
                                                 <h:outputText value="AGUARDANDO" styleClass="label label-primary" rendered="#{denuncia.tagAguardando()}"/>
-                                                <h:outputText value="EM ENDAMENTO" styleClass="label label-warning" rendered="#{denuncia.tagEmAndamento()}"/>
+                                                <h:outputText value="EM ENDAMENTO" styleClass="label label-info" rendered="#{denuncia.tagEmAndamento()}"/>
 
 
                                             </h:column>
@@ -385,6 +433,16 @@
 
         </div>
 
+        <script>
+            (function ($) {
+                $(window).load(function () {
+                    $(".ultimos-registros").mCustomScrollbar({
+                        theme: "minimal-dark"
+                    });
+                });
+            })(jQuery);
+        </script>
+        
     </h:body>
 </html>
 

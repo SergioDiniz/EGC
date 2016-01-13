@@ -7,12 +7,15 @@ package com.br.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -34,6 +37,9 @@ public class Funcionario extends Pessoa implements Serializable {
     private boolean ativo;
     @Column(nullable = false)
     private String foto;
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date ultimoDiaAtivo;
 
     @ManyToMany(mappedBy = "funcionarios", cascade = CascadeType.ALL)
     private List<Prefeitura> prefeituras;
@@ -41,7 +47,8 @@ public class Funcionario extends Pessoa implements Serializable {
     @OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL)
     private List<InformacaoDeAtendida> informacaoDeAtendidas;
 
-    @OneToMany
+    
+    @OneToMany(mappedBy = "funcionario")
     private List<Registro> registros;
 
     public Funcionario() {
@@ -135,6 +142,14 @@ public class Funcionario extends Pessoa implements Serializable {
 
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+
+    public Date getUltimoDiaAtivo() {
+        return ultimoDiaAtivo;
+    }
+
+    public void setUltimoDiaAtivo(Date ultimoDiaAtivo) {
+        this.ultimoDiaAtivo = ultimoDiaAtivo;
     }
     
     

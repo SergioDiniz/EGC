@@ -181,6 +181,10 @@ public class Fachada implements Serializable{
         return cs.totalDeUsuariosNaCidade(cidade, estado);
     }
 
+    public List<Registro> registrosDaCidade(String cidade, String estado){
+        return cs.registrosDaCidade(cidade, estado);
+    }
+    
     // FIM CidadeServices
     //
     //
