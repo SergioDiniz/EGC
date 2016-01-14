@@ -41,7 +41,25 @@
                                     <div class="foto" style="background-image: url(../funcionario/foto/#{funcionario.foto})">
 
                                     </div>
+                                    <div class="login">
+                                        <c:choose>
+                                            <c:when test="#{funcionario.ativo == true}">
+                                                <div class="ativo">
+                                                    <span class="label label-success">Ativo</span>
+                                                </div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <div class="ultimo-login">
+                                                    Ultimo Login: <br/>
+                                                    <span class="label label-default">#{funcionario.dataUltimoDiaAtivoFormatada()}</span>
+                                                </div>
+                                            </c:otherwise>
+                                        </c:choose>
+
+
+                                    </div>
                                 </div>
+
                                 <div class="dados">
 
                                     <div class="row">

@@ -6,6 +6,7 @@
 package com.br.beans;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -68,6 +69,11 @@ public class Funcionario extends Pessoa implements Serializable {
         this.prefeituras = prefeituras;
     }
 
+    public String dataUltimoDiaAtivoFormatada(){
+        String d = new SimpleDateFormat("dd.MM.yyyy").format(this.ultimoDiaAtivo);
+        return d;
+    }
+    
     public String getNome() {
         return nome;
     }

@@ -140,6 +140,15 @@ html, body{
     border: none;
 }
 
+.btn-menu-lateral .foto{
+    width: 40px;
+    height: 40px;
+    border-radius: 90px;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 .menu-lateral .btn-configuracao{
     border-bottom: 1px solid #666 !important;
     margin-bottom: 15px;
@@ -1102,6 +1111,22 @@ html, body{
 }
 
 
+.lista-de-funcionarios .funcionario .foto .login{
+    width: 200px;
+    margin-left: 100px;
+    margin-top: -40px;
+    /*font-size: 10px;*/
+    
+}
+
+.lista-de-funcionarios .funcionario .foto .login .ultimo-login{
+    color: #999;
+    font-size: 12px;
+}
+
+.lista-de-funcionarios .funcionario .foto .login .label{
+    font-size: 11px;
+}
 
 
 .lista-de-denuncias .denuncia-com-reclamacao .dados,

@@ -9,6 +9,7 @@ import com.br.beans.Funcionario;
 import com.br.beans.Prefeitura;
 import com.br.beans.Registro;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
@@ -157,6 +158,7 @@ public class FuncionarioService implements FuncionarioServiceIT {
         
         if(f.size() > 0){
             f.get(0).setAtivo(true);
+            f.get(0).setUltimoDiaAtivo(new Date());
             em.merge(f.get(0));
             return true;
         }
