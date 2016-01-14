@@ -5,7 +5,8 @@
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>EGC - Novo Funcionario</title>
     </h:head>
@@ -55,19 +56,20 @@
                         <h:form rendered="#{controladorPrefeitura.funcionarioCadastrado}">
                             <hr/>
                             <h3>Resultado:</h3>
-                            <h:dataTable value="#{controladorPrefeitura.funcionarioPesquisaCPF()}" var="funcionario" class="table table-striped" columnClasses="cDescricao">
+                            <h:dataTable value="#{controladorPrefeitura.funcionarioPesquisaCPF()}" var="funcionario" class="table table-striped table-pesquisar-funcionario" columnClasses="cDescricao">
 
                                 <h:column id="cDescricao">
                                     <f:facet name="header">
-                                        <h:outputText value="Nome"/>
+                                        <h:outputText value=""/>
                                     </f:facet>
-                                    <h:outputText value="#{funcionario.nome}"/>
+                                    <img src="../funcionario/foto/#{funcionario.foto}" style="width:40px; border-radius: 90px"/>
                                 </h:column>
 
-                                <h:column>
+                                <h:column >
                                     <f:facet name="header">
-                                        <h:outputText value="Email"/>
+                                        <h:outputText value="Nome"/>
                                     </f:facet>
+                                    <h:outputText value="#{funcionario.nome}" style="color: #1ca39c; font-weight: bold"/> <br/>
                                     <h:outputText value="#{funcionario.email}"/>
                                 </h:column>
 
@@ -79,11 +81,30 @@
                                 </h:column>
 
                                 <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Telefone"/>
+                                    </f:facet>
+                                    <h:outputText value="#{funcionario.telefone}"/>
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Sexo"/>
+                                    </f:facet>
+
+                                    <h:outputText value="Feminino" rendered="#{funcionario.sexo != true} "/>
+                                    <h:outputText value="Masculino" rendered="#{funcionario.sexo == true}"/>
+
+
+                                </h:column>
+
+
+                                <h:column>
 
 
                                     <!-- Button trigger modal -->
                                     <div align="center">
-                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalVincular">
+                                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#ModalVincular">
                                             vincular
                                         </button>
                                     </div>
@@ -139,7 +160,7 @@
                                     <h:selectOneRadio value="#{controladorPrefeitura.funcionario.sexo}">
                                         <f:selectItem itemValue="false" itemLabel="&nbsp;Mulher&nbsp;&nbsp;" />
                                         <f:selectItem itemValue="true" itemLabel="&nbsp;Homem" />
-                                        
+
                                     </h:selectOneRadio>
                                 </div>
                                 <br/>

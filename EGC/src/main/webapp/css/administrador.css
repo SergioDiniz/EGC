@@ -10,10 +10,21 @@
     color: #999999;
 }
 
-.cDescricao{
-
+.table-pesquisar-funcionario tr td{
+    vertical-align: middle !important;
+    color: #757575;
+    font-weight: 200;
+    font-size: 15px;
 }
 
+.cDescricao{
+    width: 57px;
+}
+
+.cDescricao img{
+    margin-left: 10px;
+    margin-right: 10px;
+}
 
 /*modal*/
 .window{
