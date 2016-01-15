@@ -1,0 +1,319 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>EGC - Administrador</title>
+    </h:head>
+    <h:body style="background-color: #f7f7f7;">
+        <div class="tudo">
+
+            <div id="menu">
+                <ui:include src="topo.xhtml"/>
+            </div>
+
+            <div id="menu-lateral">
+                <ui:include src="menulateral.xhtml"/>
+            </div>
+
+
+            <div class="area-titulo-pagina perfil-funcionario">
+
+
+                <div class="perfil-topo">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-offset-3">
+                                    <div class="nome-perfil">
+                                        <h:form>
+                                            #{controladorFuncionario.funcionario.nome}
+                                            <h:commandButton class="btn btn-default" value="editar"  action="configuracoes.jsf?faces-redirect=true"/>
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="container">
+                    <div class="perfil-foto">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="foto" style="background-image: url(foto/#{controladorFuncionario.funcionario.foto})">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="perfil-info">
+                    <div class="container">
+                        <div class="row dados-funcionario">
+                            <div class="col-md-offset-3 col-md-9 ">
+                                <div class="col-md-4">
+                                    <div class="dado">
+                                        #{controladorFuncionario.funcionario.email}
+                                    </div>
+                                    <div class="tipo">
+                                        EMAIL
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="dado">
+                                        #{controladorFuncionario.funcionario.cpf}
+                                    </div>
+                                    <div class="tipo">
+                                        CPF
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="dado">
+                                        #{controladorFuncionario.funcionario.telefone}
+                                    </div>
+                                    <div class="tipo">
+                                        TELEFONE
+                                    </div>
+                                </div>
+
+                                <!--                                <div class="col-md-2">
+                                                                    <div class="btn-vincular">
+                                                                        <button class="btn btn-primary">Vincular</button>
+                                                                    </div>
+                                                                </div>-->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- -->
+            <div class="container">
+
+                <div class="col-md-offset-2 col-md-8 opcoes-registro-cidade">
+                    <div class="menu-opcoes">
+                        <ul class="nav nav-tabs">
+                            <li role="presentation" class="active"><a href="#tab1" data-toggle="tab">Ultimas Ações</a></li>
+                            <li role="presentation"><a href="#tab2" data-toggle="tab">Cidades</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="tab1">
+
+                            <c:forEach var="registro" items="#{controladorFuncionario.registrosDoFuncionario(controladorFuncionario.funcionario.email)}" >
+                                <table class="tb-registro">
+                                    <tr>
+                                        <td>
+                                            <img src="../../img/icon-calendario.png" width="40px"/>
+                                        </td>
+
+                                        <td>
+                                            <div class="td-dia-semana">
+                                                #{registro.diaDaSemana()} 
+                                            </div>
+                                            <div class="td-data-semana">
+                                                #{registro.dataFormatada()}
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="td-hora">
+                                                #{registro.horaFormatada()}h
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="td-registro">
+                                                <c:choose>
+                                                    <c:when test="#{registro.tipoDeRegistro == 'DENUNCIA_EM_TRABALHO'}">
+                                                        <a href="#">denúncia</a> atualizada para o estado <span class="label label-info">Em trabalho</span>, <span class="link-mapa-denuncia">#{registro.prefeitura.cidade.cidadePK.nomeCidade}, #{registro.prefeitura.cidade.cidadePK.siglaEstado}</span>
+                                                    </c:when>
+                                                    <c:when test="#{registro.tipoDeRegistro == 'DENUNCIA_ATENDIDA'}">
+                                                        <a href="#">denúncia</a> atualizada para o estado <span class="label label-success">Atendida</span>, <span class="link-mapa-denuncia">#{registro.prefeitura.cidade.cidadePK.nomeCidade}, #{registro.prefeitura.cidade.cidadePK.siglaEstado}</span>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <a href="#">denúncia</a> recebeu uma <span class="label label-danger">Reclamação</span>, <span class="link-mapa-denuncia">#{registro.prefeitura.cidade.cidadePK.nomeCidade}, #{registro.prefeitura.cidade.cidadePK.siglaEstado}</span>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+
+                                </table>
+                            </c:forEach>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane" id="tab2">
+                            <div class="menu-cidades">
+                                <c:forEach var="prefeitura" items="#{controladorAdmin.prefeiturasDoFuncionario(controladorFuncionario.funcionario.email)}" >
+                                    #{controladorPrefeitura.dadosGeraisPrefeitura(prefeitura.email, prefeitura.cidade.cidadePK.nomeCidade, prefeitura.cidade.cidadePK.siglaEstado)}
+                                    <div class="row">
+                                        <div class="col-md-offset-1 col-md-10">
+                                            <div class="cidade">
+                                                <div class="row">
+                                                    <div class="col-md-12 cidade-info">
+                                                        <div class="col-md-3 info-foto">
+                                                            <div class="foto" style="background-image: url(../prefeitura/brasao/#{prefeitura.foto})">
+                                                                
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-9 info">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="nome-prefeitura">
+                                                                        #{prefeitura.nome}
+                                                                    </div>
+                                                                    <div class="nome-cidade">
+                                                                        #{prefeitura.cidade.cidadePK.nomeCidade}, #{prefeitura.cidade.cidadePK.siglaEstado}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="col-md-1">
+                                                                        <img src="../../img/icon-telefone.png"/>
+                                                                    </div>
+                                                                    <div class="col-md-9">
+                                                                        #{prefeitura.telefone}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="col-md-1">
+                                                                        <img src="../../img/icon-email.png"/>
+                                                                    </div>
+                                                                    <div class="col-md-9">
+                                                                        #{prefeitura.email}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="col-md-1">
+                                                                        <img src="../../img/icon-endereco.png"/>
+                                                                    </div>
+                                                                    <div class="col-md-9">
+                                                                        #{prefeitura.enderecoPrefeitura.rua} - #{prefeitura.enderecoPrefeitura.numero}, #{prefeitura.enderecoPrefeitura.cep}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 cidade-dados">
+                                                        
+                                                        <table>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <div class="col-md-5">
+                                                                                <img src="../../img/total-denuncias.png" height="40px" />
+                                                                            </div>
+
+                                                                            <div class="col-md-6">
+                                                                                <div class="row" align="right">
+                                                                                    Denúncias
+                                                                                </div>
+                                                                                <div class="row" align="right">
+                                                                                    #{controladorPrefeitura.dadosPrefeitura.get(0)}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <div class="col-md-5">
+                                                                                <img src="../../img/denuncia-atendida.png" height="40px" />
+                                                                            </div>
+
+                                                                            <div class="col-md-6">
+                                                                                <div class="row" align="right">
+                                                                                    Atendidas
+                                                                                </div>
+                                                                                <div class="row" align="right">
+                                                                                    #{controladorPrefeitura.dadosPrefeitura.get(1)}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <div class="col-md-5">
+                                                                                <img src="../../img/total-usuario.png" height="40px" />
+                                                                            </div>
+
+                                                                            <div class="col-md-6">
+                                                                                <div class="row" align="right">
+                                                                                    Usuários
+                                                                                </div>
+                                                                                <div class="row" align="right">
+                                                                                    #{controladorPrefeitura.dadosPrefeitura.get(2)}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <div class="col-md-5">
+                                                                                <img src="../../img/total-funcionarios.png" height="40px" />
+                                                                            </div>
+
+                                                                            <div class="col-md-6">
+                                                                                <div class="row" align="right">
+                                                                                    Funcionários
+                                                                                </div>
+                                                                                <div class="row" align="right">
+                                                                                    #{controladorPrefeitura.dadosPrefeitura.get(3)}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- -->
+
+                                </c:forEach>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </h:body>
+</html>
+

@@ -5,7 +5,8 @@
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
     <h:head>
         <title>EGC - Prefeitura</title>
     </h:head>
@@ -115,50 +116,52 @@
                                         <div class="col-md-offset-1 col-md-10">
                                             <div>
                                                 <div class="dropup">
-                                                    <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <img src="../../img/icon-configuracoes.png"/>
-                                                    </button>
-                                                    <ul class="lista dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
-                                                        <li>
+                                                    <h:form>
+                                                        <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <img src="../../img/icon-configuracoes.png"/>
+                                                        </button>
+                                                        <ul class="lista dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+                                                            <li>
 
-                                                            <a href="#" type="button" class="btn btn-link" data-toggle="modal" data-target="#myModalDesvincular#{indexFuncionario.index}">
-                                                                Desvincular
-                                                            </a>
+                                                                <a href="#" type="button" class="btn btn-link" data-toggle="modal" data-target="#myModalDesvincular#{indexFuncionario.index}">
+                                                                    Desvincular
+                                                                </a>
 
-                                                            <!-- Modal Aceitar -->
-                                                            <div style="padding-top: 200px" class="modal fade" id="myModalDesvincular#{indexFuncionario.index}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                                            <h4 class="modal-title" id="myModalLabel"><h2>Notificação</h2></h4>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            Deseja desvincular o funcionario <b><h:outputText value="#{funcionario.nome}"/></b>?
-                                                                            <br/>
-                                                                        </div>
-                                                                        <div class="modal-footer">
+                                                                <!-- Modal Aceitar -->
+                                                                <div style="padding-top: 200px" class="modal fade" id="myModalDesvincular#{indexFuncionario.index}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                                <h4 class="modal-title" id="myModalLabel"><h2>Notificação</h2></h4>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                Deseja desvincular o funcionario <b><h:outputText value="#{funcionario.nome}"/></b>?
+                                                                                <br/>
+                                                                            </div>
+                                                                            <div class="modal-footer">
 
 
-                                                                            <h:form>
-                                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                                                                <h:commandButton value="desvincular" class="btn btn-primary" action="#{controladorPrefeitura.desvincularFuncionario(funcionario)}" />
-                                                                            </h:form>
+                                                                                <h:form>
+                                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                                                                    <h:commandButton value="desvincular" class="btn btn-primary" action="#{controladorPrefeitura.desvincularFuncionario(funcionario)}" />
+                                                                                </h:form>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
 
-                                                        </li>
-                                                        <li>
+                                                            </li>
+                                                            <li>
 
-                                                            <a href="#" type="button" class="btn btn-link">
-                                                                Perfil
-                                                            </a>
+                                                                <a href="#" jsf:action="#{controladorPrefeitura.visualizarPerfilFuncionario(funcionario)}" type="button" class="btn btn-link">
+                                                                    Perfil
+                                                                </a>
+                                                                
+                                                            </li>
 
-                                                        </li>
-
-                                                    </ul>
+                                                        </ul>
+                                                    </h:form>
                                                 </div>
                                             </div>
                                         </div>

@@ -57,6 +57,7 @@ public class ControladorPrefeitura implements Serializable {
     private List<Denuncia> denunciaMaisRecentes;
     private List<Long> dadosPrefeitura;
     private List<Funcionario> funcionariosOnline;
+    private Funcionario funcionarioPerfil;
 
     @EJB
     private Fachada fachada;
@@ -322,7 +323,11 @@ public class ControladorPrefeitura implements Serializable {
         this.funcionariosOnline.addAll(fachada.funcionariosOnline(this.prefeitura.getEmail()));
     }
 
-    
+    public String visualizarPerfilFuncionario(Funcionario funcionario){
+        this.funcionarioPerfil = new Funcionario();
+        this.funcionarioPerfil = funcionario;
+        return "perfil-funcionario?faces-redirect=true";
+    }
     
     
     
@@ -455,4 +460,14 @@ public class ControladorPrefeitura implements Serializable {
         this.funcionariosOnline = funcionariosOnline;
     }
 
+    public Funcionario getFuncionarioPerfil() {
+        return funcionarioPerfil;
+    }
+
+    public void setFuncionarioPerfil(Funcionario funcionarioPerfil) {
+        this.funcionarioPerfil = funcionarioPerfil;
+    }
+
+    
+    
 }

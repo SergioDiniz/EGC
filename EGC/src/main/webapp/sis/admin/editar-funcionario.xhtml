@@ -33,35 +33,55 @@
                 <h:form>
 
                     <div class="row">
-                        <div class="col-md-offset-3 col-md-7"> 
+                        <div class="col-md-offset-1 col-md-2">
+                            <div class="foto-perfil-conf">
+                                <div class="foto" style="background-image: url(../funcionario/foto/#{controladorAdmin.gerenciarFuncionario.foto})">
 
-                            Nome <br/>
-                            <h:inputText value="#{controladorAdmin.gerenciarFuncionario.nome}" class="form-control input-lg campos-formulario" id="nome" required="required" pt:placeholder="nome"/> 
-                            <br/>
-                            Email <br/>
-                            <h:inputText value="#{controladorAdmin.gerenciarFuncionario.email}" class="form-control input-lg campos-formulario" id="email" required="required" pt:placeholder="email"/> 
-                            <br/>
-                            CPF <br/>
-                            <h:inputText value="#{controladorAdmin.gerenciarFuncionario.cpf}" class="form-control input-lg campos-formulario" id="cpf" required="required" pt:placeholder="CPF" disabled="true"/> 
-                            <br/>
-                            Senha <br/>
-                            <h:inputSecret redisplay="true" value="#{controladorAdmin.gerenciarFuncionario.senha}" class="form-control input-lg campos-formulario" id="senha" required="required" pt:placeholder="senha"/> 
-                            <br/>
-                            <p:messages showDetail="true" autoUpdate="true" closable="true" style=" width: 100%"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-9"> 
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-7"> 
+                                    Nome <br/>
+                                    <h:inputText value="#{controladorAdmin.gerenciarFuncionario.nome}" class="form-control input-lg campos-formulario" id="nome" required="required" pt:placeholder="nome"/> 
+                                    <br/>
+                                    Telefone <br/>
+                                    <h:inputText value="#{controladorAdmin.gerenciarFuncionario.telefone}" class="form-control input-lg campos-formulario" id="telefone" required="required" pt:placeholder="telefone"/> 
+                                    <br/>
+                                    Email <br/>
+                                    <h:inputText value="#{controladorAdmin.gerenciarFuncionario.email}" class="form-control input-lg campos-formulario" id="email" required="required" pt:placeholder="email"/> 
+                                    <br/>
+                                    CPF <br/>
+                                    <h:inputText value="#{controladorAdmin.gerenciarFuncionario.cpf}" class="form-control input-lg campos-formulario" id="cpf" required="required" pt:placeholder="CPF" disabled="true"/> 
+                                    <br/>
+                                    Sexo <br/>
+                                    <h:selectOneRadio value="#{controladorAdmin.gerenciarFuncionario.sexo}">
+                                        <f:selectItem itemValue="FALSE" itemLabel="&nbsp;Mulher&nbsp;&nbsp;" />
+                                        <f:selectItem itemValue="TRUE" itemLabel="&nbsp;Homem" />
+                                    </h:selectOneRadio>
+                                    <br/>
+                                    Senha <br/>
+                                    <h:inputSecret redisplay="true" value="#{controladorAdmin.gerenciarFuncionario.senha}" class="form-control input-lg campos-formulario" id="senha" required="required" pt:placeholder="senha"/> 
+                                    <br/>
+                                    <p:messages showDetail="true" autoUpdate="true" closable="true" style=" width: 100%"/>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-7"> 
+                                    <br/><br/>
+                                    <div align="center"><h:commandButton value="Atualizar Dados" action="#{controladorAdmin.atualizarDadosFuncionario()}" class="btn btn-info btn-lg btn-atualizardados"/></div>
+                                    <br/><br/>
+                                </div>
+
+                            </div>
 
                         </div>
-
-
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-offset-3 col-md-7"> 
-                            <br/><br/><br/>
-                            <div align="center"><h:commandButton value="Atualizar Dados" action="#{controladorAdmin.atualizarDadosFuncionario()}" class="btn btn-primary btn-lg"/></div>
-                            <br/><br/>
-                        </div>
 
-                    </div>
 
 
 
