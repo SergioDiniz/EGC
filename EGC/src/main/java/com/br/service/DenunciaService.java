@@ -7,6 +7,7 @@ package com.br.service;
 
 import com.br.beans.ConteudoInapropriado;
 import com.br.beans.Denuncia;
+import com.br.beans.EnderecoDenuncia;
 import com.br.beans.TipoDeDenuncia;
 import com.br.beans.Usuario;
 import java.text.Normalizer;
@@ -28,6 +29,38 @@ public class DenunciaService implements DenunciaServiceIT {
 
     @PersistenceContext(unitName = "jdbc/EGC")
     private EntityManager em;
+
+    @Override
+    public String novaDenuncia(Usuario usuario, EnderecoDenuncia enderecoDenuncia, String denucia, String foto, TipoDeDenuncia tipoDeDenuncia) {
+
+        try {
+            Denuncia d = new Denuncia(denucia, foto, enderecoDenuncia, tipoDeDenuncia);
+            d.setCodigo(String.valueOf(totalDeDenuncias() + 1));
+
+            usuario = em.find(Usuario.class, usuario.getId());
+
+            usuario.getDenuncias().size();
+            usuario.getDenuncias().add(d);
+
+//            usuario.novaDenuncia(d);
+            em.persist(enderecoDenuncia);
+            em.persist(d);
+            em.merge(usuario);
+
+            return "ok";
+        } catch (Exception e) {
+        }
+
+        return "ERRO";
+    }
+
+    @Override
+    public Long totalDeDenuncias() {
+        Query query = em.createQuery("SELECT COUNT(d) FROM Denuncia d");
+        List<Long> d = query.getResultList();
+
+        return d.get(0);
+    }
 
     @Override
     public List<Denuncia> pesquisarPorCidade(String cidade, String estado, String ordem) {
@@ -167,9 +200,9 @@ public class DenunciaService implements DenunciaServiceIT {
 
     @Override
     public boolean setAjudarDenuncia(Denuncia denuncia, Usuario usuario) {
-        
+
         System.out.println("Denuncia ID DS: " + denuncia.getId());
-        
+
         if (!usuario.getDenunciasAjudadas().contains(denuncia)) {
             int valor = denuncia.getNumeroAjuda();
             denuncia.setNumeroAjuda(++valor);
@@ -202,10 +235,9 @@ public class DenunciaService implements DenunciaServiceIT {
             denuncia.getConteudoInapropriados().add(conteudoInapropriado);
             em.merge(conteudoInapropriado);
             em.merge(denuncia);
-        
-            
+
             return true;
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("erro ao atualizar reclamação de denunica: " + e.getMessage());
         }
 
@@ -215,78 +247,77 @@ public class DenunciaService implements DenunciaServiceIT {
     @Override
     public long getReclamarDenuncia(Denuncia denuncia) {
         Query query = em.createQuery("SELECT COUNT(c) from Denuncia d JOIN d.conteudoInapropriados c WHERE d.id = :id");
-              query.setParameter("id", denuncia.getId());
+        query.setParameter("id", denuncia.getId());
 
         List e = query.getResultList();
-        
-        if(e.size() > 0){
+
+        if (e.size() > 0) {
             return (long) e.get(0);
         }
-              
+
         return 0;
     }
 
     @Override
     public List<Denuncia> denunciasComMaisAjudasPorCidade(String cidade, String estado) {
         Query query = em.createQuery("SELECT d from Denuncia d JOIN d.enderecoDenuncia ed WHERE d.ativo = true AND ed.cidade = :cidade and ed.estado = :estado ORDER BY d.numeroAjuda DESC");
-              query.setParameter("cidade", cidade);
-              query.setParameter("estado", estado);
-              query.setMaxResults(6);
-              
+        query.setParameter("cidade", cidade);
+        query.setParameter("estado", estado);
+        query.setMaxResults(6);
+
         List<Denuncia> r = query.getResultList();
-        
-        if(r.size() > 0){
+
+        if (r.size() > 0) {
             return r;
         }
-        
+
         return new ArrayList<>();
-        
+
     }
 
     @Override
     public List<Denuncia> denunciasMaisRecentesPorCidade(String cidade, String estado) {
         Query query = em.createQuery("SELECT d from Denuncia d JOIN d.enderecoDenuncia ed WHERE d.ativo = true AND ed.cidade = :cidade and ed.estado = :estado ORDER BY d.data DESC");
-              query.setParameter("cidade", cidade);
-              query.setParameter("estado", estado);
-              query.setMaxResults(6);
-              
+        query.setParameter("cidade", cidade);
+        query.setParameter("estado", estado);
+        query.setMaxResults(6);
+
         List<Denuncia> r = query.getResultList();
-        
-        if(r.size() > 0){
+
+        if (r.size() > 0) {
             return r;
         }
-        
+
         return new ArrayList<>();
     }
-    
+
     @Override
-    public List<Denuncia> denunciasComReclamacoes(){
-        
+    public List<Denuncia> denunciasComReclamacoes() {
+
         Query query = em.createQuery("SELECT DISTINCT d FROM Denuncia d INNER JOIN d.conteudoInapropriados c");
-        
+
         List<Denuncia> d = query.getResultList();
-        
-        if(d.size() > 0){
+
+        if (d.size() > 0) {
             return d;
         }
-        
+
         return null;
     }
-    
+
     @Override
-    public List<ConteudoInapropriado> comentariosDeConteudoInapropriadoEmDenuncia(Denuncia denuncia){
-        
+    public List<ConteudoInapropriado> comentariosDeConteudoInapropriadoEmDenuncia(Denuncia denuncia) {
+
         Query query = em.createQuery("SELECT c from Denuncia d JOIN d.conteudoInapropriados c WHERE d.id = :id");
         query.setParameter("id", denuncia.getId());
-        
+
         List<ConteudoInapropriado> c = query.getResultList();
-        
-        if(c.size() > 0){
+
+        if (c.size() > 0) {
             return c;
         }
-        
+
         return null;
     }
-    
 
 }

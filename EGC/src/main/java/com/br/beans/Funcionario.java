@@ -38,9 +38,12 @@ public class Funcionario extends Pessoa implements Serializable {
     private boolean ativo;
     @Column(nullable = false)
     private String foto;
-    
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date ultimoDiaAtivo;
+
+    @Column(nullable = false, unique = true)
+    private String codigo;
 
     @ManyToMany(mappedBy = "funcionarios", cascade = CascadeType.ALL)
     private List<Prefeitura> prefeituras;
@@ -48,7 +51,6 @@ public class Funcionario extends Pessoa implements Serializable {
     @OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL)
     private List<InformacaoDeAtendida> informacaoDeAtendidas;
 
-    
     @OneToMany(mappedBy = "funcionario")
     private List<Registro> registros;
 
@@ -69,11 +71,15 @@ public class Funcionario extends Pessoa implements Serializable {
         this.prefeituras = prefeituras;
     }
 
-    public String dataUltimoDiaAtivoFormatada(){
-        String d = new SimpleDateFormat("dd.MM.yyyy").format(this.ultimoDiaAtivo);
-        return d;
+    public String dataUltimoDiaAtivoFormatada() {
+        try {
+            String d = new SimpleDateFormat("dd.MM.yyyy").format(this.ultimoDiaAtivo);
+            return d;
+        } catch (Exception e) {
+        }
+        return null;
     }
-    
+
     public String getNome() {
         return nome;
     }
@@ -109,7 +115,7 @@ public class Funcionario extends Pessoa implements Serializable {
     public boolean isSexo() {
         return sexo;
     }
-    
+
     public boolean getSexo() {
         return sexo;
     }
@@ -157,7 +163,13 @@ public class Funcionario extends Pessoa implements Serializable {
     public void setUltimoDiaAtivo(Date ultimoDiaAtivo) {
         this.ultimoDiaAtivo = ultimoDiaAtivo;
     }
-    
-    
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
 
 }

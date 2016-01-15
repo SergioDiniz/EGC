@@ -59,36 +59,7 @@ public class UsuarioService implements UsuarioServiceIT{
     }
 
     
-    @Override
-    public String novaDenuncia(Usuario usuario, EnderecoDenuncia enderecoDenuncia, String denucia, String foto, TipoDeDenuncia tipoDeDenuncia){
-            
-            
-        try {
-            Denuncia d = new Denuncia(denucia, foto, enderecoDenuncia, tipoDeDenuncia);
-            
-            usuario = em.find(Usuario.class, usuario.getId());
-            
-            usuario.getDenuncias().size();
-            usuario.getDenuncias().add(d);
-            
-//            usuario.novaDenuncia(d);
-            
-            
-            em.persist(enderecoDenuncia);
-            em.persist(d);
-            em.merge(usuario);
-            
-            
-            
-            
-            
-            return "ok";
-        } catch (Exception e) {
-        }
-        
-        
-        return "ERRO";
-    }
+    
     
     
     @Override

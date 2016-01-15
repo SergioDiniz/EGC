@@ -130,6 +130,7 @@ public class ControladorPrefeitura implements Serializable {
 
         }
 
+        prefeitura.setCodigo(String.valueOf(fachada.totalDePrefeitura() + 1));
         prefeitura.setCidade(cidade);
         prefeitura.getEnderecoPrefeitura().setCidade(cidade.getCidadePK().getNomeCidade());
         prefeitura.getEnderecoPrefeitura().setEstado(cidade.getCidadePK().getSiglaEstado());
@@ -217,6 +218,7 @@ public class ControladorPrefeitura implements Serializable {
         } else {
             this.funcionario.setFoto("m-funcionario.png");
         }
+        this.funcionario.setCodigo(String.valueOf(fachada.numeroDeFuncionarios() + 1));
         fachada.cadastrar(funcionario);
         funcionario = fachada.buscarFuncionarioPorCPF(CPFPesquisaF);
         fachada.cadastrarNaPrefeitura(prefeitura, funcionario);

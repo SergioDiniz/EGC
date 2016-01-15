@@ -17,6 +17,8 @@ public interface PrefeituraServiceIT {
 
     public Prefeitura login(String email, String senha);
     
+    public Long totalDePrefeitura();
+    
     public String cadastrarNaPrefeitura(Prefeitura prefeitura, Funcionario funcionario);
     
     public List<Prefeitura> prefeiturasPendentes();
@@ -32,6 +34,8 @@ public interface PrefeituraServiceIT {
     public long totalDeFuncionariosNaPrefeitura(String email);
     
     public List<Long> dadosGeraisPrefeitura(String emailPrefeitura, String cidade, String estado);
+    
+    
 
     
     

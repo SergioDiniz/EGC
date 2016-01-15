@@ -10,6 +10,7 @@
     color: #999999;
 }
 
+.table-solicitacao-prefeitura tr td,
 .table-pesquisar-funcionario tr td{
     vertical-align: middle !important;
     color: #757575;

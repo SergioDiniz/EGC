@@ -48,6 +48,11 @@
                                                     <span class="label label-success">Ativo</span>
                                                 </div>
                                             </c:when>
+                                            <c:when test="#{funcionario.dataUltimoDiaAtivoFormatada() == null}">
+                                                <div class="ultimo-login">
+                                                    <span class="label label-default">Nunca Ativo</span>
+                                                </div>
+                                            </c:when>
                                             <c:otherwise>
                                                 <div class="ultimo-login">
                                                     Ultimo Login: <br/>

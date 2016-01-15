@@ -41,6 +41,8 @@ public class Prefeitura implements Serializable{
     
     private boolean ativo;
     
+    @Column(nullable = false, unique = true)
+    private String codigo;
     
     @OneToOne(cascade = CascadeType.ALL)
     private Cidade cidade;
@@ -163,6 +165,15 @@ public class Prefeitura implements Serializable{
     public void setFoto(String foto) {
         this.foto = foto;
     }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+    
     
     
     @Override

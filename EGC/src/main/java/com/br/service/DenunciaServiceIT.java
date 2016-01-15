@@ -7,6 +7,7 @@ package com.br.service;
 
 import com.br.beans.ConteudoInapropriado;
 import com.br.beans.Denuncia;
+import com.br.beans.EnderecoDenuncia;
 import com.br.beans.TipoDeDenuncia;
 import com.br.beans.Usuario;
 import java.util.List;
@@ -16,6 +17,10 @@ import java.util.List;
  * @author SergioD
  */
 public interface DenunciaServiceIT {
+    
+    public String novaDenuncia(Usuario usuario, EnderecoDenuncia enderecoDenuncia, String denucia, String foto, TipoDeDenuncia tipoDeDenuncia);
+    
+    public Long totalDeDenuncias();
     
     public List<Denuncia> pesquisarPorCidade(String cidade, String estado, String ordem);
     

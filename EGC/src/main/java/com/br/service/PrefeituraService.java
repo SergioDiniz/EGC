@@ -41,6 +41,15 @@ public class PrefeituraService implements PrefeituraServiceIT {
     }
 
     @Override
+    public Long totalDePrefeitura() {
+        Query query = em.createQuery("SELECT COUNT(p) FROM Prefeitura P");
+        List<Long> d = query.getResultList();
+
+        return d.get(0);
+
+    }
+
+    @Override
     public Prefeitura login(String email, String senha) {
         Query query = em.createQuery("SELECT p FROM Prefeitura p WHERE p.email = :email AND p.senha = :senha ");
         query.setParameter("email", email);
@@ -86,7 +95,7 @@ public class PrefeituraService implements PrefeituraServiceIT {
 
     @Override
     public String vincular(Prefeitura prefeitura, Funcionario funcionario) {
-        
+
         Query query = em.createQuery("SELECT f FROM Prefeitura p JOIN p.funcionarios f WHERE p.email = :pEmail AND f.cpf = :fCpf");
         query.setParameter("pEmail", prefeitura.getEmail());
         query.setParameter("fCpf", funcionario.getCpf());
@@ -139,35 +148,35 @@ public class PrefeituraService implements PrefeituraServiceIT {
     @Override
     public long totalDeFuncionariosNaPrefeitura(String email) {
         Query query = em.createQuery("SELECT COUNT(f) FROM Prefeitura p JOIN p.funcionarios f WHERE p.email = :email");
-            query.setParameter("email", email);
-            
-            List f = query.getResultList();
-            
-            if(f.size() > 0){
-                return (long) f.get(0);
-            }
-            
-            return 0;
+        query.setParameter("email", email);
+
+        List f = query.getResultList();
+
+        if (f.size() > 0) {
+            return (long) f.get(0);
+        }
+
+        return 0;
     }
 
     @Override
-    public List<Long> dadosGeraisPrefeitura(String emailPrefeitura, String cidade, String estado){
+    public List<Long> dadosGeraisPrefeitura(String emailPrefeitura, String cidade, String estado) {
         long funcionarios = totalDeFuncionariosNaPrefeitura(emailPrefeitura);
-        long usuarios =  new CidadeService().totalDeUsuariosNaCidade(cidade, estado);
+        long usuarios = new CidadeService().totalDeUsuariosNaCidade(cidade, estado);
         long denuncias = new DenunciaService().totalDeDenunciasNaCidade(cidade, estado);
         long denunciasAtendidas = new DenunciaService().totalDeDenunciasAtendidasNaCidade(cidade, estado);
-        
+
         List<Long> dados = new ArrayList<>();
         dados.add(0, denuncias);
         dados.add(1, denunciasAtendidas);
         dados.add(2, usuarios);
         dados.add(3, funcionarios);
-        
+
         for (Long dado : dados) {
             System.out.println(dado);
         }
-        
+
         return dados;
     }
-    
+
 }

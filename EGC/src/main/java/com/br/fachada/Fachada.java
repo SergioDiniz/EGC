@@ -35,7 +35,7 @@ import org.primefaces.model.UploadedFile;
  * @author Sergio Diniz
  */
 @Stateless
-public class Fachada implements Serializable{
+public class Fachada implements Serializable {
 
     @EJB
     private DaoIT dao;
@@ -67,10 +67,6 @@ public class Fachada implements Serializable{
         return us.login(usuario.getEmail(), usuario.getSenha());
     }
 
-    public String novaDenuncia(Usuario usuario, EnderecoDenuncia enderecoDenuncia, String denucia, String foto, TipoDeDenuncia tipoDeDenuncia) {
-        return us.novaDenuncia(usuario, enderecoDenuncia, denucia, foto, tipoDeDenuncia);
-    }
-
     public List<Denuncia> minhasDenuncias(String email) {
         return us.minhasDenuncias(email);
     }
@@ -87,6 +83,10 @@ public class Fachada implements Serializable{
     // PrefeituraServices
     public Prefeitura loginPrefeitura(String email, String senha) {
         return ps.login(email, senha);
+    }
+    
+    public Long totalDePrefeitura(){
+        return ps.totalDePrefeitura();
     }
 
     public String cadastrarNaPrefeitura(Prefeitura prefeitura, Funcionario funcionario) {
@@ -117,10 +117,10 @@ public class Fachada implements Serializable{
         return ps.totalDeFuncionariosNaPrefeitura(email);
     }
 
-    public List<Long> dadosGeraisPrefeitura(String emailPrefeitura, String cidade, String estado){
+    public List<Long> dadosGeraisPrefeitura(String emailPrefeitura, String cidade, String estado) {
         return ps.dadosGeraisPrefeitura(emailPrefeitura, cidade, estado);
     }
-    
+
     // FIM PrefeituraServices
     //
     //
@@ -146,27 +146,27 @@ public class Fachada implements Serializable{
     public int numeroDeFuncionarios() {
         return fs.numeroDeFuncionarios();
     }
-    
-    public List<Registro> registrosDoFuncionario(String email){
+
+    public List<Registro> registrosDoFuncionario(String email) {
         return fs.registrosDoFuncionario(email);
     }
-    
-    public List<Prefeitura> prefeiturasDoFuncionario(String email){
-        return  fs.prefeiturasDoFuncionario(email);
+
+    public List<Prefeitura> prefeiturasDoFuncionario(String email) {
+        return fs.prefeiturasDoFuncionario(email);
     }
 
-    public List<Funcionario> funcionariosOnline(String email){
+    public List<Funcionario> funcionariosOnline(String email) {
         return fs.funcionariosOnline(email);
     }
-    
-    public boolean tornaFuncionarioOnline(String email){
+
+    public boolean tornaFuncionarioOnline(String email) {
         return fs.tornaFuncionarioOnline(email);
     }
-    
-    public boolean tornaFuncionarioOffline(String email){
+
+    public boolean tornaFuncionarioOffline(String email) {
         return fs.tornaFuncionarioOffline(email);
     }
-    
+
     // FIM FuncionarioServices
     //
     //
@@ -181,10 +181,10 @@ public class Fachada implements Serializable{
         return cs.totalDeUsuariosNaCidade(cidade, estado);
     }
 
-    public List<Registro> registrosDaCidade(String cidade, String estado){
+    public List<Registro> registrosDaCidade(String cidade, String estado) {
         return cs.registrosDaCidade(cidade, estado);
     }
-    
+
     // FIM CidadeServices
     //
     //
@@ -222,6 +222,14 @@ public class Fachada implements Serializable{
     //
     //
     // DenunciaServices
+    public String novaDenuncia(Usuario usuario, EnderecoDenuncia enderecoDenuncia, String denucia, String foto, TipoDeDenuncia tipoDeDenuncia) {
+        return ds.novaDenuncia(usuario, enderecoDenuncia, denucia, foto, tipoDeDenuncia);
+    }
+    
+    public Long totalDeDenuncias(){
+        return ds.totalDeDenuncias();
+    }
+
     public List<Denuncia> pesquisarTodasDenunciasPorCidade(String cidade, String estado, String ordem) {
         return ds.pesquisarPorCidade(cidade, estado, ordem);
     }
@@ -266,10 +274,10 @@ public class Fachada implements Serializable{
         return ds.denunciasComReclamacoes();
     }
 
-    public List<ConteudoInapropriado> comentariosDeConteudoInapropriadoEmDenuncia(Denuncia denuncia){
+    public List<ConteudoInapropriado> comentariosDeConteudoInapropriadoEmDenuncia(Denuncia denuncia) {
         return ds.comentariosDeConteudoInapropriadoEmDenuncia(denuncia);
     }
-    
+
     // FIM DenunciaServices
     //
     //

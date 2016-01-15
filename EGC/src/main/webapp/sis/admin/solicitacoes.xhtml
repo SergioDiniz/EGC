@@ -53,13 +53,21 @@
                                         <div class="tabela-formulario">
 
                                             <h:form>
-                                                <h:dataTable value="#{controladorAdmin.prefeiturasPendentes()}" var="prefeitura" class="table table-hover" columnClasses="cDescricao">
+                                                <h:dataTable value="#{controladorAdmin.prefeiturasPendentes()}" var="prefeitura" class="table table-hover table-solicitacao-prefeitura" columnClasses="cDescricao">
 
                                                     <h:column id="cDescricao">
                                                         <f:facet name="header">
+                                                            <h:outputText value=""/>
+                                                        </f:facet>
+                                                        <img src="../prefeitura/brasao/#{prefeitura.foto}" style="width:40px; height: 40px; border-radius: 90px"/>
+                                                    </h:column>
+
+                                                    <h:column>
+                                                        <f:facet name="header">
                                                             <h:outputText value="Nome"/>
                                                         </f:facet>
-                                                        <h:outputText value="#{prefeitura.nome}"/>
+                                                        <h:outputText value="#{prefeitura.nome}" style="color: #1ca39c; font-weight: bold"/> <br/>
+                                                        <h:outputText value="#{prefeitura.email}"/>
                                                     </h:column>
 
                                                     <h:column>
@@ -69,7 +77,12 @@
                                                         <h:outputText value="#{prefeitura.cidade.cidadePK.nomeCidade} - #{prefeitura.cidade.cidadePK.siglaEstado}"/>
                                                     </h:column>
 
-
+                                                    <h:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Telefone"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{prefeitura.telefone}"/>
+                                                    </h:column>
 
                                                     <h:column>
                                                         <div align="center">

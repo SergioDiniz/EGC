@@ -49,8 +49,8 @@ public class Denuncia implements Serializable {
     private String foto;
     @Column(nullable = false)
     private int numeroAjuda;
-    @Column(nullable = false)
-    private String codigo = "0";
+    @Column(nullable = false, unique = true)
+    private String codigo;
     @Column(nullable = false)
     private boolean ativo = true;
 
@@ -269,6 +269,14 @@ public class Denuncia implements Serializable {
 
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
     
     

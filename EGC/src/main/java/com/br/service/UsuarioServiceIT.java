@@ -24,8 +24,6 @@ public interface UsuarioServiceIT{
     
     public List<Denuncia> minhasDenuncias(String email);
     
-    public String novaDenuncia(Usuario usuario, EnderecoDenuncia enderecoDenuncia, String denucia, String foto, TipoDeDenuncia tipoDeDenuncia);
-    
     public List<Denuncia> denunciasQueAjudei(String email);
    
     
