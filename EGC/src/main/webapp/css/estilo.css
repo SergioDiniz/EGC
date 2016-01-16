@@ -1107,7 +1107,7 @@ html, body{
     background-size: auto 100%;
     background-repeat: no-repeat;
     background-position: center;
-    
+
 }
 
 
@@ -1116,7 +1116,7 @@ html, body{
     margin-left: 100px;
     margin-top: -40px;
     /*font-size: 10px;*/
-    
+
 }
 
 .lista-de-funcionarios .funcionario .foto .login .ultimo-login{
@@ -1244,6 +1244,8 @@ html, body{
     padding-bottom: 2px;
 }
 
+
+
 .perfil-funcionario{
     /*width: 100%;*/
     /*min-width: 1300px;*/
@@ -1333,7 +1335,7 @@ html, body{
     background-size: auto 100%;
     background-repeat: no-repeat;
     background-position: center;
-    
+
 }
 
 
@@ -1370,6 +1372,56 @@ html, body{
     border: none !important;
     color: #df8d91;
     background-color: transparent;
+}
+
+.perfil-prefeitura-container .menu-opcoes{
+    padding-left: 40px !important;
+}
+
+.perfil-prefeitura-container .menu-opcoes .nav-tabs li.active a{
+    color: #23a7f1;
+}
+
+/*/*/
+.perfil-prefeitura-container .opcoes-registro-cidade{
+    background-color: #fff;
+    margin-top: 0;
+    padding-top: 20px;
+    padding-bottom: 0;
+}
+
+.perfil-prefeitura-container .opcoes-registro-cidade .menu-opcoes{
+    margin-left: 0px;
+    padding-bottom: 20px;
+    border-bottom: 3px solid #f4f4f4;
+}
+
+.perfil-prefeitura-container .info-numeros-denuncias{
+    margin-top: 130px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #f1f1f1;
+    
+}
+
+.perfil-prefeitura-container .info-numeros-usuario{
+    margin-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f1f1f1;
+}
+
+.perfil-prefeitura-container .info-numeros-denuncias .texto,
+.perfil-prefeitura-container .info-numeros-usuario .texto{
+    color: #999;
+    font-size: 12px;
+    font-weight: 200;
+    letter-spacing: 2px;
+}
+
+.perfil-prefeitura-container .info-numeros-denuncias .numero,
+.perfil-prefeitura-container .info-numeros-usuario .numero{
+    color: #23a7f1;
+    font-size: 25px;
+    /*font-weight: bold;*/
 }
 
 .tb-registro{
@@ -1492,6 +1544,90 @@ html, body{
 
 .menu-cidades .cidade-dados td:nth-child(4){
     background-color: #5c97bf;
+}
+
+
+.perfil-prefeitura{
+    height: 300px !important;
+    border-bottom: solid 2px #dfdfdf;
+    background-color: #f3f5f6;
+}
+
+.perfil-prefeitura .perfil-topo{
+    width: 100%;
+    height: 300px !important;
+    background-image: url(../img/40.jpg);
+    background-size: 100%;
+    background-position: 0 -420px ;
+}
+
+.perfil-prefeitura .perfil-foto{
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    margin-top: -100px;
+    margin-left: 0px
+}
+
+.perfil-prefeitura .perfil-foto .foto{
+    height: 200px;
+    width: 200px;
+    border-radius: 100px;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 3px solid #fff;
+    
+    -webkit-box-shadow: 3px 3px 4px -4px rgba(0,0,0,0.30), inset 2px 2px 1px -1px rgba(0,0,0,0.20);
+    -moz-box-shadow: 3px 3px 4px -4px rgba(0,0,0,0.30), inset 2px 2px 1px -1px rgba(0,0,0,0.20);
+    box-shadow: 3px 3px 4px -4px rgba(0,0,0,0.30), inset 2px 2px 1px -1px rgba(0,0,0,0.20);
+}
+
+.perfil-prefeitura-container{
+    padding-bottom: 50px;
+}
+
+.perfil-prefeitura-container .perfil-prefeitura-nome{
+    width: 960px !important; 
+    background-color: #fff;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    padding-left: 35px;
+    border-bottom: 3px solid #f7f7f7;
+}
+
+.perfil-prefeitura-container > .col-md-9 > .row:nth-child(2){
+    width: 960px !important;
+}
+
+.perfil-prefeitura-container .menu-acoes{
+    padding: 10px;
+    padding-bottom: 30px;
+    padding-top: 50px;
+    background-color: #fafafa;
+}
+
+
+
+/*.perfil-prefeitura-container .menu-acoes .tb-registro td:nth-child(4){
+    border-right: 2px solid #f1f1f1;
+}*/
+
+.perfil-prefeitura-container .area-direita-perfil-prefeitura{
+    /*background-color: #000;*/
+    
+}
+
+.perfil-prefeitura-container .perfil-prefeitura-nome .nome{
+    font-size: 40px;
+    font-weight: 100;
+    letter-spacing: 2px;
+}
+
+.perfil-prefeitura-container .perfil-prefeitura-nome .cidade{
+    font-weight: 200;
+    color: #999;
+    letter-spacing: 1px;
 }
 
 .foto-perfil-conf{

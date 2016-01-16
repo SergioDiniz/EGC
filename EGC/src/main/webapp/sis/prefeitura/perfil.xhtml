@@ -1,0 +1,230 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>EGC - Prefeitura</title>
+    </h:head>
+    <h:body style="background-color: #fafafa;">
+        <div class="tudo">
+
+            <div id="menu">
+                <ui:include src="topo.xhtml"/>
+            </div>
+
+            <div id="menu-lateral">
+                <ui:include src="menulateral.xhtml"/>
+            </div>
+
+
+            <div class="area-titulo-pagina perfil-prefeitura">
+
+
+                <div class="perfil-topo">
+
+                </div>
+
+
+                <div class="container">
+                    <div class="perfil-foto">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="foto" style="background-image: url(brasao/#{controladorPrefeitura.prefeitura.foto})">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- -->
+            <div class="container perfil-prefeitura-container">
+
+                <div class="col-md-3">
+                    <div class="col-md-12">
+                        <div class="info-numeros-denuncias">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <span class="texto">DENÚNCIAS</span> <br/>
+                                    <span class="numero">#{controladorPrefeitura.totalDeDenunciasNaCidade()}</span>
+                                </div>
+                                <div class="col-md-6">
+                                    <span class="texto">ATENDIDAS</span> <br/>
+                                    <span class="numero">#{controladorPrefeitura.totalDeDenunciasAtendidasNaCidade()}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-numeros-usuario">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span class="texto">USUÁRIOS</span> <br/>
+                                    <span class="numero">#{controladorPrefeitura.totalDeUsuariosNaCidade()}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-9">
+
+                    <div class="row">
+                        <div class="col-md-12 perfil-prefeitura-nome">
+                            <span class="nome">#{controladorPrefeitura.prefeitura.nome}</span> <br/>
+                            <span class="cidade">#{controladorPrefeitura.prefeitura.cidade.cidadePK.nomeCidade}, #{controladorPrefeitura.prefeitura.cidade.cidadePK.siglaEstado}</span>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-8 opcoes-registro-cidade">
+                            <div class="row">
+                                <div class="menu-opcoes">
+                                    <ul class="nav nav-tabs">
+                                        <li role="presentation"><a href="#tab1" data-toggle="tab">Informações</a></li>
+                                        <li role="presentation" class="active"><a href="#tab2" data-toggle="tab">Denúncias</a></li>
+                                        <li role="presentation"><a href="#tab3" data-toggle="tab">Ações</a></li>
+                                        <li role="presentation"><a href="#tab4" data-toggle="tab">Comentários</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane" id="tab1">
+                                        Informações
+
+                                    </div>
+
+                                    <div role="tabpanel" class="tab-pane active" id="tab2">
+
+                                        <div class="menu-cidades">
+                                            <div class="ultimas-denuncias">
+                                                <c:forEach var="ultimasDenuncia" items="#{controladorPrefeitura.denunciaMaisRecentes}" >
+                                                    <div>
+                                                        <div class="ud-denuncia">
+
+                                                            <div class="row" style="margin: 5px; margin-left: -15px;">
+                                                                <div class="col-md-2">
+                                                                    <img src="../../img/icones-denuncia/#{ultimasDenuncia.iconeDenunica}" height="50px" align="right"/>
+                                                                </div>
+                                                                <div class="col-md-10">
+                                                                    <div class="row">
+                                                                        <div class="col-md-7 rua-denuncia">
+                                                                            #{ultimasDenuncia.tipoDaDenunciaFormatado}
+                                                                        </div>
+                                                                        <div class="col-md-5 hora-denuncia">
+                                                                            #{ultimasDenuncia.dataDenuncaFormatado}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-12 conteudo-denuncia">
+                                                                            #{ultimasDenuncia.descricao}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <span class="link-mapa-denuncia">#{ultimasDenuncia.enderecoDenuncia.rua} - #{ultimasDenuncia.enderecoDenuncia.numero}, #{ultimasDenuncia.enderecoDenuncia.bairro}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <img src="../denuncias/#{ultimasDenuncia.foto}" class="img-denuncia"/>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div> 
+                                                        </div>
+                                                    </div>
+                                                </c:forEach>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div role="tabpanel" class="tab-pane" id="tab3">
+                                        <div class="menu-acoes">
+
+                                            <c:forEach var="registro" items="#{controladorCidade.registrosDaCidade(controladorPrefeitura.prefeitura.cidade.cidadePK.nomeCidade, controladorPrefeitura.prefeitura.cidade.cidadePK.siglaEstado)}" >
+                                                <table class="tb-registro">
+                                                    <tr>
+                                                        <td>
+                                                            <img src="../../img/icon-calendario.png" width="40px"/>
+                                                        </td>
+
+                                                        <td>
+                                                            <div class="td-dia-semana">
+                                                                #{registro.diaDaSemana()} 
+                                                            </div>
+                                                            <div class="td-data-semana">
+                                                                #{registro.dataFormatada()}
+                                                            </div>
+                                                        </td>
+
+                                                        <td>
+                                                            <div class="td-hora">
+                                                                #{registro.horaFormatada()}h
+                                                            </div>
+                                                        </td>
+
+                                                        <td>
+                                                            <div class="td-registro">
+                                                                <c:choose>
+                                                                    <c:when test="#{registro.tipoDeRegistro == 'DENUNCIA_EM_TRABALHO'}">
+                                                                        <a href="#">denúncia</a> atualizada para o estado <span class="label label-info">Em trabalho</span>, <span class="link-mapa-denuncia">#{registro.funcionario.nome}</span>
+                                                                    </c:when>
+                                                                    <c:when test="#{registro.tipoDeRegistro == 'DENUNCIA_ATENDIDA'}">
+                                                                        <a href="#">denúncia</a> atualizada para o estado <span class="label label-success">Atendida</span>, <span class="link-mapa-denuncia">#{registro.funcionario.nome}</span>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <a href="#">denúncia</a> recebeu uma <span class="label label-danger">Reclamação</span>, <span class="link-mapa-denuncia">#{registro.funcionario.nome}</span>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </div>
+                                                        </td>
+
+                                                    </tr>
+
+                                                </table>
+
+                                            </c:forEach>
+
+                                        </div>
+                                    </div>
+
+                                    <div role="tabpanel" class="tab-pane" id="tab4">
+                                        <div class="menu-cidades">
+                                            Comentários
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4 area-direita-perfil-prefeitura">
+                            oi
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+
+
+            </div>
+
+        </div>
+    </h:body>
+</html>
+
