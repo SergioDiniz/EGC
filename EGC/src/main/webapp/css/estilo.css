@@ -1374,6 +1374,7 @@ html, body{
     background-color: transparent;
 }
 
+
 .perfil-prefeitura-container .menu-opcoes{
     padding-left: 40px !important;
 }
@@ -1400,7 +1401,7 @@ html, body{
     margin-top: 130px;
     padding-bottom: 20px;
     border-bottom: 2px solid #f1f1f1;
-    
+
 }
 
 .perfil-prefeitura-container .info-numeros-usuario{
@@ -1546,6 +1547,78 @@ html, body{
     background-color: #5c97bf;
 }
 
+.menu-informacoes .mi-ola{
+    padding-top: 150px;
+    padding-bottom: 150px;
+    text-align: center;
+    font-weight: 200;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.menu-informacoes .mi-ola .ola{
+    font-size: 45px;
+}
+
+.menu-informacoes .mi-ola .cidade,
+.menu-informacoes .mi-ola .prefeitura{
+    font-size: 35px;
+}
+
+.menu-informacoes .mi-ola .cidade{
+    font-weight: bold;
+}
+
+
+.mi-sobre{
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: #f5f4f4;
+}
+
+.mi-sobre .titulo{
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.mi-sobre .titulo .col-md-6{
+    padding-bottom: 25px;
+    border-bottom: solid 2px #e1e1d9;
+}
+
+
+.mi-sobre .titulo .col-md-6 .texto{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.mi-sobre .info-cidade .titulo{
+    font-weight: bold;
+}
+
+.mi-sobre .info-cidade .valor{
+    font-size: 12px;
+    color: #666;
+}
+
+.mi-sobre .info-cidade .foto{
+    margin-top: 8px;
+}
+
+.mi-sobre .info-cidade .foto .foto{
+    height: 180px;
+    width: 180px;
+    border-radius: 100px;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 3px solid #fff;
+
+    -webkit-box-shadow: 3px 3px 4px -4px rgba(0,0,0,0.30);
+    -moz-box-shadow: 3px 3px 4px -4px rgba(0,0,0,0.30);
+    box-shadow: 3px 3px 4px -4px rgba(0,0,0,0.30);
+}
+
 
 .perfil-prefeitura{
     height: 300px !important;
@@ -1577,7 +1650,7 @@ html, body{
     background-repeat: no-repeat;
     background-position: center;
     border: 3px solid #fff;
-    
+
     -webkit-box-shadow: 3px 3px 4px -4px rgba(0,0,0,0.30), inset 2px 2px 1px -1px rgba(0,0,0,0.20);
     -moz-box-shadow: 3px 3px 4px -4px rgba(0,0,0,0.30), inset 2px 2px 1px -1px rgba(0,0,0,0.20);
     box-shadow: 3px 3px 4px -4px rgba(0,0,0,0.30), inset 2px 2px 1px -1px rgba(0,0,0,0.20);
@@ -1588,7 +1661,7 @@ html, body{
 }
 
 .perfil-prefeitura-container .perfil-prefeitura-nome{
-    width: 960px !important; 
+    width: 959px !important; 
     background-color: #fff;
     padding-top: 25px;
     padding-bottom: 25px;
@@ -1597,7 +1670,7 @@ html, body{
 }
 
 .perfil-prefeitura-container > .col-md-9 > .row:nth-child(2){
-    width: 960px !important;
+    width: 959px !important;
 }
 
 .perfil-prefeitura-container .menu-acoes{
@@ -1615,7 +1688,7 @@ html, body{
 
 .perfil-prefeitura-container .area-direita-perfil-prefeitura{
     /*background-color: #000;*/
-    
+
 }
 
 .perfil-prefeitura-container .perfil-prefeitura-nome .nome{

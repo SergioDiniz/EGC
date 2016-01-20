@@ -88,8 +88,8 @@
                             <div class="row">
                                 <div class="menu-opcoes">
                                     <ul class="nav nav-tabs">
-                                        <li role="presentation"><a href="#tab1" data-toggle="tab">Informações</a></li>
-                                        <li role="presentation" class="active"><a href="#tab2" data-toggle="tab">Denúncias</a></li>
+                                        <li role="presentation" class="active"><a href="#tab1" data-toggle="tab">Informações</a></li>
+                                        <li role="presentation" ><a href="#tab2" data-toggle="tab">Denúncias</a></li>
                                         <li role="presentation"><a href="#tab3" data-toggle="tab">Ações</a></li>
                                         <li role="presentation"><a href="#tab4" data-toggle="tab">Comentários</a></li>
                                     </ul>
@@ -98,12 +98,87 @@
 
                             <div class="row">
                                 <div class="tab-content">
-                                    <div role="tabpanel" class="tab-pane" id="tab1">
-                                        Informações
+                                    <div role="tabpanel" class="tab-pane active" id="tab1">
+                                        <div class="menu-informacoes">
+
+                                            <div class="mi-ola">
+                                                <span class="ola">Ola,</span> <br/>
+                                                <span class="prefeitura">Somos a Prefeitura Municipal de </span> <br/>
+                                                <span class="cidade">#{controladorPrefeitura.prefeitura.cidade.cidadePK.nomeCidade} - #{controladorPrefeitura.prefeitura.cidade.cidadePK.siglaEstado}</span>
+                                            </div>
+
+
+
+                                            <div class="mi-sobre">
+                                                <div class="titulo">
+
+                                                    <div class="row">
+                                                        <div class="col-md-offset-3 col-md-6">
+                                                            <span class="texto">SOBRE NÓS</span>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="info-cidade">
+                                                    <div class="row">
+
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-4 text-right">
+                                                                <div class="row">
+                                                                    <br/>
+                                                                    <span class="titulo">NOME</span><br/>
+                                                                    <span class="valor">#{controladorPrefeitura.prefeitura.nome}</span>
+                                                                    <br/><br/>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <span class="titulo">ANIVERSARIO</span><br/>
+                                                                    <span class="valor">12/12/1955</span>
+                                                                    <br/><br/>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <span class="titulo">ENDEREÇO</span><br/>
+                                                                    <span class="valor">#{controladorPrefeitura.prefeitura.enderecoPrefeitura.rua}, #{controladorPrefeitura.prefeitura.enderecoPrefeitura.numero}</span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4 text-center">
+                                                                <div class="foto">
+                                                                    <div class="foto" style="background-image: url(brasao/#{controladorPrefeitura.prefeitura.foto})">
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4 text-left">
+                                                                <div class="row">
+                                                                    <br/>
+                                                                    <span class="titulo">TELEFONE</span><br/>
+                                                                    <span class="valor">#{controladorPrefeitura.prefeitura.telefone}</span>
+                                                                    <br/><br/>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <span class="titulo">EMAIL</span><br/>
+                                                                    <span class="valor">#{controladorPrefeitura.prefeitura.email}</span>
+                                                                    <br/><br/>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <span class="titulo">WEB</span><br/>
+                                                                    <span class="valor">www.santahelena.gov.pb.br</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
 
                                     </div>
 
-                                    <div role="tabpanel" class="tab-pane active" id="tab2">
+                                    <div role="tabpanel" class="tab-pane " id="tab2">
 
                                         <div class="menu-cidades">
                                             <div class="ultimas-denuncias">
