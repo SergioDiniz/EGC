@@ -1576,18 +1576,27 @@ html, body{
     background-color: #f5f4f4;
 }
 
-.mi-sobre .titulo{
+.mi-sobre .titulo,
+.mi-lideres .titulo,
+.mi-fazendo .titulo,
+.mi-falando .titulo{
     text-align: center;
     padding-bottom: 20px;
 }
 
-.mi-sobre .titulo .col-md-6{
+.mi-sobre .titulo .col-md-6,
+.mi-lideres .titulo .col-md-6,
+.mi-fazendo .titulo .col-md-6,
+.mi-falando .titulo .col-md-6{
     padding-bottom: 25px;
     border-bottom: solid 2px #e1e1d9;
 }
 
 
-.mi-sobre .titulo .col-md-6 .texto{
+.mi-sobre .titulo .col-md-6 .texto,
+.mi-lideres .titulo .col-md-6 .texto,
+.mi-fazendo .titulo .col-md-6 .texto,
+.mi-falando .titulo .col-md-6 .texto{
     font-size: 18px;
     font-weight: bold;
 }
@@ -1614,10 +1623,114 @@ html, body{
     background-position: center;
     border: 3px solid #fff;
 
-    -webkit-box-shadow: 3px 3px 4px -4px rgba(0,0,0,0.30);
-    -moz-box-shadow: 3px 3px 4px -4px rgba(0,0,0,0.30);
-    box-shadow: 3px 3px 4px -4px rgba(0,0,0,0.30);
+    -webkit-box-shadow: 3px 3px 4px -4px rgba(0,0,0,0.30), inset 2px 2px 1px -1px rgba(0,0,0,0.20);
+    -moz-box-shadow: 3px 3px 4px -4px rgba(0,0,0,0.30), inset 2px 2px 1px -1px rgba(0,0,0,0.20);
+    box-shadow: 3px 3px 4px -4px rgba(0,0,0,0.30), inset 2px 2px 1px -1px rgba(0,0,0,0.20);
 }
+
+
+.slogan .texto, 
+.texto-sobre .texto{
+    font-size: 30px;
+    padding-top: 30px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.slogan .texto{
+    font-size: 30px;
+    font-family: "featherly";
+}
+
+.texto-sobre .texto{
+    font-size: 12px;
+    color: #7b7b7b;
+}
+
+.mi-lideres{
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-bottom: solid 1px #d3d2d2;
+}
+
+.mi-lideres .img-lideres .foto{
+    height: 150px;
+    width: 150px;
+    margin: 0 auto;
+}
+
+.mi-lideres .img-lideres .foto .foto{
+    height: 150px;
+    width: 150px;
+    border-radius: 100px;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 3px solid #fff;
+}
+
+.mi-lideres .img-lideres .nome,
+.mi-lideres .img-lideres .funcao{
+    font-size: 16px;
+    font-weight: 200;
+}
+
+.mi-lideres .img-lideres .nome{
+    color: #1b7fb7;
+}
+
+.mi-lideres .img-lideres .funcao{
+    color: #7b7b7b;
+}
+
+.mi-lideres .img-lideres{
+    padding-top: 50px;
+    padding-bottom: 80px;
+}
+
+
+.mi-fazendo{
+    padding-top: 30px;
+    
+}
+
+.mi-fazendo .denuncias-ra{
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: #fdf6e3;
+}
+
+.mi-fazendo .denuncias-ra .ra-titulo{
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+.mi-fazendo .denuncias-ra .descricao{
+    font-size: 12px;
+    color: #7b7b7b;
+}
+
+
+.mi-falando{
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: #ed5564;
+    color: #fff;
+}
+
+
+.mi-falando .titulo .col-md-6{
+    border-color: #fff;
+}
+
+.mi-falando .carousel-control.left{
+    background-image: none !important;
+}
+
+.mi-falando .carousel-control.right{
+    background-image: none !important;
+}
+
 
 
 .perfil-prefeitura{
