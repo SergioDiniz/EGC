@@ -6,6 +6,7 @@
 package com.br.beans;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,6 +16,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -36,8 +38,23 @@ public class Prefeitura implements Serializable{
     private String telefone;
     @Column(nullable = false)
     private String foto = "brasao.jpg";
+    private String capa;
+    @Column(length = 1024)
+    private String slogan;
+    @Column(length = 2048)
+    private String textoSobre;
+    @Column(length = 1024)
+    private String website;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date aniversario;
+    
+    
+    
     @Embedded @Column(nullable = false)
     private EnderecoPrefeitura enderecoPrefeitura;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    private LideresPrefeitura lideresPrefeitura;
     
     private boolean ativo;
     

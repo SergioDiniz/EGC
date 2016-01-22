@@ -26,17 +26,24 @@ public class EnderecoPrefeitura implements Serializable{
     private String cep;
     @Column(nullable = false)
     private int numero;
+    
+    private String longitude;
+    private String latitude;
 
     public EnderecoPrefeitura() {
     }
 
-    public EnderecoPrefeitura(String cidade, String estado, String rua, String cep, int numero) {
+    public EnderecoPrefeitura(String cidade, String estado, String rua, String cep, int numero, String longitude, String latitude) {
         this.cidade = cidade;
         this.estado = estado;
         this.rua = rua;
         this.cep = cep;
         this.numero = numero;
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
+
+    
 
     public String getCidade() {
         return cidade;
@@ -76,6 +83,22 @@ public class EnderecoPrefeitura implements Serializable{
 
     public void setNumero(int numero) {
         this.numero = numero;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
     }
     
     
