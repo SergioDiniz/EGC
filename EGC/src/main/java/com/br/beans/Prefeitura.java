@@ -15,6 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
@@ -55,6 +56,9 @@ public class Prefeitura implements Serializable{
     
     @OneToOne(cascade = CascadeType.ALL)
     private LideresPrefeitura lideresPrefeitura;
+    
+    @OneToMany
+    private List<MensagemPrefeitura> mensagensPrefeitura;
     
     private boolean ativo;
     

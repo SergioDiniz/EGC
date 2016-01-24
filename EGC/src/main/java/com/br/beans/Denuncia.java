@@ -34,7 +34,7 @@ public class Denuncia implements Serializable {
     @Id
     @GeneratedValue
     private int id;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 2048)
     private String descricao;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
