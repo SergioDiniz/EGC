@@ -81,9 +81,6 @@
                                                     Nome <br/>
                                                     <h:inputText value="#{controladorPrefeitura.prefeitura.nome}" class="form-control input-lg campos-formulario" id="nome" required="required" pt:placeholder="nome"/> 
                                                     <br/>
-                                                    Telefone <br/>
-                                                    <h:inputText value="#{controladorPrefeitura.prefeitura.telefone}" class="form-control input-lg campos-formulario" id="telefone" required="required" pt:placeholder="telefone"/> 
-                                                    <br/>
                                                     Email <br/>
                                                     <h:inputText value="#{controladorPrefeitura.prefeitura.email}" class="form-control input-lg campos-formulario" id="email" required="required" pt:placeholder="email"/> 
                                                     <br/>
@@ -96,6 +93,21 @@
 
 
                                             </div>
+
+                                            <div class="row">
+                                                <div class="col-md-offset-3 col-md-4"> 
+                                                    Telefone <br/>
+                                                    <h:inputText value="#{controladorPrefeitura.prefeitura.telefone}" class="form-control input-lg campos-formulario" id="telefone" required="required" pt:placeholder="telefone"/>  
+                                                </div>
+                                                <div class="col-md-3"> 
+                                                    Aniversario <br/>
+                                                    <h:inputText class="form-control input-lg campos-formulario" value="#{controladorPrefeitura.prefeitura.aniversario}" pt:placeholder="dia/mes/ano">
+                                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                                    </h:inputText>
+                                                </div>
+                                            </div>
+
+                                            <br/>   
 
                                             <div class="row">
                                                 <div class="col-md-offset-3 col-md-4"> 
@@ -149,19 +161,15 @@
                                         <div class="row">
                                             <div class="col-md-offset-2 col-md-8"> 
 
-                                                Slogan <br/>
-                                                <h:inputTextarea class="form-control" value="#{controladorPrefeitura.prefeitura.slogan}" rows="2" id="slogan"/>
-                                                <br/>
+
                                                 Link do site Oficial <br/>
                                                 <h:inputText value="#{controladorPrefeitura.prefeitura.website}" class="form-control input-lg campos-formulario" id="website" required="required" pt:placeholder="www.seusite.com.br"/> 
                                                 <br/>
-                                                Aniversario <br/>
-                                                <h:inputText class="form-control input-lg campos-formulario" value="#{controladorPrefeitura.prefeitura.aniversario}" pt:placeholder="dia/mes/ano">
-                                                    <f:convertDateTime pattern="dd/MM/yyyy" />
-                                                </h:inputText>
+                                                Slogan <br/>
+                                                <h:inputTextarea class="form-control" value="#{controladorPrefeitura.prefeitura.slogan}" rows="2" id="slogan"/>
                                                 <br/>
-                                                Sobre <br/>
-                                                <h:inputTextarea class="form-control" value="#{controladorPrefeitura.prefeitura.textoSobre}" rows="5" id="sobre"/>
+                                                Texto Sobre <br/>
+                                                <h:inputTextarea class="form-control" value="#{controladorPrefeitura.prefeitura.textoSobre}" rows="8" id="sobre"/>
                                                 <br/>
                                                 <p:messages showDetail="true" autoUpdate="true" closable="true" style="position: absolute; width: 408px"/>
 
@@ -203,7 +211,7 @@
                                                         <br/>
                                                         <h1 style="font-weight: 200">Nome do Prefeito</h1>
                                                         Prefeito <br/>
-                                                        <h:inputText value="#{controladorPrefeitura.prefeitura.lideresPrefeitura.prefeito}" class="form-control input-lg campos-formulario" id="nome-prefeito" required="required" pt:placeholder="Prefeito"/> 
+                                                        <!--<h:inputText value="#{controladorPrefeitura.prefeitura.lideresPrefeitura.prefeito}" class="form-control input-lg campos-formulario" id="nome-prefeito" required="required" pt:placeholder="Prefeito"/>--> 
                                                         <br/>
                                                     </div>
                                                 </div>
@@ -211,7 +219,7 @@
                                                 <br/>
                                                 <hr/>
                                                 <br/>
-                                                
+
                                                 <div class="row">
                                                     <div class="col-md-5">
                                                         <div class="foto-prefeito-conf">
@@ -234,7 +242,7 @@
                                                         <br/>
                                                         <h1 style="font-weight: 200">Nome do Vice-Prefeito</h1>
                                                         Vice-Prefeito <br/>
-                                                        <h:inputText value="#{controladorPrefeitura.prefeitura.lideresPrefeitura.prefeito}" class="form-control input-lg campos-formulario" id="nome-vice-prefeito" required="required" pt:placeholder="Vice-Prefeito"/> 
+                                                        <!--<h:inputText value="#{controladorPrefeitura.prefeitura.lideresPrefeitura.prefeito}" class="form-control input-lg campos-formulario" id="nome-vice-prefeito" required="required" pt:placeholder="Vice-Prefeito"/>--> 
                                                         <br/>
                                                     </div>
                                                 </div>
@@ -248,8 +256,18 @@
 
                             <div role="tabpanel" class="tab-pane" id="tab4">
                                 <div class="menu-mapa">
-                                    4
+                                    <div class="col-md-offset-2 col-md-8">
+                                        <br/><br/>
+                                        <div class="form-group">
+                                            <label for="txtEndereco">Endereço:</label>
+                                            <input type="text" id="txtEndereco" jsf:id="txtEndereco" name="txtEndereco" class="form-control"  jsf:value="${controladorUsuario.endMapa}"/>
+                                        </div>
 
+                                        <div id="mapa" style="height: 450px; width: 100%"></div>
+
+                                        <input type="hidden" id="txtLatitude" name="txtLatitude" jsf:value="#{controladorPrefeitura.prefeitura.enderecoPrefeitura.latitude}" />
+                                        <input type="hidden" id="txtLongitude" name="txtLongitude" jsf:value="#{controladorPrefeitura.prefeitura.enderecoPrefeitura.longitude}" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -280,6 +298,31 @@
 
 
     </h:body>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA7--w4nokUUqyxvIeuDh37KaIcLivbQHs&amp;sensor=false"></script>
+    <script src="../../js/mapa.js" type="text/javascript"/>
+    <script type="text/javascript">
+        function initialize() {
+            var latlng = new google.maps.LatLng(#{controladorPrefeitura.prefeitura.enderecoPrefeitura.latitude}, #{controladorPrefeitura.prefeitura.enderecoPrefeitura.longitude});
+            var options = {
+                zoom: 16,
+                center: latlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                styles: [{"featureType":"landscape","stylers":[{"hue":"#FFBB00"},{"saturation":43.400000000000006},{"lightness":37.599999999999994},{"gamma":1}]},{"featureType":"road.highway","stylers":[{"hue":"#FFC200"},{"saturation":-61.8},{"lightness":45.599999999999994},{"gamma":1}]},{"featureType":"road.arterial","stylers":[{"hue":"#FF0300"},{"saturation":-100},{"lightness":51.19999999999999},{"gamma":1}]},{"featureType":"road.local","stylers":[{"hue":"#FF0300"},{"saturation":-100},{"lightness":52},{"gamma":1}]},{"featureType":"water","stylers":[{"hue":"#0078FF"},{"saturation":-13.200000000000003},{"lightness":2.4000000000000057},{"gamma":1}]},{"featureType":"poi","stylers":[{"hue":"#00FF6A"},{"saturation":-1.0989010989011234},{"lightness":11.200000000000017},{"gamma":1}]}]
+            };
+
+            map = new google.maps.Map(document.getElementById("mapa"), options);
+
+            geocoder = new google.maps.Geocoder();
+
+            marker = new google.maps.Marker({
+                map: map,
+                draggable: true,
+            });
+
+            marker.setPosition(latlng);
+        }
+    </script>
+    <script src="../../js/jquery-ui.custom.min.js" type="text/javascript"/>
 </html>
 
 

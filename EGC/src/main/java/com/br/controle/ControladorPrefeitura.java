@@ -153,7 +153,10 @@ public class ControladorPrefeitura implements Serializable {
                 File targetFolder;
                 if (uploadType == UploadType.BRASAO_PREFEITURA) {
                     targetFolder = new File("/Volumes/Arquivos/Sergio/Documentos/ADS/P6/TCC/Sistema/EGC/EGC/src/main/webapp/sis/prefeitura/brasao");
-                } else {
+                } else if (uploadType == UploadType.PERFIL_PREFEITO || uploadType == UploadType.PERFIL_VICE_PREFEITO){
+                    targetFolder = new File("/Volumes/Arquivos/Sergio/Documentos/ADS/P6/TCC/Sistema/EGC/EGC/src/main/webapp/sis/prefeitura/lider");
+                }
+                else {
                     targetFolder = new File("/Volumes/Arquivos/Sergio/Documentos/ADS/P6/TCC/Sistema/EGC/EGC/src/main/webapp/sis/admin/documentos-de-solicitacao");
                 }
 

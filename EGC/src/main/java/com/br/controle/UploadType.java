@@ -12,5 +12,7 @@ package com.br.controle;
 public enum UploadType {
     DOCUMENTO_SOLICITACAO,
     BRASAO_PREFEITURA,
-    PERFIL_FUNCIONARIO
+    PERFIL_FUNCIONARIO,
+    PERFIL_PREFEITO,
+    PERFIL_VICE_PREFEITO
 }
