@@ -1820,7 +1820,8 @@ html, body{
     margin-left: 100px;
 }
 
-.foto-perfil-conf .foto{
+.foto-perfil-conf .foto,
+.foto-prefeito-conf .foto{
     width: 200px;
     height: 200px;
     border-radius: 100px;
@@ -1830,33 +1831,35 @@ html, body{
     margin-left: 18px;
 }
 
-.foto-perfil-conf .btn-mudar-foto-perfil{
+
+.foto-perfil-conf .btn-mudar-foto-perfil,
+.foto-prefeito-conf .btn-mudar-foto-perfil{
     margin-top: 15px;
     margin-left: 60px;
     width: 120px;
 }
 
-.foto-perfil-conf .btn-mudar-foto-perfil .ui-fileupload-simple{
+.btn-mudar-foto-perfil .ui-fileupload-simple{
     background: none !important;
 } 
 
-.foto-perfil-conf .btn-mudar-foto-perfil .ui-widget{
+.btn-mudar-foto-perfil .ui-widget{
     background: none !important;
 }
 
-.foto-perfil-conf .btn-mudar-foto-perfil .ui-button ui-widget{
+.btn-mudar-foto-perfil .ui-button ui-widget{
     background: none !important;
 } 
 
-.foto-perfil-conf .btn-mudar-foto-perfil .ui-state-default{
+.btn-mudar-foto-perfil .ui-state-default{
     background: none !important;
 } 
 
-.foto-perfil-conf .btn-mudar-foto-perfil .ui-corner-all{
+.btn-mudar-foto-perfil .ui-corner-all{
     background: none !important;
 }
 
-.foto-perfil-conf .btn-mudar-foto-perfil .ui-button-text-icon-left{
+.btn-mudar-foto-perfil .ui-button-text-icon-left{
     background: none !important;
 }
 

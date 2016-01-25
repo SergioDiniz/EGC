@@ -6,6 +6,7 @@
 package com.br.beans;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -97,6 +98,10 @@ public class Prefeitura implements Serializable{
     }
 
     
+    public String aniversarioFormatado(){
+        String d = new SimpleDateFormat("dd.MM.yyyy").format(this.aniversario);
+        return d;
+    }
 
 
     public int getId() {
@@ -194,6 +199,63 @@ public class Prefeitura implements Serializable{
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
+
+    public String getCapa() {
+        return capa;
+    }
+
+    public void setCapa(String capa) {
+        this.capa = capa;
+    }
+
+    public String getSlogan() {
+        return slogan;
+    }
+
+    public void setSlogan(String slogan) {
+        this.slogan = slogan;
+    }
+
+    public String getTextoSobre() {
+        return textoSobre;
+    }
+
+    public void setTextoSobre(String textoSobre) {
+        this.textoSobre = textoSobre;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public Date getAniversario() {
+        return aniversario;
+    }
+
+    public void setAniversario(Date aniversario) {
+        this.aniversario = aniversario;
+    }
+
+    public LideresPrefeitura getLideresPrefeitura() {
+        return lideresPrefeitura;
+    }
+
+    public void setLideresPrefeitura(LideresPrefeitura lideresPrefeitura) {
+        this.lideresPrefeitura = lideresPrefeitura;
+    }
+
+    public List<MensagemPrefeitura> getMensagensPrefeitura() {
+        return mensagensPrefeitura;
+    }
+
+    public void setMensagensPrefeitura(List<MensagemPrefeitura> mensagensPrefeitura) {
+        this.mensagensPrefeitura = mensagensPrefeitura;
+    }
+    
     
     
     

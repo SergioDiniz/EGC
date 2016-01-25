@@ -4,7 +4,9 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>EGC - Configurações</title>
     </h:head>
@@ -26,107 +28,251 @@
             </div>
 
 
-            <div class="container centro">
+            <div class="container centro configuracoes">
+
+                <br/>
 
                 <div class="row">
-                    <h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1">
-                        <div class="col-md-offset-1 col-md-2">
-                            <br/>
-                            <br/>
-                            <div class="foto-perfil-conf">
-                                <div class="foto" style="background-image: url(brasao/#{controladorPrefeitura.prefeitura.foto})">
-
-                                </div>
-                                <div class="btn-mudar-foto-perfil">
-                                    <p:fileUpload
-                                    label="Procurar"
-                                    value="#{controladorPrefeitura.file}"
-                                    allowTypes="/(\.|\/)(gif|jpg|jpeg|gif|png|PNG|GIF|JPG|JPEG)$/" 
-                                    mode="simple" 
-                                    skinSimple="true"
-                                    
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-9">
-                            <br/>
-                            <br/>
-
-
-
-                            <div class="row">
-                                <div class="col-md-offset-3 col-md-7"> 
-
-                                    Nome <br/>
-                                    <h:inputText value="#{controladorPrefeitura.prefeitura.nome}" class="form-control input-lg campos-formulario" id="nome" required="required" pt:placeholder="nome"/> 
-                                    <br/>
-                                    Telefone <br/>
-                                    <h:inputText value="#{controladorPrefeitura.prefeitura.telefone}" class="form-control input-lg campos-formulario" id="telefone" required="required" pt:placeholder="telefone"/> 
-                                    <br/>
-                                    Email <br/>
-                                    <h:inputText value="#{controladorPrefeitura.prefeitura.email}" class="form-control input-lg campos-formulario" id="email" required="required" pt:placeholder="email"/> 
-                                    <br/>
-                                    Senha <br/>
-                                    <h:inputSecret redisplay="true" value="#{controladorPrefeitura.prefeitura.senha}" class="form-control input-lg campos-formulario" id="senha" required="required" pt:placeholder="senha"/> 
-                                    <br/>
-                                    <p:messages showDetail="true" autoUpdate="true" closable="true" style="position: absolute; width: 408px"/>
-
-                                </div>
-
-
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-offset-3 col-md-4"> 
-                                    Estado <br/>
-                                    <h:inputText value="#{controladorPrefeitura.prefeitura.enderecoPrefeitura.estado}" class="form-control input-lg campos-formulario" id="estado" required="required" pt:placeholder="estado" disabled="true"/> 
-                                </div>
-                                <div class="col-md-3"> 
-                                    CEP <br/>
-                                    <h:inputText value="#{controladorPrefeitura.prefeitura.enderecoPrefeitura.cep}" class="form-control input-lg campos-formulario" id="cep" required="required" pt:placeholder="CEP"/> 
-                                </div>
-
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-offset-3 col-md-7"> 
-                                    <br/>
-                                    Cidade <br/>
-                                    <h:inputText value="#{controladorPrefeitura.prefeitura.enderecoPrefeitura.cidade}" class="form-control input-lg campos-formulario" id="cidade" required="required" pt:placeholder="cidade" disabled="true"/> 
-                                    <br/>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-offset-3 col-md-5"> 
-                                    Rua <br/>
-                                    <h:inputText value="#{controladorPrefeitura.prefeitura.enderecoPrefeitura.rua}" class="form-control input-lg campos-formulario" id="rua" required="required" pt:placeholder="rua"/> 
-                                </div>
-                                <div class="col-md-2"> 
-                                    Numero <br/>
-                                    <h:inputText value="#{controladorPrefeitura.prefeitura.enderecoPrefeitura.numero}" class="form-control input-lg campos-formulario" id="numero" required="required" pt:placeholder="numero"/> 
-                                </div>
-
-                            </div>
-
-
-
-                            <div class="row">
-                                <div class="col-md-offset-3 col-md-7"> 
-                                    <br/><br/><br/><br/>
-                                    <div align="center"><h:commandButton value="Atualizar Dados" action="#{controladorPrefeitura.atualizarDados()}" class="btn btn-info btn-lg btn-atualizardados"/></div>
-                                </div>
-
-                            </div>
-
-
-
-
-                            <br/><br/>
-                        </div>
-                    </h:form>
+                    <div class="col-md-offset-2 col-md-8 menu-opcoes">
+                        <ul class="nav nav-tabs">
+                            <li role="presentation" class="active"><a href="#tab1" data-toggle="tab">Informações</a></li>
+                            <li role="presentation" ><a href="#tab2" data-toggle="tab">Sobre</a></li>
+                            <li role="presentation"><a href="#tab3" data-toggle="tab">Lideres</a></li>
+                            <li role="presentation"><a href="#tab4" data-toggle="tab">Mapa</a></li>
+                        </ul>
+                    </div>
                 </div>
+
+                <h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1">
+                    <div class="row">
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="tab1">
+                                <div class="menu-info">
+                                    <div class="row">
+
+                                        <div class="col-md-offset-1 col-md-2">
+                                            <br/>
+                                            <br/>
+                                            <div class="foto-perfil-conf">
+                                                <div class="foto" style="background-image: url(brasao/#{controladorPrefeitura.prefeitura.foto})">
+
+                                                </div>
+                                                <div class="btn-mudar-foto-perfil">
+                                                    <p:fileUpload
+                                                        label="Procurar"
+                                                        value="#{controladorPrefeitura.file}"
+                                                        allowTypes="/(\.|\/)(gif|jpg|jpeg|gif|png|PNG|GIF|JPG|JPEG)$/" 
+                                                        mode="simple" 
+                                                        skinSimple="true"
+
+                                                        />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <br/>
+                                            <br/>
+
+
+
+                                            <div class="row">
+                                                <div class="col-md-offset-3 col-md-7"> 
+
+                                                    Nome <br/>
+                                                    <h:inputText value="#{controladorPrefeitura.prefeitura.nome}" class="form-control input-lg campos-formulario" id="nome" required="required" pt:placeholder="nome"/> 
+                                                    <br/>
+                                                    Telefone <br/>
+                                                    <h:inputText value="#{controladorPrefeitura.prefeitura.telefone}" class="form-control input-lg campos-formulario" id="telefone" required="required" pt:placeholder="telefone"/> 
+                                                    <br/>
+                                                    Email <br/>
+                                                    <h:inputText value="#{controladorPrefeitura.prefeitura.email}" class="form-control input-lg campos-formulario" id="email" required="required" pt:placeholder="email"/> 
+                                                    <br/>
+                                                    Senha <br/>
+                                                    <h:inputSecret redisplay="true" value="#{controladorPrefeitura.prefeitura.senha}" class="form-control input-lg campos-formulario" id="senha" required="required" pt:placeholder="senha"/> 
+                                                    <br/>
+                                                    <p:messages showDetail="true" autoUpdate="true" closable="true" style="position: absolute; width: 408px"/>
+
+                                                </div>
+
+
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-offset-3 col-md-4"> 
+                                                    Estado <br/>
+                                                    <h:inputText value="#{controladorPrefeitura.prefeitura.enderecoPrefeitura.estado}" class="form-control input-lg campos-formulario" id="estado" required="required" pt:placeholder="estado" disabled="true"/> 
+                                                </div>
+                                                <div class="col-md-3"> 
+                                                    CEP <br/>
+                                                    <h:inputText value="#{controladorPrefeitura.prefeitura.enderecoPrefeitura.cep}" class="form-control input-lg campos-formulario" id="cep" required="required" pt:placeholder="CEP"/> 
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-offset-3 col-md-7"> 
+                                                    <br/>
+                                                    Cidade <br/>
+                                                    <h:inputText value="#{controladorPrefeitura.prefeitura.enderecoPrefeitura.cidade}" class="form-control input-lg campos-formulario" id="cidade" required="required" pt:placeholder="cidade" disabled="true"/> 
+                                                    <br/>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-offset-3 col-md-5"> 
+                                                    Rua <br/>
+                                                    <h:inputText value="#{controladorPrefeitura.prefeitura.enderecoPrefeitura.rua}" class="form-control input-lg campos-formulario" id="rua" required="required" pt:placeholder="rua"/> 
+                                                </div>
+                                                <div class="col-md-2"> 
+                                                    Numero <br/>
+                                                    <h:inputText value="#{controladorPrefeitura.prefeitura.enderecoPrefeitura.numero}" class="form-control input-lg campos-formulario" id="numero" required="required" pt:placeholder="numero"/> 
+                                                </div>
+
+                                            </div>
+
+
+
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div role="tabpanel" class="tab-pane" id="tab2">
+                                <div class="menu-sobre">
+                                    <div class="col-md-offset-2 col-md-8">
+                                        <br/>
+                                        <br/>
+
+                                        <div class="row">
+                                            <div class="col-md-offset-2 col-md-8"> 
+
+                                                Slogan <br/>
+                                                <h:inputTextarea class="form-control" value="#{controladorPrefeitura.prefeitura.slogan}" rows="2" id="slogan"/>
+                                                <br/>
+                                                Link do site Oficial <br/>
+                                                <h:inputText value="#{controladorPrefeitura.prefeitura.website}" class="form-control input-lg campos-formulario" id="website" required="required" pt:placeholder="www.seusite.com.br"/> 
+                                                <br/>
+                                                Aniversario <br/>
+                                                <h:inputText class="form-control input-lg campos-formulario" value="#{controladorPrefeitura.prefeitura.aniversario}" pt:placeholder="dia/mes/ano">
+                                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                                </h:inputText>
+                                                <br/>
+                                                Sobre <br/>
+                                                <h:inputTextarea class="form-control" value="#{controladorPrefeitura.prefeitura.textoSobre}" rows="5" id="sobre"/>
+                                                <br/>
+                                                <p:messages showDetail="true" autoUpdate="true" closable="true" style="position: absolute; width: 408px"/>
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div role="tabpanel" class="tab-pane" id="tab3">
+                                <div class="menu-libre">
+                                    <div class="col-md-offset-2 col-md-8">
+                                        <br/>
+                                        <br/>
+
+                                        <div class="row">
+                                            <div class="col-md-12"> 
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <div class="foto-prefeito-conf">
+                                                            <div class="foto" style="background-image: url(lider/lider.png)">
+
+                                                            </div>
+                                                            <div class="btn-mudar-foto-perfil">
+                                                                <p:fileUpload
+                                                                    label="Procurar"
+                                                                    value="#{controladorPrefeitura.file}"
+                                                                    allowTypes="/(\.|\/)(gif|jpg|jpeg|gif|png|PNG|GIF|JPG|JPEG)$/" 
+                                                                    mode="simple" 
+                                                                    skinSimple="true"
+
+                                                                    />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <br/>
+                                                        <h1 style="font-weight: 200">Nome do Prefeito</h1>
+                                                        Prefeito <br/>
+                                                        <h:inputText value="#{controladorPrefeitura.prefeitura.lideresPrefeitura.prefeito}" class="form-control input-lg campos-formulario" id="nome-prefeito" required="required" pt:placeholder="Prefeito"/> 
+                                                        <br/>
+                                                    </div>
+                                                </div>
+
+                                                <br/>
+                                                <hr/>
+                                                <br/>
+                                                
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <div class="foto-prefeito-conf">
+                                                            <div class="foto" style="background-image: url(lider/lider.png)">
+
+                                                            </div>
+                                                            <div class="btn-mudar-foto-perfil">
+                                                                <p:fileUpload
+                                                                    label="Procurar"
+                                                                    value="#{controladorPrefeitura.file}"
+                                                                    allowTypes="/(\.|\/)(gif|jpg|jpeg|gif|png|PNG|GIF|JPG|JPEG)$/" 
+                                                                    mode="simple" 
+                                                                    skinSimple="true"
+
+                                                                    />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <br/>
+                                                        <h1 style="font-weight: 200">Nome do Vice-Prefeito</h1>
+                                                        Vice-Prefeito <br/>
+                                                        <h:inputText value="#{controladorPrefeitura.prefeitura.lideresPrefeitura.prefeito}" class="form-control input-lg campos-formulario" id="nome-vice-prefeito" required="required" pt:placeholder="Vice-Prefeito"/> 
+                                                        <br/>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div role="tabpanel" class="tab-pane" id="tab4">
+                                <div class="menu-mapa">
+                                    4
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-7"> 
+                            <br/><br/><br/><br/>
+                            <div align="right"><h:commandButton value="Atualizar Dados" action="#{controladorPrefeitura.atualizarDados()}" class="btn btn-info btn-lg btn-atualizardados"/></div>
+                        </div>
+
+                    </div>
+
+
+
+
+                    <br/><br/>
+
+                </h:form>
+
+
+
+
 
             </div>
 

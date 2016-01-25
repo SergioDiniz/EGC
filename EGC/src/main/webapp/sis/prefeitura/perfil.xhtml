@@ -179,7 +179,7 @@
                                                                 </div>
                                                                 <div class="row">
                                                                     <span class="titulo">ANIVERSARIO</span><br/>
-                                                                    <span class="valor">12/12/1955</span>
+                                                                    <span class="valor">#{controladorPrefeitura.prefeitura.aniversarioFormatado()}</span>
                                                                     <br/><br/>
                                                                 </div>
                                                                 <div class="row">
@@ -210,7 +210,7 @@
                                                                 </div>
                                                                 <div class="row">
                                                                     <span class="titulo">WEB</span><br/>
-                                                                    <span class="valor">www.santahelena.gov.pb.br</span>
+                                                                    <span class="valor">#{controladorPrefeitura.prefeitura.website}</span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -223,7 +223,7 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="texto text-center">
-                                                                Mais Trabalho, Novas Conquistas
+                                                                #{controladorPrefeitura.prefeitura.slogan}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -233,9 +233,7 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="texto text-center">
-                                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vestibulum quam eget neque vestibulum 
-                                                                maximus ac eu ligula. Phasellus sit amet sapien magna. Fusce vehicula eleifend sapien, eu porttitor 
-                                                                enim sagittis venenatis. Curabitur nunc lorem, imperdiet non condimentum in, malesuada quis elit.
+                                                                #{controladorPrefeitura.prefeitura.textoSobre}
                                                             </div>
                                                         </div>
                                                     </div>
