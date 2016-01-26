@@ -11,6 +11,7 @@ import com.br.beans.Denuncia;
 import com.br.beans.EnderecoPrefeitura;
 import com.br.beans.EstadoDeAcompanhamento;
 import com.br.beans.Funcionario;
+import com.br.beans.LideresPrefeitura;
 import com.br.beans.Prefeitura;
 import com.br.beans.Registro;
 import static com.br.controle.ControladorAdmin.info;
@@ -42,6 +43,8 @@ import org.primefaces.model.UploadedFile;
 public class ControladorPrefeitura implements Serializable {
 
     private UploadedFile file;
+    private UploadedFile file_prefeito;
+    private UploadedFile file_vice_prefeito;
 
     private Prefeitura prefeitura;
     private Cidade cidade;
@@ -135,7 +138,10 @@ public class ControladorPrefeitura implements Serializable {
         prefeitura.setCidade(cidade);
         prefeitura.getEnderecoPrefeitura().setCidade(cidade.getCidadePK().getNomeCidade());
         prefeitura.getEnderecoPrefeitura().setEstado(cidade.getCidadePK().getSiglaEstado());
-        prefeitura.setDocumento(upload(UploadType.DOCUMENTO_SOLICITACAO));
+        prefeitura.setDocumento(upload(this.file, UploadType.DOCUMENTO_SOLICITACAO));
+        LideresPrefeitura lideresPrefeitura = new LideresPrefeitura();
+        fachada.cadastrar(lideresPrefeitura);
+        prefeitura.setLideresPrefeitura(lideresPrefeitura);
         fachada.atualizar(prefeitura);
 
         cidade = new Cidade();
@@ -146,8 +152,8 @@ public class ControladorPrefeitura implements Serializable {
 
     }
 
-    public String upload(UploadType uploadType) {
-        if (file != null) {
+    public String upload(UploadedFile fileUp ,UploadType uploadType) {
+        if (fileUp != null) {
             try {
 
                 File targetFolder;
@@ -160,10 +166,15 @@ public class ControladorPrefeitura implements Serializable {
                     targetFolder = new File("/Volumes/Arquivos/Sergio/Documentos/ADS/P6/TCC/Sistema/EGC/EGC/src/main/webapp/sis/admin/documentos-de-solicitacao");
                 }
 
-                InputStream inputStream = file.getInputstream();
-                String tipoArquivo = file.getFileName();
+                InputStream inputStream = fileUp.getInputstream();
+                String tipoArquivo = fileUp.getFileName();
                 tipoArquivo = tipoArquivo.substring(tipoArquivo.lastIndexOf("."), tipoArquivo.length());
                 String nomeArquivo = prefeitura.getEmail() + tipoArquivo;
+                if(uploadType == UploadType.PERFIL_PREFEITO){
+                    nomeArquivo = "prefeito_" + nomeArquivo;
+                } else if (uploadType == UploadType.PERFIL_VICE_PREFEITO){
+                    nomeArquivo = "vice_prefeito_" + nomeArquivo;
+                }
                 OutputStream out = new FileOutputStream(new File(targetFolder, nomeArquivo));
                 int read = 0;
                 byte[] bytes = new byte[1024];
@@ -184,19 +195,60 @@ public class ControladorPrefeitura implements Serializable {
 
     public String atualizarDados() {
 
-        if (file != null) {
+        int sleep = 2000;
+        
+        
+        if(file_prefeito.getSize() > 0 || file_vice_prefeito.getSize() > 0){
+            sleep = 0;
+        }
+        
+        if (file.getSize() > 0) {
 
             try {
 
-                this.prefeitura.setFoto(upload(UploadType.BRASAO_PREFEITURA));
+                this.prefeitura.setFoto(upload(this.file, UploadType.BRASAO_PREFEITURA));
                 this.file = null;
+                
+                Thread.sleep(sleep);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        if(file_vice_prefeito.getSize() > 0){
+            sleep = 0;
+        } else{
+            sleep = 2000;
+        }
+        
+        
+        if (file_prefeito.getSize() > 0) {
+
+            try {
+
+                this.prefeitura.getLideresPrefeitura().setFoto_prefeito((upload(this.file_prefeito, UploadType.PERFIL_PREFEITO)));
+                this.file_prefeito = null;
+                
+                Thread.sleep(sleep);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        
+        
+        if (file_vice_prefeito.getSize() > 0) {
+
+            try {
+
+                this.prefeitura.getLideresPrefeitura().setFoto_vice_prefeito((upload(this.file_vice_prefeito, UploadType.PERFIL_VICE_PREFEITO)));
+                this.file_vice_prefeito = null;
 
                 Thread.sleep(2000);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-
+        
         fachada.atualizar(prefeitura);
         return null;
     }
@@ -469,6 +521,22 @@ public class ControladorPrefeitura implements Serializable {
 
     public void setFuncionarioPerfil(Funcionario funcionarioPerfil) {
         this.funcionarioPerfil = funcionarioPerfil;
+    }
+
+    public UploadedFile getFile_prefeito() {
+        return file_prefeito;
+    }
+
+    public void setFile_prefeito(UploadedFile file_prefeito) {
+        this.file_prefeito = file_prefeito;
+    }
+
+    public UploadedFile getFile_vice_prefeito() {
+        return file_vice_prefeito;
+    }
+
+    public void setFile_vice_prefeito(UploadedFile file_vice_prefeito) {
+        this.file_vice_prefeito = file_vice_prefeito;
     }
 
     

@@ -58,4 +58,14 @@ public class Dao implements DaoIT{
         return false;
     }
     
+    @Override
+    public Object pesquisar(Class classe, Object chave) {
+        try{
+            return em.find(classe, chave);
+        } catch (Exception e){
+            
+        }
+        return false;
+    }
+    
 }

@@ -1621,6 +1621,7 @@ html, body{
     background-size: auto 100%;
     background-repeat: no-repeat;
     background-position: center;
+    background-color: #fff;
     border: 3px solid #fff;
 
     -webkit-box-shadow: 3px 3px 4px -4px rgba(0,0,0,0.30), inset 2px 2px 1px -1px rgba(0,0,0,0.20);
@@ -1762,6 +1763,7 @@ html, body{
     background-size: auto 100%;
     background-repeat: no-repeat;
     background-position: center;
+    background-color: #fff;
     border: 3px solid #fff;
 
     -webkit-box-shadow: 3px 3px 4px -4px rgba(0,0,0,0.30), inset 2px 2px 1px -1px rgba(0,0,0,0.20);

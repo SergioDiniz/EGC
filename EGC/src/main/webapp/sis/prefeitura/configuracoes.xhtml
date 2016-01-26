@@ -192,13 +192,13 @@
                                                 <div class="row">
                                                     <div class="col-md-5">
                                                         <div class="foto-prefeito-conf">
-                                                            <div class="foto" style="background-image: url(lider/lider.png)">
+                                                            <div class="foto" style="background-image: url(lider/#{controladorPrefeitura.prefeitura.lideresPrefeitura.foto_prefeito})">
 
                                                             </div>
                                                             <div class="btn-mudar-foto-perfil">
                                                                 <p:fileUpload
                                                                     label="Procurar"
-                                                                    value="#{controladorPrefeitura.file}"
+                                                                    value="#{controladorPrefeitura.file_prefeito}"
                                                                     allowTypes="/(\.|\/)(gif|jpg|jpeg|gif|png|PNG|GIF|JPG|JPEG)$/" 
                                                                     mode="simple" 
                                                                     skinSimple="true"
@@ -211,7 +211,7 @@
                                                         <br/>
                                                         <h1 style="font-weight: 200">Nome do Prefeito</h1>
                                                         Prefeito <br/>
-                                                        <!--<h:inputText value="#{controladorPrefeitura.prefeitura.lideresPrefeitura.prefeito}" class="form-control input-lg campos-formulario" id="nome-prefeito" required="required" pt:placeholder="Prefeito"/>--> 
+                                                        <h:inputText value="#{controladorPrefeitura.prefeitura.lideresPrefeitura.prefeito}" class="form-control input-lg campos-formulario" id="nome-prefeito" required="required" pt:placeholder="Prefeito"/> 
                                                         <br/>
                                                     </div>
                                                 </div>
@@ -223,13 +223,13 @@
                                                 <div class="row">
                                                     <div class="col-md-5">
                                                         <div class="foto-prefeito-conf">
-                                                            <div class="foto" style="background-image: url(lider/lider.png)">
+                                                            <div class="foto" style="background-image: url(lider/#{controladorPrefeitura.prefeitura.lideresPrefeitura.foto_vice_prefeito})">
 
                                                             </div>
                                                             <div class="btn-mudar-foto-perfil">
                                                                 <p:fileUpload
                                                                     label="Procurar"
-                                                                    value="#{controladorPrefeitura.file}"
+                                                                    value="#{controladorPrefeitura.file_vice_prefeito}"
                                                                     allowTypes="/(\.|\/)(gif|jpg|jpeg|gif|png|PNG|GIF|JPG|JPEG)$/" 
                                                                     mode="simple" 
                                                                     skinSimple="true"
@@ -242,7 +242,7 @@
                                                         <br/>
                                                         <h1 style="font-weight: 200">Nome do Vice-Prefeito</h1>
                                                         Vice-Prefeito <br/>
-                                                        <!--<h:inputText value="#{controladorPrefeitura.prefeitura.lideresPrefeitura.prefeito}" class="form-control input-lg campos-formulario" id="nome-vice-prefeito" required="required" pt:placeholder="Vice-Prefeito"/>--> 
+                                                        <h:inputText value="#{controladorPrefeitura.prefeitura.lideresPrefeitura.vice_prefieto}" class="form-control input-lg campos-formulario" id="nome-vice-prefeito" required="required" pt:placeholder="Vice-Prefeito"/> 
                                                         <br/>
                                                     </div>
                                                 </div>

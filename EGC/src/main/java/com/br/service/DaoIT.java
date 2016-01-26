@@ -18,4 +18,6 @@ public interface DaoIT {
     
     public boolean excluir(Object object);
     
+    public Object pesquisar(Class classe, Object chave);
+    
 }

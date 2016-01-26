@@ -54,6 +54,7 @@ public class Fachada implements Serializable {
     @EJB
     private UploadServiceIT ups;
 
+    // DAO
     public boolean cadastrar(Object object) {
         return dao.salvar(object);
     }
@@ -61,7 +62,16 @@ public class Fachada implements Serializable {
     public boolean atualizar(Object object) {
         return dao.atualizar(object);
     }
-
+    
+    public Object pesquisar(Class classe, Object chave){
+        return dao.pesquisar(classe, chave);
+    }
+    
+    //
+    //
+    //
+    //
+    //
     // UsuarioServices
     public Usuario loginUsuario(Usuario usuario) {
         return us.login(usuario.getEmail(), usuario.getSenha());
