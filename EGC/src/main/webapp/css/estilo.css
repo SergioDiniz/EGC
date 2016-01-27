@@ -274,6 +274,8 @@ html, body{
     width: 100%;
 }
 
+
+
 .area-erro-404{
     margin: 0 auto;
     margin-top: -50px;
@@ -1045,7 +1047,37 @@ html, body{
 
 
 #mapa{
-    border: 5px solid #dfdfdf;
+    /*border: 5px solid #dfdfdf;*/
+}
+
+.formulario-denuncia{
+    margin-left: 77px;
+    margin-top: 55px;
+    width: 400px;
+    position: absolute;
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 0.7);;
+    padding: 20px 15px 30px 15px;
+    border-radius: 6px;
+    -webkit-box-shadow: 20px 13px 60px -5px rgba(0,0,0,0.32);
+-moz-box-shadow: 20px 13px 60px -5px rgba(0,0,0,0.32);
+box-shadow: 20px 13px 60px -5px rgba(0,0,0,0.32);
+
+
+    /*    color: #fff;*/
+}
+
+.area-mapa{
+    z-index: 1;
+    position: absolute;
+    width: calc(100% - 65px);
+    height: calc(100%);
+    margin-left: 65px;
+}
+
+.mapa-denuncia{
+    height: 100%;
+    width: 100%;
 }
 
 
@@ -1692,7 +1724,7 @@ html, body{
 
 .mi-fazendo{
     padding-top: 30px;
-    
+
 }
 
 .mi-fazendo .denuncias-ra{
@@ -1840,29 +1872,29 @@ html, body{
     margin-left: 60px;
     width: 120px;
 }
-
+/*ui-fileupload-simple ui-widget*/
 .btn-mudar-foto-perfil .ui-fileupload-simple{
     background: none !important;
 } 
 
 .btn-mudar-foto-perfil .ui-widget{
-    background: none !important;
+    background:  none !important;
 }
 
 .btn-mudar-foto-perfil .ui-button ui-widget{
-    background: none !important;
+    background:  #fff !important;
 } 
 
 .btn-mudar-foto-perfil .ui-state-default{
-    background: none !important;
+    background:  #fff !important;
 } 
 
 .btn-mudar-foto-perfil .ui-corner-all{
-    background: none !important;
+    background:  #fff !important;
 }
 
 .btn-mudar-foto-perfil .ui-button-text-icon-left{
-    background: none !important;
+    background:  #fff !important;
 }
 
 
