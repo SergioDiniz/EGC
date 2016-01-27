@@ -203,6 +203,7 @@ public class ControladorUsuario implements Serializable {
     }
 
     public String pesquisarCidadeFiltro() {
+        this.feedDenuncias.clear();
         String cidadeEstado[] = this.strPesquisarCidadeFiltro.split(" - ");
 
         this.cidadeDenuncia = cidadeEstado[0];
@@ -211,12 +212,13 @@ public class ControladorUsuario implements Serializable {
         this.strPesquisarCidadeFiltro = "";
         this.ordemDenuncia = "data";
         this.tipoDenunciaFeed = TipoDeDenuncia.TODOS;
-        return null;
+        setDenunicasFeed();
+        return "index.jsf?faces-redirect=true";
     }
 
     public void setDenunicasFeed() {
 
-        this.feedDenuncias = new ArrayList<>();
+        this.feedDenuncias.clear();
 
         switch (this.tipoDenunciaFeed) {
             case TODOS:
@@ -281,7 +283,7 @@ public class ControladorUsuario implements Serializable {
     public String denunciasOrdemData() {
         this.ordemDenuncia = "data";
 
-        this.feedDenuncias = new ArrayList<>();
+        
         setDenunicasFeed();
 
         return null;
@@ -290,7 +292,7 @@ public class ControladorUsuario implements Serializable {
     public String denunciasOrdemReclamacao() {
         this.ordemDenuncia = "reclamacao";
 
-        this.feedDenuncias = new ArrayList<>();
+        
         setDenunicasFeed();
 
         return null;
@@ -302,7 +304,7 @@ public class ControladorUsuario implements Serializable {
         this.cidadeDenuncia = "Brasil";
         this.ufDenuncia = "Brasil";
 
-        this.feedDenuncias = new ArrayList<>();
+        
         setDenunicasFeed();
 
         return null;
@@ -316,7 +318,7 @@ public class ControladorUsuario implements Serializable {
             this.ufDenuncia = this.usuario.getEndereco().getEstado();
         }
 
-        this.feedDenuncias = new ArrayList<>();
+        
         setDenunicasFeed();
 
         return null;
@@ -324,84 +326,84 @@ public class ControladorUsuario implements Serializable {
 
     public String denunciasColetaDeLixo() {
         this.tipoDenunciaFeed = TipoDeDenuncia.COLETA_DE_LIXO;
-        this.feedDenuncias = new ArrayList<>();
+        
         setDenunicasFeed();
         return null;
     }
 
     public String denunciasQualidadeAgua() {
         this.tipoDenunciaFeed = TipoDeDenuncia.DISTRIBUICAO_E_QUALIDADE_DA_AGUA;
-        this.feedDenuncias = new ArrayList<>();
+        
         setDenunicasFeed();
         return null;
     }
 
     public String denunciasIluminacaoPublica() {
         this.tipoDenunciaFeed = TipoDeDenuncia.ILUMINACAO_PUBLICA;
-        this.feedDenuncias = new ArrayList<>();
+        
         setDenunicasFeed();
         return null;
     }
 
     public String denunciasObrasPublicas() {
         this.tipoDenunciaFeed = TipoDeDenuncia.OBRAS_PUBLICAS;
-        this.feedDenuncias = new ArrayList<>();
+        
         setDenunicasFeed();
         return null;
     }
 
     public String denunciasManutencaoEsgoto() {
         this.tipoDenunciaFeed = TipoDeDenuncia.MANUTENCAO_DE_CANAIS_E_REDES_DE_ESGOTOS;
-        this.feedDenuncias = new ArrayList<>();
+        
         setDenunicasFeed();
         return null;
     }
 
     public String denunciasManutencaoViasPublicas() {
         this.tipoDenunciaFeed = TipoDeDenuncia.MANUTENCAO_E_CONSERVACAO_DE_VIAS_PUBLICAS;
-        this.feedDenuncias = new ArrayList<>();
+        
         setDenunicasFeed();
         return null;
     }
 
     public String denunciasPodaDeArvores() {
         this.tipoDenunciaFeed = TipoDeDenuncia.PODA_E_MANUTENCAO_DAS_ARVORES;
-        this.feedDenuncias = new ArrayList<>();
+        
         setDenunicasFeed();
         return null;
     }
 
     public String denunciasPoluicaoVisual() {
         this.tipoDenunciaFeed = TipoDeDenuncia.POLUICAO_VISUAL;
-        this.feedDenuncias = new ArrayList<>();
+        
         setDenunicasFeed();
         return null;
     }
 
     public String denunciasTransitoPlacas() {
         this.tipoDenunciaFeed = TipoDeDenuncia.TRANSITO_SINALIZACAO_E_PLACAS;
-        this.feedDenuncias = new ArrayList<>();
+        
         setDenunicasFeed();
         return null;
     }
 
     public String denunciasAcessibilidade() {
         this.tipoDenunciaFeed = TipoDeDenuncia.ACESSIBILIDADE;
-        this.feedDenuncias = new ArrayList<>();
+        
         setDenunicasFeed();
         return null;
     }
 
     public String denunciasSaude() {
         this.tipoDenunciaFeed = TipoDeDenuncia.SAUDE;
-        this.feedDenuncias = new ArrayList<>();
+        
         setDenunicasFeed();
         return null;
     }
 
     public String denunciasEducacao() {
         this.tipoDenunciaFeed = TipoDeDenuncia.EDUCACAO;
-        this.feedDenuncias = new ArrayList<>();
+        
         setDenunicasFeed();
         return null;
     }

@@ -122,19 +122,23 @@ public class DenunciaService implements DenunciaServiceIT {
 //        if (tipoDeDenuncia == TipoDeDenuncia.BRASIL){
 //            tipoDeDenuncia = TipoDeDenuncia.TODOS;
 //        }
+        
+        System.out.println("Ordem: " + ordem);
+        System.out.println("Tipo de Denuncia: " + tipoDeDenuncia);
+        
         Query query;
         if (ordem.equals("data")) {
             if (tipoDeDenuncia == TipoDeDenuncia.BRASIL) {
-                query = em.createQuery("SELECT d FROM Denuncia d JOIN d.enderecoDenuncia ed WHERE d.ativo = true AND ed.pais = 'Brasil' ORDER BY d.data DESC");
+                query = em.createQuery("SELECT d FROM Denuncia d JOIN d.enderecoDenuncia ed WHERE d.ativo = true AND ed.pais = 'Brazil' ORDER BY d.data DESC");
             } else {
-                query = em.createQuery("SELECT d FROM Denuncia d JOIN d.enderecoDenuncia ed WHERE d.ativo = true AND ed.pais = 'Brasil' AND d.tipoDeDenuncia = :tipo ORDER BY d.data DESC");
+                query = em.createQuery("SELECT d FROM Denuncia d JOIN d.enderecoDenuncia ed WHERE d.ativo = true AND ed.pais = 'Brazil' AND d.tipoDeDenuncia = :tipo ORDER BY d.data DESC");
                 query.setParameter("tipo", tipoDeDenuncia);
             }
         } else {
             if (tipoDeDenuncia == TipoDeDenuncia.BRASIL) {
-                query = em.createQuery("SELECT d FROM Denuncia d JOIN d.enderecoDenuncia ed WHERE d.ativo = true AND ed.pais = 'Brasil' ORDER BY d.data ASC");
+                query = em.createQuery("SELECT d FROM Denuncia d JOIN d.enderecoDenuncia ed WHERE d.ativo = true AND ed.pais = 'Brazil' ORDER BY d.data ASC");
             } else {
-                query = em.createQuery("SELECT d FROM Denuncia d JOIN d.enderecoDenuncia ed WHERE d.ativo = true AND ed.pais = 'Brasil' AND d.tipoDeDenuncia = :tipo ORDER BY d.data ASC");
+                query = em.createQuery("SELECT d FROM Denuncia d JOIN d.enderecoDenuncia ed WHERE d.ativo = true AND ed.pais = 'Brazil' AND d.tipoDeDenuncia = :tipo ORDER BY d.data ASC");
                 query.setParameter("tipo", tipoDeDenuncia);
             }
         }
@@ -145,7 +149,7 @@ public class DenunciaService implements DenunciaServiceIT {
             return d;
         }
 
-        return null;
+        return new ArrayList<>();
 
     }
 
@@ -154,7 +158,7 @@ public class DenunciaService implements DenunciaServiceIT {
         Query query;
 
         if (cidade.equals("Brasil")) {
-            query = em.createQuery("SELECT COUNT(d) FROM Denuncia d JOIN d.enderecoDenuncia ed WHERE d.ativo = true AND ed.pais = 'Brasil'");
+            query = em.createQuery("SELECT COUNT(d) FROM Denuncia d JOIN d.enderecoDenuncia ed WHERE d.ativo = true AND ed.pais = 'Brazil'");
         } else {
             query = em.createQuery("SELECT COUNT(d) FROM Denuncia d WHERE d.ativo = true AND d.cidade.CidadePK.nomeCidade = :cidade AND d.cidade.CidadePK.siglaEstado = :estado");
             query.setParameter("cidade", cidade);
@@ -175,7 +179,7 @@ public class DenunciaService implements DenunciaServiceIT {
         Query query;
 
         if (cidade.equals("Brasil")) {
-            query = em.createQuery("SELECT COUNT(d) FROM Denuncia d JOIN d.enderecoDenuncia ed JOIN d.informacaoDeAtendida ia WHERE d.ativo = true AND ed.pais = 'Brasil' AND ia.id > -1 ");
+            query = em.createQuery("SELECT COUNT(d) FROM Denuncia d JOIN d.enderecoDenuncia ed JOIN d.informacaoDeAtendida ia WHERE d.ativo = true AND ed.pais = 'Brazil' AND ia.id > -1 ");
         } else {
             query = em.createQuery("SELECT COUNT(d) FROM Denuncia d JOIN d.informacaoDeAtendida ia WHERE d.ativo = true AND d.cidade.CidadePK.nomeCidade = :cidade AND d.cidade.CidadePK.siglaEstado = :estado AND ia.id > -1");
             query.setParameter("cidade", cidade);
@@ -302,7 +306,7 @@ public class DenunciaService implements DenunciaServiceIT {
             return d;
         }
 
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
@@ -317,7 +321,7 @@ public class DenunciaService implements DenunciaServiceIT {
             return c;
         }
 
-        return null;
+        return new ArrayList<>();
     }
 
 }
