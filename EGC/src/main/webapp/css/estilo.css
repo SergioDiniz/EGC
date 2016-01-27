@@ -1443,7 +1443,8 @@ box-shadow: 20px 13px 60px -5px rgba(0,0,0,0.32);
 }
 
 .perfil-prefeitura-container .info-numeros-denuncias .texto,
-.perfil-prefeitura-container .info-numeros-usuario .texto{
+.perfil-prefeitura-container .info-numeros-usuario .texto,
+.perfil-prefeitura-container .info-lista-funcionario .texto{
     color: #999;
     font-size: 12px;
     font-weight: 200;
@@ -1455,6 +1456,14 @@ box-shadow: 20px 13px 60px -5px rgba(0,0,0,0.32);
     color: #23a7f1;
     font-size: 25px;
     /*font-weight: bold;*/
+}
+
+.perfil-prefeitura-container .info-lista-funcionario table{
+    margin-top: 7px;
+}
+
+.perfil-prefeitura-container .info-lista-funcionario table tr td{
+    border: none;
 }
 
 .tb-registro{
