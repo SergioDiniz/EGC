@@ -2,7 +2,7 @@
 --------
 **Eficiência em Gestão de Cidades**, Uma ferramenta que faz uso da participação popular na construção de cidades inteligentes
 
-![Site](https://www.imageupload.co.uk/images/2015/04/13/egc.jpg)
+![Site](/EGC/img/site-mockup.jpg)
  - [WebSite](#)
  
 Desenvolvimento:
