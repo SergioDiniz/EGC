@@ -4,11 +4,13 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>EGC - Funcionario</title>
     </h:head>
-    <h:body>
+    <h:body style="background-color: #f9f9f9">
 
         <div class="tudo">
 
@@ -25,6 +27,348 @@
             </div>
 
         </div>
+
+        <div class="container area-administrativa">
+            <div class="btns-numero-tipos-denuncia">
+                <div class="col-md-12 btn14-prefeitura">
+
+                    <div class="col-md-6">
+
+                        <div class="row">
+                            <!--<div class="col-md-12">-->
+                            <div class="col-md-6 btn-1">
+                                <div class="col-md-6">
+                                    <img src="../../img/total-denuncias.png" height="60px" />
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        Denúncias
+                                    </div>
+                                    <div class="row">
+                                        <h:outputText value="#{controladorFuncionario.totalDeDenunciasNaCidade()}"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 btn-2">
+                                <div class="col-md-6">
+                                    <img src="../../img/denuncia-atendida.png" height="60px" />
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        Atendidas
+                                    </div>
+                                    <div class="row">
+                                        <h:outputText value="#{controladorFuncionario.totalDeDenunciasAtendidasNaCidade()}"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--</div>-->
+                        </div>
+
+
+                        <div class="row">
+                            <!--<div class="col-md-12">-->
+                            <div class="col-md-6 btn-3">
+                                <div class="col-md-6">
+                                    <img src="../../img/total-funcionarios.png" height="60px" />
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        Funcionários
+                                    </div>
+                                    <div class="row">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 btn-4">
+                                <div class="col-md-6">
+                                    <img src="../../img/total-usuario.png" height="60px" />
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        Usuários
+                                    </div>
+                                    <div class="row">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--</div>-->
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="ultimos-registros">
+                            <div class="row titulo-area">
+                                Últimos Registros
+                            </div>
+
+                            <c:forEach var="registro" items="#{controladorFuncionario.registrosDoFuncionario(controladorFuncionario.funcionario.email)}" >
+                                <table class="tb-registro">
+                                    <tr>
+                                        <td>
+                                            <img src="../../img/icon-calendario.png" width="40px"/>
+                                        </td>
+
+                                        <td>
+                                            <div class="td-dia-semana">
+                                                #{registro.diaDaSemana()} 
+                                            </div>
+                                            <div class="td-data-semana">
+                                                #{registro.dataFormatada()}
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="td-hora">
+                                                #{registro.horaFormatada()}h
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="td-registro">
+                                                <c:choose>
+                                                    <c:when test="#{registro.tipoDeRegistro == 'DENUNCIA_EM_TRABALHO'}">
+                                                        <a href="#">denúncia</a> atualizada para o estado <span class="label label-info">Em trabalho</span>, <span class="link-mapa-denuncia">#{registro.funcionario.nome}</span>
+                                                    </c:when>
+                                                    <c:when test="#{registro.tipoDeRegistro == 'DENUNCIA_ATENDIDA'}">
+                                                        <a href="#">denúncia</a> atualizada para o estado <span class="label label-success">Atendida</span>, <span class="link-mapa-denuncia">#{registro.funcionario.nome}</span>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <a href="#">denúncia</a> recebeu uma <span class="label label-danger">Reclamação</span>, <span class="link-mapa-denuncia">#{registro.funcionario.nome}</span>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+
+                                </table>
+
+                            </c:forEach>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- -->
+            <div class="resumo">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="denuncias-mais-ajudadas">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    Com mais ajudas
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <h:form>
+                                        <p:poll interval="3" update="maisAjudadas" listener="#{controladorFuncionario.denunciasComMaisAjudas()}"/>
+                                        <h:dataTable value="#{controladorFuncionario.denunciaComMaisAjuda}" var="denuncia" styleClass="table table-hover" id="maisAjudadas">    <h:column>
+                                                <f:facet name="header">TOTAL</f:facet>
+                                                    #{denuncia.numeroAjuda}
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">DESCRIÇÃO</f:facet>
+                                                    #{denuncia.descricao}
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">TIPO</f:facet>
+                                                    #{denuncia.tipoDeDenuncia}
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">ENDEREÇO</f:facet>
+                                                <span class="link-mapa-denuncia">#{denuncia.enderecoDenuncia.rua} - #{denuncia.enderecoDenuncia.numero}, #{denuncia.enderecoDenuncia.bairro}</span>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">DATA</f:facet>
+                                                    #{denuncia.dataDenuncaFormatado}
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">STATUS</f:facet>
+                                                <h:outputText value="ATENDIDA" styleClass="label label-success" rendered="#{denuncia.tagAtendida()}"/>
+                                                <h:outputText value="AGUARDANDO" styleClass="label label-primary" rendered="#{denuncia.tagAguardando()}"/>
+                                                <h:outputText value="EM ENDAMENTO" styleClass="label label-info" rendered="#{denuncia.tagEmAndamento()}"/>
+
+
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header"></f:facet>
+                                                <button class="btn btn-visualizar-denuncia" data-toggle="modal" data-target=".denunciaComMaisAjuda#{denuncia.id}">
+                                                    <span class="glyphicon glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+                                                </button>
+
+                                            </h:column>
+                                        </h:dataTable>
+                                    </h:form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="resumo-meio">
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <div class="col-md-12">
+                            <div class="ultimas-denuncias">
+                                <div class="row">
+                                    Últimas Denúncias Realizadas
+                                </div>
+                                <h:form>
+                                    <p:poll interval="10" listener="#{controladorFuncionario.denunciasMaisRecentes()}" update="teste123"/>
+                                    <h:panelGroup id="teste123">
+                                        <c:forEach var="ultimasDenuncia" items="#{controladorFuncionario.denunciaMaisRecentes}" >
+                                            <div class="ud-denuncia">
+
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <img src="../../img/icones-denuncia/#{ultimasDenuncia.iconeDenunica}" height="50px"/>
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <div class="row">
+                                                            <div class="col-md-7 rua-denuncia">
+                                                                #{ultimasDenuncia.tipoDaDenunciaFormatado}
+                                                            </div>
+                                                            <div class="col-md-5 hora-denuncia">
+                                                                #{ultimasDenuncia.dataDenuncaFormatado}
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12 conteudo-denuncia">
+                                                                #{ultimasDenuncia.descricao}
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <span class="link-mapa-denuncia">#{ultimasDenuncia.enderecoDenuncia.rua} - #{ultimasDenuncia.enderecoDenuncia.numero}, #{ultimasDenuncia.enderecoDenuncia.bairro}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <img src="../denuncias/#{ultimasDenuncia.foto}" class="img-denuncia" height="130px"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                        </c:forEach>
+                                    </h:panelGroup>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="col-md-12">
+                            <div class="ultimas-atendidas">
+                                <div class="row">
+                                    Últimas Denúncias Atendidas
+                                </div>
+                                <c:forEach var="ultimasDenuncia" items="#{controladorFuncionario.denunciaMaisRecentes}" id="id-denuncias">
+                                    <div class="ud-denuncia">
+
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                                <img src="../../img/icones-denuncia/#{ultimasDenuncia.iconeDenunica}" height="50px"/>
+                                            </div>
+                                            <div class="col-md-11">
+                                                <div class="row">
+                                                    <div class="col-md-7 rua-denuncia">
+                                                        #{ultimasDenuncia.tipoDaDenunciaFormatado}
+                                                    </div>
+                                                    <div class="col-md-5 hora-denuncia">
+                                                        #{ultimasDenuncia.dataDenuncaFormatado}
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-12">                                                    
+
+
+                                                        <table CELLSPACING="0">
+                                                            <tr>
+                                                                <td rows="2">
+                                                                    <div class="denuncia-feita" style="background-image: url(../denuncias/#{ultimasDenuncia.foto});">
+
+                                                                    </div>
+                                                                </td>
+                                                                <td rowspan="2" style="background-image: url(../denuncias/#{ultimasDenuncia.foto});">
+                                                                    <div class="reposta-denuncia">
+                                                                        <div class="texto-centro">
+                                                                            teste
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="denuncia-feita-descricao">
+                                                                        #{ultimasDenuncia.descricao}
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+
+                                                        <!--
+                                                        <div class="col-md-5 col-md-mesmo-tamanho">
+                                                            <div class="denuncia-feita">
+                                                                <div class="row">
+                                                                    <br/><br/><br/>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <br/><br/><br/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-7 col-md-mesmo-tamanho">
+                                                            <div class="reposta-denuncia">
+                                                                <div class="row">
+                                                                    <br/><br/><br/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        -->
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </c:forEach>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <script>
+            (function ($) {
+                $(window).load(function () {
+                    $(".ultimos-registros").mCustomScrollbar({
+                        theme: "minimal-dark"
+                    });
+                });
+            })(jQuery);
+        </script>
 
     </h:body>
 </html>

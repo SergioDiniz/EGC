@@ -7,6 +7,7 @@ package com.br.controle;
 
 import com.br.beans.Cidade;
 import com.br.beans.CidadePK;
+import com.br.beans.Denuncia;
 import com.br.beans.Funcionario;
 import com.br.beans.Registro;
 import com.br.fachada.Fachada;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -39,11 +41,16 @@ public class ControladorFuncionario implements Serializable {
     private Funcionario funcionario;
     private Cidade cidade;
     private CidadePK cidadePK;
-
+    private List<Denuncia> denunciaComMaisAjuda;
+    private List<Denuncia> denunciaMaisRecentes;
+            
+            
     public ControladorFuncionario() {
         this.funcionario = new Funcionario();
         this.cidade = new Cidade();
         this.cidadePK = new CidadePK();
+        this.denunciaComMaisAjuda = new ArrayList<>();
+        this.denunciaMaisRecentes = new ArrayList<>();
     }
 
     public void mostrapagina() throws IOException {
@@ -62,6 +69,9 @@ public class ControladorFuncionario implements Serializable {
 
             fachada.tornaFuncionarioOnline(this.funcionario.getEmail());
 
+            denunciasComMaisAjudas();
+            denunciasMaisRecentes();
+            
             return "/sis/funcionario/index.jsf?faces-redirect=true";
 
         } else {
@@ -132,6 +142,32 @@ public class ControladorFuncionario implements Serializable {
         return fachada.registrosDoFuncionario(email);
     }
 
+    public long totalDeDenunciasNaCidade() {
+        return fachada.totalDeDenunciasNaCidade(this.cidade.getCidadePK().getNomeCidade(), this.cidade.getCidadePK().getSiglaEstado());
+    }
+
+    public long totalDeDenunciasAtendidasNaCidade() {
+        return fachada.totalDeDenunciasAtendidasNaCidade(this.cidade.getCidadePK().getNomeCidade(), this.cidade.getCidadePK().getSiglaEstado());
+    }
+
+    public void denunciasComMaisAjudas() {
+        this.denunciaComMaisAjuda = new ArrayList<>();
+        this.denunciaComMaisAjuda.addAll(fachada.denunciasComMaisAjudasPorCidade(this.cidade.getCidadePK().getNomeCidade(), 
+                this.cidade.getCidadePK().getSiglaEstado()));
+
+    }
+
+    public void denunciasMaisRecentes() {
+        this.denunciaMaisRecentes = new ArrayList<>();
+        this.denunciaMaisRecentes.addAll(fachada.denunciasMaisRecentesPorCidade(this.cidade.getCidadePK().getNomeCidade(), 
+                this.cidade.getCidadePK().getSiglaEstado()));
+    }
+
+    //
+    //
+    //
+    //
+    //
     // geters and seters
     public Funcionario getFuncionario() {
         return funcionario;
@@ -165,4 +201,24 @@ public class ControladorFuncionario implements Serializable {
         this.file = file;
     }
 
+    public List<Denuncia> getDenunciaComMaisAjuda() {
+        return denunciaComMaisAjuda;
+    }
+
+    public void setDenunciaComMaisAjuda(List<Denuncia> denunciaComMaisAjuda) {
+        this.denunciaComMaisAjuda = denunciaComMaisAjuda;
+    }
+
+    public List<Denuncia> getDenunciaMaisRecentes() {
+        return denunciaMaisRecentes;
+    }
+
+    public void setDenunciaMaisRecentes(List<Denuncia> denunciaMaisRecentes) {
+        this.denunciaMaisRecentes = denunciaMaisRecentes;
+    }
+
+    
+
+
+    
 }
