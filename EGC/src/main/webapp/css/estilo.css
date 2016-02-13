@@ -1588,6 +1588,33 @@ box-shadow: 20px 13px 60px -5px rgba(0,0,0,0.32);
     background-color: #5c97bf;
 }
 
+.menu-cidades .comentarios{
+    padding-bottom: 20px;
+}
+
+.menu-cidades .comentarios h1{
+    font-weight: 100;
+    padding: 10px 0 10px 0;
+}
+
+.menu-cidades .comentarios .coment{
+    padding: 10px 0 10px 0; 
+}
+
+.menu-cidades .comentarios .coment b{
+    color: #23a7f1;
+}
+
+.menu-cidades .comentarios .coment .glyphicon-trash{
+    color: #23a7f1;
+}
+
+.menu-cidades .comentarios .coment .hora-denuncia{
+    padding-left: 20px;
+    margin-top: 3px;
+    background-position: 0 1px;
+}
+
 .menu-informacoes .mi-ola{
     padding-top: 150px;
     padding-bottom: 150px;
