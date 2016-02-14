@@ -1967,3 +1967,26 @@ box-shadow: 20px 13px 60px -5px rgba(0,0,0,0.32);
     border-radius: 3px;
     font-weight: 200;
 }
+
+.gerenciar-denuncias .denuncia{
+    background-color: #fff;
+    /*margin-bottom: 20px;*/
+}
+
+.gerenciar-denuncias .col-md-4{
+    padding: 5px !important;
+}
+
+.gerenciar-denuncias .col-md-4 .glyphicon-heart{
+    color: #c9302c;
+}
+
+.gerenciar-denuncias .col-md-4 .glyphicon-exclamation-sign{
+    color: #f09635;
+}
+
+.gerenciar-denuncias .col-md-4 .glyphicon-heart, 
+.gerenciar-denuncias .col-md-4 .glyphicon-exclamation-sign{
+    font-size: 14px;
+    padding-right: 6px;
+}
