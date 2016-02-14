@@ -195,6 +195,21 @@ public class Fachada implements Serializable {
         return cs.registrosDaCidade(cidade, estado);
     }
 
+    public List<List> ruasDeUmaCidadeNumerosDeDenuncia(String cidade, String estado){
+        return cs.ruasDeUmaCidadeNumerosDeDenuncia(cidade, estado);
+    }
+    
+    public List<List> cepDeUmaCidadeNumerosDeDenuncia(String cidade, String estado){
+        return cs.cepDeUmaCidadeNumerosDeDenuncia(cidade, estado);
+    }
+ 
+    public List<List> tiposDeDenunciasNumerosDeDenuncia(String cidade, String estado){
+        return cs.tiposDeDenunciasNumerosDeDenuncia(cidade, estado);
+    }
+    
+    public List<List> estadoDeDenunciasNumerosDeDenuncia(String cidade, String estado){
+        return cs.estadoDeDenunciasNumerosDeDenuncia(cidade, estado);
+    }
     // FIM CidadeServices
     //
     //

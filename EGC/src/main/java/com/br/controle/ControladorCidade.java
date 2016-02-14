@@ -30,5 +30,21 @@ public class ControladorCidade implements Serializable {
     public List<Registro> registrosDaCidade(String cidade, String estado) {
         return fachada.registrosDaCidade(cidade, estado);
     }
+    
+    public List<List> ruasDeUmaCidadeNumerosDeDenuncia(String cidade, String estado){
+        return fachada.ruasDeUmaCidadeNumerosDeDenuncia(cidade, estado);
+    }
 
+    public List<List> cepDeUmaCidadeNumerosDeDenuncia(String cidade, String estado){
+        return fachada.cepDeUmaCidadeNumerosDeDenuncia(cidade, estado);
+    }
+ 
+    public List<List> tiposDeDenunciasNumerosDeDenuncia(String cidade, String estado){
+        return fachada.tiposDeDenunciasNumerosDeDenuncia(cidade, estado);
+    }
+    
+    public List<List> estadoDeDenunciasNumerosDeDenuncia(String cidade, String estado){
+        return fachada.estadoDeDenunciasNumerosDeDenuncia(cidade, estado);
+    }
+    
 }

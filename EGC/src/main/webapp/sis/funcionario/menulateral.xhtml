@@ -3,11 +3,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
 
 
     <h:body>
-        
+
         <div class="menu-lateral ml-admin">
             <u class="list-unstyled">
                 <li>
@@ -17,13 +18,19 @@
                         </button>
                     </a>
                 </li>
-                
+
                 <li>
-                    <a href="denuncias.jsf">
-                        <button class="btn-menu-lateral tooltips" title="Pesquisar" rel="tooltip" data-placement="right">
-                            <img src="../../img/pesquisar.png"/>
+
+                    <h:form>
+                        <button class="btn-menu-lateral tooltips" title="Gerenciar Denuncias" rel="tooltip" data-placement="right">
+                            <h:commandButton action="#{controladorFuncionario.paginaGerenciarDenuncias()}" class="btn-menu-lateral tooltips" image="../../img/pesquisar.png"/>
                         </button>
-                    </a>
+                    </h:form>
+
+                    <!--                        <button class="btn-menu-lateral tooltips" title="Pesquisar" rel="tooltip" data-placement="right">
+                                                <img src="../../img/pesquisar.png"/>
+                                            </button>-->
+
                 </li>
                 <li>
                     <a href="novadenuncia.jsf">
@@ -49,11 +56,11 @@
             </u>
         </div>
 
-    <script>
-        $('.tooltips').tooltip('hide')
-    </script>
-    
-        
+        <script>
+            $('.tooltips').tooltip('hide')
+        </script>
+
+
     </h:body>
 </html>
 

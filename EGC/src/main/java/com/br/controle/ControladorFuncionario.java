@@ -10,6 +10,7 @@ import com.br.beans.CidadePK;
 import com.br.beans.Denuncia;
 import com.br.beans.Funcionario;
 import com.br.beans.Registro;
+import com.br.beans.TipoDeDenuncia;
 import com.br.fachada.Fachada;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -43,8 +44,9 @@ public class ControladorFuncionario implements Serializable {
     private CidadePK cidadePK;
     private List<Denuncia> denunciaComMaisAjuda;
     private List<Denuncia> denunciaMaisRecentes;
-            
-            
+    private List<Denuncia> denunciaGerenciadas;
+    private TipoDeDenuncia tipoDeDenunciaGerenciando;
+
     public ControladorFuncionario() {
         this.funcionario = new Funcionario();
         this.cidade = new Cidade();
@@ -71,7 +73,9 @@ public class ControladorFuncionario implements Serializable {
 
             denunciasComMaisAjudas();
             denunciasMaisRecentes();
-            
+
+            this.tipoDeDenunciaGerenciando = TipoDeDenuncia.TODOS;
+
             return "/sis/funcionario/index.jsf?faces-redirect=true";
 
         } else {
@@ -87,8 +91,15 @@ public class ControladorFuncionario implements Serializable {
 
         fachada.tornaFuncionarioOffline(this.funcionario.getEmail());
 
+//        this.funcionario = new Funcionario();
+//        this.cidadePK = new CidadePK();
+
         this.funcionario = new Funcionario();
+        this.cidade = new Cidade();
         this.cidadePK = new CidadePK();
+        this.denunciaComMaisAjuda = new ArrayList<>();
+        this.denunciaMaisRecentes = new ArrayList<>();
+        
         return "/index.jsf?faces-redirect=true";
     }
 
@@ -152,15 +163,27 @@ public class ControladorFuncionario implements Serializable {
 
     public void denunciasComMaisAjudas() {
         this.denunciaComMaisAjuda = new ArrayList<>();
-        this.denunciaComMaisAjuda.addAll(fachada.denunciasComMaisAjudasPorCidade(this.cidade.getCidadePK().getNomeCidade(), 
+        this.denunciaComMaisAjuda.addAll(fachada.denunciasComMaisAjudasPorCidade(this.cidade.getCidadePK().getNomeCidade(),
                 this.cidade.getCidadePK().getSiglaEstado()));
 
     }
 
     public void denunciasMaisRecentes() {
         this.denunciaMaisRecentes = new ArrayList<>();
-        this.denunciaMaisRecentes.addAll(fachada.denunciasMaisRecentesPorCidade(this.cidade.getCidadePK().getNomeCidade(), 
+        this.denunciaMaisRecentes.addAll(fachada.denunciasMaisRecentesPorCidade(this.cidade.getCidadePK().getNomeCidade(),
                 this.cidade.getCidadePK().getSiglaEstado()));
+    }
+
+    
+    public String paginaGerenciarDenuncias() {
+        setTodasDenunciasEmGerenciamento();
+        return "denuncias.jsf?faces-redirect=true";
+    }
+
+    public void setTodasDenunciasEmGerenciamento() {
+        this.denunciaGerenciadas = new ArrayList<>();
+        this.denunciaGerenciadas = fachada.pesquisarTodasDenunciasPorCidade(this.cidade.getCidadePK().getNomeCidade(),
+                this.cidade.getCidadePK().getSiglaEstado(), "data");
     }
 
     //
@@ -217,8 +240,20 @@ public class ControladorFuncionario implements Serializable {
         this.denunciaMaisRecentes = denunciaMaisRecentes;
     }
 
-    
+    public List<Denuncia> getDenunciaGerenciadas() {
+        return denunciaGerenciadas;
+    }
 
+    public void setDenunciaGerenciadas(List<Denuncia> denunciaGerenciadas) {
+        this.denunciaGerenciadas = denunciaGerenciadas;
+    }
 
-    
+    public TipoDeDenuncia getTipoDeDenunciaGerenciando() {
+        return tipoDeDenunciaGerenciando;
+    }
+
+    public void setTipoDeDenunciaGerenciando(TipoDeDenuncia tipoDeDenunciaGerenciando) {
+        this.tipoDeDenunciaGerenciando = tipoDeDenunciaGerenciando;
+    }
+
 }

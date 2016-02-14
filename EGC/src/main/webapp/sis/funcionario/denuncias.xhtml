@@ -9,8 +9,11 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>EGC - Funcionario</title>
+
     </h:head>
+
     <h:body style="background-color: #f9f9f9">
+
 
         <div class="tudo">
 
@@ -30,218 +33,144 @@
 
         <div class="container">
 
+
+
             <div class="gerenciar-denuncias">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-9">
+
+                        <c:forEach var="denuncia" items="#{controladorFuncionario.denunciaGerenciadas}">
+                            <div class=" col-md-6">
+                                <div class="denuncia col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <img src="../../img/icones-denuncia/#{denuncia.iconeDenunica}" height="50px"/>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <div class="row">
+
+                                                <div class="col-md-8 rua-denuncia">
+                                                    #{denuncia.tipoDaDenunciaFormatado}
+                                                </div>
+                                                <div class="col-md-4 hora-denuncia">
+                                                    #{denuncia.dataDenuncaFormatado}
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="conteudo-denuncia">
+                                                        #{denuncia.descricao}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <span class="link-mapa-denuncia">#{denuncia.enderecoDenuncia.toString()}</span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <img src="../denuncias/#{denuncia.foto}" class="img-denuncia" height="150px"/>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="col-md-3">
+                                                        <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> #{denuncia.numeroAjuda}
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> #{controladorDenuncia.getReclamarDenuncia(denuncia)}
+                                                    </div>
+                                                    <div class="col-md-6 text-right btn-gerenciar">
+                                                        <button class="btn btn-default btn-xs">Gerenciar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div> 
+                                </div>
+                            </div>
+                        </c:forEach>
 
 
+                    </div>
 
-                        <div class=" col-md-4">
-                            <div class="denuncia col-md-12">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <img src="../../img/icones-denuncia/ic-lixo.png" height="50px"/>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class="row">
-                                            <div class="col-md-7 rua-denuncia">
-                                                Lixo
-                                            </div>
-                                            <div class="col-md-5 hora-denuncia">
-                                                hora
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12 conteudo-denuncia">
-                                                conteudo
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <span class="link-mapa-denuncia">R. Pedro Muniz Brito - 297-481, S/B</span>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <img src="../denuncias/1452507863700.jpg" class="img-denuncia" height="130px"/>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> 2
-                                            </div>
-                                            <div class="col-md-3">
-                                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> 2
-                                            </div>
-                                            <div class="col-md-6 text-right">
-                                                <button class="btn btn-default btn-xs">Gerenciar</button>
-                                            </div>
-                                        </div>
+                    <div class="col-md-3 lista-de-fitro">
 
-                                    </div>
 
-                                </div> 
+                        <div class="texto text-center">ANDAMENTO</div>
+                        <div class="progress-pie-chart" data-percent="65">
+
+                            <div class="ppc-progress">
+                                <div class="ppc-progress-fill"></div>
+                            </div>
+                            <div class="ppc-percents">
+                                <div class="pcc-percents-wrapper">
+                                    <span>%</span>
+                                </div>
                             </div>
                         </div>
-                        
-                        <div class=" col-md-4">
-                            <div class="denuncia col-md-12">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <img src="../../img/icones-denuncia/ic-lixo.png" height="50px"/>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class="row">
-                                            <div class="col-md-7 rua-denuncia">
-                                                Lixo
-                                            </div>
-                                            <div class="col-md-5 hora-denuncia">
-                                                hora
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12 conteudo-denuncia">
-                                                conteudo
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <span class="link-mapa-denuncia">R. Pedro Muniz Brito - 297-481, S/B</span>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <img src="../denuncias/1452507863700.jpg" class="img-denuncia" height="130px"/>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> 2
-                                            </div>
-                                            <div class="col-md-3">
-                                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> 2
-                                            </div>
-                                            <div class="col-md-6 text-right">
-                                                <button class="btn btn-default btn-xs">Gerenciar</button>
-                                            </div>
-                                        </div>
 
-                                    </div>
-
-                                </div> 
-                            </div>
-                        </div>
-                        
-                        
-                        <div class=" col-md-4">
-                            <div class="denuncia col-md-12">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <img src="../../img/icones-denuncia/ic-lixo.png" height="50px"/>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class="row">
-                                            <div class="col-md-7 rua-denuncia">
-                                                Lixo
-                                            </div>
-                                            <div class="col-md-5 hora-denuncia">
-                                                hora
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12 conteudo-denuncia">
-                                                conteudo
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <span class="link-mapa-denuncia">R. Pedro Muniz Brito - 297-481, S/B</span>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <img src="../denuncias/1452507863700.jpg" class="img-denuncia" height="130px"/>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> 2
-                                            </div>
-                                            <div class="col-md-3">
-                                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> 2
-                                            </div>
-                                            <div class="col-md-6 text-right">
-                                                <button class="btn btn-default btn-xs">Gerenciar</button>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                </div> 
-                            </div>
-                        </div>
-                        
-                        <div class=" col-md-4">
-                            <div class="denuncia col-md-12">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <img src="../../img/icones-denuncia/ic-lixo.png" height="50px"/>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class="row">
-                                            <div class="col-md-7 rua-denuncia">
-                                                Lixo
-                                            </div>
-                                            <div class="col-md-5 hora-denuncia">
-                                                hora
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12 conteudo-denuncia">
-                                                conteudo
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <span class="link-mapa-denuncia">R. Pedro Muniz Brito - 297-481, S/B</span>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <img src="../denuncias/1452507863700.jpg" class="img-denuncia" height="130px"/>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> 2
-                                            </div>
-                                            <div class="col-md-3">
-                                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> 2
-                                            </div>
-                                            <div class="col-md-6 text-right">
-                                                <button class="btn btn-default btn-xs">Gerenciar</button>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                </div> 
-                            </div>
-                        </div>
-                        
+                        <br/>
 
 
+                        <span class="texto">FILTRO</span> <br/>
+                        <ul class="list-unstyled">
+                            <li><b>TODAS</b></li>
+                            <li><b>DATA <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span></b></li>
+                            <li><b>AJUDAS</b> <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span></li>
+                            <li><b>RECLAMAÇÕES</b> <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span></li>
 
+                        </ul>
+                        <br/>
 
+                        <span class="texto">ESTADO</span> <br/>
+                        <ul class="list-unstyled">
+
+                            <c:forEach  var="tipo" items="#{controladorCidade.estadoDeDenunciasNumerosDeDenuncia(controladorFuncionario.cidade.cidadePK.nomeCidade, controladorFuncionario.cidade.cidadePK.siglaEstado)}">
+                                <li><b>#{tipo.get(0)} <span class="badge">#{tipo.get(1)}</span></b></li>
+                            </c:forEach>
+
+                        </ul>
+                        <br/>
+
+                        <span class="texto">CATEGORIA</span> <br/>
+                        <ul class="list-unstyled">
+                            <c:forEach  var="tipo" items="#{controladorCidade.tiposDeDenunciasNumerosDeDenuncia(controladorFuncionario.cidade.cidadePK.nomeCidade, controladorFuncionario.cidade.cidadePK.siglaEstado)}">
+                                <li><b>#{tipo.get(0)} <span class="badge">#{tipo.get(1)}</span></b></li>
+                            </c:forEach>
+                        </ul>
+                        <br/>
+
+                        <span class="texto">RUAS</span> <br/>
+                        <ul class="list-unstyled">
+                            <c:forEach  var="rua" items="#{controladorCidade.ruasDeUmaCidadeNumerosDeDenuncia(controladorFuncionario.cidade.cidadePK.nomeCidade, controladorFuncionario.cidade.cidadePK.siglaEstado)}">
+                                <li><b>#{rua.get(0)} <span class="badge">#{rua.get(1)}</span></b></li>
+                            </c:forEach>
+                        </ul>
+                        <br/>
+
+                        <span class="texto">CEPS</span> <br/>
+                        <ul class="list-unstyled">
+                            <c:forEach  var="cep" items="#{controladorCidade.cepDeUmaCidadeNumerosDeDenuncia(controladorFuncionario.cidade.cidadePK.nomeCidade, controladorFuncionario.cidade.cidadePK.siglaEstado)}">
+                                <li><b>#{cep.get(0)} <span class="badge">#{cep.get(1)}</span></b></li>
+                            </c:forEach>
+                        </ul>
+                        <br/>
 
 
 
                     </div>
+
                 </div>
 
             </div>
 
         </div>
+
 
 
     </h:body>

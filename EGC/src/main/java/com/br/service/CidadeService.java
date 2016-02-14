@@ -8,6 +8,8 @@ package com.br.service;
 import com.br.beans.Cidade;
 import com.br.beans.CidadePK;
 import com.br.beans.Registro;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -79,6 +81,137 @@ public class CidadeService implements CidadeServiceIT{
         }
         
         return null;
+    }
+    
+    
+    @Override
+    public List<List> ruasDeUmaCidadeNumerosDeDenuncia(String cidade, String estado){
+        
+        Query query = em.createQuery("SELECT d.enderecoDenuncia.rua, COUNT(d.enderecoDenuncia.rua) FROM Cidade c JOIN c.denuncias d WHERE c.CidadePK.nomeCidade = :cidade and c.CidadePK.siglaEstado = :estado GROUP BY d.enderecoDenuncia.rua ORDER BY d.enderecoDenuncia.rua ASC");
+        query.setParameter("cidade", cidade);
+        query.setParameter("estado", estado);
+        
+        List resultado = query.getResultList();
+        
+        List<List> ruas = new ArrayList<>();
+        Iterator i = resultado.iterator();
+        
+        while(i.hasNext()){
+            Object[] r = (Object[]) i.next();
+            
+            List l = new ArrayList();
+            l.add(r[0]);
+            l.add(r[1]);
+            
+            
+            ruas.add(l);
+            
+        }
+        
+        
+        if (ruas.size() > 0){
+            return ruas;
+        }
+        
+        return new ArrayList<>();
+        
+    }
+    
+    
+    @Override
+    public List<List> cepDeUmaCidadeNumerosDeDenuncia(String cidade, String estado){
+        Query query = em.createQuery("SELECT d.enderecoDenuncia.cep, COUNT(d.enderecoDenuncia.cep) FROM Cidade c JOIN c.denuncias d WHERE c.CidadePK.nomeCidade = :cidade and c.CidadePK.siglaEstado = :estado GROUP BY d.enderecoDenuncia.cep ORDER BY d.enderecoDenuncia.cep ASC");
+        query.setParameter("cidade", cidade);
+        query.setParameter("estado", estado);
+        
+        List resultado = query.getResultList();
+        
+        List<List> ruas = new ArrayList<>();
+        Iterator i = resultado.iterator();
+        
+        while(i.hasNext()){
+            Object[] r = (Object[]) i.next();
+            
+            List l = new ArrayList();
+            l.add(r[0]);
+            l.add(r[1]);
+            
+            
+            ruas.add(l);
+            
+        }
+        
+        
+        if (ruas.size() > 0){
+            return ruas;
+        }
+        
+        return new ArrayList<>();
+    }
+ 
+    @Override
+    public List<List> tiposDeDenunciasNumerosDeDenuncia(String cidade, String estado){
+        Query query = em.createQuery("SELECT d.tipoDeDenuncia, COUNT(d.tipoDeDenuncia) FROM Cidade c JOIN c.denuncias d WHERE c.CidadePK.nomeCidade = :cidade and c.CidadePK.siglaEstado = :estado GROUP BY d.tipoDeDenuncia ORDER BY d.tipoDeDenuncia ASC");
+        query.setParameter("cidade", cidade);
+        query.setParameter("estado", estado);
+        
+        List resultado = query.getResultList();
+        
+        List<List> ruas = new ArrayList<>();
+        Iterator i = resultado.iterator();
+        
+        while(i.hasNext()){
+            Object[] r = (Object[]) i.next();
+            
+            List l = new ArrayList();
+            String tipo = (String) r[0].toString();
+            l.add(tipo.replaceAll("_", " "));
+            l.add(r[1]);
+            
+            
+            ruas.add(l);
+            
+        }
+        
+        
+        if (ruas.size() > 0){
+            return ruas;
+        }
+        
+        return new ArrayList<>();
+    }
+    
+    @Override
+    public List<List> estadoDeDenunciasNumerosDeDenuncia(String cidade, String estado){
+        Query query = em.createQuery("SELECT d.estadoDeAcompanhamento, COUNT(d.estadoDeAcompanhamento) FROM Cidade c JOIN c.denuncias d WHERE c.CidadePK.nomeCidade = :cidade and c.CidadePK.siglaEstado = :estado GROUP BY d.estadoDeAcompanhamento ORDER BY d.estadoDeAcompanhamento ASC");
+        query.setParameter("cidade", cidade);
+        query.setParameter("estado", estado);
+        
+        List resultado = query.getResultList();
+        
+        List<List> ruas = new ArrayList<>();
+        Iterator i = resultado.iterator();
+        
+        while(i.hasNext()){
+            Object[] r = (Object[]) i.next();
+            
+            List l = new ArrayList();
+            String tipo = (String) r[0].toString();
+            l.add(tipo.replaceAll("_", " "));
+            l.add(r[1]);
+            
+            
+            ruas.add(l);
+            
+        }
+        
+        
+        if (ruas.size() > 0){
+            return ruas;
+        }
+        
+        return new ArrayList<>();
+        
     }
     
 }
