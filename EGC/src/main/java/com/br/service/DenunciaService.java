@@ -323,5 +323,21 @@ public class DenunciaService implements DenunciaServiceIT {
 
         return new ArrayList<>();
     }
+    
+    @Override
+    public Denuncia pesquisarDenunicaCodigo(String codigo){
+        
+        Query query = em.createQuery("SELECT d from Denuncia d WHERE d.codigo = :codigo and d.ativo = true");
+        query.setParameter("codigo", codigo);
+        
+        List<Denuncia> d = query.getResultList();
+        
+        if (d.size() > 0){
+            return d.get(0);
+        }
+     
+        return null;
+        
+    }
 
 }

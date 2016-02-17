@@ -303,6 +303,10 @@ public class Fachada implements Serializable {
         return ds.comentariosDeConteudoInapropriadoEmDenuncia(denuncia);
     }
 
+    public Denuncia pesquisarDenunicaCodigo(String codigo){
+        return ds.pesquisarDenunicaCodigo(codigo);
+    }
+    
     // FIM DenunciaServices
     //
     //

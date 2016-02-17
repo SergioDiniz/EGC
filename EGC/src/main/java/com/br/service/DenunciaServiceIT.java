@@ -46,4 +46,6 @@ public interface DenunciaServiceIT {
     
     public List<ConteudoInapropriado> comentariosDeConteudoInapropriadoEmDenuncia(Denuncia denuncia);
     
+    public Denuncia pesquisarDenunicaCodigo(String codigo);
+    
 }

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
+                      http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+
+	<url-mapping id="index">
+		<pattern value="/index" />
+		<view-id value="/index.jsf" />
+	</url-mapping>
+
+
+
+        <!--Funcionario-->
+        <url-mapping id="funcionarioInicio">
+                <pattern value="/funcionario" />
+                <view-id value="/sis/funcionario/index.jsf?faces-redirect=true" />
+        </url-mapping>
+        
+        <url-mapping id="funcionarioDenuncias">
+                <pattern value="/funcionario/denuncia" />
+                <view-id value="/sis/funcionario/denuncias.jsf?faces-redirect=true" />
+        </url-mapping>
+        
+        <url-mapping id="gerenciarDenuncia">
+                <pattern value="/funcionario/denuncia/#{codigoDenuncia}" />
+                <view-id value="/sis/funcionario/gerenciar.jsf" />
+        </url-mapping>
+        
+        <url-mapping id="funcionarioConfiguracoes">
+                <pattern value="/funcionario/configuracoes" />
+                <view-id value="/sis/funcionario/configuracoes.jsf?faces-redirect=true" />
+        </url-mapping>
+        
+        
+
+</pretty-config>

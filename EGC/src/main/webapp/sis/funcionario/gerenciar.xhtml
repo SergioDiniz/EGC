@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:pt="http://java.sun.com/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+
+    <h:head>
+
+        <f:metadata>
+            <f:viewParam  required="true" id="codigoDenuncia_id" name="codigoDenuncia" value="#{controladorFuncionario.codigoDenuncia}" />
+            <f:event type="preRenderView" listener="#{controladorFuncionario.pesquisarDenuncia}" />
+        </f:metadata>
+
+        <title>EGC - Funcionario</title>
+    </h:head>
+    <h:body style="background-color: #f9f9f9">
+
+        <div class="tudo">
+
+            <div id="menu">
+                <ui:include src="topo.xhtml"/>
+            </div>
+
+            <div id="menu-lateral">
+                <ui:include src="menulateral.xhtml"/>
+            </div>
+
+            <div class="area-titulo-pagina">
+                <div class="titulo-pagina">Bem Vindo!</div>
+            </div>
+
+        </div>
+
+        <div class="container">
+            Codigo: <h:outputText value="#{controladorFuncionario.codigoDenuncia}"/>
+
+            <br/>
+
+            <br/>
+            <br/><br/>
+
+            Descrição: <h:outputText value="#{controladorFuncionario.denunciaGerenciada.descricao}"/>
+            
+
+
+        </div>
+
+
+
+    </h:body>
+</html>
+
