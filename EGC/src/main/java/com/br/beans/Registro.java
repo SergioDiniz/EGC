@@ -161,7 +161,14 @@ public class Registro implements Serializable {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Registro{" + "id=" + id + ", data=" + data + ", tipoDeRegistro=" + tipoDeRegistro + ", denuncia=" + denuncia + ", prefeitura=" + prefeitura + ", funcionario=" + funcionario + '}';
+    }
     
     
 
+    
+    
 }

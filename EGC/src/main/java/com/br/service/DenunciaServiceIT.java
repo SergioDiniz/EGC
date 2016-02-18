@@ -8,6 +8,8 @@ package com.br.service;
 import com.br.beans.ConteudoInapropriado;
 import com.br.beans.Denuncia;
 import com.br.beans.EnderecoDenuncia;
+import com.br.beans.Funcionario;
+import com.br.beans.Registro;
 import com.br.beans.TipoDeDenuncia;
 import com.br.beans.Usuario;
 import java.util.List;
@@ -48,6 +50,6 @@ public interface DenunciaServiceIT {
     
     public Denuncia pesquisarDenunicaCodigo(String codigo);
     
-    public boolean atualizarDenunciaGerenciada(Denuncia denuncia);
+    public boolean atualizarDenunciaGerenciada(Registro registro);
     
 }

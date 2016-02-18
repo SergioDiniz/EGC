@@ -95,6 +95,10 @@ public class Fachada implements Serializable {
         return ps.login(email, senha);
     }
     
+    public Prefeitura pesquisarPrefeituraPorCidade(String cidade, String estado){
+        return ps.pesquisarPrefeituraPorCidade(cidade, estado);
+    }
+    
     public Long totalDePrefeitura(){
         return ps.totalDePrefeitura();
     }
@@ -307,8 +311,8 @@ public class Fachada implements Serializable {
         return ds.pesquisarDenunicaCodigo(codigo);
     }
     
-    public boolean atualizarDenunciaGerenciada(Denuncia denuncia){
-        return ds.atualizarDenunciaGerenciada(denuncia);
+    public boolean atualizarDenunciaGerenciada(Registro registro){
+        return ds.atualizarDenunciaGerenciada(registro);
     }
     
     // FIM DenunciaServices

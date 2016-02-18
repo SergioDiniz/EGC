@@ -12,5 +12,6 @@ package com.br.beans;
 public enum TipoDeRegistro {
     RECLAMACAO,
     DENUNCIA_ATENDIDA,
-    DENUNCIA_EM_TRABALHO
+    DENUNCIA_EM_TRABALHO,
+    AGUARDANDO
 }

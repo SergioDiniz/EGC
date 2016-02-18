@@ -172,4 +172,13 @@ public class Funcionario extends Pessoa implements Serializable {
         this.codigo = codigo;
     }
 
+    @Override
+    public String toString() {
+        return "Funcionario{" + "nome=" + nome + ", cpf=" + cpf + ", codigo=" + codigo + '}';
+    }
+
+   
+    
+    
+
 }

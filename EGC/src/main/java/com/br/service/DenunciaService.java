@@ -8,7 +8,9 @@ package com.br.service;
 import com.br.beans.ConteudoInapropriado;
 import com.br.beans.Denuncia;
 import com.br.beans.EnderecoDenuncia;
+import com.br.beans.Funcionario;
 import com.br.beans.InformacaoDeAtendida;
+import com.br.beans.Registro;
 import com.br.beans.TipoDeDenuncia;
 import com.br.beans.Usuario;
 import java.text.Normalizer;
@@ -340,23 +342,24 @@ public class DenunciaService implements DenunciaServiceIT {
 
     }
 
+    
+    public boolean novoRegistroDenuncia(Denuncia denuncia, Funcionario funcionario){
+        
+        return false;
+        
+    }
+    
+    
     @Override
-    public boolean atualizarDenunciaGerenciada(Denuncia denuncia) {
+    public boolean atualizarDenunciaGerenciada(Registro registro) {
 
         try {
             
-//            denuncia = em.find(Denuncia.class, denuncia.getId());
-//            
-//            InformacaoDeAtendida informacaoDeAtendida = new InformacaoDeAtendida();
-//            
-//            if (denuncia.getInformacaoDeAtendida() != null) {
-//                informacaoDeAtendida = em.find(InformacaoDeAtendida.class, informacaoDeAtendida.getId());
-//            }
-//
-//            denuncia.setInformacaoDeAtendida(informacaoDeAtendida);
-//
-//            em.merge(informacaoDeAtendida);
-            em.merge(denuncia);
+//            Denuncia denuncia = em.find(Denuncia.class, registro.getDenuncia().getId());
+//            Funcionario funcionario = em.find(Funcionario.class, registro.getFuncionario().getId());
+            
+            
+            em.merge(registro);
             return true;
             
         } catch (Exception e) {

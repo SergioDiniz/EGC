@@ -17,6 +17,8 @@ public interface PrefeituraServiceIT {
 
     public Prefeitura login(String email, String senha);
     
+    public Prefeitura pesquisarPrefeituraPorCidade(String cidade, String estado);
+    
     public Long totalDePrefeitura();
     
     public String cadastrarNaPrefeitura(Prefeitura prefeitura, Funcionario funcionario);

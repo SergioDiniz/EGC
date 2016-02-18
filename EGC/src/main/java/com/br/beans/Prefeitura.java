@@ -280,6 +280,12 @@ public class Prefeitura implements Serializable{
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Prefeitura{" + "id=" + id + ", nome=" + nome + ", email=" + email + ", ativo=" + ativo + ", codigo=" + codigo + ", cidade=" + cidade + '}';
+    }
+    
     
     
     

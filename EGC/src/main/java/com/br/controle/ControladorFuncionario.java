@@ -10,8 +10,10 @@ import com.br.beans.CidadePK;
 import com.br.beans.Denuncia;
 import com.br.beans.EstadoDeAcompanhamento;
 import com.br.beans.Funcionario;
+import com.br.beans.Prefeitura;
 import com.br.beans.Registro;
 import com.br.beans.TipoDeDenuncia;
+import com.br.beans.TipoDeRegistro;
 import com.br.fachada.Fachada;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -20,6 +22,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -202,7 +205,21 @@ public class ControladorFuncionario implements Serializable {
 
     
     public void atualizarDenunciaGerenciada(){
-        fachada.atualizarDenunciaGerenciada(this.denunciaGerenciada);
+        
+        Registro registro = new Registro();
+        registro.setData(new Date());
+        registro.setDenuncia(this.denunciaGerenciada);
+        registro.setFuncionario(this.funcionario);
+        registro.setPrefeitura(fachada.pesquisarPrefeituraPorCidade(this.cidade.getCidadePK().getNomeCidade(), this.cidade.getCidadePK().getSiglaEstado()));
+        if(this.denunciaGerenciada.getEstadoDeAcompanhamento() == EstadoDeAcompanhamento.AGUARDANDO){
+            registro.setTipoDeRegistro(TipoDeRegistro.AGUARDANDO);
+        } else{
+            registro.setTipoDeRegistro(TipoDeRegistro.DENUNCIA_EM_TRABALHO);
+        }
+        
+        System.out.println("Registro: " + registro.toString());
+        
+        fachada.atualizarDenunciaGerenciada(registro);
         System.out.println("atualizar");
         System.out.println("estado: " + this.denunciaGerenciada.getEstadoDeAcompanhamento());
     }

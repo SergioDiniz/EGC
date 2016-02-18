@@ -39,7 +39,30 @@ public class PrefeituraService implements PrefeituraServiceIT {
 
         return "ERRO!";
     }
-
+    
+    @Override
+    public Prefeitura pesquisarPrefeituraPorCidade(String cidade, String estado){
+        
+        try {
+            
+            Query query = em.createQuery("SELECT p FROM Prefeitura p WHERE p.cidade.CidadePK.nomeCidade = :cidade AND p.cidade.CidadePK.siglaEstado = :estado");
+            query.setParameter("cidade", cidade);
+            query.setParameter("estado", estado);
+            
+            List<Prefeitura> p = query.getResultList();
+            
+            if(p.size() > 0){
+                return p.get(0);
+            }
+            
+        } catch (Exception e) {
+            System.out.println("ERRP EM PESQUISAR PREFEITURA POR CIDADE: " + e.getMessage());
+        }
+        
+        return null;
+        
+    }
+    
     @Override
     public Long totalDePrefeitura() {
         Query query = em.createQuery("SELECT COUNT(p) FROM Prefeitura P");
