@@ -1,0 +1,156 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:pt="http://java.sun.com/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+
+
+    <h:head>
+
+        <f:metadata>
+            <f:viewParam  required="true" id="codigoDenuncia_id" name="codigoDenuncia" value="#{controladorFuncionario.codigoDenuncia}" />
+            <f:event type="preRenderView" listener="#{controladorFuncionario.pesquisarDenuncia}" />
+        </f:metadata>
+
+        <title>EGC - Funcionario</title>
+    </h:head>
+    <h:body style="background-color: #f9f9f9">
+
+        <div class="tudo">
+
+            <div id="menu">
+                <ui:include src="topo.xhtml"/>
+            </div>
+
+            <div id="menu-lateral">
+                <ui:include src="menulateral.xhtml"/>
+            </div>
+
+            <div class="area-titulo-pagina">
+                <div class="titulo-pagina">Atender Denúncia!</div>
+            </div>
+
+        </div>
+
+
+
+        <div class="container">
+            <div class="denuncia-individual atender-denuncia">
+
+                <div class="row">
+
+                    <div class="col-md-offset-2 col-md-8">
+                        <div class="ud-denuncia">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <img src="/EGC/sis/denuncias/#{controladorFuncionario.denunciaGerenciada.foto}" class="img-denuncia"/>
+                                </div>
+                            </div>
+                            <div class="row" style="margin: 5px; margin-left: -15px;">
+                                <div class="col-md-2 ">
+                                    <img src="/EGC/img/icones-denuncia/#{controladorFuncionario.denunciaGerenciada.iconeDenunica}" height="50px" align="right"/>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="row">
+                                        <div class="col-md-9 rua-denuncia">
+                                            #{controladorFuncionario.denunciaGerenciada.tipoDaDenunciaFormatado}
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="hora-denuncia">
+                                                #{controladorFuncionario.denunciaGerenciada.dataDenuncaFormatado}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 conteudo-denuncia">
+                                            #{controladorFuncionario.denunciaGerenciada.descricao}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <span class="link-mapa-denuncia">#{controladorFuncionario.denunciaGerenciada.enderecoDenuncia.rua} - #{controladorFuncionario.denunciaGerenciada.enderecoDenuncia.numero}, #{controladorFuncionario.denunciaGerenciada.enderecoDenuncia.bairro}, #{controladorFuncionario.denunciaGerenciada.enderecoDenuncia.cidade} - #{controladorFuncionario.denunciaGerenciada.enderecoDenuncia.estado}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="col-md-1 text-left">
+                                                <div class="row">
+                                                    <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> #{controladorFuncionario.denunciaGerenciada.numeroAjuda}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <div class="row">
+                                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> #{controladorDenuncia.getReclamarDenuncia(controladorFuncionario.denunciaGerenciada)}
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+
+                <br/>
+                
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-8">
+                        <h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Escreva um Comentário.</label>
+                                        <textarea class="form-control" rows="6" jsf:value="${controladorFuncionario.informacaoDeAtendida.descricao}"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="btn-mudar-foto-perfil">
+                                        <p:fileUpload
+                                            label="Foto"
+                                            value="#{controladorFuncionario.file}"
+                                            allowTypes="/(\.|\/)(gif|jpg|jpeg|gif|png|PNG|GIF|JPG|JPEG)$/" 
+                                            mode="simple" 
+                                            skinSimple="true"
+
+                                            />
+                                    </div>
+                                </div>
+                                <div class="col-md-offset-2 col-md-4 text-right">
+                                    <h:commandButton action="#{controladorFuncionario.atenderDenuncia()}" class="btn btn-primary btn-block" value="Atender"/>
+                                </div>
+                            </div>
+
+
+                            
+
+
+                        </h:form>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+
+
+
+    </h:body>
+</html>
+

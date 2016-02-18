@@ -11,6 +11,7 @@ import com.br.beans.ConteudoInapropriado;
 import com.br.beans.Denuncia;
 import com.br.beans.EnderecoDenuncia;
 import com.br.beans.Funcionario;
+import com.br.beans.InformacaoDeAtendida;
 import com.br.beans.Prefeitura;
 import com.br.beans.Registro;
 import com.br.beans.TipoDeDenuncia;
@@ -317,6 +318,10 @@ public class Fachada implements Serializable {
     
     public List<Registro> registroDeUmaDenuncia(String codigoDenuncia){
         return ds.registroDeUmaDenuncia(codigoDenuncia);
+    }
+    
+    public boolean atenderDenuncia(InformacaoDeAtendida informacaoDeAtendida, Registro registro){
+        return ds.atenderDenuncia(informacaoDeAtendida, registro);
     }
     
     // FIM DenunciaServices

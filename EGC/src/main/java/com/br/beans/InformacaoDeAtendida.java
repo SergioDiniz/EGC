@@ -67,6 +67,41 @@ public class InformacaoDeAtendida implements Serializable{
     public void setFoto(String foto) {
         this.foto = foto;
     }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
+    @Override
+    public String toString() {
+        return "InformacaoDeAtendida{" + "id=" + id + ", descricao=" + descricao + ", data=" + data + ", foto=" + foto + ", funcionario=" + funcionario + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 43 * hash + this.id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final InformacaoDeAtendida other = (InformacaoDeAtendida) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
     
     
     

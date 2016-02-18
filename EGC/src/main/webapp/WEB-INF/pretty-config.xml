@@ -27,6 +27,11 @@
                 <view-id value="/sis/funcionario/gerenciar.jsf" />
         </url-mapping>
         
+<!--        <url-mapping id="atenderDenuncia">
+                <pattern value="/funcionario/atender" />
+                <view-id value="/sis/funcionario/atenderdenuncia.jsf" />
+        </url-mapping>-->
+        
         <url-mapping id="funcionarioConfiguracoes">
                 <pattern value="/funcionario/configuracoes" />
                 <view-id value="/sis/funcionario/configuracoes.jsf?faces-redirect=true" />

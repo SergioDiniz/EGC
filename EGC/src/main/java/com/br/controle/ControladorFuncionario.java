@@ -10,6 +10,7 @@ import com.br.beans.CidadePK;
 import com.br.beans.Denuncia;
 import com.br.beans.EstadoDeAcompanhamento;
 import com.br.beans.Funcionario;
+import com.br.beans.InformacaoDeAtendida;
 import com.br.beans.Prefeitura;
 import com.br.beans.Registro;
 import com.br.beans.TipoDeDenuncia;
@@ -30,6 +31,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -52,6 +54,7 @@ public class ControladorFuncionario implements Serializable {
     private List<Denuncia> denunciaMaisRecentes;
     private List<Denuncia> denunciaGerenciadas;
     private TipoDeDenuncia tipoDeDenunciaGerenciando;
+    private InformacaoDeAtendida informacaoDeAtendida;
 
     private Denuncia denunciaGerenciada;
 
@@ -63,6 +66,7 @@ public class ControladorFuncionario implements Serializable {
         this.cidadePK = new CidadePK();
         this.denunciaComMaisAjuda = new ArrayList<>();
         this.denunciaMaisRecentes = new ArrayList<>();
+        this.informacaoDeAtendida = new InformacaoDeAtendida();
     }
 
     public void mostrapagina() throws IOException {
@@ -112,14 +116,29 @@ public class ControladorFuncionario implements Serializable {
         return "/index.jsf?faces-redirect=true";
     }
 
-    public String upload() {
-        if (file != null) {
+    public String upload(UploadedFile fileUp, UploadType uploadType) {
+        if (fileUp != null) {
             try {
-                File targetFolder = new File("/Volumes/Arquivos/Sergio/Documentos/ADS/P6/TCC/Sistema/EGC/EGC/src/main/webapp/sis/funcionario/foto");
-                InputStream inputStream = file.getInputstream();
-                String tipoArquivo = file.getFileName();
+                //Caminho
+                File targetFolder;
+                if (uploadType == UploadType.PERFIL_FUNCIONARIO) {
+                    targetFolder = new File("/Volumes/Arquivos/Sergio/Documentos/ADS/P6/TCC/Sistema/EGC/EGC/src/main/webapp/sis/funcionario/foto");
+                } else {
+                    targetFolder = new File("/Volumes/Arquivos/Sergio/Documentos/ADS/P6/TCC/Sistema/EGC/EGC/src/main/webapp/sis/denuncias");
+                }
+
+                InputStream inputStream = fileUp.getInputstream();
+                String tipoArquivo = fileUp.getFileName();
                 tipoArquivo = tipoArquivo.substring(tipoArquivo.lastIndexOf("."), tipoArquivo.length());
-                String nomeArquivo = this.funcionario.getEmail() + tipoArquivo; //Nome do Arquivo
+
+                //Nome do Arquivo
+                String nomeArquivo;
+                if (uploadType == UploadType.PERFIL_FUNCIONARIO) {
+                    nomeArquivo = this.funcionario.getEmail() + tipoArquivo;
+                } else {
+                    nomeArquivo = System.currentTimeMillis() + tipoArquivo;
+                }
+
                 OutputStream out = new FileOutputStream(new File(targetFolder, nomeArquivo));
                 int read = 0;
                 byte[] bytes = new byte[1024];
@@ -133,6 +152,7 @@ public class ControladorFuncionario implements Serializable {
                 return nomeArquivo;
             } catch (IOException e) {
                 e.printStackTrace();
+                System.out.println("EERO O FAZER UPLOAD DE ARQUIVO: " + e.getMessage());
             }
         }
         return null;
@@ -145,7 +165,7 @@ public class ControladorFuncionario implements Serializable {
 
             try {
 
-                this.funcionario.setFoto(upload());
+                this.funcionario.setFoto(upload(this.file, UploadType.PERFIL_FUNCIONARIO));
                 this.file = null;
 
                 Thread.sleep(3000);
@@ -153,7 +173,7 @@ public class ControladorFuncionario implements Serializable {
                 e.printStackTrace();
             }
         }
-        
+
         fachada.atualizar(this.funcionario);
         return null;
     }
@@ -194,7 +214,6 @@ public class ControladorFuncionario implements Serializable {
                 this.cidade.getCidadePK().getSiglaEstado(), "data");
     }
 
-
     public void pesquisarDenuncia(ComponentSystemEvent event) {
 //        System.out.println("Codigo Denuncia: " + this.codigoDenuncia);
         this.denunciaGerenciada = new Denuncia();
@@ -203,28 +222,63 @@ public class ControladorFuncionario implements Serializable {
 
     }
 
-    
-    public void atualizarDenunciaGerenciada(){
-        
+    public void atualizarDenunciaGerenciada() {
+
         Registro registro = new Registro();
         registro.setData(new Date());
         registro.setDenuncia(this.denunciaGerenciada);
         registro.setFuncionario(this.funcionario);
         registro.setPrefeitura(fachada.pesquisarPrefeituraPorCidade(this.cidade.getCidadePK().getNomeCidade(), this.cidade.getCidadePK().getSiglaEstado()));
-        if(this.denunciaGerenciada.getEstadoDeAcompanhamento() == EstadoDeAcompanhamento.AGUARDANDO){
+        if (this.denunciaGerenciada.getEstadoDeAcompanhamento() == EstadoDeAcompanhamento.AGUARDANDO) {
             registro.setTipoDeRegistro(TipoDeRegistro.AGUARDANDO);
-        } else{
+        } else {
             registro.setTipoDeRegistro(TipoDeRegistro.DENUNCIA_EM_TRABALHO);
         }
-        
+
         System.out.println("Registro: " + registro.toString());
-        
+
         fachada.atualizarDenunciaGerenciada(registro);
         System.out.println("atualizar");
         System.out.println("estado: " + this.denunciaGerenciada.getEstadoDeAcompanhamento());
     }
-    
-    
+
+    public void paginaAtenderDenuncia() throws IOException {
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/EGC/sis/funcionario/atenderdenuncia.jsf");
+    }
+
+    public String atenderDenuncia() {
+
+        if (file.getSize() > 0) {
+            try {
+                // Upando e Setando informações sobre a foto do atendimento
+                this.informacaoDeAtendida.setFoto((upload(this.file, UploadType.FOTO_DENUNCIA_ATENDIDA)));
+                this.file = null;
+
+                Thread.sleep(3000);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        // Setando informações sobre o atendimento
+        this.informacaoDeAtendida.setData(new Date());
+        this.informacaoDeAtendida.setFuncionario(this.funcionario);
+
+        // Criando registro par agardar no historico
+        Registro registro = new Registro();
+        registro.setData(new Date());
+        this.denunciaGerenciada.setEstadoDeAcompanhamento(EstadoDeAcompanhamento.ATENDIDA);
+        registro.setDenuncia(this.denunciaGerenciada);
+        registro.setFuncionario(this.funcionario);
+        registro.setPrefeitura(fachada.pesquisarPrefeituraPorCidade(this.cidade.getCidadePK().getNomeCidade(), this.cidade.getCidadePK().getSiglaEstado()));
+        registro.setTipoDeRegistro(TipoDeRegistro.DENUNCIA_ATENDIDA);
+
+        System.out.println("Descrição de Atendida: " + this.informacaoDeAtendida.toString());
+
+        fachada.atenderDenuncia(this.informacaoDeAtendida, registro);
+
+        return null;
+    }
+
     //
     //
     //
@@ -311,6 +365,14 @@ public class ControladorFuncionario implements Serializable {
 
     public void setDenunciaGerenciada(Denuncia denunciaGerenciada) {
         this.denunciaGerenciada = denunciaGerenciada;
+    }
+
+    public InformacaoDeAtendida getInformacaoDeAtendida() {
+        return informacaoDeAtendida;
+    }
+
+    public void setInformacaoDeAtendida(InformacaoDeAtendida informacaoDeAtendida) {
+        this.informacaoDeAtendida = informacaoDeAtendida;
     }
 
 }

@@ -343,44 +343,62 @@ public class DenunciaService implements DenunciaServiceIT {
 
     }
 
-    
-    
     @Override
     public boolean atualizarDenunciaGerenciada(Registro registro) {
 
         try {
-                       
+
             em.merge(registro.getDenuncia());
             em.merge(registro);
             return true;
-            
+
         } catch (Exception e) {
             System.out.println("ERRO AO ATUALIZAR DENUNCIA GERENCIADA: " + e.getMessage());
         }
 
         return false;
     }
-    
+
     @Override
-    public List<Registro> registroDeUmaDenuncia(String codigoDenuncia){
-        
+    public List<Registro> registroDeUmaDenuncia(String codigoDenuncia) {
+
         try {
-            
+
             Query query = em.createQuery("SELECT r from Denuncia d JOIN d.registros r WHERE d.codigo = :codigoDenuncia ORDER BY r.data DESC");
             query.setParameter("codigoDenuncia", codigoDenuncia);
-            
+
             List<Registro> r = query.getResultList();
-            
-            if(r.size() > 0){
+
+            if (r.size() > 0) {
                 return r;
             }
-            
+
         } catch (Exception e) {
             System.out.println("ERRO EM RETORNA REGISTRO DE UMA DENUNCIA: " + e.getMessage());
         }
-        
+
         return new ArrayList<>();
+
+    }
+
+    @Override
+    public boolean atenderDenuncia(InformacaoDeAtendida informacaoDeAtendida, Registro registro) {
+
+        try {
+            System.out.println("IDA: " + informacaoDeAtendida.toString());
+            System.out.println("R: " + registro.toString());
+            
+            registro.getDenuncia().setInformacaoDeAtendida(informacaoDeAtendida);
+            
+            em.merge(informacaoDeAtendida);
+            em.merge(registro.getDenuncia());
+            em.merge(registro);
+            
+        } catch (Exception e) {
+            System.out.println("ERRO AO ATENDER DENUNCIA: " + e.getMessage());
+        }
         
+        return false;
     }
 
 }

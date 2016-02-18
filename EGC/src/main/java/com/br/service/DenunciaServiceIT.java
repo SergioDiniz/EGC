@@ -9,6 +9,7 @@ import com.br.beans.ConteudoInapropriado;
 import com.br.beans.Denuncia;
 import com.br.beans.EnderecoDenuncia;
 import com.br.beans.Funcionario;
+import com.br.beans.InformacaoDeAtendida;
 import com.br.beans.Registro;
 import com.br.beans.TipoDeDenuncia;
 import com.br.beans.Usuario;
@@ -53,5 +54,7 @@ public interface DenunciaServiceIT {
     public boolean atualizarDenunciaGerenciada(Registro registro);
     
     public List<Registro> registroDeUmaDenuncia(String codigoDenuncia);
+    
+    public boolean atenderDenuncia(InformacaoDeAtendida informacaoDeAtendida, Registro registro);
     
 }
