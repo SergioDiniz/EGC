@@ -7,6 +7,7 @@ package com.br.controle;
 
 import com.br.beans.Cidade;
 import com.br.beans.CidadePK;
+import com.br.beans.ConteudoInapropriado;
 import com.br.beans.Denuncia;
 import com.br.beans.EstadoDeAcompanhamento;
 import com.br.beans.Funcionario;
@@ -55,6 +56,7 @@ public class ControladorFuncionario implements Serializable {
     private List<Denuncia> denunciaGerenciadas;
     private TipoDeDenuncia tipoDeDenunciaGerenciando;
     private InformacaoDeAtendida informacaoDeAtendida;
+    private ConteudoInapropriado conteudoInapropriado;
 
     private Denuncia denunciaGerenciada;
 
@@ -67,6 +69,7 @@ public class ControladorFuncionario implements Serializable {
         this.denunciaComMaisAjuda = new ArrayList<>();
         this.denunciaMaisRecentes = new ArrayList<>();
         this.informacaoDeAtendida = new InformacaoDeAtendida();
+        this.conteudoInapropriado = new ConteudoInapropriado();
     }
 
     public void mostrapagina() throws IOException {
@@ -238,8 +241,7 @@ public class ControladorFuncionario implements Serializable {
         System.out.println("Registro: " + registro.toString());
 
         fachada.atualizarDenunciaGerenciada(registro);
-        System.out.println("atualizar");
-        System.out.println("estado: " + this.denunciaGerenciada.getEstadoDeAcompanhamento());
+
     }
 
     public void paginaAtenderDenuncia() throws IOException {
@@ -272,10 +274,29 @@ public class ControladorFuncionario implements Serializable {
         registro.setPrefeitura(fachada.pesquisarPrefeituraPorCidade(this.cidade.getCidadePK().getNomeCidade(), this.cidade.getCidadePK().getSiglaEstado()));
         registro.setTipoDeRegistro(TipoDeRegistro.DENUNCIA_ATENDIDA);
 
-        System.out.println("Descrição de Atendida: " + this.informacaoDeAtendida.toString());
-
         fachada.atenderDenuncia(this.informacaoDeAtendida, registro);
+        this.informacaoDeAtendida = new InformacaoDeAtendida();
+        return null;
+    }
 
+    public String fazerReclamacaoEmDenuncia() {
+        
+        
+        //Salvando reclamação
+        fachada.setReclamarDenuncia(this.denunciaGerenciada, this.conteudoInapropriado);
+        this.conteudoInapropriado = new ConteudoInapropriado();
+            
+        // Criando registro par agardar no historico
+        Registro registro = new Registro();
+        registro.setData(new Date());
+        this.denunciaGerenciada.setEstadoDeAcompanhamento(EstadoDeAcompanhamento.ATENDIDA);
+        registro.setDenuncia(this.denunciaGerenciada);
+        registro.setFuncionario(this.funcionario);
+        registro.setPrefeitura(fachada.pesquisarPrefeituraPorCidade(this.cidade.getCidadePK().getNomeCidade(), this.cidade.getCidadePK().getSiglaEstado()));
+        registro.setTipoDeRegistro(TipoDeRegistro.RECLAMACAO);
+
+        fachada.atualizar(registro);
+        
         return null;
     }
 
@@ -374,5 +395,15 @@ public class ControladorFuncionario implements Serializable {
     public void setInformacaoDeAtendida(InformacaoDeAtendida informacaoDeAtendida) {
         this.informacaoDeAtendida = informacaoDeAtendida;
     }
+
+    public ConteudoInapropriado getConteudoInapropriado() {
+        return conteudoInapropriado;
+    }
+
+    public void setConteudoInapropriado(ConteudoInapropriado conteudoInapropriado) {
+        this.conteudoInapropriado = conteudoInapropriado;
+    }
+    
+    
 
 }

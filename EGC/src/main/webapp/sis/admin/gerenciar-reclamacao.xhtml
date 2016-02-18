@@ -59,7 +59,7 @@
 
                 <div class="col-md-offset-2 col-md-8">
                     <div class="denuncia-reclamacao">
-                        <div class="foto-dr">
+                        <div class="foto-dr text-center">
                             <a class="test-popup-link" href="../denuncias/#{controladorAdmin.denunciaReclamacao.foto}" >
                                 <img src="../denuncias/#{controladorAdmin.denunciaReclamacao.foto}"/>
                             </a>
@@ -92,11 +92,18 @@
                                 <div class="col-md-3 hora-denuncia">
                                     #{controladorAdmin.denunciaReclamacao.dataDenuncaFormatado}
                                 </div>
-                                <div class="col-md-offset-4 col-md-2 numero-denuncias">
+                                <div class="col-md-4">
+                                    <div class="row text-center" style="padding-top: 5px;">
+                                        <h:outputText value="ATENDIDA" styleClass="label label-success" rendered="#{controladorAdmin.denunciaReclamacao.tagAtendida()}"/>
+                                        <h:outputText value="AGUARDANDO" styleClass="label label-primary" rendered="#{controladorAdmin.denunciaReclamacao.tagAguardando()}"/>
+                                        <h:outputText value="EM ENDAMENTO" styleClass="label label-info" rendered="#{controladorAdmin.denunciaReclamacao.tagEmAndamento()}"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 numero-denuncias">
                                     Denúncias: #{controladorDenuncia.getReclamarDenuncia(controladorAdmin.denunciaReclamacao)}
                                 </div>
                                 <div class="col-md-2 numero-ajuda">
-                                    Ajudas: #{controladorDenuncia.getReclamarDenuncia(controladorAdmin.denunciaReclamacao)}
+                                    Ajudas: #{controladorAdmin.denunciaReclamacao.numeroAjuda}
                                 </div>
                             </div>
                         </div>

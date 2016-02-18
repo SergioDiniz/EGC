@@ -48,8 +48,8 @@
                     <div class="col-md-offset-2 col-md-8">
                         <div class="ud-denuncia">
                             <div class="row">
-                                <div class="col-md-12">
-                                    <img src="/EGC/sis/denuncias/#{controladorFuncionario.denunciaGerenciada.foto}" class="img-denuncia"/>
+                                <div class="col-md-12 text-center">
+                                    <img src="/EGC/sis/denuncias/#{controladorFuncionario.denunciaGerenciada.foto}" class="img-denuncia-atendida"/>
                                 </div>
                             </div>
                             <div class="row" style="margin: 5px; margin-left: -15px;">
@@ -115,7 +115,7 @@
 
                                                                 </div>
 
-                                                                <h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1">
+                                                                <h:form acceptcharset="ISO-8859-1">
 
                                                                     <div class="modal-body">
                                                                         <p align="center" style="font-size: 16px">Nos ajude a identificar o que há de errado com esta denúncia.</p>
@@ -129,7 +129,7 @@
 
                                                                                 <div class="form-group">
                                                                                     <label>Tipo de Conteúdo: </label>
-                                                                                    <h:selectOneListbox size="1" class="form-control" value="#{controladorDenuncia.conteudoInapropriado.tipoDeConteudo}">
+                                                                                    <h:selectOneListbox size="1" class="form-control" value="#{controladorFuncionario.conteudoInapropriado.tipoDeConteudo}">
                                                                                         <f:selectItem itemValue="FALSA_DENUNCIA" itemLabel="Falsa Denúncia" />
                                                                                         <f:selectItem itemValue="NUDEZ" itemLabel="Exposição de Nudez"/>
                                                                                         <f:selectItem itemValue="SPAN" itemLabel="Span"/>
@@ -139,7 +139,7 @@
 
                                                                                 <div class="form-group">
                                                                                     <label>Descrição:</label>
-                                                                                    <textarea class="form-control" rows="6" jsf:value="${controladorDenuncia.conteudoInapropriado.descricao}">
+                                                                                    <textarea class="form-control" rows="6" jsf:value="${controladorFuncionario.conteudoInapropriado.descricao}">
                                                 
                                                                                     </textarea>
                                                                                 </div>
@@ -150,7 +150,7 @@
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                                                        <h:commandButton value="Reclamar" action="#{controladorDenuncia.setReclamarDenuncia(controladorFuncionario.denunciaGerenciada)}" class="btn btn-primary"/>
+                                                                        <h:commandButton value="Reclamar" action="#{controladorFuncionario.fazerReclamacaoEmDenuncia()}" class="btn btn-primary"/>
                                                                     </div>
 
                                                                 </h:form>

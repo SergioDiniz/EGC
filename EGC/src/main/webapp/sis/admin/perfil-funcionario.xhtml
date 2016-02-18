@@ -144,6 +144,9 @@
                                                     <c:when test="#{registro.tipoDeRegistro == 'DENUNCIA_ATENDIDA'}">
                                                         <a href="#">denúncia</a> atualizada para o estado <span class="label label-success">Atendida</span>, <span class="link-mapa-denuncia">#{registro.prefeitura.cidade.cidadePK.nomeCidade}, #{registro.prefeitura.cidade.cidadePK.siglaEstado}</span>
                                                     </c:when>
+                                                    <c:when test="#{registro.tipoDeRegistro == 'AGUARDANDO'}">
+                                                        <a href="#">denúncia</a> atualizada para o estado <span class="label label-default">Aguardando</span>, <span class="link-mapa-denuncia">#{registro.prefeitura.cidade.cidadePK.nomeCidade}, #{registro.prefeitura.cidade.cidadePK.siglaEstado}</span>
+                                                    </c:when>
                                                     <c:otherwise>
                                                         <a href="#">denúncia</a> recebeu uma <span class="label label-danger">Reclamação</span>, <span class="link-mapa-denuncia">#{registro.prefeitura.cidade.cidadePK.nomeCidade}, #{registro.prefeitura.cidade.cidadePK.siglaEstado}</span>
                                                     </c:otherwise>

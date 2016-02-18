@@ -68,7 +68,7 @@ public class CidadeService implements CidadeServiceIT{
     @Override
     public List<Registro> registrosDaCidade(String cidade, String estado){
         
-        Query query = em.createQuery("SELECT r FROM Registro r WHERE r.prefeitura.enderecoPrefeitura.cidade = :cidade and r.prefeitura.enderecoPrefeitura.estado = :estado ORDER BY r.data DESC");
+        Query query = em.createQuery("SELECT r FROM Registro r JOIN r.denuncia d WHERE r.prefeitura.enderecoPrefeitura.cidade = :cidade and r.prefeitura.enderecoPrefeitura.estado = :estado AND d.ativo = TRUE ORDER BY r.data DESC");
         query.setParameter("cidade", cidade);
         query.setParameter("estado", estado);
         
