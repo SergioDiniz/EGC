@@ -1993,13 +1993,21 @@ html, body{
     padding: 15px 5px 5px 10px !important;
 }
 
+.gerenciar-denuncias .denuncia{
+    padding: 0 !important;
+    padding-bottom: 10px !important;
+}
+
 .gerenciar-denuncias .img-denuncia{
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
     padding-bottom: 10px;
 
 }
 
 .gerenciar-denuncias .link-mapa-denuncia{
-    padding-left: 0;
+    padding: 0;
 }
 
 .gerenciar-denuncias .col-md-6{
