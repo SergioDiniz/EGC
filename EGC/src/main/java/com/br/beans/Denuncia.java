@@ -62,6 +62,9 @@ public class Denuncia implements Serializable {
     private InformacaoDeAtendida informacaoDeAtendida;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<ConteudoInapropriado> conteudoInapropriados;
+    
+    @OneToMany(mappedBy = "denuncia")
+    private List<Registro> registros;
 
     public Denuncia() {
     }

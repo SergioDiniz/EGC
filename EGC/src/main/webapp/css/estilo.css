@@ -141,9 +141,9 @@ html, body{
 }
 
 .btn-menu-lateral input[type="image"]{
-    
+
     padding: 12px 19px 12px 19px;
-    
+
     width: 63px;
     height: 50px;
     margin-left: -5px;
@@ -2000,11 +2000,13 @@ html, body{
     padding: 5px !important;
 }
 
-.gerenciar-denuncias .col-md-6 .glyphicon-heart{
+.gerenciar-denuncias .col-md-6 .glyphicon-heart,
+.denuncia-individual .glyphicon-heart{
     color: #c9302c;
 }
 
-.gerenciar-denuncias .col-md-6 .glyphicon-exclamation-sign{
+.gerenciar-denuncias .col-md-6 .glyphicon-exclamation-sign,
+.denuncia-individual .glyphicon-exclamation-sign{
     color: #f09635;
 }
 
@@ -2041,3 +2043,15 @@ html, body{
     margin-left: 5px;
 }
 
+.denuncia-individual{
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.denuncia-individual .ud-denuncia{
+    background-color: #fff;
+}
+
+.denuncia-individual .btn-atender-denuncia{
+    margin-top: 20px;
+}

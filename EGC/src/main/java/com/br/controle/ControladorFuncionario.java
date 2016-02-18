@@ -8,6 +8,7 @@ package com.br.controle;
 import com.br.beans.Cidade;
 import com.br.beans.CidadePK;
 import com.br.beans.Denuncia;
+import com.br.beans.EstadoDeAcompanhamento;
 import com.br.beans.Funcionario;
 import com.br.beans.Registro;
 import com.br.beans.TipoDeDenuncia;
@@ -52,7 +53,6 @@ public class ControladorFuncionario implements Serializable {
     private Denuncia denunciaGerenciada;
 
     private String codigoDenuncia = "";
-    private List<String> listaDeCodigo;
 
     public ControladorFuncionario() {
         this.funcionario = new Funcionario();
@@ -60,7 +60,6 @@ public class ControladorFuncionario implements Serializable {
         this.cidadePK = new CidadePK();
         this.denunciaComMaisAjuda = new ArrayList<>();
         this.denunciaMaisRecentes = new ArrayList<>();
-        this.listaDeCodigo = new ArrayList<>();
     }
 
     public void mostrapagina() throws IOException {
@@ -192,20 +191,23 @@ public class ControladorFuncionario implements Serializable {
                 this.cidade.getCidadePK().getSiglaEstado(), "data");
     }
 
-    public void addCodigoDenuncia(ComponentSystemEvent event) {
-        System.out.println("Codigo: " + this.codigoDenuncia);
-        this.listaDeCodigo.add(this.codigoDenuncia);
-        System.out.println("Tamanho da Lista: " + this.listaDeCodigo.size());
-    }
 
     public void pesquisarDenuncia(ComponentSystemEvent event) {
-        System.out.println("Codigo Denuncia: " + this.codigoDenuncia);
+//        System.out.println("Codigo Denuncia: " + this.codigoDenuncia);
         this.denunciaGerenciada = new Denuncia();
         this.denunciaGerenciada = fachada.pesquisarDenunicaCodigo(this.codigoDenuncia);
-        System.out.println("Descricao: " + this.denunciaGerenciada.getDescricao());
+//        System.out.println("Descricao: " + this.denunciaGerenciada.getDescricao());
 
     }
 
+    
+    public void atualizarDenunciaGerenciada(){
+        fachada.atualizarDenunciaGerenciada(this.denunciaGerenciada);
+        System.out.println("atualizar");
+        System.out.println("estado: " + this.denunciaGerenciada.getEstadoDeAcompanhamento());
+    }
+    
+    
     //
     //
     //
@@ -277,21 +279,13 @@ public class ControladorFuncionario implements Serializable {
     }
 
     public String getCodigoDenuncia() {
-        System.out.println("get: " + this.codigoDenuncia);
+//        System.out.println("get: " + this.codigoDenuncia);
         return codigoDenuncia;
     }
 
     public void setCodigoDenuncia(String codigoDenuncia) {
-        System.out.println("set " + this.codigoDenuncia);
+//        System.out.println("set " + this.codigoDenuncia);
         this.codigoDenuncia = codigoDenuncia;
-    }
-
-    public List<String> getListaDeCodigo() {
-        return listaDeCodigo;
-    }
-
-    public void setListaDeCodigo(List<String> listaDeCodigo) {
-        this.listaDeCodigo = listaDeCodigo;
     }
 
     public Denuncia getDenunciaGerenciada() {

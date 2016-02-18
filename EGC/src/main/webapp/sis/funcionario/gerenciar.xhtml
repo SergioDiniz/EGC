@@ -6,7 +6,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:c="http://java.sun.com/jsp/jstl/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://java.sun.com/jsf">
 
 
 
@@ -32,23 +33,190 @@
             </div>
 
             <div class="area-titulo-pagina">
-                <div class="titulo-pagina">Bem Vindo!</div>
+                <div class="titulo-pagina">Gerenciar Denúncia!</div>
             </div>
 
         </div>
 
+
+
         <div class="container">
-            Codigo: <h:outputText value="#{controladorFuncionario.codigoDenuncia}"/>
+            <div class="denuncia-individual">
 
-            <br/>
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-8">
+                        <div class="ud-denuncia">
 
-            <br/>
-            <br/><br/>
+                            <div class="row" style="margin: 5px; margin-left: -15px;">
+                                <div class="col-md-2">
+                                    <img src="/EGC/img/icones-denuncia/#{controladorFuncionario.denunciaGerenciada.iconeDenunica}" height="50px" align="right"/>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="row">
+                                        <div class="col-md-9 rua-denuncia">
+                                            #{controladorFuncionario.denunciaGerenciada.tipoDaDenunciaFormatado}
+                                        </div>
+                                        <div class="col-md-3 hora-denuncia">
+                                            #{controladorFuncionario.denunciaGerenciada.dataDenuncaFormatado}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 conteudo-denuncia">
+                                            #{controladorFuncionario.denunciaGerenciada.descricao}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <span class="link-mapa-denuncia">#{controladorFuncionario.denunciaGerenciada.enderecoDenuncia.rua} - #{controladorFuncionario.denunciaGerenciada.enderecoDenuncia.numero}, #{controladorFuncionario.denunciaGerenciada.enderecoDenuncia.bairro}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <img src="/EGC/sis/denuncias/#{controladorFuncionario.denunciaGerenciada.foto}" class="img-denuncia"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="col-md-2">
+                                                <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> #{controladorFuncionario.denunciaGerenciada.numeroAjuda}
+                                            </div>
+                                            <div class="col-md-2">
+                                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> #{controladorDenuncia.getReclamarDenuncia(controladorFuncionario.denunciaGerenciada)}
+                                            </div>
+                                            <div class="col-md-offset-6 col-md-2">
 
-            Descrição: <h:outputText value="#{controladorFuncionario.denunciaGerenciada.descricao}"/>
-            
+                                                <button data-toggle="modal" data-target=".denunciaReclamacao" class="btn btn-info">
+                                                    Denunciar
+                                                </button>
 
 
+                                                <!--modal--> 
+                                                <div id="modal-reclamacao">
+                                                    <div class="modal fade bs-example-modal-lg denunciaReclamacao" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                    <h4 class="modal-title">O que está acontecendo?</h4>
+
+                                                                </div>
+
+                                                                <h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1">
+
+                                                                    <div class="modal-body">
+                                                                        <p align="center" style="font-size: 16px">Nos ajude a identificar o que há de errado com esta denúncia.</p>
+                                                                        <br/>
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-5">
+                                                                                <img src="/EGC/sis/denuncias/#{controladorFuncionario.denunciaGerenciada.foto}" style="width: 100%; max-height: 100%;" />
+                                                                            </div>
+                                                                            <div class="col-md-7">
+
+                                                                                <div class="form-group">
+                                                                                    <label>Tipo de Conteúdo: </label>
+                                                                                    <h:selectOneListbox size="1" class="form-control" value="#{controladorDenuncia.conteudoInapropriado.tipoDeConteudo}">
+                                                                                        <f:selectItem itemValue="FALSA_DENUNCIA" itemLabel="Falsa Denúncia" />
+                                                                                        <f:selectItem itemValue="NUDEZ" itemLabel="Exposição de Nudez"/>
+                                                                                        <f:selectItem itemValue="SPAN" itemLabel="Span"/>
+                                                                                        <f:selectItem itemValue="IRRITANTE" itemLabel="Essa denúncia me irrita"/>
+                                                                                    </h:selectOneListbox>
+                                                                                </div>
+
+                                                                                <div class="form-group">
+                                                                                    <label>Descrição:</label>
+                                                                                    <textarea class="form-control" rows="6" jsf:value="${controladorDenuncia.conteudoInapropriado.descricao}">
+                                                
+                                                                                    </textarea>
+                                                                                </div>
+
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                                                        <h:commandButton value="Reclamar" action="#{controladorDenuncia.setReclamarDenuncia(controladorFuncionario.denunciaGerenciada)}" class="btn btn-primary"/>
+                                                                    </div>
+
+                                                                </h:form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="btn-atender-denuncia">
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-8">
+
+
+                            <h:form rendered="#{!controladorFuncionario.denunciaGerenciada.tagAtendida()}">
+                                <label>Acompanhamento: </label>
+                                <div>
+                                    <div class="col-md-7">
+                                        <div class="row">
+
+                                            <h:selectOneListbox size="1" class="form-control input-lg" value="#{controladorFuncionario.denunciaGerenciada.estadoDeAcompanhamento}">
+                                                <f:selectItem itemValue="AGUARDANDO" itemLabel="Aguardando" />
+                                                <f:selectItem itemValue="EM_TRABALHO" itemLabel="Em Trabalho"/>
+                                            </h:selectOneListbox>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="row">
+
+                                            <div class="btn-group" role="group" >
+                                                <h:commandButton class="btn btn-default btn-lg" style="width: 135px;" value="Salvar" action="#{controladorFuncionario.atualizarDenunciaGerenciada()}" />
+                                                <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#modalAtenderDenuncia">Atender Denúncia</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="modalAtenderDenuncia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    ...
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </h:form>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
         </div>
 
 

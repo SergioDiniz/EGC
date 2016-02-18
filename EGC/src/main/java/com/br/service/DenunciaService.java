@@ -8,6 +8,7 @@ package com.br.service;
 import com.br.beans.ConteudoInapropriado;
 import com.br.beans.Denuncia;
 import com.br.beans.EnderecoDenuncia;
+import com.br.beans.InformacaoDeAtendida;
 import com.br.beans.TipoDeDenuncia;
 import com.br.beans.Usuario;
 import java.text.Normalizer;
@@ -122,10 +123,9 @@ public class DenunciaService implements DenunciaServiceIT {
 //        if (tipoDeDenuncia == TipoDeDenuncia.BRASIL){
 //            tipoDeDenuncia = TipoDeDenuncia.TODOS;
 //        }
-        
         System.out.println("Ordem: " + ordem);
         System.out.println("Tipo de Denuncia: " + tipoDeDenuncia);
-        
+
         Query query;
         if (ordem.equals("data")) {
             if (tipoDeDenuncia == TipoDeDenuncia.BRASIL) {
@@ -323,21 +323,47 @@ public class DenunciaService implements DenunciaServiceIT {
 
         return new ArrayList<>();
     }
-    
+
     @Override
-    public Denuncia pesquisarDenunicaCodigo(String codigo){
-        
+    public Denuncia pesquisarDenunicaCodigo(String codigo) {
+
         Query query = em.createQuery("SELECT d from Denuncia d WHERE d.codigo = :codigo and d.ativo = true");
         query.setParameter("codigo", codigo);
-        
+
         List<Denuncia> d = query.getResultList();
-        
-        if (d.size() > 0){
+
+        if (d.size() > 0) {
             return d.get(0);
         }
-     
+
         return null;
-        
+
+    }
+
+    @Override
+    public boolean atualizarDenunciaGerenciada(Denuncia denuncia) {
+
+        try {
+            
+//            denuncia = em.find(Denuncia.class, denuncia.getId());
+//            
+//            InformacaoDeAtendida informacaoDeAtendida = new InformacaoDeAtendida();
+//            
+//            if (denuncia.getInformacaoDeAtendida() != null) {
+//                informacaoDeAtendida = em.find(InformacaoDeAtendida.class, informacaoDeAtendida.getId());
+//            }
+//
+//            denuncia.setInformacaoDeAtendida(informacaoDeAtendida);
+//
+//            em.merge(informacaoDeAtendida);
+            em.merge(denuncia);
+            return true;
+            
+        } catch (Exception e) {
+            System.out.println("ERRO AO ATUALIZAR DENUNCIA GERENCIADA: " + e.getMessage());
+        }
+
+        return false;
     }
 
 }

@@ -34,7 +34,8 @@ public class Registro implements Serializable {
     @Enumerated(EnumType.STRING)
     private TipoDeRegistro tipoDeRegistro;
 
-    @OneToOne
+    
+    @ManyToOne
     private Denuncia denuncia;
 
     @OneToOne

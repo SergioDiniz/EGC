@@ -48,4 +48,6 @@ public interface DenunciaServiceIT {
     
     public Denuncia pesquisarDenunicaCodigo(String codigo);
     
+    public boolean atualizarDenunciaGerenciada(Denuncia denuncia);
+    
 }
