@@ -6,7 +6,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://java.sun.com/jsf">
     <h:head>
         <title>EGC - Funcionario</title>
     </h:head>
@@ -69,7 +70,7 @@
                         </div>
 
 
-                        
+
 
                     </div>
 
@@ -79,7 +80,7 @@
                                 Últimos Registros
                             </div>
 
-                            <c:forEach var="registro" items="#{controladorFuncionario.registrosDoFuncionario(controladorFuncionario.funcionario.email)}" >
+                            <c:forEach var="registro" items="#{controladorCidade.registrosDaCidade(controladorFuncionario.cidade.cidadePK.nomeCidade, controladorFuncionario.cidade.cidadePK.siglaEstado)}" >
                                 <table class="tb-registro">
                                     <tr>
                                         <td>
@@ -105,13 +106,16 @@
                                             <div class="td-registro">
                                                 <c:choose>
                                                     <c:when test="#{registro.tipoDeRegistro == 'DENUNCIA_EM_TRABALHO'}">
-                                                        <a href="#">denúncia</a> atualizada para o estado <span class="label label-info">Em trabalho</span>, <span class="link-mapa-denuncia">#{registro.funcionario.nome}</span>
+                                                        <a href="/EGC/funcionario/denuncia/#{registro.denuncia.codigo}">denúncia</a> atualizada para o estado <span class="label label-info">Em trabalho</span>, <span class="link-mapa-denuncia">#{registro.funcionario.nome}</span>
                                                     </c:when>
                                                     <c:when test="#{registro.tipoDeRegistro == 'DENUNCIA_ATENDIDA'}">
-                                                        <a href="#">denúncia</a> atualizada para o estado <span class="label label-success">Atendida</span>, <span class="link-mapa-denuncia">#{registro.funcionario.nome}</span>
+                                                        <a href="/EGC/funcionario/denuncia/#{registro.denuncia.codigo}">denúncia</a> atualizada para o estado <span class="label label-success">Atendida</span>, <span class="link-mapa-denuncia">#{registro.funcionario.nome}</span>
+                                                    </c:when>
+                                                    <c:when test="#{registro.tipoDeRegistro == 'AGUARDANDO'}">
+                                                        <a href="/EGC/funcionario/denuncia/#{registro.denuncia.codigo}">denúncia</a> atualizada para o estado <span class="label label-default">Aguardando</span>, <span class="link-mapa-denuncia">#{registro.funcionario.nome}</span>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <a href="#">denúncia</a> recebeu uma <span class="label label-danger">Reclamação</span>, <span class="link-mapa-denuncia">#{registro.funcionario.nome}</span>
+                                                        <a href="/EGC/funcionario/denuncia/#{registro.denuncia.codigo}">denúncia</a> recebeu uma <span class="label label-danger">Reclamação</span>, <span class="link-mapa-denuncia">#{registro.funcionario.nome}</span>
                                                     </c:otherwise>
                                                 </c:choose>
                                             </div>
@@ -172,11 +176,14 @@
 
 
                                             </h:column>
+                                            
                                             <h:column>
                                                 <f:facet name="header"></f:facet>
-                                                <button class="btn btn-visualizar-denuncia" data-toggle="modal" data-target=".denunciaComMaisAjuda#{denuncia.id}">
+
+
+                                                <h:commandLink action="#{controladorDenuncia.visualizarDenunciaComMaisAjudaFuncionario(denuncia.codigo)}" class="btn btn-visualizar-denuncia">
                                                     <span class="glyphicon glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
-                                                </button>
+                                                </h:commandLink>
 
                                             </h:column>
                                         </h:dataTable>
@@ -224,7 +231,7 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-12">
-                                                                <span class="link-mapa-denuncia">#{ultimasDenuncia.enderecoDenuncia.rua} - #{ultimasDenuncia.enderecoDenuncia.numero}, #{ultimasDenuncia.enderecoDenuncia.bairro}</span>
+                                                                <a href="/EGC/funcionario/denuncia/#{ultimasDenuncia.codigo}"> <span class="link-mapa-denuncia">#{ultimasDenuncia.enderecoDenuncia.rua} - #{ultimasDenuncia.enderecoDenuncia.numero}, #{ultimasDenuncia.enderecoDenuncia.bairro}</span></a>
                                                             </div>
                                                         </div>
                                                         <div class="row">

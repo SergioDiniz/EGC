@@ -529,12 +529,17 @@ html, body{
     color: #fff;
     padding: 0;
     text-align: center;
+
 }
 
 .btn-visualizar-denuncia:hover,
 .btn-visualizar-denuncia:focus{
     background-color: #2980b9;
     color: #fff;
+}
+
+.btn-visualizar-denuncia .glyphicon-zoom-in{
+    vertical-align: middle !important;
 }
 
 .ultimas-denuncias{
@@ -676,6 +681,7 @@ html, body{
     color: #808080;
     background-image: url(../img/icones-denuncia/ic-relogio.png);
     background-repeat: no-repeat;
+    padding-left: 15px;
 }
 
 .denuncia{
@@ -2014,6 +2020,7 @@ html, body{
 .gerenciar-denuncias .col-md-6 .glyphicon-exclamation-sign{
     font-size: 14px;
     padding-right: 6px;
+
 }
 
 .gerenciar-denuncias .btn-gerenciar{
@@ -2054,4 +2061,25 @@ html, body{
 
 .denuncia-individual .btn-atender-denuncia{
     margin-top: 20px;
+}
+
+.denuncia-individual .registro-denuncia-individual{
+    margin-top: 20px !important;
+}
+
+.denuncia-individual .ud-denuncia{
+    padding-top: 0;
+}
+
+.denuncia-individual .link-mapa-denuncia{
+    padding-left: 0;
+}
+
+.denuncia-individual .hora-denuncia{
+    margin-left: 25px;
+}
+
+.denuncia-individual .glyphicon-heart,
+.denuncia-individual .glyphicon-exclamation-sign{
+    margin-top: 10px;
 }

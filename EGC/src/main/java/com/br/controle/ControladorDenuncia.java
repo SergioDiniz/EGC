@@ -7,10 +7,13 @@ package com.br.controle;
 
 import com.br.beans.ConteudoInapropriado;
 import com.br.beans.Denuncia;
+import com.br.beans.Registro;
 import com.br.fachada.Fachada;
+import java.io.IOException;
 import java.io.Serializable;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -20,6 +23,7 @@ import org.primefaces.model.map.MapModel;
 import org.primefaces.model.map.Marker;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -87,6 +91,15 @@ public class ControladorDenuncia implements Serializable {
     public long getReclamarDenuncia(Denuncia denuncia){
         return fachada.getReclamarDenuncia(denuncia);
     }
+    
+    public List<Registro> registroDeUmaDenuncia(String codigoDenuncia){
+        return fachada.registroDeUmaDenuncia(codigoDenuncia);
+    }
+    
+    public void visualizarDenunciaComMaisAjudaFuncionario(String codigoDenuncia) throws IOException{
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/EGC/funcionario/denuncia/" + codigoDenuncia);
+    }
+    
     
 //
 //

@@ -44,11 +44,16 @@
             <div class="denuncia-individual">
 
                 <div class="row">
+
                     <div class="col-md-offset-2 col-md-8">
                         <div class="ud-denuncia">
-
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <img src="/EGC/sis/denuncias/#{controladorFuncionario.denunciaGerenciada.foto}" class="img-denuncia"/>
+                                </div>
+                            </div>
                             <div class="row" style="margin: 5px; margin-left: -15px;">
-                                <div class="col-md-2">
+                                <div class="col-md-2 ">
                                     <img src="/EGC/img/icones-denuncia/#{controladorFuncionario.denunciaGerenciada.iconeDenunica}" height="50px" align="right"/>
                                 </div>
                                 <div class="col-md-10">
@@ -56,8 +61,10 @@
                                         <div class="col-md-9 rua-denuncia">
                                             #{controladorFuncionario.denunciaGerenciada.tipoDaDenunciaFormatado}
                                         </div>
-                                        <div class="col-md-3 hora-denuncia">
-                                            #{controladorFuncionario.denunciaGerenciada.dataDenuncaFormatado}
+                                        <div class="col-md-3">
+                                            <div class="hora-denuncia">
+                                                #{controladorFuncionario.denunciaGerenciada.dataDenuncaFormatado}
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -67,23 +74,23 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <span class="link-mapa-denuncia">#{controladorFuncionario.denunciaGerenciada.enderecoDenuncia.rua} - #{controladorFuncionario.denunciaGerenciada.enderecoDenuncia.numero}, #{controladorFuncionario.denunciaGerenciada.enderecoDenuncia.bairro}</span>
+                                            <span class="link-mapa-denuncia">#{controladorFuncionario.denunciaGerenciada.enderecoDenuncia.rua} - #{controladorFuncionario.denunciaGerenciada.enderecoDenuncia.numero}, #{controladorFuncionario.denunciaGerenciada.enderecoDenuncia.bairro}, #{controladorFuncionario.denunciaGerenciada.enderecoDenuncia.cidade} - #{controladorFuncionario.denunciaGerenciada.enderecoDenuncia.estado}</span>
                                         </div>
                                     </div>
+
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <img src="/EGC/sis/denuncias/#{controladorFuncionario.denunciaGerenciada.foto}" class="img-denuncia"/>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="col-md-2">
-                                                <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> #{controladorFuncionario.denunciaGerenciada.numeroAjuda}
+                                            <div class="col-md-1 text-left">
+                                                <div class="row">
+                                                    <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> #{controladorFuncionario.denunciaGerenciada.numeroAjuda}
+                                                </div>
                                             </div>
-                                            <div class="col-md-2">
-                                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> #{controladorDenuncia.getReclamarDenuncia(controladorFuncionario.denunciaGerenciada)}
+                                            <div class="col-md-1">
+                                                <div class="row">
+                                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> #{controladorDenuncia.getReclamarDenuncia(controladorFuncionario.denunciaGerenciada)}
+                                                </div>
                                             </div>
-                                            <div class="col-md-offset-6 col-md-2">
+                                            <div class="col-md-offset-8 col-md-2">
 
                                                 <button data-toggle="modal" data-target=".denunciaReclamacao" class="btn btn-info">
                                                     Denunciar
@@ -214,6 +221,59 @@
                     </div>
                 </div>
 
+
+                <div class="registro-denuncia-individual">
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-8">
+                            <label>Registros: </label>
+                            <c:forEach var="registro" items="#{controladorDenuncia.registroDeUmaDenuncia(controladorFuncionario.codigoDenuncia)}" >
+                                <table class="tb-registro">
+                                    <tr>
+                                        <td>
+                                            <img src="../../img/icon-calendario.png" width="40px"/>
+                                        </td>
+
+                                        <td>
+                                            <div class="td-dia-semana">
+                                                #{registro.diaDaSemana()} 
+                                            </div>
+                                            <div class="td-data-semana">
+                                                #{registro.dataFormatada()}
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="td-hora">
+                                                #{registro.horaFormatada()}h
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="td-registro">
+                                                <c:choose>
+                                                    <c:when test="#{registro.tipoDeRegistro == 'DENUNCIA_EM_TRABALHO'}">
+                                                        <a href="#">denúncia</a> atualizada para o estado <span class="label label-info">Em trabalho</span>, <span class="link-mapa-denuncia">#{registro.funcionario.nome}</span>
+                                                    </c:when>
+                                                    <c:when test="#{registro.tipoDeRegistro == 'DENUNCIA_ATENDIDA'}">
+                                                        <a href="#">denúncia</a> atualizada para o estado <span class="label label-success">Atendida</span>, <span class="link-mapa-denuncia">#{registro.funcionario.nome}</span>
+                                                    </c:when>
+                                                    <c:when test="#{registro.tipoDeRegistro == 'AGUARDANDO'}">
+                                                        <a href="#">denúncia</a> atualizada para o estado <span class="label label-default">Aguardando</span>, <span class="link-mapa-denuncia">#{registro.funcionario.nome}</span>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <a href="#">denúncia</a> recebeu uma <span class="label label-danger">Reclamação</span>, <span class="link-mapa-denuncia">#{registro.funcionario.nome}</span>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+
+                                </table>
+                            </c:forEach>
+                        </div>
+                    </div>
+                </div>
 
 
             </div>

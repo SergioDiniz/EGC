@@ -315,6 +315,10 @@ public class Fachada implements Serializable {
         return ds.atualizarDenunciaGerenciada(registro);
     }
     
+    public List<Registro> registroDeUmaDenuncia(String codigoDenuncia){
+        return ds.registroDeUmaDenuncia(codigoDenuncia);
+    }
+    
     // FIM DenunciaServices
     //
     //

@@ -491,6 +491,9 @@
                                                                     <c:when test="#{registro.tipoDeRegistro == 'DENUNCIA_ATENDIDA'}">
                                                                         <a href="#">denúncia</a> atualizada para o estado <span class="label label-success">Atendida</span>, <span class="link-mapa-denuncia">#{registro.funcionario.nome}</span>
                                                                     </c:when>
+                                                                    <c:when test="#{registro.tipoDeRegistro == 'AGUARDANDO'}">
+                                                                        <a href="#">denúncia</a> atualizada para o estado <span class="label label-default">Aguardando</span>, <span class="link-mapa-denuncia">#{registro.funcionario.nome}</span>
+                                                                    </c:when>
                                                                     <c:otherwise>
                                                                         <a href="#">denúncia</a> recebeu uma <span class="label label-danger">Reclamação</span>, <span class="link-mapa-denuncia">#{registro.funcionario.nome}</span>
                                                                     </c:otherwise>
@@ -515,7 +518,7 @@
                                                 <div class="text-center">
                                                     <h1>Últimos Comentários</h1>
                                                 </div>
-                                                
+
                                                 <div class="coment">
                                                     <div class="row">
                                                         <div class="col-md-12">
@@ -537,7 +540,7 @@
                                                                 <div class="row">
                                                                     sdlasd asd als dalskd ask dalks d
                                                                 </div>
-                                                                
+
                                                                 <div class="row hora-denuncia">
                                                                     21:22 - 28/01/2016
                                                                 </div>
@@ -545,8 +548,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                
-                                                
+
+
 
                                                 <div class="coment">
                                                     <div class="row">
@@ -569,7 +572,7 @@
                                                                 <div class="row">
                                                                     sdlasd asd als dalskd ask dalks d
                                                                 </div>
-                                                                
+
                                                                 <div class="row hora-denuncia">
                                                                     21:22 - 28/01/2016
                                                                 </div>

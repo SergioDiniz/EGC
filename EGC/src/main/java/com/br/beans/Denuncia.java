@@ -281,6 +281,14 @@ public class Denuncia implements Serializable {
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
+
+    public List<Registro> getRegistros() {
+        return registros;
+    }
+
+    public void setRegistros(List<Registro> registros) {
+        this.registros = registros;
+    }
     
     
     

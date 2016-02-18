@@ -335,6 +335,7 @@ public class DenunciaService implements DenunciaServiceIT {
         List<Denuncia> d = query.getResultList();
 
         if (d.size() > 0) {
+            d.get(0).getRegistros().size();
             return d.get(0);
         }
 
@@ -343,22 +344,13 @@ public class DenunciaService implements DenunciaServiceIT {
     }
 
     
-    public boolean novoRegistroDenuncia(Denuncia denuncia, Funcionario funcionario){
-        
-        return false;
-        
-    }
-    
     
     @Override
     public boolean atualizarDenunciaGerenciada(Registro registro) {
 
         try {
-            
-//            Denuncia denuncia = em.find(Denuncia.class, registro.getDenuncia().getId());
-//            Funcionario funcionario = em.find(Funcionario.class, registro.getFuncionario().getId());
-            
-            
+                       
+            em.merge(registro.getDenuncia());
             em.merge(registro);
             return true;
             
@@ -367,6 +359,28 @@ public class DenunciaService implements DenunciaServiceIT {
         }
 
         return false;
+    }
+    
+    @Override
+    public List<Registro> registroDeUmaDenuncia(String codigoDenuncia){
+        
+        try {
+            
+            Query query = em.createQuery("SELECT r from Denuncia d JOIN d.registros r WHERE d.codigo = :codigoDenuncia ORDER BY r.data DESC");
+            query.setParameter("codigoDenuncia", codigoDenuncia);
+            
+            List<Registro> r = query.getResultList();
+            
+            if(r.size() > 0){
+                return r;
+            }
+            
+        } catch (Exception e) {
+            System.out.println("ERRO EM RETORNA REGISTRO DE UMA DENUNCIA: " + e.getMessage());
+        }
+        
+        return new ArrayList<>();
+        
     }
 
 }

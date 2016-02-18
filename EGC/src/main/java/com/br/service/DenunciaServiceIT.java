@@ -52,4 +52,6 @@ public interface DenunciaServiceIT {
     
     public boolean atualizarDenunciaGerenciada(Registro registro);
     
+    public List<Registro> registroDeUmaDenuncia(String codigoDenuncia);
+    
 }
