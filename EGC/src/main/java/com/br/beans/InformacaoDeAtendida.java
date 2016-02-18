@@ -6,6 +6,7 @@
 package com.br.beans;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.*;
 
@@ -19,7 +20,7 @@ public class InformacaoDeAtendida implements Serializable{
     private int id;
     @Column (nullable = false, length = 2048)
     private String descricao;
-    @Column (nullable = false) @Temporal(TemporalType.DATE)
+    @Column (nullable = false) @Temporal(TemporalType.TIMESTAMP)
     private Date data;
     @Column (nullable = false)
     private String foto;
@@ -36,6 +37,11 @@ public class InformacaoDeAtendida implements Serializable{
         this.foto = foto;
     }
 
+    public String getDataDenuncaFormatado() {
+        SimpleDateFormat formato = new SimpleDateFormat("HH:mm - dd/MM/yyyy");
+        return formato.format(getData());
+    }
+    
     public int getId() {
         return id;
     }

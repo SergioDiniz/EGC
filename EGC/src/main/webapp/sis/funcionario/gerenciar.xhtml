@@ -90,7 +90,14 @@
                                                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> #{controladorDenuncia.getReclamarDenuncia(controladorFuncionario.denunciaGerenciada)}
                                                 </div>
                                             </div>
-                                            <div class="col-md-offset-8 col-md-2">
+                                            <div class="col-md-4">
+                                                <div class="row text-left" style="padding-top: 8px;">
+                                                    <h:outputText value="ATENDIDA" styleClass="label label-success" rendered="#{controladorFuncionario.denunciaGerenciada.tagAtendida()}"/>
+                                                    <h:outputText value="AGUARDANDO" styleClass="label label-primary" rendered="#{controladorFuncionario.denunciaGerenciada.tagAguardando()}"/>
+                                                    <h:outputText value="EM ENDAMENTO" styleClass="label label-info" rendered="#{controladorFuncionario.denunciaGerenciada.tagEmAndamento()}"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-offset-4 col-md-2">
 
                                                 <button data-toggle="modal" data-target=".denunciaReclamacao" class="btn btn-info">
                                                     Denunciar
@@ -163,44 +170,89 @@
                     </div>
                 </div>
 
+                <h:panelGroup rendered="#{!controladorFuncionario.denunciaGerenciada.tagAtendida()}">
+                    <div class="btn-atender-denuncia">
+                        <div class="row">
+                            <div class="col-md-offset-2 col-md-8">
 
-                <div class="btn-atender-denuncia">
-                    <div class="row">
-                        <div class="col-md-offset-2 col-md-8">
 
+                                <h:form>
+                                    <label>Acompanhamento: </label>
+                                    <div>
+                                        <div class="col-md-7">
+                                            <div class="row">
 
-                            <h:form rendered="#{!controladorFuncionario.denunciaGerenciada.tagAtendida()}">
-                                <label>Acompanhamento: </label>
-                                <div>
-                                    <div class="col-md-7">
-                                        <div class="row">
+                                                <h:selectOneListbox size="1" class="form-control input-lg" value="#{controladorFuncionario.denunciaGerenciada.estadoDeAcompanhamento}">
+                                                    <f:selectItem itemValue="AGUARDANDO" itemLabel="Aguardando" />
+                                                    <f:selectItem itemValue="EM_TRABALHO" itemLabel="Em Trabalho"/>
+                                                </h:selectOneListbox>
 
-                                            <h:selectOneListbox size="1" class="form-control input-lg" value="#{controladorFuncionario.denunciaGerenciada.estadoDeAcompanhamento}">
-                                                <f:selectItem itemValue="AGUARDANDO" itemLabel="Aguardando" />
-                                                <f:selectItem itemValue="EM_TRABALHO" itemLabel="Em Trabalho"/>
-                                            </h:selectOneListbox>
-
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="row">
-
-                                            <div class="btn-group" role="group" >
-                                                <h:commandButton class="btn btn-default btn-lg" style="width: 135px;" value="Salvar" action="#{controladorFuncionario.atualizarDenunciaGerenciada()}" />
-                                                <h:commandButton action="#{controladorFuncionario.paginaAtenderDenuncia()}" value="Atender Denuncia" class="btn btn-success btn-lg"/>
-                                                
                                             </div>
-
                                         </div>
+                                        <div class="col-md-5">
+                                            <div class="row">
+
+                                                <div class="btn-group" role="group" >
+                                                    <h:commandButton class="btn btn-default btn-lg" style="width: 135px;" value="Salvar" action="#{controladorFuncionario.atualizarDenunciaGerenciada()}" />
+                                                    <h:commandButton action="#{controladorFuncionario.paginaAtenderDenuncia()}" value="Atender Denuncia" class="btn btn-success btn-lg"/>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
                                     </div>
-
-
-                                </div>
-                            </h:form>
-
+                                </h:form>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </h:panelGroup>
+
+
+                <h:panelGroup rendered="#{controladorFuncionario.denunciaGerenciada.tagAtendida()}">
+                    <div class="info-de-atendida">
+                        <div class="row">
+                            <div class="col-md-offset-2 col-md-8">
+
+                                <label>Informações de Atendimento</label>
+                                <div class="ud-denuncia">
+                                    <div class="row">
+                                        <div class="col-md-12 text-center">
+                                            <img src="/EGC/sis/denuncias/#{controladorFuncionario.denunciaGerenciada.informacaoDeAtendida.foto}" class="img-denuncia-atendida"/>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin: 5px; margin-left: -15px;">
+                                        <div class="col-md-2 ">
+                                            <img src="/EGC/sis/funcionario/foto/#{controladorFuncionario.denunciaGerenciada.informacaoDeAtendida.funcionario.foto}" height="50px" align="right"/>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <div class="row">
+                                                <div class="col-md-9 rua-denuncia">
+                                                    #{controladorFuncionario.denunciaGerenciada.informacaoDeAtendida.funcionario.nome}
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="hora-denuncia">
+                                                        #{controladorFuncionario.denunciaGerenciada.informacaoDeAtendida.dataDenuncaFormatado}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 conteudo-denuncia">
+                                                    #{controladorFuncionario.denunciaGerenciada.informacaoDeAtendida.descricao}
+                                                </div>
+                                            </div>
+                                            
+
+                                            
+                                        </div>
+                                    </div> 
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </h:panelGroup>
 
 
                 <div class="registro-denuncia-individual">
@@ -256,7 +308,7 @@
                     </div>
                 </div>
 
-                
+
 
 
             </div>

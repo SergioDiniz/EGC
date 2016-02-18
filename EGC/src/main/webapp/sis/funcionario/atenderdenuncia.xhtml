@@ -90,7 +90,13 @@
                                                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> #{controladorDenuncia.getReclamarDenuncia(controladorFuncionario.denunciaGerenciada)}
                                                 </div>
                                             </div>
-
+                                            <div class="col-md-4">
+                                                <div class="row text-left" style="padding-top: 8px;">
+                                                    <h:outputText value="ATENDIDA" styleClass="label label-success" rendered="#{controladorFuncionario.denunciaGerenciada.tagAtendida()}"/>
+                                                    <h:outputText value="AGUARDANDO" styleClass="label label-primary" rendered="#{controladorFuncionario.denunciaGerenciada.tagAguardando()}"/>
+                                                    <h:outputText value="EM ENDAMENTO" styleClass="label label-info" rendered="#{controladorFuncionario.denunciaGerenciada.tagEmAndamento()}"/>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -100,7 +106,7 @@
                 </div>
 
                 <br/>
-                
+
                 <div class="row">
                     <div class="col-md-offset-2 col-md-8">
                         <h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1">
@@ -132,7 +138,7 @@
                             </div>
 
 
-                            
+
 
 
                         </h:form>
