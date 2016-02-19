@@ -356,7 +356,7 @@
                                                 </button>   
                                             </div>
 
-                                            <!--modal--> 
+                                            <!--modal visualizar denuncia--> 
                                             <!-- -->
                                             <div class="modal fade bs-example-modal-lg denuncia#{denuncia.id}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-lg">
@@ -414,7 +414,68 @@
                                                                             </c:when>
 
 
-                                                                        </c:choose>    
+                                                                        </c:choose>
+
+                                                                        <h:panelGroup rendered="#{denuncia.tagAtendida()}">
+                                                                            <br/>
+                                                                            <div>
+                                                                                <label>Informações de Atendimento</label>
+                                                                                <div>
+                                                                                    <img src="/EGC/sis/denuncias/#{denuncia.informacaoDeAtendida.foto}" width="393px"/>
+                                                                                </div>
+                                                                                <div>
+                                                                                    #{denuncia.informacaoDeAtendida.descricao}
+                                                                                </div>
+                                                                            </div>
+                                                                        </h:panelGroup>
+
+
+                                                                        <br/>
+                                                                        <label>Registros:</label>
+
+                                                                        <c:forEach var="registro" items="#{denuncia.registros}" >
+                                                                            <table class="tb-registro">
+                                                                                <tr>
+
+                                                                                    <td>
+                                                                                        <img src="/EGC/img/icon-calendario.png" width="40px"/>
+                                                                                    </td>
+
+                                                                                    <td>
+                                                                                        <div class="td-dia-semana">
+                                                                                            #{registro.diaDaSemana()} 
+                                                                                        </div>
+                                                                                        <div class="td-data-semana">
+                                                                                            #{registro.dataFormatada()}
+                                                                                        </div>
+                                                                                    </td>
+
+
+
+                                                                                    <td>
+                                                                                        <div class="td-registro">
+                                                                                            <c:choose>
+                                                                                                <c:when test="#{registro.tipoDeRegistro == 'DENUNCIA_EM_TRABALHO'}">
+                                                                                                    atualizada para o estado <span class="label label-info">Em trabalho</span>
+                                                                                                </c:when>
+                                                                                                <c:when test="#{registro.tipoDeRegistro == 'DENUNCIA_ATENDIDA'}">
+                                                                                                    atualizada para o estado <span class="label label-success">Atendida</span>
+                                                                                                </c:when>
+                                                                                                <c:when test="#{registro.tipoDeRegistro == 'AGUARDANDO'}">
+                                                                                                    atualizada para o estado <span class="label label-default">Aguardando</span>
+                                                                                                </c:when>
+                                                                                                <c:otherwise>
+                                                                                                    recebeu uma <span class="label label-danger">Reclamação</span>
+                                                                                                </c:otherwise>
+                                                                                            </c:choose>
+                                                                                        </div>
+                                                                                    </td>
+
+                                                                                </tr>
+
+                                                                            </table>
+
+                                                                        </c:forEach>
 
 
 
@@ -466,7 +527,7 @@
 
                                                     </span>
 
-                                                    <!--modal--> 
+                                                    <!--modal reclamação--> 
                                                     <div id="modal-reclamacao">
                                                         <div class="modal fade bs-example-modal-lg denunciaReclamacao#{denuncia.id}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog">
