@@ -328,6 +328,10 @@ public class Fachada implements Serializable {
         return ds.gerenciarDenunciasFiltro(cidade, estado, ordem, filtroQuery, filtro);
     }
     
+    public List<Denuncia> denunciasAtendidasEmCidade(String cidade, String estado){
+        return ds.denunciasAtendidasEmCidade(cidade, estado);
+    }
+    
     // FIM DenunciaServices
     //
     //

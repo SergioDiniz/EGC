@@ -59,4 +59,6 @@ public interface DenunciaServiceIT {
     
     public List<Denuncia> gerenciarDenunciasFiltro(String cidade, String estado, String ordem, String filtroQuery, String filtro);
     
+    public List<Denuncia> denunciasAtendidasEmCidade(String cidade, String estado);
+    
 }

@@ -112,89 +112,117 @@
                     <div class="col-md-3 lista-de-fitro">
                         <h:form>
 
-                        <div class="texto text-center">ANDAMENTO</div>
-                        <div class="progress-pie-chart" data-percent="65">
+                            <div class="texto text-center">ANDAMENTO</div>
+                            <div class="progress-pie-chart" data-percent="#{controladorFuncionario.andamentoDasDenuncias()}">
 
-                            <div class="ppc-progress">
-                                <div class="ppc-progress-fill"></div>
-                            </div>
-                            <div class="ppc-percents">
-                                <div class="pcc-percents-wrapper">
-                                    <span>%</span>
+                                <div class="ppc-progress">
+                                    <div class="ppc-progress-fill"></div>
+                                </div>
+                                <div class="ppc-percents">
+                                    <div class="pcc-percents-wrapper">
+                                        <span>%</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <br/>
+                            <br/>
 
-                        
-                        <span class="texto">FILTRO</span> <br/>
-                        <ul class="list-unstyled">
-                            <li><b><h:commandLink value="TODAS" action="#{controladorFuncionario.paginaGerenciarDenuncias()}"/></b></li>
-                            <li>
-                                <b>
-                                    <h:commandLink value="DATA" action="#{controladorFuncionario.gerenciarDenunciasFiltro('DATA', controladorFuncionario.filtroQuery, controladorFuncionario.filtroTipo )}"/>
-                                    <c:choose>
-                                        <c:when test="#{controladorFuncionario.filtroData == 'DATA_DESC'}">
-                                            <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </b>    
-                            </li>
-                            <li>
-                                <b>
-                                    <h:commandLink value="AJUDA" action="#{controladorFuncionario.gerenciarDenunciasFiltro('AJUDA', controladorFuncionario.filtroQuery, controladorFuncionario.filtroTipo )}"/>
-                                    <c:choose>
-                                        <c:when test="#{controladorFuncionario.filtroAjuda == 'AJUDA_DESC'}">
-                                            <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </b>    
-                            </li>
-                            
 
-                        </ul>
-                        <br/>
+                            <span class="texto">FILTRO</span> <br/>
+                            <ul class="list-unstyled">
+                                <li><b><h:commandLink value="TODAS" action="#{controladorFuncionario.paginaGerenciarDenuncias()}"/></b></li>
+                                <li>
+                                    <b>
+                                        <h:commandLink value="DATA" action="#{controladorFuncionario.gerenciarDenunciasFiltro('DATA', controladorFuncionario.filtroQuery, controladorFuncionario.filtroTipo )}"/>
+                                        <c:choose>
+                                            <c:when test="#{controladorFuncionario.filtroData == 'DATA_DESC'}">
+                                                <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </b>    
+                                </li>
+                                <li>
+                                    <b>
+                                        <h:commandLink value="AJUDA" action="#{controladorFuncionario.gerenciarDenunciasFiltro('AJUDA', controladorFuncionario.filtroQuery, controladorFuncionario.filtroTipo )}"/>
+                                        <c:choose>
+                                            <c:when test="#{controladorFuncionario.filtroAjuda == 'AJUDA_DESC'}">
+                                                <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </b>    
+                                </li>
 
-                        <span class="texto">ESTADO</span> <br/>
-                        <ul class="list-unstyled">
 
-                            <c:forEach  var="tipo" items="#{controladorCidade.estadoDeDenunciasNumerosDeDenuncia(controladorFuncionario.cidade.cidadePK.nomeCidade, controladorFuncionario.cidade.cidadePK.siglaEstado)}">
-                                <li><b>#{tipo.get(0)} <span class="badge">#{tipo.get(1)}</span></b></li>
-                            </c:forEach>
+                            </ul>
+                            <br/>
 
-                        </ul>
-                        <br/>
+                            <span class="texto">ESTADO</span> <br/>
+                            <ul class="list-unstyled">
 
-                        <span class="texto">CATEGORIA</span> <br/>
-                        <ul class="list-unstyled">
-                            <c:forEach  var="tipo" items="#{controladorCidade.tiposDeDenunciasNumerosDeDenuncia(controladorFuncionario.cidade.cidadePK.nomeCidade, controladorFuncionario.cidade.cidadePK.siglaEstado)}">
-                                <li><b>#{tipo.get(0)} <span class="badge">#{tipo.get(1)}</span></b></li>
-                            </c:forEach>
-                        </ul>
-                        <br/>
+                                <c:forEach  var="estado" items="#{controladorCidade.estadoDeDenunciasNumerosDeDenuncia(controladorFuncionario.cidade.cidadePK.nomeCidade, controladorFuncionario.cidade.cidadePK.siglaEstado)}">
+                                    
+                                    <li>
+                                        <b>
+                                            <h:commandLink value="#{estado.get(0)}" action="#{controladorFuncionario.gerenciarDenunciasFiltro('', estado.get(0), 'ESTADO' )}"/>
+                                            <span class="badge">#{estado.get(1)}</span>
+                                        </b>    
+                                    </li>
+                                    
+                                </c:forEach>
 
-                        <span class="texto">RUAS</span> <br/>
-                        <ul class="list-unstyled">
-                            <c:forEach  var="rua" items="#{controladorCidade.ruasDeUmaCidadeNumerosDeDenuncia(controladorFuncionario.cidade.cidadePK.nomeCidade, controladorFuncionario.cidade.cidadePK.siglaEstado)}">
-                                <li><b>#{rua.get(0)} <span class="badge">#{rua.get(1)}</span></b></li>
-                            </c:forEach>
-                        </ul>
-                        <br/>
+                            </ul>
+                            <br/>
 
-                        <span class="texto">CEPS</span> <br/>
-                        <ul class="list-unstyled">
-                            <c:forEach  var="cep" items="#{controladorCidade.cepDeUmaCidadeNumerosDeDenuncia(controladorFuncionario.cidade.cidadePK.nomeCidade, controladorFuncionario.cidade.cidadePK.siglaEstado)}">
-                                <li><b>#{cep.get(0)} <span class="badge">#{cep.get(1)}</span></b></li>
-                            </c:forEach>
-                        </ul>
-                        <br/>
+                            <span class="texto">CATEGORIA</span> <br/>
+                            <ul class="list-unstyled">
+                                <c:forEach  var="tipo" items="#{controladorCidade.tiposDeDenunciasNumerosDeDenuncia(controladorFuncionario.cidade.cidadePK.nomeCidade, controladorFuncionario.cidade.cidadePK.siglaEstado)}">
+
+                                    <li>
+                                        <b>
+                                            <h:commandLink value="#{tipo.get(0)}" action="#{controladorFuncionario.gerenciarDenunciasFiltro('', tipo.get(0), 'CATEGORIA' )}"/>
+                                            <span class="badge">#{tipo.get(1)}</span>
+                                        </b>    
+                                    </li>
+                                </c:forEach>
+
+                            </ul>
+                            <br/>
+
+                            <span class="texto">RUAS</span> <br/>
+                            <ul class="list-unstyled">
+                                <c:forEach  var="rua" items="#{controladorCidade.ruasDeUmaCidadeNumerosDeDenuncia(controladorFuncionario.cidade.cidadePK.nomeCidade, controladorFuncionario.cidade.cidadePK.siglaEstado)}">
+
+                                    <li>
+                                        <b>
+                                            <h:commandLink value="#{rua.get(0)}" action="#{controladorFuncionario.gerenciarDenunciasFiltro('', rua.get(0), 'RUA' )}"/>
+                                            <span class="badge">#{rua.get(1)}</span>
+                                        </b>    
+                                    </li>
+
+                                </c:forEach>
+                            </ul>
+                            <br/>
+
+                            <span class="texto">CEPS</span> <br/>
+                            <ul class="list-unstyled">
+                                <c:forEach  var="cep" items="#{controladorCidade.cepDeUmaCidadeNumerosDeDenuncia(controladorFuncionario.cidade.cidadePK.nomeCidade, controladorFuncionario.cidade.cidadePK.siglaEstado)}">
+
+                                    <li>
+                                        <b>
+                                            <h:commandLink value="#{cep.get(0)}" action="#{controladorFuncionario.gerenciarDenunciasFiltro('', cep.get(0), 'CEP' )}"/>
+                                            <span class="badge">#{cep.get(1)}</span>
+                                        </b>    
+                                    </li>
+
+                                </c:forEach>
+                            </ul>
+                            <br/>
 
 
                         </h:form>

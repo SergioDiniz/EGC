@@ -34,39 +34,157 @@
 
                     <div class="col-md-6">
 
-                        <div class="row">
-                            <!--<div class="col-md-12">-->
-                            <div class="col-md-6 btn-1">
-                                <div class="col-md-6">
-                                    <img src="/EGC/img/total-denuncias.png" height="60px" />
-                                </div>
+                        
+                        <div class="row menu-cidades">
+                            <c:forEach var="prefeitura" items="#{controladorAdmin.prefeiturasDoFuncionario(controladorFuncionario.funcionario.email)}" >
+                                #{controladorPrefeitura.dadosGeraisPrefeitura(prefeitura.email, prefeitura.cidade.cidadePK.nomeCidade, prefeitura.cidade.cidadePK.siglaEstado)}
+                                <div>
+                                    <div class="col-md-12">
+                                        <div class="cidade">
+                                            <div class="row">
+                                                <div class="col-md-12 cidade-info">
+                                                    <div class="col-md-3 info-foto">
+                                                        <div class="foto" style="background-image: url(/EGC/sis/prefeitura/brasao/#{prefeitura.foto})">
 
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        Denúncias
-                                    </div>
-                                    <div class="row">
-                                        <h:outputText value="#{controladorFuncionario.totalDeDenunciasNaCidade()}"/>
-                                    </div>
-                                </div>
-                            </div>
+                                                        </div>
+                                                    </div>
 
-                            <div class="col-md-6 btn-2">
-                                <div class="col-md-6">
-                                    <img src="/EGC/img/denuncia-atendida.png" height="60px" />
-                                </div>
+                                                    <div class="col-md-9 info">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="nome-prefeitura">
+                                                                    #{prefeitura.nome}
+                                                                </div>
+                                                                <div class="nome-cidade">
+                                                                    #{prefeitura.cidade.cidadePK.nomeCidade}, #{prefeitura.cidade.cidadePK.siglaEstado}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="col-md-1">
+                                                                    <img src="/EGC/img/icon-telefone.png"/>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    #{prefeitura.telefone}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="col-md-1">
+                                                                    <img src="/EGC/img/icon-email.png"/>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    #{prefeitura.email}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="col-md-1">
+                                                                    <img src="/EGC/img/icon-endereco.png"/>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    #{prefeitura.enderecoPrefeitura.rua} - #{prefeitura.enderecoPrefeitura.numero}, #{prefeitura.enderecoPrefeitura.cep}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 cidade-dados">
 
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        Atendidas
-                                    </div>
-                                    <div class="row">
-                                        <h:outputText value="#{controladorFuncionario.totalDeDenunciasAtendidasNaCidade()}"/>
+                                                    <table>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <div class="col-md-5">
+                                                                            <img src="/EGC/img/total-denuncias.png" height="40px" />
+                                                                        </div>
+
+                                                                        <div class="col-md-6">
+                                                                            <div class="row" align="right">
+                                                                                Denúncias
+                                                                            </div>
+                                                                            <div class="row" align="right">
+                                                                                #{controladorPrefeitura.dadosPrefeitura.get(0)}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+
+                                                            <td>
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <div class="col-md-5">
+                                                                            <img src="/EGC/img/denuncia-atendida.png" height="40px" />
+                                                                        </div>
+
+                                                                        <div class="col-md-6">
+                                                                            <div class="row" align="right">
+                                                                                Atendidas
+                                                                            </div>
+                                                                            <div class="row" align="right">
+                                                                                #{controladorPrefeitura.dadosPrefeitura.get(1)}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+
+                                                            <td>
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <div class="col-md-5">
+                                                                            <img src="/EGC/img/total-usuario.png" height="40px" />
+                                                                        </div>
+
+                                                                        <div class="col-md-6">
+                                                                            <div class="row" align="right">
+                                                                                Usuários
+                                                                            </div>
+                                                                            <div class="row" align="right">
+                                                                                #{controladorPrefeitura.dadosPrefeitura.get(2)}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+
+                                                            <td>
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <div class="col-md-5">
+                                                                            <img src="/EGC/img/total-funcionarios.png" height="40px" />
+                                                                        </div>
+
+                                                                        <div class="col-md-6">
+                                                                            <div class="row" align="right">
+                                                                                Funcionários
+                                                                            </div>
+                                                                            <div class="row" align="right">
+                                                                                #{controladorPrefeitura.dadosPrefeitura.get(3)}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!--</div>-->
+                                <!-- -->
+
+                            </c:forEach>
                         </div>
+
 
 
 
@@ -175,7 +293,7 @@
 
 
                                             </h:column>
-                                            
+
                                             <h:column>
                                                 <f:facet name="header"></f:facet>
 
@@ -253,7 +371,7 @@
                                 <div class="row">
                                     Últimas Denúncias Atendidas
                                 </div>
-                                <c:forEach var="ultimasDenuncia" items="#{controladorFuncionario.denunciaMaisRecentes}" id="id-denuncias">
+                                <c:forEach var="ultimasDenuncia" items="#{controladorFuncionario.denunciasAtendidasEmCidade()}" id="id-denuncias">
                                     <div class="ud-denuncia">
 
                                         <div class="row">
@@ -263,10 +381,10 @@
                                             <div class="col-md-11">
                                                 <div class="row">
                                                     <div class="col-md-7 rua-denuncia">
-                                                        #{ultimasDenuncia.tipoDaDenunciaFormatado}
+                                                        <a href="/EGC/funcionario/denuncia/#{ultimasDenuncia.codigo}">#{ultimasDenuncia.tipoDaDenunciaFormatado}</a>
                                                     </div>
                                                     <div class="col-md-5 hora-denuncia">
-                                                        #{ultimasDenuncia.dataDenuncaFormatado}
+                                                        #{ultimasDenuncia.informacaoDeAtendida.dataDenuncaFormatado}
                                                     </div>
                                                 </div>
 
@@ -281,10 +399,10 @@
 
                                                                     </div>
                                                                 </td>
-                                                                <td rowspan="2" style="background-image: url(/EGC/sis/denuncias/#{ultimasDenuncia.foto});">
+                                                                <td rowspan="2" style="background-image: url(/EGC/sis/denuncias/#{ultimasDenuncia.informacaoDeAtendida.foto});">
                                                                     <div class="reposta-denuncia">
                                                                         <div class="texto-centro">
-                                                                            teste
+                                                                            #{ultimasDenuncia.informacaoDeAtendida.descricao}
                                                                         </div>
                                                                     </div>
                                                                 </td>

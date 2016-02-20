@@ -214,6 +214,11 @@ public class ControladorFuncionario implements Serializable {
         this.denunciaMaisRecentes.addAll(fachada.denunciasMaisRecentesPorCidade(this.cidade.getCidadePK().getNomeCidade(),
                 this.cidade.getCidadePK().getSiglaEstado()));
     }
+    
+    public List<Denuncia> denunciasAtendidasEmCidade(){
+        return fachada.denunciasAtendidasEmCidade(this.cidade.getCidadePK().getNomeCidade(),
+                this.cidade.getCidadePK().getSiglaEstado());
+    }
 
     public String paginaGerenciarDenuncias() {
         setTodasDenunciasEmGerenciamento();
@@ -319,13 +324,13 @@ public class ControladorFuncionario implements Serializable {
         if(ordem.compareToIgnoreCase("DATA") == 0){
             if(this.filtroData.compareToIgnoreCase("DATA_ASC") == 0){
                 this.filtroData = "DATA_DESC";
-            } else{
+            } else {
                 this.filtroData = "DATA_ASC";
             }
             ordem = this.filtroData;
             
             
-        } else {
+        } else if (ordem.compareToIgnoreCase("AJUDA") == 0) {
             if(this.filtroAjuda.compareToIgnoreCase("AJUDA_ASC") == 0){
                 this.filtroAjuda = "AJUDA_DESC";
             } else{
@@ -347,6 +352,11 @@ public class ControladorFuncionario implements Serializable {
         
         return null;
         
+    }
+    
+    
+    public long andamentoDasDenuncias(){
+        return (totalDeDenunciasAtendidasNaCidade() * 100) / totalDeDenunciasNaCidade();
     }
     
 

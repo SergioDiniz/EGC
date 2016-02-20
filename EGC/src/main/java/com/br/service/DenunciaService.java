@@ -8,6 +8,7 @@ package com.br.service;
 import com.br.beans.ConteudoInapropriado;
 import com.br.beans.Denuncia;
 import com.br.beans.EnderecoDenuncia;
+import com.br.beans.EstadoDeAcompanhamento;
 import com.br.beans.Funcionario;
 import com.br.beans.InformacaoDeAtendida;
 import com.br.beans.Registro;
@@ -385,8 +386,6 @@ public class DenunciaService implements DenunciaServiceIT {
     public boolean atenderDenuncia(InformacaoDeAtendida informacaoDeAtendida, Registro registro) {
 
         try {
-            System.out.println("IDA: " + informacaoDeAtendida.toString());
-            System.out.println("R: " + registro.toString());
             
             registro.getDenuncia().setInformacaoDeAtendida(informacaoDeAtendida);
             
@@ -405,7 +404,9 @@ public class DenunciaService implements DenunciaServiceIT {
     @Override
     public List<Denuncia> gerenciarDenunciasFiltro(String cidade, String estado, String ordem, String filtroQuery, String filtro){
         
-        System.out.println("ordem: " + ordem);
+        
+        
+        
         
         //ordem
         String sqlOrdem = "";
@@ -417,22 +418,37 @@ public class DenunciaService implements DenunciaServiceIT {
             default: sqlOrdem = " ORDER BY d.data DESC"; break;
         }
         
-        System.out.println("SQL Ordem: " + sqlOrdem);
+        
         
         // filtro
         String sqlFiltro = "";
         switch(filtro){
-            case "ESTADO" : sqlFiltro = "and d.estadoDeAcompanhamento = :filtroQuery"; break;
-            case "CATEGORIA" : sqlFiltro = "and d.tipoDeDenuncia = :filtroQuery"; break;
+            case "ESTADO" : sqlFiltro = " and d.estadoDeAcompanhamento = :filtroQuery"; 
+                            filtroQuery = filtroQuery.replaceAll(" ", "_"); //substituindo " " por "_"
+                            break;
+            case "CATEGORIA" : sqlFiltro = " and d.tipoDeDenuncia = :filtroQuery"; 
+                            filtroQuery = filtroQuery.replaceAll(" ", "_"); //substituindo " " por "_"
+//                            filtroQuery = TipoDeDenuncia.valueOf(filtroQuery);
+                            break;
             case "RUA" : sqlFiltro = " and ed.rua = :filtroQuery"; break;
-            case "CEP" : sqlFiltro = "and ed.cep = :filtroQuery"; break;
+            case "CEP" : sqlFiltro = " and ed.cep = :filtroQuery"; break;
         }
+        
+        System.out.println("ordem: " + ordem);
+        System.out.println("SQL Ordem: " + sqlOrdem);
+        System.out.println("Filto: " + filtro);
+        System.out.println("SQL Filtro: " + sqlFiltro);
+        System.out.println("Filtro Query: " + filtroQuery);
         
         Query query = em.createQuery("SELECT d from Denuncia d JOIN d.enderecoDenuncia ed WHERE ed.cidade = :cidade AND ed.estado = :estado " + sqlFiltro + sqlOrdem);
         query.setParameter("cidade", cidade);
         query.setParameter("estado", estado);
         if(sqlFiltro.length() > 2){
-            query.setParameter("filtroQuery", filtroQuery);
+            switch(filtro){
+                case "CATEGORIA" : query.setParameter("filtroQuery", TipoDeDenuncia.valueOf(filtroQuery));  break;
+                case "ESTADO": query.setParameter("filtroQuery", EstadoDeAcompanhamento.valueOf(filtroQuery)); break;
+                default: query.setParameter("filtroQuery", filtroQuery); break;
+            }
         }
         
         
@@ -446,5 +462,24 @@ public class DenunciaService implements DenunciaServiceIT {
         
         return new ArrayList<>();
     }
+    
+    @Override
+    public List<Denuncia> denunciasAtendidasEmCidade(String cidade, String estado){
+        
+        Query query = em.createQuery("SELECT d from Denuncia d JOIN d.enderecoDenuncia ed JOIN d.informacaoDeAtendida ia WHERE ed.cidade = :cidade and ed.estado = :estado ORDER BY ia.data DESC");
+        query.setParameter("cidade", cidade);
+        query.setParameter("estado", estado);
+        
+        List<Denuncia> d = query.getResultList();
+        
+        if(d.size() > 0){
+            return d;
+        }
+        
+        return new ArrayList<>();
+        
+    }
+    
+    
 
 }
