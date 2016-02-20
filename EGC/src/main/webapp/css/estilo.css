@@ -2042,12 +2042,16 @@ html, body{
     letter-spacing: 3px;
 }
 
-.lista-de-fitro li{
+.lista-de-fitro li, 
+.lista-de-fitro li a,
+.lista-de-fitro li a:hover{
     color: #23A7F1;
     font-size: 12px;
+    text-decoration: none;
 }
 
 .lista-de-fitro li .glyphicon-sort-by-attributes-alt,
+.lista-de-fitro li .glyphicon-sort-by-attributes,
 .lista-de-fitro li .glyphicon glyphicon-sort-by-attributes{
     color: #000 !important;
 }

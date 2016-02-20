@@ -57,4 +57,6 @@ public interface DenunciaServiceIT {
     
     public boolean atenderDenuncia(InformacaoDeAtendida informacaoDeAtendida, Registro registro);
     
+    public List<Denuncia> gerenciarDenunciasFiltro(String cidade, String estado, String ordem, String filtroQuery, String filtro);
+    
 }

@@ -400,5 +400,51 @@ public class DenunciaService implements DenunciaServiceIT {
         
         return false;
     }
+    
+    
+    @Override
+    public List<Denuncia> gerenciarDenunciasFiltro(String cidade, String estado, String ordem, String filtroQuery, String filtro){
+        
+        System.out.println("ordem: " + ordem);
+        
+        //ordem
+        String sqlOrdem = "";
+        switch(ordem){
+            case "DATA_DESC" : sqlOrdem = " ORDER BY d.data DESC"; break;
+            case "DATA_ASC" : sqlOrdem = " ORDER BY d.data ASC"; break;
+            case "AJUDA_DESC" : sqlOrdem = " ORDER BY d.numeroAjuda DESC"; break;
+            case "AJUDA_ASC" : sqlOrdem = " ORDER BY d.numeroAjuda ASC"; break;
+            default: sqlOrdem = " ORDER BY d.data DESC"; break;
+        }
+        
+        System.out.println("SQL Ordem: " + sqlOrdem);
+        
+        // filtro
+        String sqlFiltro = "";
+        switch(filtro){
+            case "ESTADO" : sqlFiltro = "and d.estadoDeAcompanhamento = :filtroQuery"; break;
+            case "CATEGORIA" : sqlFiltro = "and d.tipoDeDenuncia = :filtroQuery"; break;
+            case "RUA" : sqlFiltro = " and ed.rua = :filtroQuery"; break;
+            case "CEP" : sqlFiltro = "and ed.cep = :filtroQuery"; break;
+        }
+        
+        Query query = em.createQuery("SELECT d from Denuncia d JOIN d.enderecoDenuncia ed WHERE ed.cidade = :cidade AND ed.estado = :estado " + sqlFiltro + sqlOrdem);
+        query.setParameter("cidade", cidade);
+        query.setParameter("estado", estado);
+        if(sqlFiltro.length() > 2){
+            query.setParameter("filtroQuery", filtroQuery);
+        }
+        
+        
+        
+        List<Denuncia> d = query.getResultList();
+        
+        if(d.size() > 0){
+            return d;
+        }
+        
+        
+        return new ArrayList<>();
+    }
 
 }

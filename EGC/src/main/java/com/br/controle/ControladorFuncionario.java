@@ -57,6 +57,11 @@ public class ControladorFuncionario implements Serializable {
     private TipoDeDenuncia tipoDeDenunciaGerenciando;
     private InformacaoDeAtendida informacaoDeAtendida;
     private ConteudoInapropriado conteudoInapropriado;
+    
+    private String filtroData;
+    private String filtroAjuda;
+    private String filtroQuery;
+    private String filtroTipo;
 
     private Denuncia denunciaGerenciada;
 
@@ -70,6 +75,10 @@ public class ControladorFuncionario implements Serializable {
         this.denunciaMaisRecentes = new ArrayList<>();
         this.informacaoDeAtendida = new InformacaoDeAtendida();
         this.conteudoInapropriado = new ConteudoInapropriado();
+        this.filtroData = "DATA_DESC";
+        this.filtroAjuda = "AJUDA_DESC";
+        this.filtroQuery = "";
+        this.filtroTipo = "";
     }
 
     public void mostrapagina() throws IOException {
@@ -208,6 +217,10 @@ public class ControladorFuncionario implements Serializable {
 
     public String paginaGerenciarDenuncias() {
         setTodasDenunciasEmGerenciamento();
+        this.filtroData = "DATA_DESC";
+        this.filtroAjuda = "AJUDA_DESC";
+        this.filtroQuery = "";
+        this.filtroTipo = "";
         return "denuncias.jsf?faces-redirect=true";
     }
 
@@ -299,6 +312,43 @@ public class ControladorFuncionario implements Serializable {
         
         return null;
     }
+    
+    public String gerenciarDenunciasFiltro(String ordem, String filtroQuery, String filtro){
+        
+        // setando ordem
+        if(ordem.compareToIgnoreCase("DATA") == 0){
+            if(this.filtroData.compareToIgnoreCase("DATA_ASC") == 0){
+                this.filtroData = "DATA_DESC";
+            } else{
+                this.filtroData = "DATA_ASC";
+            }
+            ordem = this.filtroData;
+            
+            
+        } else {
+            if(this.filtroAjuda.compareToIgnoreCase("AJUDA_ASC") == 0){
+                this.filtroAjuda = "AJUDA_DESC";
+            } else{
+                this.filtroAjuda = "AJUDA_ASC";
+            }
+            ordem = this.filtroAjuda;
+            
+        }
+        
+        this.filtroQuery = filtroQuery;
+        this.filtroTipo = filtro;
+        
+        
+        
+        this.denunciaGerenciadas = new ArrayList<>();
+        this.denunciaGerenciadas = fachada.gerenciarDenunciasFiltro(this.cidade.getCidadePK().getNomeCidade(), this.cidade.getCidadePK().getSiglaEstado(), 
+                ordem, this.filtroQuery, this.filtroTipo);
+        
+        
+        return null;
+        
+    }
+    
 
     //
     //
@@ -403,6 +453,39 @@ public class ControladorFuncionario implements Serializable {
     public void setConteudoInapropriado(ConteudoInapropriado conteudoInapropriado) {
         this.conteudoInapropriado = conteudoInapropriado;
     }
+
+    public String getFiltroData() {
+        return filtroData;
+    }
+
+    public void setFiltroData(String filtroData) {
+        this.filtroData = filtroData;
+    }
+
+    public String getFiltroAjuda() {
+        return filtroAjuda;
+    }
+
+    public void setFiltroAjuda(String filtroAjuda) {
+        this.filtroAjuda = filtroAjuda;
+    }
+
+    public String getFiltroQuery() {
+        return filtroQuery;
+    }
+
+    public void setFiltroQuery(String filtroQuery) {
+        this.filtroQuery = filtroQuery;
+    }
+
+    public String getFiltroTipo() {
+        return filtroTipo;
+    }
+
+    public void setFiltroTipo(String filtroTipo) {
+        this.filtroTipo = filtroTipo;
+    }
+    
     
     
 

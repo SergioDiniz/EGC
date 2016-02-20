@@ -110,7 +110,7 @@
                     </div>
 
                     <div class="col-md-3 lista-de-fitro">
-
+                        <h:form>
 
                         <div class="texto text-center">ANDAMENTO</div>
                         <div class="progress-pie-chart" data-percent="65">
@@ -127,13 +127,37 @@
 
                         <br/>
 
-
+                        
                         <span class="texto">FILTRO</span> <br/>
                         <ul class="list-unstyled">
-                            <li><b>TODAS</b></li>
-                            <li><b>DATA <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span></b></li>
-                            <li><b>AJUDAS</b> <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span></li>
-                            <li><b>RECLAMAÇÕES</b> <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span></li>
+                            <li><b><h:commandLink value="TODAS" action="#{controladorFuncionario.paginaGerenciarDenuncias()}"/></b></li>
+                            <li>
+                                <b>
+                                    <h:commandLink value="DATA" action="#{controladorFuncionario.gerenciarDenunciasFiltro('DATA', controladorFuncionario.filtroQuery, controladorFuncionario.filtroTipo )}"/>
+                                    <c:choose>
+                                        <c:when test="#{controladorFuncionario.filtroData == 'DATA_DESC'}">
+                                            <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </b>    
+                            </li>
+                            <li>
+                                <b>
+                                    <h:commandLink value="AJUDA" action="#{controladorFuncionario.gerenciarDenunciasFiltro('AJUDA', controladorFuncionario.filtroQuery, controladorFuncionario.filtroTipo )}"/>
+                                    <c:choose>
+                                        <c:when test="#{controladorFuncionario.filtroAjuda == 'AJUDA_DESC'}">
+                                            <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </b>    
+                            </li>
+                            
 
                         </ul>
                         <br/>
@@ -173,7 +197,7 @@
                         <br/>
 
 
-
+                        </h:form>
                     </div>
 
                 </div>
