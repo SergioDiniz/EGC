@@ -2154,6 +2154,10 @@ html, body{
     color: #656d78;
 }
 
+.texto-cor-vermelho{
+    color: red;
+}
+
 .texto-cor-branco{
     color: #FFF;
 }
@@ -2165,6 +2169,11 @@ html, body{
 .texto-cor-azul-escuro{
     color: #1b7fb7;
 }
+
+.texto-cor-azul-egc1{
+    color: #499fdd;
+}
+
 
 .background-cor-vermelho-opaco{
     background-color: #f45655;
@@ -2271,6 +2280,7 @@ html, body{
 
 .pagina-visitante .resultado-pesquisa-visitante .informacoes-gerais{
     margin-top: 1em;
+    margin-bottom: 1em;
 }
 
 .pagina-visitante .resultado-pesquisa-visitante .informacoes-gerais .bloco{
@@ -2278,8 +2288,50 @@ html, body{
     padding-bottom: 1em;
 }
 
+.pagina-visitante .denuncias-da-cidade{
+    /*background-color: #999999;*/
+}
 
-@media (max-width: 768px){
+.pagina-visitante .denuncias-da-cidade .denuncia-visitante{
+    background-color: #fff;
+    border-top: 0.3em solid #6fbfe0;
+    border-bottom: 0.1em solid #eee;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    margin-bottom: 2em;
+}
+
+.pagina-visitante .denuncias-da-cidade .denuncia-visitante .icone-denuncia{
+    width: 90%;
+    max-width: 5em;
+}
+
+.pagina-visitante .denuncias-da-cidade .denuncia-visitante .denuncia-topo .hora-denuncia{
+    margin-top: 0.25em;
+}
+
+.pagina-visitante .denuncias-da-cidade .denuncia-visitante .denuncia-centro{
+    margin-top: 1em;
+    
+}
+
+.pagina-visitante .denuncias-da-cidade .denuncia-visitante .denuncia-centro .endereco-denuncia label{
+    margin-top: 0.5em;
+    font-size: 0.85em;
+    text-decoration: underline !important;
+    font-weight: normal;
+}
+
+.pagina-visitante .denuncias-da-cidade .denuncia-visitante .foto-denuncia img{
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    max-height: 20em;
+    margin-top: 0.5em;
+    
+}
+
+@media (max-width: 767px){
 
     .texto-1{
         font-size: 1.5em;
@@ -2303,6 +2355,15 @@ html, body{
     .pagina-visitante .resultado-pesquisa-visitante .img-lider{
         width: 10em;
         height: 10em;
+    }
+    
+    .pagina-visitante .denuncias-da-cidade{
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    .pagina-visitante .denuncias-da-cidade .denuncia-visitante{
+        border-top: 0.5em solid #6fbfe0;
     }
 
 }
