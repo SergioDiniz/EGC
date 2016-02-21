@@ -2154,12 +2154,32 @@ html, body{
     color: #656d78;
 }
 
+.texto-cor-branco{
+    color: #FFF;
+}
+
 .texto-cor-cinza-claro{
     color: #999;
 }
 
 .texto-cor-azul-escuro{
     color: #1b7fb7;
+}
+
+.background-cor-vermelho-opaco{
+    background-color: #f45655;
+}
+
+.background-cor-amarelo-opaco{
+    background-color: #f09635;
+}
+
+.background-cor-verde-opaco{
+    background-color: #21b9aa;
+}
+
+.background-cor-azul-opaco{
+    background-color: #5c97bf;
 }
 
 .menu-visitante{
@@ -2248,6 +2268,16 @@ html, body{
 .pagina-visitante .resultado-pesquisa-visitante .lideres-da-cidade{
     margin-top: 0.5em;
 }
+
+.pagina-visitante .resultado-pesquisa-visitante .informacoes-gerais{
+    margin-top: 1em;
+}
+
+.pagina-visitante .resultado-pesquisa-visitante .informacoes-gerais .bloco{
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
 
 @media (max-width: 768px){
 
