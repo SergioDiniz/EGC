@@ -9,7 +9,12 @@
 		<view-id value="/index.jsf" />
 	</url-mapping>
 
-
+        <!--Visitante-->
+        EGC/sis/visitante/pesquisar.jsf
+        <url-mapping id="inicioVisitante">
+                <pattern value="/pesquisar" />
+                <view-id value="/sis/visitante/pesquisar.jsf?faces-redirect=true" />
+        </url-mapping>
 
         <!--Funcionario-->
         <url-mapping id="funcionarioInicio">

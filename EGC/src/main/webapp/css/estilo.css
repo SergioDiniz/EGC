@@ -2116,3 +2116,163 @@ html, body{
 .btn-atender{
 
 }
+
+
+/*visitante*/
+
+.texto-100{
+    font-weight: 100 !important;
+}
+
+.texto-200{
+    font-weight: 200;
+}
+
+.texto-1{
+    font-size: 2em;
+    font-weight: 100 !important;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+
+.texto-2{
+    font-weight: 200;
+}
+
+.cor-vermelha{
+    background-color: red;
+}
+
+.cor-azul{
+    background-color: blue;
+}
+
+.cor-amarela{
+    background-color: yellow;
+}
+
+.texto-cor-cinza-dark{
+    color: #656d78;
+}
+
+.texto-cor-cinza-claro{
+    color: #999;
+}
+
+.texto-cor-azul-escuro{
+    color: #1b7fb7;
+}
+
+.menu-visitante{
+    /*margin-top: -50px;*/
+    width: 100%;
+    /*    min-width: 1300px;*/
+    height: 50px;
+    /*background-color: #03a9f4;*/
+    background-color: #3498DB;
+    box-shadow: 0px 0px 10px 0.00px rgba(0, 0, 0, 0.43);
+    /*position: fixed;*/
+    z-index: 1000;
+}
+
+.m-visitante{
+    background-color: #ffffff;
+}
+
+.m-visitante .btn-default{
+    margin-top: 8px;
+}
+
+.pagina-visitante:last-child{
+    /*margin-top: 50px;*/
+    padding-bottom: 50px;
+}
+
+.pagina-visitante .barra-pesquisa{
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 15px 10px 15px 10px;
+    /*    border: 1px solid #d8d8d8;*/
+
+    background-color: rgba(255, 255, 255, 0.7);;
+    /*padding: 20px 15px 30px 15px;*/
+    border-radius: 6px;
+    -webkit-box-shadow: 10px 7px 30px -5px rgba(0,0,0,0.32);
+    -moz-box-shadow: 10px 7px 30px -5px rgba(0,0,0,0.32);
+    box-shadow: 10px 7px 30px -5px rgba(0,0,0,0.32);
+}
+
+
+.pagina-visitante .mapa-fundo-visitante{
+    background-color: #d8d8d8;
+    width: 100%;
+    height: 500px;
+    position: absolute;
+    z-index: -1;
+}
+
+.pagina-visitante .resultado-pesquisa-visitante{
+    margin-top: 350px;
+
+}
+
+.pagina-visitante .resultado-pesquisa-visitante .img-brasao,
+.pagina-visitante .resultado-pesquisa-visitante .img-lider{
+    width: 10em;
+    height: 10em;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    background-position: center;
+    border-radius: 100px;
+    /*border: none;*/
+    border: 3px solid #fff;
+
+    -webkit-box-shadow: 3px 3px 4px -4px rgba(0,0,0,0.30), inset 2px 2px 1px -1px rgba(0,0,0,0.20);
+    -moz-box-shadow: 3px 3px 4px -4px rgba(0,0,0,0.30), inset 2px 2px 1px -1px rgba(0,0,0,0.20);
+    box-shadow: 3px 3px 4px -4px rgba(0,0,0,0.30), inset 2px 2px 1px -1px rgba(0,0,0,0.20);
+}
+
+.pagina-visitante .resultado-pesquisa-visitante .img-lider{
+    width: 8.5em;
+    height: 8.5em;
+}
+
+
+.pagina-visitante .resultado-pesquisa-visitante .icones-info{
+    padding-right: 0.3em;
+}
+
+.pagina-visitante .resultado-pesquisa-visitante .informacoes-da-prefeitura{
+    margin-top: 0.5em;
+}
+
+.pagina-visitante .resultado-pesquisa-visitante .lideres-da-cidade{
+    margin-top: 0.5em;
+}
+
+@media (max-width: 768px){
+
+    .texto-1{
+        font-size: 1.5em;
+    }
+
+    .pagina-visitante .barra-pesquisa .btn-default{
+        display: block;
+        width: 100% !important;
+        padding: 10px 0 10px 0;
+    }
+
+    .pagina-visitante .resultado-pesquisa-visitante{
+        margin-top: 0;
+    }
+
+    .pagina-visitante .resultado-pesquisa-visitante .img-brasao{
+        width: 6em;
+        height: 6em;
+    }
+    
+    .pagina-visitante .resultado-pesquisa-visitante .img-lider{
+        width: 10em;
+        height: 10em;
+    }
+
+}
