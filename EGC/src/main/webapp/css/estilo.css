@@ -2211,6 +2211,11 @@ html, body{
     margin-top: 8px;
 }
 
+.logo-visitante{
+    float: left;
+    padding-top: 8px;
+}
+
 .pagina-visitante:last-child{
     /*margin-top: 50px;*/
     padding-bottom: 50px;
@@ -2331,6 +2336,13 @@ html, body{
     
 }
 
+
+.navbar-default{
+    background-image: none;
+    background-color: #fff;
+}
+
+
 @media (max-width: 767px){
 
     .texto-1{
@@ -2364,6 +2376,10 @@ html, body{
     
     .pagina-visitante .denuncias-da-cidade .denuncia-visitante{
         border-top: 0.5em solid #6fbfe0;
+    }
+    
+    .filtro-celular{
+        padding: 0;
     }
 
 }

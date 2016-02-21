@@ -8,7 +8,7 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>EGC - Prefeitura</title>
+        <title>EGC</title>
     </h:head>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
@@ -61,7 +61,7 @@
                             <label><h2 class="texto-1">Resultado</h2></label>
 
                             <div class="row">
-                                <div class="col-md-8 col-sm-8 col-xs-12" >
+                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12" >
                                     <div class="row">
                                         <div class="col-md-4 col-sm-4 col-xs-12">
                                             <!--informações da prefeitura-->
@@ -226,8 +226,66 @@
                                         <!--denuncias-->
                                         <div class="col-lg-8 col-xs-12 col-md-8 col-sm-8 denuncias-da-cidade">
 
-                                            <div class="visible-xs col-md-12 text-center">
-                                                <label><h2 class="texto-1">Denúncias</h2></label>
+                                            <!--filtro celular-->
+                                            <div class="visible-xs col-md-12 filtro-celular">
+
+                                                <nav class="navbar navbar-default">
+                                                    <div class="container-fluid">
+                                                        <!-- Brand and toggle get grouped for better mobile display -->
+                                                        <div class="navbar-header">
+                                                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                                                <span class="sr-only">Toggle navigation</span>
+                                                                <span class="icon-bar"></span>
+                                                                <span class="icon-bar"></span>
+                                                                <span class="icon-bar"></span>
+                                                            </button>
+                                                            <a class="navbar-brand">Filtro de Denúncias</a>
+                                                        </div>
+
+                                                        <!-- Collect the nav links, forms, and other content for toggling -->
+                                                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                                            <ul class="nav navbar-nav">
+                                                                <li><a href="#">TODAS</a></li>
+                                                                <li><a href="#">DATA <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span></a></li>
+                                                                <li><a href="#">AJUDA <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span></a></li>
+                                                                
+                                                                <li class="dropdown">
+                                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ESTADO<span class="caret"></span></a>
+                                                                    <ul class="dropdown-menu">
+                                                                        <li><a href="#">ATENDIDA <span class="badge">2</span></a></li>
+                                                                        <li><a href="#">EM TRABALHO <span class="badge">1</span></a></li>
+                                                                    </ul>
+                                                                </li>
+                                                                
+                                                                <li class="dropdown">
+                                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CATEGORIA<span class="caret"></span></a>
+                                                                    <ul class="dropdown-menu">
+                                                                        <li><a href="#">COLETA DE LIXO <span class="badge">4</span></a></li>
+                                                                        <li><a href="#">DISTRIBUICAO E QUALIDADE DA AGUA <span class="badge">2</span></a></li>
+                                                                    </ul>
+                                                                </li>
+                                                                
+                                                                <li class="dropdown">
+                                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">RUAS<span class="caret"></span></a>
+                                                                    <ul class="dropdown-menu">
+                                                                        <li><a href="#">R. Ten. Epitácio Limeira <span class="badge">1</span></a></li>
+                                                                        <li><a href="#">R. Josias Francisco Diniz <span class="badge">2</span></a></li>
+                                                                    </ul>
+                                                                </li>
+                                                                
+                                                                <li class="dropdown">
+                                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CEPS<span class="caret"></span></a>
+                                                                    <ul class="dropdown-menu">
+                                                                        <li><a href="#">58925-000 <span class="badge">2</span></a></li>
+                                                                    </ul>
+                                                                </li>
+                                                                
+                                                            </ul>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </nav>
+                                                
                                             </div>
 
                                             <div class="col-lg-12 denuncia-visitante">
@@ -286,7 +344,7 @@
                                                 <div class="row foto-denuncia text-center">
                                                     <img src="/EGC/sis/denuncias/1455822833506.jpg"/>
                                                 </div>
-                                                
+
                                                 <div class="row text-right">
                                                     <span class="label label-info">EM ANDAMENTO</span>
                                                 </div>
@@ -359,8 +417,126 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="hidden-xs col-lg-4 col-md-4 col-sm-4 cor-azul">
-                                    filtro
+                                <div class="hidden-xs col-lg-3 col-md-3 col-sm-3">
+                                    <!--Filtro desk-->
+                                    <div class="lista-de-fitro">
+                                        <h:form rendered="#{1 == 2}">
+
+                                            <div class="texto text-center">ANDAMENTO</div>
+                                            <div class="progress-pie-chart" data-percent="#{controladorFuncionario.andamentoDasDenuncias()}">
+
+                                                <div class="ppc-progress">
+                                                    <div class="ppc-progress-fill"></div>
+                                                </div>
+                                                <div class="ppc-percents">
+                                                    <div class="pcc-percents-wrapper">
+                                                        <span>%</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <br/>
+
+
+                                            <span class="texto">FILTRO</span> <br/>
+                                            <ul class="list-unstyled">
+                                                <li><b><h:commandLink value="TODAS" action="#{controladorFuncionario.paginaGerenciarDenuncias()}"/></b></li>
+                                                <li>
+                                                    <b>
+                                                        <h:commandLink value="DATA" action="#{controladorFuncionario.gerenciarDenunciasFiltro('DATA', controladorFuncionario.filtroQuery, controladorFuncionario.filtroTipo )}"/>
+                                                        <c:choose>
+                                                            <c:when test="#{controladorFuncionario.filtroData == 'DATA_DESC'}">
+                                                                <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </b>    
+                                                </li>
+                                                <li>
+                                                    <b>
+                                                        <h:commandLink value="AJUDA" action="#{controladorFuncionario.gerenciarDenunciasFiltro('AJUDA', controladorFuncionario.filtroQuery, controladorFuncionario.filtroTipo )}"/>
+                                                        <c:choose>
+                                                            <c:when test="#{controladorFuncionario.filtroAjuda == 'AJUDA_DESC'}">
+                                                                <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </b>    
+                                                </li>
+
+
+                                            </ul>
+                                            <br/>
+
+                                            <span class="texto">ESTADO</span> <br/>
+                                            <ul class="list-unstyled">
+
+                                                <c:forEach  var="estado" items="#{controladorCidade.estadoDeDenunciasNumerosDeDenuncia(controladorFuncionario.cidade.cidadePK.nomeCidade, controladorFuncionario.cidade.cidadePK.siglaEstado)}">
+
+                                                    <li>
+                                                        <b>
+                                                            <h:commandLink value="#{estado.get(0)}" action="#{controladorFuncionario.gerenciarDenunciasFiltro('', estado.get(0), 'ESTADO' )}"/>
+                                                            <span class="badge">#{estado.get(1)}</span>
+                                                        </b>    
+                                                    </li>
+
+                                                </c:forEach>
+
+                                            </ul>
+                                            <br/>
+
+                                            <span class="texto">CATEGORIA</span> <br/>
+                                            <ul class="list-unstyled">
+                                                <c:forEach  var="tipo" items="#{controladorCidade.tiposDeDenunciasNumerosDeDenuncia(controladorFuncionario.cidade.cidadePK.nomeCidade, controladorFuncionario.cidade.cidadePK.siglaEstado)}">
+
+                                                    <li>
+                                                        <b>
+                                                            <h:commandLink value="#{tipo.get(0)}" action="#{controladorFuncionario.gerenciarDenunciasFiltro('', tipo.get(0), 'CATEGORIA' )}"/>
+                                                            <span class="badge">#{tipo.get(1)}</span>
+                                                        </b>    
+                                                    </li>
+                                                </c:forEach>
+
+                                            </ul>
+                                            <br/>
+
+                                            <span class="texto">RUAS</span> <br/>
+                                            <ul class="list-unstyled">
+                                                <c:forEach  var="rua" items="#{controladorCidade.ruasDeUmaCidadeNumerosDeDenuncia(controladorFuncionario.cidade.cidadePK.nomeCidade, controladorFuncionario.cidade.cidadePK.siglaEstado)}">
+
+                                                    <li>
+                                                        <b>
+                                                            <h:commandLink value="#{rua.get(0)}" action="#{controladorFuncionario.gerenciarDenunciasFiltro('', rua.get(0), 'RUA' )}"/>
+                                                            <span class="badge">#{rua.get(1)}</span>
+                                                        </b>    
+                                                    </li>
+
+                                                </c:forEach>
+                                            </ul>
+                                            <br/>
+
+                                            <span class="texto">CEPS</span> <br/>
+                                            <ul class="list-unstyled">
+                                                <c:forEach  var="cep" items="#{controladorCidade.cepDeUmaCidadeNumerosDeDenuncia(controladorFuncionario.cidade.cidadePK.nomeCidade, controladorFuncionario.cidade.cidadePK.siglaEstado)}">
+
+                                                    <li>
+                                                        <b>
+                                                            <h:commandLink value="#{cep.get(0)}" action="#{controladorFuncionario.gerenciarDenunciasFiltro('', cep.get(0), 'CEP' )}"/>
+                                                            <span class="badge">#{cep.get(1)}</span>
+                                                        </b>    
+                                                    </li>
+
+                                                </c:forEach>
+                                            </ul>
+                                            <br/>
+
+
+                                        </h:form>
+                                    </div>
                                 </div>
                             </div>
 
