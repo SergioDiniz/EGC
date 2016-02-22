@@ -72,7 +72,7 @@ public class DenunciaService implements DenunciaServiceIT {
         Query query;
 
 //        String sql = "SELECT d.* FROM denuncia d LEFT OUTER JOIN enderecodenuncia ed on d.enderecodenuncia_id = ed.id WHERE upper(TRANSLATE(d.nomecidade,'ÀÁáàÉÈéèÍíÓóÒòÚú','AAaaEEeeIiOoOoUu')) = ?1 AND upper(TRANSLATE(d.siglaestado,'ÀÁáàÉÈéèÍíÓóÒòÚú','AAaaEEeeIiOoOoUu')) = ?2 ORDER BY d.data DESC";
-        if (ordem.equals("data")) {
+        if (ordem.equalsIgnoreCase("data")) {
 //            query = em.createNativeQuery(sql);
             query = em.createQuery("SELECT d FROM Denuncia d WHERE d.ativo = true AND d.cidade.CidadePK.nomeCidade = :cidade AND d.cidade.CidadePK.siglaEstado = :estado AND d.ativo = TRUE ORDER BY d.data DESC");
 //            query = em.createNativeQuery(sql, Denuncia.class);

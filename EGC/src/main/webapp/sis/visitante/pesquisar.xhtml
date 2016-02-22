@@ -6,7 +6,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
     <h:head>
         <title>EGC</title>
     </h:head>
@@ -35,18 +36,22 @@
 
                     <div class="barra-pesquisa col-md-4 col-sm-6 col-xs-offset-1 col-xs-10">
                         <h:form>
-                            <div class="form-group">
-                                <label>Pesquise</label>
-                                <h:inputText class="form-control input-lg" />
-                            </div>
-                            <div class="form-group">
-                                <h:commandButton value="pesquisar" class="btn btn-default btn-block" />
-                            </div>
+                            <form jsf:id="form">
+                                <div class="form-group">
+                                    <label>Pesquise</label>
+                                    <input type="text" id="txtEndereco" jsf:id="txtEndereco" name="txtEndereco" class="form-control input-lg"  jsf:value="${controladorCidade.enderecoPesquisa}"/>
+                                </div>
 
-                            <div class="area-mapa">
-                                <div id="mapa" class="mapa-denuncia"></div>
-                            </div>
+                                <div class="form-group">
+                                    <h:commandButton class="btn btn-default btn-lg btn-block" action="#{controladorCidade.pesquisarCidade()}" value="pesquisar"/>
+                                    <!--<button class="btn btn-default btn-lg btn-block" jsf:action="#{controladorCidade.pesquisarCidade()}">pesquisar</button>-->
+                                </div>
 
+                                <div class="hidden-xs area-mapa">
+                                    <div id="mapa" class="mapa-denuncia"></div>
+                                </div>
+
+                            </form>
                         </h:form>
                     </div>
                 </div>
@@ -228,190 +233,179 @@
 
                                             <!--filtro celular-->
                                             <div class="visible-xs col-md-12 filtro-celular">
-
-                                                <nav class="navbar navbar-default">
-                                                    <div class="container-fluid">
-                                                        <!-- Brand and toggle get grouped for better mobile display -->
-                                                        <div class="navbar-header">
-                                                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                                                                <span class="sr-only">Toggle navigation</span>
-                                                                <span class="icon-bar"></span>
-                                                                <span class="icon-bar"></span>
-                                                                <span class="icon-bar"></span>
-                                                            </button>
-                                                            <a class="navbar-brand">Filtro de Denúncias</a>
-                                                        </div>
-
-                                                        <!-- Collect the nav links, forms, and other content for toggling -->
-                                                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                                                            <ul class="nav navbar-nav">
-                                                                <li><a href="#">TODAS</a></li>
-                                                                <li><a href="#">DATA <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span></a></li>
-                                                                <li><a href="#">AJUDA <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span></a></li>
-                                                                
-                                                                <li class="dropdown">
-                                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ESTADO<span class="caret"></span></a>
-                                                                    <ul class="dropdown-menu">
-                                                                        <li><a href="#">ATENDIDA <span class="badge">2</span></a></li>
-                                                                        <li><a href="#">EM TRABALHO <span class="badge">1</span></a></li>
-                                                                    </ul>
-                                                                </li>
-                                                                
-                                                                <li class="dropdown">
-                                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CATEGORIA<span class="caret"></span></a>
-                                                                    <ul class="dropdown-menu">
-                                                                        <li><a href="#">COLETA DE LIXO <span class="badge">4</span></a></li>
-                                                                        <li><a href="#">DISTRIBUICAO E QUALIDADE DA AGUA <span class="badge">2</span></a></li>
-                                                                    </ul>
-                                                                </li>
-                                                                
-                                                                <li class="dropdown">
-                                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">RUAS<span class="caret"></span></a>
-                                                                    <ul class="dropdown-menu">
-                                                                        <li><a href="#">R. Ten. Epitácio Limeira <span class="badge">1</span></a></li>
-                                                                        <li><a href="#">R. Josias Francisco Diniz <span class="badge">2</span></a></li>
-                                                                    </ul>
-                                                                </li>
-                                                                
-                                                                <li class="dropdown">
-                                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CEPS<span class="caret"></span></a>
-                                                                    <ul class="dropdown-menu">
-                                                                        <li><a href="#">58925-000 <span class="badge">2</span></a></li>
-                                                                    </ul>
-                                                                </li>
-                                                                
-                                                            </ul>
-                                                            
-                                                        </div>
-                                                    </div>
-                                                </nav>
-                                                
-                                            </div>
-
-                                            <div class="col-lg-12 denuncia-visitante">
-
-                                                <div class="row denuncia-topo">
-                                                    <div class="col-lg-12">
-                                                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                                                            <div class="row">
-                                                                <img src="/EGC/img/icones-denuncia/icone-lixo.png" class="icone-denuncia"/>
+                                                <h:form>
+                                                    <nav class="navbar navbar-default">
+                                                        <div class="container-fluid">
+                                                            <!-- Brand and toggle get grouped for better mobile display -->
+                                                            <div class="navbar-header">
+                                                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                                                    <span class="sr-only">Toggle navigation</span>
+                                                                    <span class="icon-bar"></span>
+                                                                    <span class="icon-bar"></span>
+                                                                    <span class="icon-bar"></span>
+                                                                </button>
+                                                                <a class="navbar-brand">Filtro de Denúncias</a>
                                                             </div>
 
-                                                        </div>
-                                                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-                                                            <div class="row">
-                                                                <label class="texto-cor-azul-egc1">Distribuição e Qualidade da Agua</label>
+                                                            <!-- Collect the nav links, forms, and other content for toggling -->
+                                                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                                                <ul class="nav navbar-nav">
+                                                                    <li><h:commandLink value="TODAS" action="#{controladorCidade.pesquisarCidade()}"/></li>
+                                                                    <li>
+                                                                        <h:commandLink value="DATA" action="#{controladorCidade.gerenciarDenunciasFiltro('DATA', controladorCidade.filtroQuery, controladorCidade.filtroTipo )}">
+                                                                            <c:choose>
+                                                                                <c:when test="#{controladorCidade.filtroData == 'DATA_DESC'}">
+                                                                                    <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
+                                                                                </c:when>
+                                                                                <c:otherwise>
+                                                                                    <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
+                                                                                </c:otherwise>
+                                                                            </c:choose>
+                                                                        </h:commandLink>
+                                                                    </li>
+                                                                    <li>
+                                                                        <h:commandLink value="AJUDA" action="#{controladorCidade.gerenciarDenunciasFiltro('AJUDA', controladorCidade.filtroQuery, controladorCidade.filtroTipo )}">
+                                                                            <c:choose>
+                                                                                <c:when test="#{controladorCidade.filtroAjuda == 'AJUDA_DESC'}">
+                                                                                    <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
+                                                                                </c:when>
+                                                                                <c:otherwise>
+                                                                                    <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
+                                                                                </c:otherwise>
+                                                                            </c:choose>
+                                                                        </h:commandLink> 
+                                                                    </li>
+
+                                                                    <li class="dropdown">
+                                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ESTADO<span class="caret"></span></a>
+                                                                        <ul class="dropdown-menu">
+                                                                            <c:forEach  var="estado" items="#{controladorCidade.estadoDeDenunciasNumerosDeDenuncia(controladorCidade.cidadePK.nomeCidade, controladorCidade.cidadePK.siglaEstado)}">
+
+                                                                                <li>
+                                                                                    <h:commandLink value="#{estado.get(0)}" action="#{controladorCidade.gerenciarDenunciasFiltro('', estado.get(0), 'ESTADO' )}">
+                                                                                        <span class="badge">#{estado.get(1)}</span>
+                                                                                    </h:commandLink>
+                                                                                </li>
+
+                                                                            </c:forEach>
+                                                                        </ul>
+                                                                    </li>
+
+                                                                    <li class="dropdown">
+                                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CATEGORIA<span class="caret"></span></a>
+                                                                        <ul class="dropdown-menu">
+                                                                            <c:forEach  var="tipo" items="#{controladorCidade.tiposDeDenunciasNumerosDeDenuncia(controladorCidade.cidadePK.nomeCidade, controladorCidade.cidadePK.siglaEstado)}">
+                                                                                <li>
+                                                                                    <h:commandLink value="#{tipo.get(0)}" action="#{controladorCidade.gerenciarDenunciasFiltro('', tipo.get(0), 'CATEGORIA' )}">
+                                                                                        <span class="badge">#{tipo.get(1)}</span>
+                                                                                    </h:commandLink>
+                                                                                </li>
+                                                                            </c:forEach>
+                                                                        </ul>
+                                                                    </li>
+
+                                                                    <li class="dropdown">
+                                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">RUAS<span class="caret"></span></a>
+                                                                        <ul class="dropdown-menu">
+                                                                            <c:forEach  var="rua" items="#{controladorCidade.ruasDeUmaCidadeNumerosDeDenuncia(controladorCidade.cidadePK.nomeCidade, controladorCidade.cidadePK.siglaEstado)}">
+                                                                                <li>
+                                                                                    <h:commandLink value="#{rua.get(0)}" action="#{controladorCidade.gerenciarDenunciasFiltro('', rua.get(0), 'RUA' )}">
+                                                                                        <span class="badge">#{rua.get(1)}</span>
+                                                                                    </h:commandLink>
+                                                                                </li>
+                                                                            </c:forEach>
+                                                                        </ul>
+                                                                    </li>
+
+                                                                    <li class="dropdown">
+                                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CEPS<span class="caret"></span></a>
+                                                                        <ul class="dropdown-menu">
+                                                                            <c:forEach  var="cep" items="#{controladorCidade.cepDeUmaCidadeNumerosDeDenuncia(controladorCidade.cidadePK.nomeCidade, controladorCidade.cidadePK.siglaEstado)}">
+                                                                                <li>
+                                                                                    <h:commandLink value="#{cep.get(0)}" action="#{controladorCidade.gerenciarDenunciasFiltro('', cep.get(0), 'CEP' )}">
+                                                                                        <span class="badge">#{cep.get(1)}</span>
+                                                                                    </h:commandLink>
+                                                                                </li>
+                                                                            </c:forEach>
+                                                                        </ul>
+                                                                    </li>
+
+                                                                </ul>
+
                                                             </div>
-
-                                                            <div class="row">
-                                                                <div class="col-lg-6 col-xs-6">
-                                                                    <div class="row">
-                                                                        <div class="texto-cor-cinza-claro  hora-denuncia">09:26 - 18/02/2016</div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-6 col-xs-6 text-right">
-                                                                    <div class="row">
-                                                                        <span class="glyphicon glyphicon-heart texto-cor-vermelho" aria-hidden="true"> 2</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-exclamation-sign texto-cor-cinza-claro" aria-hidden="true"> 2</span> 
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
                                                         </div>
+                                                    </nav>
 
-                                                    </div>
-                                                </div>
-                                                <div class="row denuncia-centro">
-                                                    <div class="col-lg-12">
-
-                                                        <div class="row descricao-denuncia">
-                                                            <div class="col-lg-12">
-                                                                Suspendisse tempor erat non rutrum efficitur. Ut blandit sem lacus, 
-                                                                malesuada pharetra odio laoreet eu. Fusce in justo lectus. 
-                                                                Aliquam et urna malesuada, consequat ipsum non, eleifend du.
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row endereco-denuncia">
-                                                            <div class="col-lg-12 texto-cor-cinza-claro">
-                                                                <label>R. Ten. Epitácio Limeira, 277-385 - S/B, Santa Helena - PB, 58925-000, Brazil</label>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-
-                                                <div class="row foto-denuncia text-center">
-                                                    <img src="/EGC/sis/denuncias/1455822833506.jpg"/>
-                                                </div>
-
-                                                <div class="row text-right">
-                                                    <span class="label label-info">EM ANDAMENTO</span>
-                                                </div>
-
+                                                </h:form>
                                             </div>
 
 
-                                            <!--denuncia 2-->
-                                            <div class="col-lg-12 denuncia-visitante">
 
-                                                <div class="row denuncia-topo">
-                                                    <div class="col-lg-12">
-                                                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                                                            <div class="row">
-                                                                <img src="/EGC/img/icones-denuncia/icone-lixo.png" class="icone-denuncia"/>
+                                            <c:forEach var="denuncia" items="#{controladorCidade.denunciasPesquisaVisitante}">
+                                                <div class="col-lg-12 denuncia-visitante">
+
+                                                    <div class="row denuncia-topo">
+                                                        <div class="col-lg-12">
+                                                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                                                <div class="row">
+                                                                    <img src="/EGC/img/icones-denuncia/#{denuncia.iconeDenunica}" class="icone-denuncia"/>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                                                <div class="row">
+                                                                    <label class="texto-cor-azul-egc1">#{denuncia.tipoDaDenunciaFormatado}</label>
+                                                                </div>
+
+                                                                <div class="row">
+                                                                    <div class="col-lg-6 col-xs-6">
+                                                                        <div class="row">
+                                                                            <div class="texto-cor-cinza-claro  hora-denuncia">#{denuncia.dataDenuncaFormatado}</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6 col-xs-6 text-right">
+                                                                        <div class="row">
+                                                                            <span class="glyphicon glyphicon-heart texto-cor-vermelho" aria-hidden="true"> #{denuncia.numeroAjuda}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-exclamation-sign texto-cor-cinza-claro" aria-hidden="true"> 2</span> 
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
                                                             </div>
 
                                                         </div>
-                                                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-                                                            <div class="row">
-                                                                <label class="texto-cor-azul-egc1">Distribuição e Qualidade da Agua</label>
+                                                    </div>
+                                                    <div class="row denuncia-centro">
+                                                        <div class="col-lg-12">
+
+                                                            <div class="row descricao-denuncia">
+                                                                <div class="col-lg-12">
+                                                                    #{denuncia.descricao}
+                                                                    Suspendisse tempor erat non rutrum efficitur. Ut blandit sem lacus, 
+                                                                    malesuada pharetra odio laoreet eu. Fusce in justo lectus. 
+                                                                    Aliquam et urna malesuada, consequat ipsum non, eleifend du.
+                                                                </div>
                                                             </div>
 
-                                                            <div class="row">
-                                                                <div class="col-lg-6 col-xs-6">
-                                                                    <div class="row">
-                                                                        <div class="texto-cor-cinza-claro  hora-denuncia">09:26 - 18/02/2016</div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-6 col-xs-6 text-right">
-                                                                    <div class="row">
-                                                                        <span class="glyphicon glyphicon-heart texto-cor-vermelho" aria-hidden="true"> 2</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-exclamation-sign texto-cor-cinza-claro" aria-hidden="true"> 2</span> 
-                                                                    </div>
+                                                            <div class="row endereco-denuncia">
+                                                                <div class="col-lg-12 texto-cor-cinza-claro">
+                                                                    <label>#{denuncia.enderecoDenuncia}</label>
                                                                 </div>
                                                             </div>
 
                                                         </div>
 
                                                     </div>
-                                                </div>
-                                                <div class="row denuncia-centro">
-                                                    <div class="col-lg-12">
 
-                                                        <div class="row descricao-denuncia">
-                                                            <div class="col-lg-12">
-                                                                Suspendisse tempor erat non rutrum efficitur. Ut blandit sem lacus, 
-                                                                malesuada pharetra odio laoreet eu. Fusce in justo lectus. 
-                                                                Aliquam et urna malesuada, consequat ipsum non, eleifend du.
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row endereco-denuncia">
-                                                            <div class="col-lg-12 texto-cor-cinza-claro">
-                                                                <label>R. Ten. Epitácio Limeira, 277-385 - S/B, Santa Helena - PB, 58925-000, Brazil</label>
-                                                            </div>
-                                                        </div>
-
-
-
+                                                    <div class="row foto-denuncia text-center">
+                                                        <img src="/EGC/sis/denuncias/#{denuncia.foto}"/>
                                                     </div>
-                                                </div>
 
-                                                <div class="row foto-denuncia text-center">
-                                                    <img src="/EGC/sis/denuncias/1455792872487.jpg"/>
-                                                </div>
+                                                    <div class="row text-right">
+                                                        <span class="label label-info">#{denuncia.estadoDeAcompanhamento}</span>
+                                                    </div>
 
-                                            </div>
+                                                </div>
+                                            </c:forEach>                                        
 
 
                                         </div>
@@ -420,10 +414,10 @@
                                 <div class="hidden-xs col-lg-3 col-md-3 col-sm-3">
                                     <!--Filtro desk-->
                                     <div class="lista-de-fitro">
-                                        <h:form rendered="#{1 == 2}">
+                                        <h:form>
 
                                             <div class="texto text-center">ANDAMENTO</div>
-                                            <div class="progress-pie-chart" data-percent="#{controladorFuncionario.andamentoDasDenuncias()}">
+                                            <div class="progress-pie-chart" data-percent="#{controladorCidade.andamentoDasDenuncias()}">
 
                                                 <div class="ppc-progress">
                                                     <div class="ppc-progress-fill"></div>
@@ -440,12 +434,12 @@
 
                                             <span class="texto">FILTRO</span> <br/>
                                             <ul class="list-unstyled">
-                                                <li><b><h:commandLink value="TODAS" action="#{controladorFuncionario.paginaGerenciarDenuncias()}"/></b></li>
+                                                <li><b><h:commandLink value="TODAS" action="#{controladorCidade.pesquisarCidade()}"/></b></li>
                                                 <li>
                                                     <b>
-                                                        <h:commandLink value="DATA" action="#{controladorFuncionario.gerenciarDenunciasFiltro('DATA', controladorFuncionario.filtroQuery, controladorFuncionario.filtroTipo )}"/>
+                                                        <h:commandLink value="DATA" action="#{controladorCidade.gerenciarDenunciasFiltro('DATA', controladorCidade.filtroQuery, controladorCidade.filtroTipo )}"/>
                                                         <c:choose>
-                                                            <c:when test="#{controladorFuncionario.filtroData == 'DATA_DESC'}">
+                                                            <c:when test="#{controladorCidade.filtroData == 'DATA_DESC'}">
                                                                 <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
                                                             </c:when>
                                                             <c:otherwise>
@@ -456,9 +450,9 @@
                                                 </li>
                                                 <li>
                                                     <b>
-                                                        <h:commandLink value="AJUDA" action="#{controladorFuncionario.gerenciarDenunciasFiltro('AJUDA', controladorFuncionario.filtroQuery, controladorFuncionario.filtroTipo )}"/>
+                                                        <h:commandLink value="AJUDA" action="#{controladorCidade.gerenciarDenunciasFiltro('AJUDA', controladorCidade.filtroQuery, controladorCidade.filtroTipo )}"/>
                                                         <c:choose>
-                                                            <c:when test="#{controladorFuncionario.filtroAjuda == 'AJUDA_DESC'}">
+                                                            <c:when test="#{controladorCidade.filtroAjuda == 'AJUDA_DESC'}">
                                                                 <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
                                                             </c:when>
                                                             <c:otherwise>
@@ -475,11 +469,11 @@
                                             <span class="texto">ESTADO</span> <br/>
                                             <ul class="list-unstyled">
 
-                                                <c:forEach  var="estado" items="#{controladorCidade.estadoDeDenunciasNumerosDeDenuncia(controladorFuncionario.cidade.cidadePK.nomeCidade, controladorFuncionario.cidade.cidadePK.siglaEstado)}">
+                                                <c:forEach  var="estado" items="#{controladorCidade.estadoDeDenunciasNumerosDeDenuncia(controladorCidade.cidadePK.nomeCidade, controladorCidade.cidadePK.siglaEstado)}">
 
                                                     <li>
                                                         <b>
-                                                            <h:commandLink value="#{estado.get(0)}" action="#{controladorFuncionario.gerenciarDenunciasFiltro('', estado.get(0), 'ESTADO' )}"/>
+                                                            <h:commandLink value="#{estado.get(0)}" action="#{controladorCidade.gerenciarDenunciasFiltro('', estado.get(0), 'ESTADO' )}"/>
                                                             <span class="badge">#{estado.get(1)}</span>
                                                         </b>    
                                                     </li>
@@ -491,11 +485,11 @@
 
                                             <span class="texto">CATEGORIA</span> <br/>
                                             <ul class="list-unstyled">
-                                                <c:forEach  var="tipo" items="#{controladorCidade.tiposDeDenunciasNumerosDeDenuncia(controladorFuncionario.cidade.cidadePK.nomeCidade, controladorFuncionario.cidade.cidadePK.siglaEstado)}">
+                                                <c:forEach  var="tipo" items="#{controladorCidade.tiposDeDenunciasNumerosDeDenuncia(controladorCidade.cidadePK.nomeCidade, controladorCidade.cidadePK.siglaEstado)}">
 
                                                     <li>
                                                         <b>
-                                                            <h:commandLink value="#{tipo.get(0)}" action="#{controladorFuncionario.gerenciarDenunciasFiltro('', tipo.get(0), 'CATEGORIA' )}"/>
+                                                            <h:commandLink value="#{tipo.get(0)}" action="#{controladorCidade.gerenciarDenunciasFiltro('', tipo.get(0), 'CATEGORIA' )}"/>
                                                             <span class="badge">#{tipo.get(1)}</span>
                                                         </b>    
                                                     </li>
@@ -506,11 +500,11 @@
 
                                             <span class="texto">RUAS</span> <br/>
                                             <ul class="list-unstyled">
-                                                <c:forEach  var="rua" items="#{controladorCidade.ruasDeUmaCidadeNumerosDeDenuncia(controladorFuncionario.cidade.cidadePK.nomeCidade, controladorFuncionario.cidade.cidadePK.siglaEstado)}">
+                                                <c:forEach  var="rua" items="#{controladorCidade.ruasDeUmaCidadeNumerosDeDenuncia(controladorCidade.cidadePK.nomeCidade, controladorCidade.cidadePK.siglaEstado)}">
 
                                                     <li>
                                                         <b>
-                                                            <h:commandLink value="#{rua.get(0)}" action="#{controladorFuncionario.gerenciarDenunciasFiltro('', rua.get(0), 'RUA' )}"/>
+                                                            <h:commandLink value="#{rua.get(0)}" action="#{controladorCidade.gerenciarDenunciasFiltro('', rua.get(0), 'RUA' )}"/>
                                                             <span class="badge">#{rua.get(1)}</span>
                                                         </b>    
                                                     </li>
@@ -521,11 +515,11 @@
 
                                             <span class="texto">CEPS</span> <br/>
                                             <ul class="list-unstyled">
-                                                <c:forEach  var="cep" items="#{controladorCidade.cepDeUmaCidadeNumerosDeDenuncia(controladorFuncionario.cidade.cidadePK.nomeCidade, controladorFuncionario.cidade.cidadePK.siglaEstado)}">
+                                                <c:forEach  var="cep" items="#{controladorCidade.cepDeUmaCidadeNumerosDeDenuncia(controladorCidade.cidadePK.nomeCidade, controladorCidade.cidadePK.siglaEstado)}">
 
                                                     <li>
                                                         <b>
-                                                            <h:commandLink value="#{cep.get(0)}" action="#{controladorFuncionario.gerenciarDenunciasFiltro('', cep.get(0), 'CEP' )}"/>
+                                                            <h:commandLink value="#{cep.get(0)}" action="#{controladorCidade.gerenciarDenunciasFiltro('', cep.get(0), 'CEP' )}"/>
                                                             <span class="badge">#{cep.get(1)}</span>
                                                         </b>    
                                                     </li>
@@ -556,6 +550,45 @@
 
 
     </h:body>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA7--w4nokUUqyxvIeuDh37KaIcLivbQHs&amp;sensor=false"></script>
+    <script type="text/javascript">
+
+        var geocoder;
+        var marker;
+
+        function initialize() {
+            geocoder = new google.maps.Geocoder();
+            marker = new google.maps.Marker({
+                draggable: true,
+            });
+        }
+
+
+        $(document).ready(function () {
+            initialize();
+        });
+
+
+        $(document).ready(function () {
+            $("#txtEndereco").autocomplete({
+                source: function (request, response) {
+                    geocoder.geocode({'address': request.term + ', Brasil', 'region': 'BR'}, function (results, status) {
+                        response($.map(results, function (item) {
+                            return {
+                                label: item.formatted_address,
+                                value: item.formatted_address,
+                                latitude: item.geometry.location.lat(),
+                                longitude: item.geometry.location.lng()
+                            }
+                        }));
+                    })
+                }
+            });
+        });
+
+
+    </script>
+    <script src="/EGC/js/jquery-ui.custom.min.js" type="text/javascript"/>
 
 </html>
 
