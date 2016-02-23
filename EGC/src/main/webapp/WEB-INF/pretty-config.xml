@@ -10,10 +10,14 @@
 	</url-mapping>
 
         <!--Visitante-->
-        EGC/sis/visitante/pesquisar.jsf
         <url-mapping id="inicioVisitante">
                 <pattern value="/pesquisar" />
                 <view-id value="/sis/visitante/pesquisar.jsf?faces-redirect=true" />
+        </url-mapping>
+        
+        <url-mapping id="visitanteVisualizarDenunciaUnica">
+                <pattern value="/pesquisar/#{codigoDenuncia}" />
+                <view-id value="/sis/visitante/visualizar.jsf?faces-redirect=true" />
         </url-mapping>
 
         <!--Funcionario-->

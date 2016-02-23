@@ -1490,8 +1490,8 @@ html, body{
 }
 
 .tb-registro td:nth-child(2){
-    padding-left: 15px;
-    padding-right: 30px;
+    padding-left: 0.5em;
+    padding-right: 1em;
 }
 
 .tb-registro td:nth-child(3){
@@ -1505,7 +1505,7 @@ html, body{
 
 .tb-registro td:nth-child(4){
     border-bottom: 2px solid #f1f1f1;
-    padding-left: 15px;
+    padding-left: 0.8em;
     background-color: #fff;
     width: 100%;
     border-radius: 0  5px 5px 0;
@@ -2191,6 +2191,10 @@ html, body{
     background-color: #5c97bf;
 }
 
+.background-cor-cinza-claro{
+    background-color: #f7f7f7;
+}
+
 .menu-visitante{
     /*margin-top: -50px;*/
     width: 100%;
@@ -2247,6 +2251,10 @@ html, body{
 .pagina-visitante .resultado-pesquisa-visitante{
     margin-top: 350px;
 
+}
+
+.pagina-visitante .visualisar-denuncia-individual{
+    margin-top: 0 !important;
 }
 
 .pagina-visitante .resultado-pesquisa-visitante .img-brasao,
@@ -2306,6 +2314,14 @@ html, body{
     margin-bottom: 2em;
 }
 
+.visualisar-denuncia-individual .denuncia-visitante{
+    margin-bottom: 0 !important;
+}
+
+.visualisar-denuncia-individual .denuncia-visitante{
+    padding-top: 0 !important;
+}
+
 .pagina-visitante .denuncias-da-cidade .denuncia-visitante .icone-denuncia{
     width: 90%;
     max-width: 5em;
@@ -2331,10 +2347,15 @@ html, body{
     margin: 0;
     padding: 0;
     max-width: 100%;
-    max-height: 20em;
+    max-height: 30em;
     margin-top: 0.5em;
-    
 }
+
+.visualisar-denuncia-individual .foto-denuncia img{
+    margin-top: 0 !important;
+    margin-bottom: 1em !important;
+}
+
 
 
 .navbar-default{
@@ -2376,6 +2397,14 @@ html, body{
     
     .pagina-visitante .denuncias-da-cidade .denuncia-visitante{
         border-top: 0.5em solid #6fbfe0;
+    }
+    
+    #registro-denuncia-unica{
+        background-color: #f7f7f7;
+    }
+    
+    .pagina-visitante .visualisar-denuncia-individual .denuncias-da-cidade .denuncia-visitante .foto-denuncia img{
+        max-height: 100%;
     }
     
 
