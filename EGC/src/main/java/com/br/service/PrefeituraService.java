@@ -201,5 +201,22 @@ public class PrefeituraService implements PrefeituraServiceIT {
 
         return dados;
     }
+    
+    @Override
+    public boolean prefeituraCadastrada(String cidade, String estado){
+        
+        Query query = em.createQuery("SELECT p FROM Prefeitura p WHERE p.cidade.CidadePK.nomeCidade = :cidade and p.cidade.CidadePK.siglaEstado = :estado and p.ativo = TRUE");
+        query.setParameter("cidade", cidade);
+        query.setParameter("estado", estado);
+        
+        List<Prefeitura> p = query.getResultList();
+        
+        if(p.size() > 0){
+            return true;
+        }
+        
+        return false;
+    }
+    
 
 }

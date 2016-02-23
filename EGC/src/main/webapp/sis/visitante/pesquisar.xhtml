@@ -59,485 +59,511 @@
 
 
 
-            <div class="container pagina-visitante">
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="resultado-pesquisa-visitante">
-                            <label><h2 class="texto-1">Resultado</h2></label>
+            <h:panelGroup rendered="#{controladorCidade.denunciasPesquisaVisitante.size() > 0 or controladorCidade.mostrarInformacoesPrefeitura}">
+                <div class="container pagina-visitante">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="resultado-pesquisa-visitante">
+                                <label><h2 class="texto-1">Resultado</h2></label>
 
-                            <div class="row">
-                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12" >
-                                    <div class="row">
-                                        <div class="col-md-4 col-sm-4 col-xs-12">
-                                            <!--informações da prefeitura-->
-                                            <div class="row informacoes-da-prefeitura">
+                                <div class="row">
+                                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12" >
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-4 col-xs-12">
 
-                                                <div class="col-md-12 col-sm-12 col-xs-4 text-center">
-                                                    <img class="img-brasao" style="background-image: url(/EGC/sis/prefeitura/brasao/sth@gmail.com.jpg)"/>
-                                                </div>
+                                                <h:panelGroup rendered="#{controladorCidade.mostrarInformacoesPrefeitura}">
+                                                    <!--informações da prefeitura-->
+                                                    <div class="row informacoes-da-prefeitura">
 
-                                                <div class="col-md-12 col-sm-12 col-xs-8">
-                                                    <div class="row">
-                                                        <label class="texto-1 ">Prefeitura de STH</label>
-                                                    </div>
-                                                    <div class="row">
-                                                        <label class="texto-2 texto-cor-cinza-claro">Santa Helena, PB</label>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div>
-                                                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                                                <div class="row">
-                                                                    <img src="/EGC/img/icon-telefone.png" class="icones-info"/> <span class="texto-200 texto-cor-cinza-dark">(83) 5555-4444</span>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <img src="/EGC/img/icon-email.png" class="icones-info"/> <span class="texto-200 texto-cor-cinza-dark">sth@gmail.com</span>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <img src="/EGC/img/icon-endereco.png" class="icones-info"/> <span class="texto-200 texto-cor-cinza-dark">Rua Pedro Muniz de Brito - 72, 58925000</span>
+                                                        <div class="col-md-12 col-sm-12 col-xs-4 text-center">
+                                                            <img class="img-brasao" style="background-image: url(/EGC/sis/prefeitura/brasao/#{controladorCidade.prefeitura.foto})"/>
+                                                        </div>
+
+                                                        <div class="col-md-12 col-sm-12 col-xs-8">
+                                                            <div class="row">
+                                                                <label class="texto-1 ">#{controladorCidade.prefeitura.nome}</label>
+                                                            </div>
+                                                            <div class="row">
+                                                                <label class="texto-2 texto-cor-cinza-claro">#{controladorCidade.prefeitura.enderecoPrefeitura.cidade}, #{controladorCidade.prefeitura.enderecoPrefeitura.estado}</label>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div>
+                                                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                        <div class="row">
+                                                                            <img src="/EGC/img/icon-telefone.png" class="icones-info"/> <span class="texto-200 texto-cor-cinza-dark">#{controladorCidade.prefeitura.telefone}</span>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <img src="/EGC/img/icon-email.png" class="icones-info"/> <span class="texto-200 texto-cor-cinza-dark">#{controladorCidade.prefeitura.email}</span>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <img src="/EGC/img/icon-endereco.png" class="icones-info"/> <span class="texto-200 texto-cor-cinza-dark">#{controladorCidade.prefeitura.enderecoPrefeitura.rua} - #{controladorCidade.prefeitura.enderecoPrefeitura.numero}, #{controladorCidade.prefeitura.enderecoPrefeitura.cep}</span>
+                                                                        </div>
+                                                                    </div>
+
                                                                 </div>
                                                             </div>
 
                                                         </div>
+
+
                                                     </div>
 
-                                                </div>
+                                                    <!--lideres da prefeitura-->
+                                                    <div class="row lideres-da-cidade">
 
+                                                        <div class="col-md-12 text-center">
+                                                            <label><h2 class="texto-1">Lideres da Cidade</h2></label>
+                                                        </div>
+
+                                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6  text-center">
+                                                            <div class="row">
+                                                                <div>
+                                                                    <img class="img-lider" style="background-image: url(/EGC/sis/prefeitura/lider/#{controladorCidade.prefeitura.lideresPrefeitura.foto_prefeito})"/>
+                                                                </div>
+                                                                <div class="texto-cor-azul-escuro">#{controladorCidade.prefeitura.lideresPrefeitura.prefeito}</div>
+                                                                <div class="texto-cor-cinza-dark">Prefeito Municipal</div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6 text-center">
+                                                            <div class="row">
+                                                                <div>
+                                                                    <img class="img-lider" style="background-image: url(/EGC/sis/prefeitura/lider/#{controladorCidade.prefeitura.lideresPrefeitura.foto_vice_prefeito})"/>
+                                                                </div>
+                                                                <div class="texto-cor-azul-escuro">#{controladorCidade.prefeitura.lideresPrefeitura.vice_prefieto}</div>
+                                                                <div class="texto-cor-cinza-dark">Vice-Prefeito Municipal</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </h:panelGroup>
+
+                                                <!--Informações Gerais do Municipio-->
+                                                <div class="row informacoes-gerais">
+
+                                                    <div class="col-md-12 text-center">
+                                                        <label><h2 class="texto-1">Informações</h2></label>
+                                                    </div>
+
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 background-cor-vermelho-opaco">
+                                                        <div class="row bloco">
+                                                            <div class="col-lg-offset-0 col-lg-4 col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6 col-xs-4">
+                                                                <div class="row text-center">
+                                                                    <img src="/EGC/img/total-denuncias.png" class="icone-informacoes-gerais" width="80%" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-8">
+                                                                <div class="row" align="right">
+                                                                    <div class="col-lg-12 texto-cor-branco">
+                                                                        Denúncias
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row" align="right">
+                                                                    <div class="col-lg-12 texto-cor-branco">
+                                                                        #{controladorCidade.informacoesMunicipio.get(0)}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 background-cor-amarelo-opaco">
+                                                        <div class="row bloco">
+                                                            <div class="col-lg-offset-0 col-lg-4 col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6 col-xs-4">
+                                                                <div class="row text-center">
+                                                                    <img src="/EGC/img/denuncia-atendida.png" class="icone-informacoes-gerais" width="80%" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-8">
+                                                                <div class="row" align="right">
+                                                                    <div class="col-lg-12 texto-cor-branco">
+                                                                        Atendidas
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row" align="right">
+                                                                    <div class="col-lg-12 texto-cor-branco">
+                                                                        #{controladorCidade.informacoesMunicipio.get(1)}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 background-cor-verde-opaco">
+                                                        <div class="row bloco">
+                                                            <div class="col-lg-offset-0 col-lg-4 col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6 col-xs-4">
+                                                                <div class="row text-center">
+                                                                    <img src="/EGC/img/total-usuario.png" class="icone-informacoes-gerais" width="80%" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-8">
+                                                                <div class="row" align="right">
+                                                                    <div class="col-lg-12 texto-cor-branco">
+                                                                        Usuários
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row" align="right">
+                                                                    <div class="col-lg-12 texto-cor-branco">
+                                                                        #{controladorCidade.informacoesMunicipio.get(2)}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 background-cor-azul-opaco">
+                                                        <div class="row bloco">
+                                                            <div class="col-lg-offset-0 col-lg-4 col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6 col-xs-4">
+                                                                <div class="row text-center">
+                                                                    <img src="/EGC/img/total-funcionarios.png" class="icone-informacoes-gerais" width="80%" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-8">
+                                                                <div class="row" align="right">
+                                                                    <div class="col-lg-12 texto-cor-branco">
+                                                                        Funcionários
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row" align="right">
+                                                                    <div class="col-lg-12 texto-cor-branco">
+                                                                        #{controladorCidade.informacoesMunicipio.get(3)}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
                                             </div>
 
-                                            <!--lideres da prefeitura-->
-                                            <div class="row lideres-da-cidade">
+                                            <!--denuncias-->
+                                            <div class="col-lg-8 col-xs-12 col-md-8 col-sm-8 denuncias-da-cidade">
+                                                <h:panelGroup rendered="#{controladorCidade.denunciasPesquisaVisitante.size() > 0}">
+                                                    <!--filtro celular-->
+                                                    <div class="visible-xs col-md-12 filtro-celular">
+                                                        <h:form>
+                                                            <nav class="navbar navbar-default">
+                                                                <div class="container-fluid">
+                                                                    <!-- Brand and toggle get grouped for better mobile display -->
+                                                                    <div class="navbar-header">
+                                                                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                                                            <span class="sr-only">Toggle navigation</span>
+                                                                            <span class="icon-bar"></span>
+                                                                            <span class="icon-bar"></span>
+                                                                            <span class="icon-bar"></span>
+                                                                        </button>
+                                                                        <a class="navbar-brand">Filtro de Denúncias</a>
+                                                                    </div>
 
-                                                <div class="col-md-12 text-center">
-                                                    <label><h2 class="texto-1">Lideres da Cidade</h2></label>
-                                                </div>
+                                                                    <!-- Collect the nav links, forms, and other content for toggling -->
+                                                                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                                                        <ul class="nav navbar-nav">
+                                                                            <li><h:commandLink value="TODAS" action="#{controladorCidade.pesquisarCidade()}"/></li>
+                                                                            <li>
+                                                                                <h:commandLink value="DATA" action="#{controladorCidade.gerenciarDenunciasFiltro('DATA', controladorCidade.filtroQuery, controladorCidade.filtroTipo )}">
+                                                                                    <c:choose>
+                                                                                        <c:when test="#{controladorCidade.filtroData == 'DATA_DESC'}">
+                                                                                            <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
+                                                                                        </c:when>
+                                                                                        <c:otherwise>
+                                                                                            <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
+                                                                                        </c:otherwise>
+                                                                                    </c:choose>
+                                                                                </h:commandLink>
+                                                                            </li>
+                                                                            <li>
+                                                                                <h:commandLink value="AJUDA" action="#{controladorCidade.gerenciarDenunciasFiltro('AJUDA', controladorCidade.filtroQuery, controladorCidade.filtroTipo )}">
+                                                                                    <c:choose>
+                                                                                        <c:when test="#{controladorCidade.filtroAjuda == 'AJUDA_DESC'}">
+                                                                                            <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
+                                                                                        </c:when>
+                                                                                        <c:otherwise>
+                                                                                            <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
+                                                                                        </c:otherwise>
+                                                                                    </c:choose>
+                                                                                </h:commandLink> 
+                                                                            </li>
 
-                                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6  text-center">
-                                                    <div class="row">
-                                                        <div>
-                                                            <img class="img-lider" style="background-image: url(/EGC/sis/prefeitura/lider/prefeito_sth@gmail.com.jpg)"/>
-                                                        </div>
-                                                        <div class="texto-cor-azul-escuro">Emmanuel Messias </div>
-                                                        <div class="texto-cor-cinza-dark">Prefeito Municipal</div>
+                                                                            <li class="dropdown">
+                                                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ESTADO<span class="caret"></span></a>
+                                                                                <ul class="dropdown-menu">
+                                                                                    <c:forEach  var="estado" items="#{controladorCidade.estadoDeDenunciasNumerosDeDenuncia(controladorCidade.cidadePK.nomeCidade, controladorCidade.cidadePK.siglaEstado)}">
+
+                                                                                        <li>
+                                                                                            <h:commandLink value="#{estado.get(0)}" action="#{controladorCidade.gerenciarDenunciasFiltro('', estado.get(0), 'ESTADO' )}">
+                                                                                                <span class="badge">#{estado.get(1)}</span>
+                                                                                            </h:commandLink>
+                                                                                        </li>
+
+                                                                                    </c:forEach>
+                                                                                </ul>
+                                                                            </li>
+
+                                                                            <li class="dropdown">
+                                                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CATEGORIA<span class="caret"></span></a>
+                                                                                <ul class="dropdown-menu">
+                                                                                    <c:forEach  var="tipo" items="#{controladorCidade.tiposDeDenunciasNumerosDeDenuncia(controladorCidade.cidadePK.nomeCidade, controladorCidade.cidadePK.siglaEstado)}">
+                                                                                        <li>
+                                                                                            <h:commandLink value="#{tipo.get(0)}" action="#{controladorCidade.gerenciarDenunciasFiltro('', tipo.get(0), 'CATEGORIA' )}">
+                                                                                                <span class="badge">#{tipo.get(1)}</span>
+                                                                                            </h:commandLink>
+                                                                                        </li>
+                                                                                    </c:forEach>
+                                                                                </ul>
+                                                                            </li>
+
+                                                                            <li class="dropdown">
+                                                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">RUAS<span class="caret"></span></a>
+                                                                                <ul class="dropdown-menu">
+                                                                                    <c:forEach  var="rua" items="#{controladorCidade.ruasDeUmaCidadeNumerosDeDenuncia(controladorCidade.cidadePK.nomeCidade, controladorCidade.cidadePK.siglaEstado)}">
+                                                                                        <li>
+                                                                                            <h:commandLink value="#{rua.get(0)}" action="#{controladorCidade.gerenciarDenunciasFiltro('', rua.get(0), 'RUA' )}">
+                                                                                                <span class="badge">#{rua.get(1)}</span>
+                                                                                            </h:commandLink>
+                                                                                        </li>
+                                                                                    </c:forEach>
+                                                                                </ul>
+                                                                            </li>
+
+                                                                            <li class="dropdown">
+                                                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CEPS<span class="caret"></span></a>
+                                                                                <ul class="dropdown-menu">
+                                                                                    <c:forEach  var="cep" items="#{controladorCidade.cepDeUmaCidadeNumerosDeDenuncia(controladorCidade.cidadePK.nomeCidade, controladorCidade.cidadePK.siglaEstado)}">
+                                                                                        <li>
+                                                                                            <h:commandLink value="#{cep.get(0)}" action="#{controladorCidade.gerenciarDenunciasFiltro('', cep.get(0), 'CEP' )}">
+                                                                                                <span class="badge">#{cep.get(1)}</span>
+                                                                                            </h:commandLink>
+                                                                                        </li>
+                                                                                    </c:forEach>
+                                                                                </ul>
+                                                                            </li>
+
+                                                                        </ul>
+
+                                                                    </div>
+                                                                </div>
+                                                            </nav>
+
+                                                        </h:form>
                                                     </div>
-                                                </div>
+                                                </h:panelGroup>
 
-                                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6 text-center">
-                                                    <div class="row">
-                                                        <div>
-                                                            <img class="img-lider" style="background-image: url(/EGC/sis/prefeitura/lider/vice_prefeito_sth@gmail.com.jpg)"/>
+                                                <c:forEach var="denuncia" items="#{controladorCidade.denunciasPesquisaVisitante}">
+                                                    <div class="col-lg-12 denuncia-visitante">
+
+                                                        <div class="row denuncia-topo">
+                                                            <div class="col-lg-12">
+                                                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                                                    <div class="row">
+                                                                        <img src="/EGC/img/icones-denuncia/#{denuncia.iconeDenunica}" class="icone-denuncia"/>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                                                    <div class="row">
+                                                                        <label class="texto-cor-azul-egc1">#{denuncia.tipoDaDenunciaFormatado}</label>
+                                                                    </div>
+
+                                                                    <div class="row">
+                                                                        <div class="col-lg-6 col-xs-6">
+                                                                            <div class="row">
+                                                                                <div class="texto-cor-cinza-claro  hora-denuncia">#{denuncia.dataDenuncaFormatado}</div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6 col-xs-6 text-right">
+                                                                            <div class="row">
+                                                                                <span class="glyphicon glyphicon-heart texto-cor-vermelho" aria-hidden="true"> #{denuncia.numeroAjuda}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-exclamation-sign texto-cor-cinza-claro" aria-hidden="true"> 2</span> 
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
                                                         </div>
-                                                        <div class="texto-cor-azul-escuro">João Cleber</div>
-                                                        <div class="texto-cor-cinza-dark">Vice-Prefeito Municipal</div>
+                                                        <div class="row denuncia-centro">
+                                                            <div class="col-lg-12">
+
+                                                                <div class="row descricao-denuncia">
+                                                                    <div class="col-lg-12">
+                                                                        #{denuncia.descricao}
+                                                                        Suspendisse tempor erat non rutrum efficitur. Ut blandit sem lacus, 
+                                                                        malesuada pharetra odio laoreet eu. Fusce in justo lectus. 
+                                                                        Aliquam et urna malesuada, consequat ipsum non, eleifend du.
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="row endereco-denuncia">
+                                                                    <div class="col-lg-12 texto-cor-cinza-claro">
+                                                                        <label>#{denuncia.enderecoDenuncia}</label>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="row foto-denuncia text-center">
+                                                            <img src="/EGC/sis/denuncias/#{denuncia.foto}"/>
+                                                        </div>
+
+                                                        <div class="row text-right">
+                                                            <span class="label label-info">#{denuncia.estadoDeAcompanhamento}</span>
+                                                        </div>
+
                                                     </div>
-                                                </div>
+                                                </c:forEach>                                        
+                                                
+                                                <!--se não houver nenhuma denuncia-->
+                                                <h:panelGroup rendered="#{controladorCidade.denunciasPesquisaVisitante.size() == 0}">
+                                                    <div class="text-center"><h2 class="texto-1">Nenhum Denúncia nesta Cidade</h2></div>
+                                                </h:panelGroup>
+
                                             </div>
-
-                                            <!--Informações Gerais do Municipio-->
-                                            <div class="row informacoes-gerais">
-
-                                                <div class="col-md-12 text-center">
-                                                    <label><h2 class="texto-1">Informações</h2></label>
-                                                </div>
-
-                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 background-cor-vermelho-opaco">
-                                                    <div class="row bloco">
-                                                        <div class="col-lg-offset-0 col-lg-4 col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6 col-xs-4">
-                                                            <div class="row text-center">
-                                                                <img src="/EGC/img/total-denuncias.png" class="icone-informacoes-gerais" width="80%" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-8 col-md-12 col-sm-12 col-xs-8">
-                                                            <div class="row" align="right">
-                                                                <div class="col-lg-12 texto-cor-branco">
-                                                                    Denúncias
-                                                                </div>
-                                                            </div>
-                                                            <div class="row" align="right">
-                                                                <div class="col-lg-12 texto-cor-branco">
-                                                                    2
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 background-cor-amarelo-opaco">
-                                                    <div class="row bloco">
-                                                        <div class="col-lg-offset-0 col-lg-4 col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6 col-xs-4">
-                                                            <div class="row text-center">
-                                                                <img src="/EGC/img/denuncia-atendida.png" class="icone-informacoes-gerais" width="80%" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-8 col-md-12 col-sm-12 col-xs-8">
-                                                            <div class="row" align="right">
-                                                                <div class="col-lg-12 texto-cor-branco">
-                                                                    Atendidas
-                                                                </div>
-                                                            </div>
-                                                            <div class="row" align="right">
-                                                                <div class="col-lg-12 texto-cor-branco">
-                                                                    1
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 background-cor-verde-opaco">
-                                                    <div class="row bloco">
-                                                        <div class="col-lg-offset-0 col-lg-4 col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6 col-xs-4">
-                                                            <div class="row text-center">
-                                                                <img src="/EGC/img/total-usuario.png" class="icone-informacoes-gerais" width="80%" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-8 col-md-12 col-sm-12 col-xs-8">
-                                                            <div class="row" align="right">
-                                                                <div class="col-lg-12 texto-cor-branco">
-                                                                    Usuários
-                                                                </div>
-                                                            </div>
-                                                            <div class="row" align="right">
-                                                                <div class="col-lg-12 texto-cor-branco">
-                                                                    2
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 background-cor-azul-opaco">
-                                                    <div class="row bloco">
-                                                        <div class="col-lg-offset-0 col-lg-4 col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6 col-xs-4">
-                                                            <div class="row text-center">
-                                                                <img src="/EGC/img/total-funcionarios.png" class="icone-informacoes-gerais" width="80%" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-8 col-md-12 col-sm-12 col-xs-8">
-                                                            <div class="row" align="right">
-                                                                <div class="col-lg-12 texto-cor-branco">
-                                                                    Funcionários
-                                                                </div>
-                                                            </div>
-                                                            <div class="row" align="right">
-                                                                <div class="col-lg-12 texto-cor-branco">
-                                                                    1
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
                                         </div>
-
-                                        <!--denuncias-->
-                                        <div class="col-lg-8 col-xs-12 col-md-8 col-sm-8 denuncias-da-cidade">
-
-                                            <!--filtro celular-->
-                                            <div class="visible-xs col-md-12 filtro-celular">
+                                    </div>
+                                    <div class="hidden-xs col-lg-3 col-md-3 col-sm-3">
+                                        <h:panelGroup rendered="#{controladorCidade.denunciasPesquisaVisitante.size() > 0}">
+                                            <!--Filtro desk-->
+                                            <div class="lista-de-fitro">
                                                 <h:form>
-                                                    <nav class="navbar navbar-default">
-                                                        <div class="container-fluid">
-                                                            <!-- Brand and toggle get grouped for better mobile display -->
-                                                            <div class="navbar-header">
-                                                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                                                                    <span class="sr-only">Toggle navigation</span>
-                                                                    <span class="icon-bar"></span>
-                                                                    <span class="icon-bar"></span>
-                                                                    <span class="icon-bar"></span>
-                                                                </button>
-                                                                <a class="navbar-brand">Filtro de Denúncias</a>
-                                                            </div>
 
-                                                            <!-- Collect the nav links, forms, and other content for toggling -->
-                                                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                                                                <ul class="nav navbar-nav">
-                                                                    <li><h:commandLink value="TODAS" action="#{controladorCidade.pesquisarCidade()}"/></li>
-                                                                    <li>
-                                                                        <h:commandLink value="DATA" action="#{controladorCidade.gerenciarDenunciasFiltro('DATA', controladorCidade.filtroQuery, controladorCidade.filtroTipo )}">
-                                                                            <c:choose>
-                                                                                <c:when test="#{controladorCidade.filtroData == 'DATA_DESC'}">
-                                                                                    <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
-                                                                                </c:when>
-                                                                                <c:otherwise>
-                                                                                    <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
-                                                                                </c:otherwise>
-                                                                            </c:choose>
-                                                                        </h:commandLink>
-                                                                    </li>
-                                                                    <li>
-                                                                        <h:commandLink value="AJUDA" action="#{controladorCidade.gerenciarDenunciasFiltro('AJUDA', controladorCidade.filtroQuery, controladorCidade.filtroTipo )}">
-                                                                            <c:choose>
-                                                                                <c:when test="#{controladorCidade.filtroAjuda == 'AJUDA_DESC'}">
-                                                                                    <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
-                                                                                </c:when>
-                                                                                <c:otherwise>
-                                                                                    <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
-                                                                                </c:otherwise>
-                                                                            </c:choose>
-                                                                        </h:commandLink> 
-                                                                    </li>
+                                                    <div class="texto text-center">ANDAMENTO</div>
+                                                    <div class="progress-pie-chart" data-percent="#{controladorCidade.andamentoDasDenuncias()}">
 
-                                                                    <li class="dropdown">
-                                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ESTADO<span class="caret"></span></a>
-                                                                        <ul class="dropdown-menu">
-                                                                            <c:forEach  var="estado" items="#{controladorCidade.estadoDeDenunciasNumerosDeDenuncia(controladorCidade.cidadePK.nomeCidade, controladorCidade.cidadePK.siglaEstado)}">
-
-                                                                                <li>
-                                                                                    <h:commandLink value="#{estado.get(0)}" action="#{controladorCidade.gerenciarDenunciasFiltro('', estado.get(0), 'ESTADO' )}">
-                                                                                        <span class="badge">#{estado.get(1)}</span>
-                                                                                    </h:commandLink>
-                                                                                </li>
-
-                                                                            </c:forEach>
-                                                                        </ul>
-                                                                    </li>
-
-                                                                    <li class="dropdown">
-                                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CATEGORIA<span class="caret"></span></a>
-                                                                        <ul class="dropdown-menu">
-                                                                            <c:forEach  var="tipo" items="#{controladorCidade.tiposDeDenunciasNumerosDeDenuncia(controladorCidade.cidadePK.nomeCidade, controladorCidade.cidadePK.siglaEstado)}">
-                                                                                <li>
-                                                                                    <h:commandLink value="#{tipo.get(0)}" action="#{controladorCidade.gerenciarDenunciasFiltro('', tipo.get(0), 'CATEGORIA' )}">
-                                                                                        <span class="badge">#{tipo.get(1)}</span>
-                                                                                    </h:commandLink>
-                                                                                </li>
-                                                                            </c:forEach>
-                                                                        </ul>
-                                                                    </li>
-
-                                                                    <li class="dropdown">
-                                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">RUAS<span class="caret"></span></a>
-                                                                        <ul class="dropdown-menu">
-                                                                            <c:forEach  var="rua" items="#{controladorCidade.ruasDeUmaCidadeNumerosDeDenuncia(controladorCidade.cidadePK.nomeCidade, controladorCidade.cidadePK.siglaEstado)}">
-                                                                                <li>
-                                                                                    <h:commandLink value="#{rua.get(0)}" action="#{controladorCidade.gerenciarDenunciasFiltro('', rua.get(0), 'RUA' )}">
-                                                                                        <span class="badge">#{rua.get(1)}</span>
-                                                                                    </h:commandLink>
-                                                                                </li>
-                                                                            </c:forEach>
-                                                                        </ul>
-                                                                    </li>
-
-                                                                    <li class="dropdown">
-                                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CEPS<span class="caret"></span></a>
-                                                                        <ul class="dropdown-menu">
-                                                                            <c:forEach  var="cep" items="#{controladorCidade.cepDeUmaCidadeNumerosDeDenuncia(controladorCidade.cidadePK.nomeCidade, controladorCidade.cidadePK.siglaEstado)}">
-                                                                                <li>
-                                                                                    <h:commandLink value="#{cep.get(0)}" action="#{controladorCidade.gerenciarDenunciasFiltro('', cep.get(0), 'CEP' )}">
-                                                                                        <span class="badge">#{cep.get(1)}</span>
-                                                                                    </h:commandLink>
-                                                                                </li>
-                                                                            </c:forEach>
-                                                                        </ul>
-                                                                    </li>
-
-                                                                </ul>
-
+                                                        <div class="ppc-progress">
+                                                            <div class="ppc-progress-fill"></div>
+                                                        </div>
+                                                        <div class="ppc-percents">
+                                                            <div class="pcc-percents-wrapper">
+                                                                <span>%</span>
                                                             </div>
                                                         </div>
-                                                    </nav>
+                                                    </div>
+
+                                                    <br/>
+
+
+                                                    <span class="texto">FILTRO</span> <br/>
+                                                    <ul class="list-unstyled">
+                                                        <li><b><h:commandLink value="TODAS" action="#{controladorCidade.pesquisarCidade()}"/></b></li>
+                                                        <li>
+                                                            <b>
+                                                                <h:commandLink value="DATA" action="#{controladorCidade.gerenciarDenunciasFiltro('DATA', controladorCidade.filtroQuery, controladorCidade.filtroTipo )}"/>
+                                                                <c:choose>
+                                                                    <c:when test="#{controladorCidade.filtroData == 'DATA_DESC'}">
+                                                                        <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </b>    
+                                                        </li>
+                                                        <li>
+                                                            <b>
+                                                                <h:commandLink value="AJUDA" action="#{controladorCidade.gerenciarDenunciasFiltro('AJUDA', controladorCidade.filtroQuery, controladorCidade.filtroTipo )}"/>
+                                                                <c:choose>
+                                                                    <c:when test="#{controladorCidade.filtroAjuda == 'AJUDA_DESC'}">
+                                                                        <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </b>    
+                                                        </li>
+
+
+                                                    </ul>
+                                                    <br/>
+
+                                                    <span class="texto">ESTADO</span> <br/>
+                                                    <ul class="list-unstyled">
+
+                                                        <c:forEach  var="estado" items="#{controladorCidade.estadoDeDenunciasNumerosDeDenuncia(controladorCidade.cidadePK.nomeCidade, controladorCidade.cidadePK.siglaEstado)}">
+
+                                                            <li>
+                                                                <b>
+                                                                    <h:commandLink value="#{estado.get(0)}" action="#{controladorCidade.gerenciarDenunciasFiltro('', estado.get(0), 'ESTADO' )}"/>
+                                                                    <span class="badge">#{estado.get(1)}</span>
+                                                                </b>    
+                                                            </li>
+
+                                                        </c:forEach>
+
+                                                    </ul>
+                                                    <br/>
+
+                                                    <span class="texto">CATEGORIA</span> <br/>
+                                                    <ul class="list-unstyled">
+                                                        <c:forEach  var="tipo" items="#{controladorCidade.tiposDeDenunciasNumerosDeDenuncia(controladorCidade.cidadePK.nomeCidade, controladorCidade.cidadePK.siglaEstado)}">
+
+                                                            <li>
+                                                                <b>
+                                                                    <h:commandLink value="#{tipo.get(0)}" action="#{controladorCidade.gerenciarDenunciasFiltro('', tipo.get(0), 'CATEGORIA' )}"/>
+                                                                    <span class="badge">#{tipo.get(1)}</span>
+                                                                </b>    
+                                                            </li>
+                                                        </c:forEach>
+
+                                                    </ul>
+                                                    <br/>
+
+                                                    <span class="texto">RUAS</span> <br/>
+                                                    <ul class="list-unstyled">
+                                                        <c:forEach  var="rua" items="#{controladorCidade.ruasDeUmaCidadeNumerosDeDenuncia(controladorCidade.cidadePK.nomeCidade, controladorCidade.cidadePK.siglaEstado)}">
+
+                                                            <li>
+                                                                <b>
+                                                                    <h:commandLink value="#{rua.get(0)}" action="#{controladorCidade.gerenciarDenunciasFiltro('', rua.get(0), 'RUA' )}"/>
+                                                                    <span class="badge">#{rua.get(1)}</span>
+                                                                </b>    
+                                                            </li>
+
+                                                        </c:forEach>
+                                                    </ul>
+                                                    <br/>
+
+                                                    <span class="texto">CEPS</span> <br/>
+                                                    <ul class="list-unstyled">
+                                                        <c:forEach  var="cep" items="#{controladorCidade.cepDeUmaCidadeNumerosDeDenuncia(controladorCidade.cidadePK.nomeCidade, controladorCidade.cidadePK.siglaEstado)}">
+
+                                                            <li>
+                                                                <b>
+                                                                    <h:commandLink value="#{cep.get(0)}" action="#{controladorCidade.gerenciarDenunciasFiltro('', cep.get(0), 'CEP' )}"/>
+                                                                    <span class="badge">#{cep.get(1)}</span>
+                                                                </b>    
+                                                            </li>
+
+                                                        </c:forEach>
+                                                    </ul>
+                                                    <br/>
+
 
                                                 </h:form>
                                             </div>
+                                        </h:panelGroup>
 
-
-
-                                            <c:forEach var="denuncia" items="#{controladorCidade.denunciasPesquisaVisitante}">
-                                                <div class="col-lg-12 denuncia-visitante">
-
-                                                    <div class="row denuncia-topo">
-                                                        <div class="col-lg-12">
-                                                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                                                                <div class="row">
-                                                                    <img src="/EGC/img/icones-denuncia/#{denuncia.iconeDenunica}" class="icone-denuncia"/>
-                                                                </div>
-
-                                                            </div>
-                                                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-                                                                <div class="row">
-                                                                    <label class="texto-cor-azul-egc1">#{denuncia.tipoDaDenunciaFormatado}</label>
-                                                                </div>
-
-                                                                <div class="row">
-                                                                    <div class="col-lg-6 col-xs-6">
-                                                                        <div class="row">
-                                                                            <div class="texto-cor-cinza-claro  hora-denuncia">#{denuncia.dataDenuncaFormatado}</div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-6 col-xs-6 text-right">
-                                                                        <div class="row">
-                                                                            <span class="glyphicon glyphicon-heart texto-cor-vermelho" aria-hidden="true"> #{denuncia.numeroAjuda}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-exclamation-sign texto-cor-cinza-claro" aria-hidden="true"> 2</span> 
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="row denuncia-centro">
-                                                        <div class="col-lg-12">
-
-                                                            <div class="row descricao-denuncia">
-                                                                <div class="col-lg-12">
-                                                                    #{denuncia.descricao}
-                                                                    Suspendisse tempor erat non rutrum efficitur. Ut blandit sem lacus, 
-                                                                    malesuada pharetra odio laoreet eu. Fusce in justo lectus. 
-                                                                    Aliquam et urna malesuada, consequat ipsum non, eleifend du.
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="row endereco-denuncia">
-                                                                <div class="col-lg-12 texto-cor-cinza-claro">
-                                                                    <label>#{denuncia.enderecoDenuncia}</label>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="row foto-denuncia text-center">
-                                                        <img src="/EGC/sis/denuncias/#{denuncia.foto}"/>
-                                                    </div>
-
-                                                    <div class="row text-right">
-                                                        <span class="label label-info">#{denuncia.estadoDeAcompanhamento}</span>
-                                                    </div>
-
-                                                </div>
-                                            </c:forEach>                                        
-
-
-                                        </div>
                                     </div>
                                 </div>
-                                <div class="hidden-xs col-lg-3 col-md-3 col-sm-3">
-                                    <!--Filtro desk-->
-                                    <div class="lista-de-fitro">
-                                        <h:form>
 
-                                            <div class="texto text-center">ANDAMENTO</div>
-                                            <div class="progress-pie-chart" data-percent="#{controladorCidade.andamentoDasDenuncias()}">
-
-                                                <div class="ppc-progress">
-                                                    <div class="ppc-progress-fill"></div>
-                                                </div>
-                                                <div class="ppc-percents">
-                                                    <div class="pcc-percents-wrapper">
-                                                        <span>%</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <br/>
-
-
-                                            <span class="texto">FILTRO</span> <br/>
-                                            <ul class="list-unstyled">
-                                                <li><b><h:commandLink value="TODAS" action="#{controladorCidade.pesquisarCidade()}"/></b></li>
-                                                <li>
-                                                    <b>
-                                                        <h:commandLink value="DATA" action="#{controladorCidade.gerenciarDenunciasFiltro('DATA', controladorCidade.filtroQuery, controladorCidade.filtroTipo )}"/>
-                                                        <c:choose>
-                                                            <c:when test="#{controladorCidade.filtroData == 'DATA_DESC'}">
-                                                                <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                    </b>    
-                                                </li>
-                                                <li>
-                                                    <b>
-                                                        <h:commandLink value="AJUDA" action="#{controladorCidade.gerenciarDenunciasFiltro('AJUDA', controladorCidade.filtroQuery, controladorCidade.filtroTipo )}"/>
-                                                        <c:choose>
-                                                            <c:when test="#{controladorCidade.filtroAjuda == 'AJUDA_DESC'}">
-                                                                <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                    </b>    
-                                                </li>
-
-
-                                            </ul>
-                                            <br/>
-
-                                            <span class="texto">ESTADO</span> <br/>
-                                            <ul class="list-unstyled">
-
-                                                <c:forEach  var="estado" items="#{controladorCidade.estadoDeDenunciasNumerosDeDenuncia(controladorCidade.cidadePK.nomeCidade, controladorCidade.cidadePK.siglaEstado)}">
-
-                                                    <li>
-                                                        <b>
-                                                            <h:commandLink value="#{estado.get(0)}" action="#{controladorCidade.gerenciarDenunciasFiltro('', estado.get(0), 'ESTADO' )}"/>
-                                                            <span class="badge">#{estado.get(1)}</span>
-                                                        </b>    
-                                                    </li>
-
-                                                </c:forEach>
-
-                                            </ul>
-                                            <br/>
-
-                                            <span class="texto">CATEGORIA</span> <br/>
-                                            <ul class="list-unstyled">
-                                                <c:forEach  var="tipo" items="#{controladorCidade.tiposDeDenunciasNumerosDeDenuncia(controladorCidade.cidadePK.nomeCidade, controladorCidade.cidadePK.siglaEstado)}">
-
-                                                    <li>
-                                                        <b>
-                                                            <h:commandLink value="#{tipo.get(0)}" action="#{controladorCidade.gerenciarDenunciasFiltro('', tipo.get(0), 'CATEGORIA' )}"/>
-                                                            <span class="badge">#{tipo.get(1)}</span>
-                                                        </b>    
-                                                    </li>
-                                                </c:forEach>
-
-                                            </ul>
-                                            <br/>
-
-                                            <span class="texto">RUAS</span> <br/>
-                                            <ul class="list-unstyled">
-                                                <c:forEach  var="rua" items="#{controladorCidade.ruasDeUmaCidadeNumerosDeDenuncia(controladorCidade.cidadePK.nomeCidade, controladorCidade.cidadePK.siglaEstado)}">
-
-                                                    <li>
-                                                        <b>
-                                                            <h:commandLink value="#{rua.get(0)}" action="#{controladorCidade.gerenciarDenunciasFiltro('', rua.get(0), 'RUA' )}"/>
-                                                            <span class="badge">#{rua.get(1)}</span>
-                                                        </b>    
-                                                    </li>
-
-                                                </c:forEach>
-                                            </ul>
-                                            <br/>
-
-                                            <span class="texto">CEPS</span> <br/>
-                                            <ul class="list-unstyled">
-                                                <c:forEach  var="cep" items="#{controladorCidade.cepDeUmaCidadeNumerosDeDenuncia(controladorCidade.cidadePK.nomeCidade, controladorCidade.cidadePK.siglaEstado)}">
-
-                                                    <li>
-                                                        <b>
-                                                            <h:commandLink value="#{cep.get(0)}" action="#{controladorCidade.gerenciarDenunciasFiltro('', cep.get(0), 'CEP' )}"/>
-                                                            <span class="badge">#{cep.get(1)}</span>
-                                                        </b>    
-                                                    </li>
-
-                                                </c:forEach>
-                                            </ul>
-                                            <br/>
-
-
-                                        </h:form>
-                                    </div>
-                                </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
-            </div>
+            </h:panelGroup>
+
+            
+            <!--se não houver nenhuma denuncia e a prefeitura não é cadastrada-->
+            <h:panelGroup rendered="#{controladorCidade.enderecoPesquisa.length() > 0 and controladorCidade.denunciasPesquisaVisitante.size() == 0 and controladorCidade.mostrarInformacoesPrefeitura == false}">
+                <div class="container pagina-visitante">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="resultado-pesquisa-visitante">
+                                <label><h2 class="texto-1">Nenhum Resultado Encontrado</h2></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </h:panelGroup>
+
         </div>
 
 

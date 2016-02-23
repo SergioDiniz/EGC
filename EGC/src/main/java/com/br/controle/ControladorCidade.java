@@ -7,6 +7,7 @@ package com.br.controle;
 
 import com.br.beans.CidadePK;
 import com.br.beans.Denuncia;
+import com.br.beans.Prefeitura;
 import com.br.beans.Registro;
 import com.br.fachada.Fachada;
 import java.io.Serializable;
@@ -34,6 +35,9 @@ public class ControladorCidade implements Serializable {
     private String filtroQuery;
     private String filtroTipo;
     private String enderecoPesquisa;
+    private boolean mostrarInformacoesPrefeitura;
+    private Prefeitura prefeitura;
+    private List<Long> informacoesMunicipio;
 
     public ControladorCidade() {
         this.cidadePK = new CidadePK();
@@ -43,6 +47,8 @@ public class ControladorCidade implements Serializable {
         this.filtroQuery = "";
         this.filtroTipo = "";
         this.enderecoPesquisa = "";
+        this.mostrarInformacoesPrefeitura = false;
+        this.prefeitura = new Prefeitura();
     }
 
     public List<Registro> registrosDaCidade(String cidade, String estado) {
@@ -65,10 +71,28 @@ public class ControladorCidade implements Serializable {
         return fachada.estadoDeDenunciasNumerosDeDenuncia(cidade, estado);
     }
 
-    public String pesquisarCidade() {
-        
-        String end[] = this.enderecoPesquisa.split(", ");
+    public boolean mostrarInformacoesDaPrefeitura() {
+        return fachada.prefeituraCadastrada(this.cidadePK.getNomeCidade(), this.cidadePK.getSiglaEstado());
+    }
 
+    public void informacoesGeraisMunicipio(String emailPrefeitura, String cidade, String estado) {
+        this.informacoesMunicipio = new ArrayList<>();
+
+        long denuncias = fachada.totalDeDenunciasNaCidade(cidade, estado);
+        long denunciasAtendidas = fachada.totalDeDenunciasAtendidasNaCidade(cidade, estado);
+        long usuarios = fachada.totalDeUsuariosNaCidade(cidade, estado);
+        long funcionarios = fachada.totalDeFuncionariosNaPrefeitura(emailPrefeitura);
+
+        this.informacoesMunicipio.add(0, denuncias);
+        this.informacoesMunicipio.add(1, denunciasAtendidas);
+        this.informacoesMunicipio.add(2, usuarios);
+        this.informacoesMunicipio.add(3, funcionarios);
+    }
+
+    public String pesquisarCidade() {
+
+        // pegando informações de denuncias
+        String end[] = this.enderecoPesquisa.split(", ");
 
         if (end.length == 3) {
             String cs[] = end[1].split(" - ");
@@ -84,17 +108,36 @@ public class ControladorCidade implements Serializable {
                 this.cidadePK.setSiglaEstado("");
             }
         }
-        
+
         this.denunciasPesquisaVisitante = new ArrayList<>();
         this.denunciasPesquisaVisitante = fachada.pesquisarTodasDenunciasPorCidade(this.cidadePK.getNomeCidade(), this.cidadePK.getSiglaEstado(), "DATA");
+
+        System.out.println("Numero de Denuncias: " + this.denunciasPesquisaVisitante.size());
         
+        // pegando informações da prefeitura
+        this.prefeitura = new Prefeitura();
+        this.prefeitura = fachada.pesquisarPrefeituraPorCidade(this.cidadePK.getNomeCidade(), this.cidadePK.getSiglaEstado());
+
+        // vefiricando se a prefeitura existe
+        if (this.prefeitura != null) {
+            this.mostrarInformacoesPrefeitura = true;
+        } else {
+            this.mostrarInformacoesPrefeitura = false;
+        }
         
+        System.out.println("Mostrar Prefeitura: " + this.mostrarInformacoesPrefeitura);
         
+        // pegando informações gerais do municipio
+        String emailPrefeitura = "";
+        if(this.prefeitura != null){
+            emailPrefeitura = this.prefeitura.getEmail();
+        }
+        informacoesGeraisMunicipio(emailPrefeitura, this.cidadePK.getNomeCidade(), this.cidadePK.getSiglaEstado());
         
         return null;
     }
-    
-    public long andamentoDasDenuncias(){
+
+    public long andamentoDasDenuncias() {
         return 0;
     }
 
@@ -189,5 +232,30 @@ public class ControladorCidade implements Serializable {
     public void setCidadePK(CidadePK cidadePK) {
         this.cidadePK = cidadePK;
     }
+
+    public boolean isMostrarInformacoesPrefeitura() {
+        return mostrarInformacoesPrefeitura;
+    }
+
+    public void setMostrarInformacoesPrefeitura(boolean mostrarInformacoesPrefeitura) {
+        this.mostrarInformacoesPrefeitura = mostrarInformacoesPrefeitura;
+    }
+
+    public Prefeitura getPrefeitura() {
+        return prefeitura;
+    }
+
+    public void setPrefeitura(Prefeitura prefeitura) {
+        this.prefeitura = prefeitura;
+    }
+
+    public List<Long> getInformacoesMunicipio() {
+        return informacoesMunicipio;
+    }
+
+    public void setInformacoesMunicipio(List<Long> informacoesMunicipio) {
+        this.informacoesMunicipio = informacoesMunicipio;
+    }
+
 
 }

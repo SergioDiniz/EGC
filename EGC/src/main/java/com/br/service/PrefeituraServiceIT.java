@@ -37,7 +37,7 @@ public interface PrefeituraServiceIT {
     
     public List<Long> dadosGeraisPrefeitura(String emailPrefeitura, String cidade, String estado);
     
-    
+    public boolean prefeituraCadastrada(String cidade, String estado);
 
     
     

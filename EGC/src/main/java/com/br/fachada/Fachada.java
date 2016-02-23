@@ -135,6 +135,10 @@ public class Fachada implements Serializable {
     public List<Long> dadosGeraisPrefeitura(String emailPrefeitura, String cidade, String estado) {
         return ps.dadosGeraisPrefeitura(emailPrefeitura, cidade, estado);
     }
+    
+    public boolean prefeituraCadastrada(String cidade, String estado){
+        return ps.prefeituraCadastrada(cidade, estado);
+    }
 
     // FIM PrefeituraServices
     //
