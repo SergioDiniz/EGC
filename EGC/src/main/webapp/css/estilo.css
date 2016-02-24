@@ -77,13 +77,14 @@ html, body{
     margin-top: 100px;
     background-color: #f3f5f6;
     background-image: url(../img/backinicio.jpg);
-    background-size: 100%;
+    background-position: center;
+    background-size: cover;
 }
 
 #s-logo{
     text-align: center;
-    padding-top: 130px;
-    padding-bottom: 130px;
+    padding-top: 8em;
+    padding-bottom: 8em;
 }
 
 .descricaoTipoLogin{
@@ -252,6 +253,15 @@ html, body{
 
 }
 .login{
+    width: 100%;
+    height: auto;
+    padding-top: 10em;
+    padding-bottom: 33em;
+    background-color: #0c0e10;
+    background-image: url(../img/bglogin.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto 100%;
 
 }
 
@@ -2383,6 +2393,15 @@ html, body{
 
 @media (max-width: 767px){
 
+    .login{
+        padding-top: 2em;
+        padding-bottom: 5em;
+    }
+    
+    .login .from-login{
+        margin-top: 5em;
+    }
+    
     .texto-1{
         font-size: 1.5em;
     }

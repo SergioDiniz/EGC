@@ -14,140 +14,147 @@
         <script src="/EGC/js/jquery-1.11.2.js" type="text/javascript"/>
         <script src="/EGC/js/bootstrap.js" type="text/javascript"/>
         <script src="/EGC/js/scripts.js" type="text/javascript"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
     </h:head>
+
+
     <h:body>
-        
-<!--        <div id="menu">
-            <ui:include src="menu.xhtml"/>
-        </div>-->
-        <div class="info-sistema">
-            
+
+        <!--        <div id="menu">
+                    <ui:include src="menu.xhtml"/>
+                </div>-->
+        <!--        <div class="info-sistema">
+                    
+                </div>-->
+
+        <div class="login">
+
+            <div class="col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10">
+                <div class="row">
+
+
+                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 text-center">
+                        <span id="logo-egc"><img src="img/logo.png" title="EGC"/></span> <br/><br/>
+                        <span id="texto-egc">Eficiência em Gestão de Cidades</span> <br/>
+                        <span id="descricao-egc">Uma ferramenta que faz uso da participação popular na construção de cidades inteligentes</span> <br/><br/><br/>
+                        <h:form>
+                            <h:commandButton class="btn btn-default btn-lg" value="Cadastre-se" action="/sis/cadastro/usuario.jsf?faces-redirect=true"/>
+                        </h:form>
+                    </div>
+
+                    <div class="col-lg-offset-1 col-lg-4 col-md-5 col-sm-5 col-xs-12 from-login">
+                        
+                        <label class="visible-xs text-center"><h2 class="texto-200 texto-cor-branco">Login</h2></label>
+                        
+                        <h:form>
+                            <h:inputText value="#{controladorUsuario.usuario.email}" class="form-control input-lg" pt:placeholder="email"/>
+                            <br/>
+                            <h:inputSecret value="#{controladorUsuario.usuario.senha}" class="form-control input-lg" pt:placeholder="senha"/>
+                            <br/>
+                            <h:commandButton class="btn btn-primary btn-lg btn-login" value="entrar"
+                                             action="#{controladorUsuario.login()}"/>
+                            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                        </h:form>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
         </div>
 
         <div class="container">
-            <div class="conteudo login">
-                
-                <div class="row">
-                    <div class="col-md-7">
-                        <div class="informacoes">
-                            <span id="logo-egc"><img src="img/logo.png" title="EGC"/></span> <br/><br/>
-                            <span id="texto-egc">Eficiência em Gestão de Cidades</span> <br/>
-                            <span id="descricao-egc">Uma ferramenta que faz uso da participação popular na construção de cidades inteligentes</span> <br/><br/><br/>
-                            <h:form>
-                                <h:commandButton class="btn btn-default btn-lg" value="Cadastre-se" action="/sis/cadastro/usuario.jsf?faces-redirect=true"/>
-                            </h:form>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-offset-1 col-md-4">
-                        <div class="area-login">
-                            <h:form>
-                                <h:inputText value="#{controladorUsuario.usuario.email}" class="form-control input-lg" pt:placeholder="email"/>
-                                <br/>
-                                <h:inputSecret value="#{controladorUsuario.usuario.senha}" class="form-control input-lg" pt:placeholder="senha"/>
-                                <br/>
-                                <h:commandButton class="btn btn-primary btn-lg btn-login" value="entrar"
-                                                 action="#{controladorUsuario.login()}"/>
-                                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
-                            </h:form>
-                        </div>
-                    </div>
-                </div>
-                
-                
-                
-                
-            </div>
-            
-            
+
             <div class="row">
-            <div class="escolherTipoLogin">
-                                
-                <div class="col-md-12">
-                    <div class="col-md-4 loginFuncionario" align="center">
-                        
-                        <div class="row">
-                            <img src="img/icon funcionario.png" title="Login Funcionario"></img>
-                        </div>
-                        <div class="row" align="center">
-                            <h:form>
-                                <h:commandLink action="/sis/login/funcionario.jsf?faces-redirect=true" value="Funcionario"/>
-                            </h:form>
-                        </div>
-                        
-                        <div class="row" align="center">
-                            <div class="col-md-offset-1 col-md-10">
-                                <p class="descricaoTipoLogin">
-                                Ambiente para o gerenciamento das denúncias da cidade, 
-                                isto é, atualizar a situação das denúncias, podendo 
-                                informa se uma denúncia já foi atendida, se estão 
-                                trabalhando para melhorar e também de denunciar caso 
-                                o conteúdo da denúncia seja improprio.
-                                </p>
+                <div class="escolherTipoLogin">
+
+                    <div class="col-md-12">
+                        <div class="col-md-4 loginFuncionario" align="center">
+
+                            <div class="row">
+                                <img src="img/icon funcionario.png" title="Login Funcionario"></img>
                             </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-4 loginPrefeitura" align="center">
-                        
-                        <div class="row">
-                            <img src="img/icon prefeitura.png" title="Login Prefeitura"></img>
-                        </div>
-                        <div class="row" align="center">
-                            <h:form>
-                                <h:commandLink action="/sis/login/prefeitura.jsf?faces-redirect=true" value="Prefeitura"/>
-                            </h:form>
-                        </div>
-                        
-                        <div class="row" align="center">
-                            <div class="col-md-offset-1 col-md-10">
-                                <p class="descricaoTipoLogin">
-                                Ambiente composto pelas funções de gerenciar o 
-                                acompanhamento das denúncias feitas pelos Usuários.
-                                Tendo acesso apenas as denúncias da sua cidade, 
-                                a Prefeitura terá como conhecer o total de denúncias 
-                                e as informações referente a elas. 
+                            <div class="row" align="center">
                                 <h:form>
-                                    <b><h:commandLink action="/sis/cadastro/prefeitura.jsf?faces-redirect=true" value="Solicitar Acesso."/></b>
+                                    <h:commandLink action="/sis/login/funcionario.jsf?faces-redirect=true" value="Funcionario"/>
                                 </h:form>
-                                </p>
+                            </div>
+
+                            <div class="row" align="center">
+                                <div class="col-md-offset-1 col-md-10">
+                                    <p class="descricaoTipoLogin">
+                                        Ambiente para o gerenciamento das denúncias da cidade, 
+                                        isto é, atualizar a situação das denúncias, podendo 
+                                        informa se uma denúncia já foi atendida, se estão 
+                                        trabalhando para melhorar e também de denunciar caso 
+                                        o conteúdo da denúncia seja improprio.
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="col-md-4 loginAdmin" align="center">
-                        
-                        <div class="row">
-                            <img src="img/icon admin.png" title="Login Administrador"></img>
+
+                        <div class="col-md-4 loginPrefeitura" align="center">
+
+                            <div class="row">
+                                <img src="img/icon prefeitura.png" title="Login Prefeitura"></img>
+                            </div>
+                            <div class="row" align="center">
+                                <h:form>
+                                    <h:commandLink action="/sis/login/prefeitura.jsf?faces-redirect=true" value="Prefeitura"/>
+                                </h:form>
+                            </div>
+
+                            <div class="row" align="center">
+                                <div class="col-md-offset-1 col-md-10">
+                                    <p class="descricaoTipoLogin">
+                                        Ambiente composto pelas funções de gerenciar o 
+                                        acompanhamento das denúncias feitas pelos Usuários.
+                                        Tendo acesso apenas as denúncias da sua cidade, 
+                                        a Prefeitura terá como conhecer o total de denúncias 
+                                        e as informações referente a elas. 
+                                        <h:form>
+                                            <b><h:commandLink action="/sis/cadastro/prefeitura.jsf?faces-redirect=true" value="Solicitar Acesso."/></b>
+                                        </h:form>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="row" align="center">
-                            <h:form>
-                                <h:commandLink action="/sis/login/administrador.jsf?faces-redirect=true" value="Administrador"/>
-                            </h:form>
-                        </div>
-                        
-                        <div class="row" align="center">
-                            <div class="col-md-offset-1 col-md-10">
-                                <p class="descricaoTipoLogin">
-                                O administrador irá validar e aprovar o cadastro 
-                                de novas prefeituras podendo também excluir uma 
-                                prefeitura quando a mesma fizer a solicitação para 
-                                cancelar sua conta. Terá um ambiente especial para 
-                                o acompanhamento de denúncias que contem irregularidades, 
-                                podendo excluir ou confirma que é válida. 
-                                </p>
+
+                        <div class="col-md-4 loginAdmin" align="center">
+
+                            <div class="row">
+                                <img src="img/icon admin.png" title="Login Administrador"></img>
+                            </div>
+                            <div class="row" align="center">
+                                <h:form>
+                                    <h:commandLink action="/sis/login/administrador.jsf?faces-redirect=true" value="Administrador"/>
+                                </h:form>
+                            </div>
+
+                            <div class="row" align="center">
+                                <div class="col-md-offset-1 col-md-10">
+                                    <p class="descricaoTipoLogin">
+                                        O administrador irá validar e aprovar o cadastro 
+                                        de novas prefeituras podendo também excluir uma 
+                                        prefeitura quando a mesma fizer a solicitação para 
+                                        cancelar sua conta. Terá um ambiente especial para 
+                                        o acompanhamento de denúncias que contem irregularidades, 
+                                        podendo excluir ou confirma que é válida. 
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            </div>
-            
+
         </div>
 
         <div class="rodape">
             <div id="s-logo">
-                <img src="img/s-logo.png" height="70px"/>
+                <img src="img/s-logo.png" height="100em"/>
             </div>
         </div>
     </h:body>
