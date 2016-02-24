@@ -2397,11 +2397,11 @@ html, body{
         padding-top: 2em;
         padding-bottom: 5em;
     }
-    
+
     .login .from-login{
         margin-top: 5em;
     }
-    
+
     .texto-1{
         font-size: 1.5em;
     }
@@ -2448,4 +2448,11 @@ html, body{
     }
 
 
+}
+
+@media (min-width: 768px) and (max-width: 991px){
+    .login{
+        padding-top: 6em;
+        padding-bottom: 10em;
+    }
 }
