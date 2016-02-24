@@ -48,6 +48,7 @@ public class ControladorUsuario implements Serializable {
     private int totalDenuncias;
     private int denunicasAtendidas;
     private List<Denuncia> feedDenuncias;
+    private boolean usuarioAtivo;
 
     @EJB
     private Fachada fachada;
@@ -67,6 +68,7 @@ public class ControladorUsuario implements Serializable {
         this.denunicasAtendidas = 0;
         this.conteudoInapropriado = new ConteudoInapropriado();
         this.feedDenuncias = new ArrayList<>();
+        this.usuarioAtivo = false;
     }
 
     public String cadastro() {
@@ -105,7 +107,9 @@ public class ControladorUsuario implements Serializable {
             this.ufDenuncia = this.usuario.getEndereco().getEstado();
             this.tipoDenunciaFeed = TipoDeDenuncia.TODOS;
             this.ordemDenuncia = "data";
+            this.usuarioAtivo = true;
             setDenunicasFeed();
+
             return "/sis/usuario/index.jsf?faces-redirect=true";
 //            FacesContext.getCurrentInstance().getExternalContext().redirect(null);
         } else {
@@ -118,6 +122,20 @@ public class ControladorUsuario implements Serializable {
 
     public String logout() {
         this.usuario = new Usuario(new EnderecoUsuario());
+        this.endMapa = "";
+        this.endLatitude = "";
+        this.endLogitude = "";
+        this.denuncia = "";
+        this.cidadeDenuncia = "";
+        this.ufDenuncia = "";
+        this.tipoDenunciaFeed = TipoDeDenuncia.TODOS;
+        this.ordemDenuncia = "data";
+        this.strPesquisarCidadeFiltro = "";
+        this.totalDenuncias = 0;
+        this.denunicasAtendidas = 0;
+        this.conteudoInapropriado = new ConteudoInapropriado();
+        this.feedDenuncias = new ArrayList<>();
+        this.usuarioAtivo = false;
         return "/index.jsf?faces-redirect=true";
     }
 
@@ -283,7 +301,6 @@ public class ControladorUsuario implements Serializable {
     public String denunciasOrdemData() {
         this.ordemDenuncia = "data";
 
-        
         setDenunicasFeed();
 
         return null;
@@ -292,7 +309,6 @@ public class ControladorUsuario implements Serializable {
     public String denunciasOrdemReclamacao() {
         this.ordemDenuncia = "reclamacao";
 
-        
         setDenunicasFeed();
 
         return null;
@@ -304,7 +320,6 @@ public class ControladorUsuario implements Serializable {
         this.cidadeDenuncia = "Brasil";
         this.ufDenuncia = "Brasil";
 
-        
         setDenunicasFeed();
 
         return null;
@@ -318,7 +333,6 @@ public class ControladorUsuario implements Serializable {
             this.ufDenuncia = this.usuario.getEndereco().getEstado();
         }
 
-        
         setDenunicasFeed();
 
         return null;
@@ -326,84 +340,84 @@ public class ControladorUsuario implements Serializable {
 
     public String denunciasColetaDeLixo() {
         this.tipoDenunciaFeed = TipoDeDenuncia.COLETA_DE_LIXO;
-        
+
         setDenunicasFeed();
         return null;
     }
 
     public String denunciasQualidadeAgua() {
         this.tipoDenunciaFeed = TipoDeDenuncia.DISTRIBUICAO_E_QUALIDADE_DA_AGUA;
-        
+
         setDenunicasFeed();
         return null;
     }
 
     public String denunciasIluminacaoPublica() {
         this.tipoDenunciaFeed = TipoDeDenuncia.ILUMINACAO_PUBLICA;
-        
+
         setDenunicasFeed();
         return null;
     }
 
     public String denunciasObrasPublicas() {
         this.tipoDenunciaFeed = TipoDeDenuncia.OBRAS_PUBLICAS;
-        
+
         setDenunicasFeed();
         return null;
     }
 
     public String denunciasManutencaoEsgoto() {
         this.tipoDenunciaFeed = TipoDeDenuncia.MANUTENCAO_DE_CANAIS_E_REDES_DE_ESGOTOS;
-        
+
         setDenunicasFeed();
         return null;
     }
 
     public String denunciasManutencaoViasPublicas() {
         this.tipoDenunciaFeed = TipoDeDenuncia.MANUTENCAO_E_CONSERVACAO_DE_VIAS_PUBLICAS;
-        
+
         setDenunicasFeed();
         return null;
     }
 
     public String denunciasPodaDeArvores() {
         this.tipoDenunciaFeed = TipoDeDenuncia.PODA_E_MANUTENCAO_DAS_ARVORES;
-        
+
         setDenunicasFeed();
         return null;
     }
 
     public String denunciasPoluicaoVisual() {
         this.tipoDenunciaFeed = TipoDeDenuncia.POLUICAO_VISUAL;
-        
+
         setDenunicasFeed();
         return null;
     }
 
     public String denunciasTransitoPlacas() {
         this.tipoDenunciaFeed = TipoDeDenuncia.TRANSITO_SINALIZACAO_E_PLACAS;
-        
+
         setDenunicasFeed();
         return null;
     }
 
     public String denunciasAcessibilidade() {
         this.tipoDenunciaFeed = TipoDeDenuncia.ACESSIBILIDADE;
-        
+
         setDenunicasFeed();
         return null;
     }
 
     public String denunciasSaude() {
         this.tipoDenunciaFeed = TipoDeDenuncia.SAUDE;
-        
+
         setDenunicasFeed();
         return null;
     }
 
     public String denunciasEducacao() {
         this.tipoDenunciaFeed = TipoDeDenuncia.EDUCACAO;
-        
+
         setDenunicasFeed();
         return null;
     }
@@ -497,8 +511,6 @@ public class ControladorUsuario implements Serializable {
         return "";
 
     }
-    
-    
 
 //    
 //
@@ -635,6 +647,14 @@ public class ControladorUsuario implements Serializable {
 
     public void setFeedDenuncias(List<Denuncia> feedDenuncias) {
         this.feedDenuncias = feedDenuncias;
+    }
+
+    public boolean isUsuarioAtivo() {
+        return usuarioAtivo;
+    }
+
+    public void setUsuarioAtivo(boolean usuarioAtivo) {
+        this.usuarioAtivo = usuarioAtivo;
     }
 
 }

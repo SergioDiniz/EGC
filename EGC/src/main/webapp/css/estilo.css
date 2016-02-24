@@ -2369,6 +2369,17 @@ html, body{
     background-color: #fff;
 }
 
+.info-usuario-ativo-top{
+    margin-top: 1em;
+}
+
+.info-usuario-ativo-top a{
+    color: #6fbfe0;
+    font-weight: bold; 
+    padding-right: 0.8em;
+    vertical-align: 0.2em;
+}
+
 
 @media (max-width: 767px){
 

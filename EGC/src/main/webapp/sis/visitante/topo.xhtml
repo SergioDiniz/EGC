@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
 
         <link rel="stylesheet" href="/EGC/css/bootstrap.css" type="text/css"/>
@@ -31,14 +32,31 @@
         <div class="container menu-visitante m-visitante">
             <div class="row">
 
-                <div class="col-md-12">
-                    <div class="logo-visitante">
-                        <img src="/EGC/img/logo-azul.png" alt="EGC"/>
+                <div>
+                    <div class="col-lg-6 col-xs-6">
+                        <div class="logo-visitante">
+                            <img src="/EGC/img/logo-azul.png" alt="EGC"/>
+                        </div>
                     </div>
 
-                    <div class="text-right">
-                        <button class="btn btn-default">Entrar</button>
+                    <div class="col-lg-6 col-xs-6">
+                        <div class="text-right">
+                            <c:choose>
+                                <c:when test="#{controladorUsuario.usuarioAtivo}">
+                                    <div class="info-usuario-ativo-top">
+                                        <a href="#">#{controladorUsuario.usuario.nickname}</a>
+                                        <h:commandButton image="/img/sair-azul.png" action="#{controladorUsuario.logout()}" />
+                                    </div>
+
+
+                                </c:when>
+                                <c:when test="#{!controladorUsuario.usuarioAtivo}">
+                                    <button class="btn btn-default">Entrar</button>
+                                </c:when>
+                            </c:choose>
+                        </div>
                     </div>
+
                 </div>
 
             </div>

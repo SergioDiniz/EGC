@@ -178,9 +178,13 @@ public class ControladorCidade implements Serializable {
         this.visualizarDenuncia = new Denuncia();
         this.visualizarDenuncia = fachada.pesquisarDenunicaCodigo(this.codigoDenuncia);
 
+        
+        
         // pegando informações da prefeitura
+        String cidade = this.visualizarDenuncia.getCidade().getCidadePK().getNomeCidade();
+        String estado = this.visualizarDenuncia.getCidade().getCidadePK().getSiglaEstado();
         this.prefeitura = new Prefeitura();
-        this.prefeitura = fachada.pesquisarPrefeituraPorCidade(this.cidadePK.getNomeCidade(), this.cidadePK.getSiglaEstado());
+        this.prefeitura = fachada.pesquisarPrefeituraPorCidade(cidade, estado);
 
         // vefiricando se a prefeitura existe
         if (this.prefeitura != null) {
@@ -194,7 +198,7 @@ public class ControladorCidade implements Serializable {
         if (this.prefeitura != null) {
             emailPrefeitura = this.prefeitura.getEmail();
         }
-        informacoesGeraisMunicipio(emailPrefeitura, this.cidadePK.getNomeCidade(), this.cidadePK.getSiglaEstado());
+        informacoesGeraisMunicipio(emailPrefeitura, cidade, estado);
 
     }
 
