@@ -117,8 +117,6 @@ public class ControladorCidade implements Serializable {
         this.denunciasPesquisaVisitante = new ArrayList<>();
         this.denunciasPesquisaVisitante = fachada.pesquisarTodasDenunciasPorCidade(this.cidadePK.getNomeCidade(), this.cidadePK.getSiglaEstado(), "DATA");
 
-        System.out.println("Numero de Denuncias: " + this.denunciasPesquisaVisitante.size());
-
         // pegando informações da prefeitura
         this.prefeitura = new Prefeitura();
         this.prefeitura = fachada.pesquisarPrefeituraPorCidade(this.cidadePK.getNomeCidade(), this.cidadePK.getSiglaEstado());
@@ -129,8 +127,6 @@ public class ControladorCidade implements Serializable {
         } else {
             this.mostrarInformacoesPrefeitura = false;
         }
-
-        System.out.println("Mostrar Prefeitura: " + this.mostrarInformacoesPrefeitura);
 
         // pegando informações gerais do municipio
         String emailPrefeitura = "";
@@ -181,6 +177,25 @@ public class ControladorCidade implements Serializable {
     public void pesquisarDenuncia(ComponentSystemEvent event) {
         this.visualizarDenuncia = new Denuncia();
         this.visualizarDenuncia = fachada.pesquisarDenunicaCodigo(this.codigoDenuncia);
+
+        // pegando informações da prefeitura
+        this.prefeitura = new Prefeitura();
+        this.prefeitura = fachada.pesquisarPrefeituraPorCidade(this.cidadePK.getNomeCidade(), this.cidadePK.getSiglaEstado());
+
+        // vefiricando se a prefeitura existe
+        if (this.prefeitura != null) {
+            this.mostrarInformacoesPrefeitura = true;
+        } else {
+            this.mostrarInformacoesPrefeitura = false;
+        }
+
+        // pegando informações gerais do municipio
+        String emailPrefeitura = "";
+        if (this.prefeitura != null) {
+            emailPrefeitura = this.prefeitura.getEmail();
+        }
+        informacoesGeraisMunicipio(emailPrefeitura, this.cidadePK.getNomeCidade(), this.cidadePK.getSiglaEstado());
+
     }
 
     //
@@ -283,7 +298,4 @@ public class ControladorCidade implements Serializable {
         this.codigoDenuncia = codigoDenuncia;
     }
 
-    
-    
-    
 }

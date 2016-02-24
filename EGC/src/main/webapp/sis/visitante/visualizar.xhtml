@@ -271,6 +271,64 @@
 
                                         </div>   
 
+                                        <!--informações de atendimento-->
+                                        <h:panelGroup rendered="#{controladorCidade.visualizarDenuncia.tagAtendida()}">
+                                            <div class="informacoes-de-atentidmento">
+                                                <div class="col-lg-12 denuncia-visitante">
+
+                                                    <div class="row foto-denuncia text-center">
+                                                        <img src="/EGC/sis/denuncias/#{controladorCidade.visualizarDenuncia.informacaoDeAtendida.foto}"/>
+                                                    </div>
+
+
+                                                    <div class="row denuncia-topo">
+                                                        <div class="col-lg-12">
+                                                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                                                <div class="row">
+                                                                    <img src="/EGC/sis/funcionario/foto/#{controladorCidade.visualizarDenuncia.informacaoDeAtendida.funcionario.foto}" class="icone-denuncia"/>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                                                <div class="row">
+                                                                    <label class="texto-cor-azul-egc1">#{controladorCidade.visualizarDenuncia.informacaoDeAtendida.funcionario.nome}</label>
+                                                                </div>
+
+                                                                <div class="row">
+                                                                    <div class="col-lg-6 col-xs-6">
+                                                                        <div class="row">
+                                                                            <div class="texto-cor-cinza-claro  hora-denuncia">#{controladorCidade.visualizarDenuncia.informacaoDeAtendida.dataDenuncaFormatado}</div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="row denuncia-centro">
+                                                        <div class="col-lg-12">
+
+                                                            <div class="row descricao-denuncia">
+                                                                <div class="col-lg-12">
+                                                                    #{controladorCidade.visualizarDenuncia.informacaoDeAtendida.descricao}
+                                                                    Suspendisse tempor erat non rutrum efficitur. Ut blandit sem lacus, 
+                                                                    malesuada pharetra odio laoreet eu. Fusce in justo lectus. 
+                                                                    Aliquam et urna malesuada, consequat ipsum non, eleifend du.
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+
+
+                                                </div> 
+                                            </div>
+                                        </h:panelGroup>
+
                                         <!--registros da denuncia-->
                                         <div class="col-lg-12" id="registro-denuncia-unica">
 
