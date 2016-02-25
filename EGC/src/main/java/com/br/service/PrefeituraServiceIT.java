@@ -5,8 +5,10 @@
  */
 package com.br.service;
 
+import com.br.beans.Denuncia;
 import com.br.beans.Funcionario;
 import com.br.beans.Prefeitura;
+import com.br.beans.Registro;
 import java.util.List;
 
 /**
@@ -18,6 +20,8 @@ public interface PrefeituraServiceIT {
     public Prefeitura login(String email, String senha);
     
     public Prefeitura pesquisarPrefeituraPorCidade(String cidade, String estado);
+    
+    public Prefeitura pesquisarPrefeituraPorCodigo(String codigo);
     
     public Long totalDePrefeitura();
     
@@ -39,6 +43,10 @@ public interface PrefeituraServiceIT {
     
     public boolean prefeituraCadastrada(String cidade, String estado);
 
+    public List<Registro> registroDaPrefeitura(String codigoPrefeitura);
     
+    public List<Denuncia> denunciaDaPrefeitura(String codigoPrefeitura);
+    
+    public List<Funcionario> funcionarioDaPrefeitura(String codigoPrefeitura);
     
 }

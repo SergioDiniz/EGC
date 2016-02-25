@@ -2391,6 +2391,15 @@ html, body{
 }
 
 
+
+/*visualizar perfil*/
+.visualizar-perfil .perfil-prefeitura{
+    margin-top: 0;
+    padding-left: 0; 
+}
+
+
+
 @media (max-width: 767px){
 
     .login{
@@ -2450,9 +2459,26 @@ html, body{
     
 }
 
+/*SM*/
 @media (min-width: 768px) and (max-width: 991px){
     .login{
         padding-top: 6em;
         padding-bottom: 10em;
+    }
+}
+
+/*MD*/
+@media (min-width: 992px) and (max-width: 1199px){
+
+    .perfil-prefeitura .perfil-foto{
+        margin-left: -100px !important;
+    }
+}
+
+/*LG*/
+@media (min-width: 1200px) {
+
+    .perfil-prefeitura .perfil-foto{
+        margin-left: 30px;
     }
 }

@@ -100,6 +100,10 @@ public class Fachada implements Serializable {
         return ps.pesquisarPrefeituraPorCidade(cidade, estado);
     }
     
+    public Prefeitura pesquisarPrefeituraPorCodigo(String codigo){
+        return ps.pesquisarPrefeituraPorCodigo(codigo);
+    }
+    
     public Long totalDePrefeitura(){
         return ps.totalDePrefeitura();
     }
@@ -140,6 +144,18 @@ public class Fachada implements Serializable {
         return ps.prefeituraCadastrada(cidade, estado);
     }
 
+    public List<Registro> registroDaPrefeitura(String codigoPrefeitura){
+        return ps.registroDaPrefeitura(codigoPrefeitura);
+    }
+    
+    public List<Denuncia> denunciaDaPrefeitura(String codigoPrefeitura){
+        return ps.denunciaDaPrefeitura(codigoPrefeitura);
+    }
+    
+    public List<Funcionario> funcionarioDaPrefeitura(String codigoPrefeitura){
+        return ps.funcionarioDaPrefeitura(codigoPrefeitura);
+    }
+    
     // FIM PrefeituraServices
     //
     //

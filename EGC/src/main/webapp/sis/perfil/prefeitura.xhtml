@@ -1,0 +1,659 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+    <h:head>
+
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+
+        <script type="text/javascript">
+            // When the window has finished loading create our google map below
+            google.maps.event.addDomListener(window, 'load', init);
+
+            function init() {
+                // Basic options for a simple Google Map
+                // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
+
+                var loglat = new google.maps.LatLng(#{controladorCidade.prefeitura.enderecoPrefeitura.latitude}, #{controladorCidade.prefeitura.enderecoPrefeitura.longitude}); // -6.722780, -38.640592
+
+                var mapOptions = {
+                    // How zoomed in you want the map to start at (always required)
+                    zoom: 16,
+                    // The latitude and longitude to center the map (always required)
+                    center: loglat, // New York -6.722780, -38.640592
+
+                    // How you would like to style the map. 
+                    // This is where you would paste any style found on Snazzy Maps.
+                    styles: [{"featureType": "landscape", "stylers": [{"hue": "#FFBB00"}, {"saturation": 43.400000000000006}, {"lightness": 37.599999999999994}, {"gamma": 1}]}, {"featureType": "road.highway", "stylers": [{"hue": "#FFC200"}, {"saturation": -61.8}, {"lightness": 45.599999999999994}, {"gamma": 1}]}, {"featureType": "road.arterial", "stylers": [{"hue": "#FF0300"}, {"saturation": -100}, {"lightness": 51.19999999999999}, {"gamma": 1}]}, {"featureType": "road.local", "stylers": [{"hue": "#FF0300"}, {"saturation": -100}, {"lightness": 52}, {"gamma": 1}]}, {"featureType": "water", "stylers": [{"hue": "#0078FF"}, {"saturation": -13.200000000000003}, {"lightness": 2.4000000000000057}, {"gamma": 1}]}, {"featureType": "poi", "stylers": [{"hue": "#00FF6A"}, {"saturation": -1.0989010989011234}, {"lightness": 11.200000000000017}, {"gamma": 1}]}]
+                };
+
+                // Get the HTML DOM element that will contain your map 
+                // We are using a div with id="map" seen below in the body
+                var mapElement = document.getElementById('map');
+
+                // Create the Google Map using our element and options defined above
+                var map = new google.maps.Map(mapElement, mapOptions);
+
+                // Let's also add a marker while we're at it
+                var marker = new google.maps.Marker({
+                    position: loglat,
+                    map: map,
+                    title: 'Prefeitura'
+                });
+            }
+        </script>
+
+        <f:metadata>
+            <f:viewParam  required="true" id="codigoPrefeitura_id" name="codigoPrefeitura" value="#{controladorCidade.codigoPrefeitura}" />
+            <f:event type="preRenderView" listener="#{controladorCidade.pesquisarPrefeitura}" />
+        </f:metadata>
+
+        <title>EGC</title>
+    </h:head>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    </head>
+    <h:body>
+
+        <div class="tudo visualizar-perfil">
+
+            <div id="menu">
+                <ui:include src="/sis/visitante/topo.xhtml"/>
+            </div>
+
+            <div class="area-titulo-pagina perfil-prefeitura visible-lg visible-md">
+
+
+                <div class="perfil-topo">
+
+                </div>
+
+
+                <div class="container">
+                    <div class="perfil-foto">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="foto" style="background-image: url(/EGC/sis/prefeitura/brasao/#{controladorCidade.prefeitura.foto})">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="container perfil-prefeitura-container visible-lg visible-md">
+
+                <div class="col-md-3">
+                    <div class="col-md-12">
+                        <div class="info-numeros-denuncias">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <span class="texto">DENÚNCIAS</span> <br/>
+                                    <span class="numero">#{controladorCidade.informacoesMunicipio.get(0)}</span>
+                                </div>
+                                <div class="col-md-6">
+                                    <span class="texto">ATENDIDAS</span> <br/>
+                                    <span class="numero">#{controladorCidade.informacoesMunicipio.get(1)}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-numeros-usuario">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span class="texto">USUÁRIOS</span> <br/>
+                                    <span class="numero">#{controladorCidade.informacoesMunicipio.get(2)}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-9">
+
+                    <div class="row">
+                        <div class="col-md-12 perfil-prefeitura-nome">
+                            <span class="nome">#{controladorCidade.prefeitura.nome}</span> <br/>
+                            <span class="cidade">#{controladorCidade.prefeitura.cidade.cidadePK.nomeCidade}, #{controladorCidade.prefeitura.cidade.cidadePK.siglaEstado}</span>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-8 opcoes-registro-cidade">
+                            <div class="row">
+                                <div class="menu-opcoes">
+                                    <ul class="nav nav-tabs">
+                                        <li role="presentation" class="active"><a href="#tab1" data-toggle="tab">Informações</a></li>
+                                        <li role="presentation" ><a href="#tab2" data-toggle="tab">Denúncias</a></li>
+                                        <li role="presentation"><a href="#tab3" data-toggle="tab">Ações</a></li>
+                                        <li role="presentation"><a href="#tab4" data-toggle="tab">Comentários</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="tab1">
+                                        <div class="menu-informacoes">
+
+                                            <div class="mi-ola">
+                                                <span class="ola">Ola,</span> <br/>
+                                                <span class="prefeitura">Somos a Prefeitura Municipal de </span> <br/>
+                                                <span class="cidade">#{controladorCidade.prefeitura.cidade.cidadePK.nomeCidade} - #{controladorCidade.prefeitura.cidade.cidadePK.siglaEstado}</span>
+                                            </div>
+
+
+
+                                            <div class="mi-sobre">
+
+                                                <div class="titulo">
+                                                    <div class="row">
+                                                        <div class="col-md-offset-3 col-md-6">
+                                                            <span class="texto">SOBRE NÓS</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="info-cidade">
+                                                    <div class="row">
+
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-4 text-right">
+                                                                <div class="row">
+                                                                    <br/>
+                                                                    <span class="titulo">NOME</span><br/>
+                                                                    <span class="valor">#{controladorCidade.prefeitura.nome}</span>
+                                                                    <br/><br/>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <span class="titulo">ANIVERSARIO</span><br/>
+                                                                    <span class="valor">#{controladorCidade.prefeitura.aniversarioFormatado()}</span>
+                                                                    <br/><br/>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <span class="titulo">ENDEREÇO</span><br/>
+                                                                    <span class="valor">#{controladorCidade.prefeitura.enderecoPrefeitura.rua}, #{controladorCidade.prefeitura.enderecoPrefeitura.numero}</span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4 text-center">
+                                                                <div class="foto">
+                                                                    <div class="foto" style="background-image: url(/EGC/sis/prefeitura/brasao/#{controladorCidade.prefeitura.foto})">
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4 text-left">
+                                                                <div class="row">
+                                                                    <br/>
+                                                                    <span class="titulo">TELEFONE</span><br/>
+                                                                    <span class="valor">#{controladorCidade.prefeitura.telefone}</span>
+                                                                    <br/><br/>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <span class="titulo">EMAIL</span><br/>
+                                                                    <span class="valor">#{controladorCidade.prefeitura.email}</span>
+                                                                    <br/><br/>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <span class="titulo">WEB</span><br/>
+                                                                    <span class="valor">#{controladorCidade.prefeitura.website}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="slogan">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="texto text-center">
+                                                                #{controladorCidade.prefeitura.slogan}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="texto-sobre">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="texto text-center">
+                                                                #{controladorCidade.prefeitura.textoSobre}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="mi-lideres">
+
+                                                <div class="titulo">
+                                                    <div class="row">
+                                                        <div class="col-md-offset-3 col-md-6">
+                                                            <span class="texto">NOSSOS LIDERES</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="img-lideres">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-offset-1 col-md-5">
+                                                                <div class="foto">
+                                                                    <div class="foto" style="background-image: url(/EGC/sis/prefeitura/lider/#{controladorCidade.prefeitura.lideresPrefeitura.foto_prefeito})">
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="nome text-center">
+                                                                    #{controladorCidade.prefeitura.lideresPrefeitura.prefeito}
+                                                                </div>
+                                                                <div class="funcao text-center">
+                                                                    Prefeito Municipal
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-5">
+                                                                <div class="foto">
+                                                                    <div class="foto" style="background-image: url(/EGC/sis/prefeitura/lider/#{controladorCidade.prefeitura.lideresPrefeitura.foto_vice_prefeito})">
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="nome text-center">
+                                                                    #{controladorCidade.prefeitura.lideresPrefeitura.vice_prefieto}
+                                                                </div>
+                                                                <div class="funcao text-center">
+                                                                    Vice-Prefeito Municipal
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+                                            <div class="mi-fazendo">
+
+                                                <div class="titulo">
+                                                    <div class="row">
+                                                        <div class="col-md-offset-3 col-md-6">
+                                                            <span class="texto">O QUE ESTAMOS FAZENDO</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="numero-denuncia">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="denuncias-ra">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="ra-titulo text-center">
+                                                                DENUNCIAS REALIZADAS E ATENDIDAS
+                                                            </div>
+                                                            <div class="descricao text-center">
+                                                                Donec vestibulum quam eget neque vestibulum  Donec vestibulum
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="mi-falando">
+
+                                                <div class="titulo">
+                                                    <div class="row">
+                                                        <div class="col-md-offset-3 col-md-6">
+                                                            <span class="texto">O QUE ESTÃO FALANDO</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mensagens">
+                                                    <div id="myCarousel" class="carousel slide">
+                                                        <!-- Indicators -->
+                                                        <ol class="carousel-indicators">
+                                                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                                                            <li data-target="#myCarousel" data-slide-to="2"></li>
+                                                            <li data-target="#myCarousel" data-slide-to="3"></li>
+                                                        </ol>
+
+                                                        <!-- Wrapper for slides -->
+                                                        <div class="carousel-inner" role="listbox">
+                                                            <div class="item active">
+                                                                <img style="height: 220px;"/>
+                                                                <div class="carousel-caption">
+                                                                    <img src="/EGC/img/icon-usuario-mensagem.png"/> <br/><br/>
+                                                                    Donec vestibulum quam eget neque vestibulum  Donec 
+                                                                    vestibulum quam eget neque  vestibulum  Donec vestibulum 
+                                                                    quam eget neque vestibulum
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="item">
+                                                                <img style="height: 220px;"/>
+                                                                <div class="carousel-caption">
+                                                                    <img src="/EGC/img/icon-usuario-mensagem.png"/> <br/><br/>
+                                                                    Donec vestibulum quam eget neque vestibulum  Donec 
+                                                                    vestibulum quam eget neque  vestibulum  Donec vestibulum 
+                                                                    quam eget neque vestibulum
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="item">
+                                                                <img style="height: 220px;"/>
+                                                                <div class="carousel-caption">
+                                                                    <img src="/EGC/img/icon-usuario-mensagem.png"/> <br/><br/>
+                                                                    Donec vestibulum quam eget neque vestibulum  Donec 
+                                                                    vestibulum quam eget neque  vestibulum  Donec vestibulum 
+                                                                    quam eget neque vestibulum
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="item">
+                                                                <img style="height: 220px;"/>
+                                                                <div class="carousel-caption">
+                                                                    <img src="/EGC/img/icon-usuario-mensagem.png"/> <br/><br/>
+                                                                    Donec vestibulum quam eget neque vestibulum  Donec 
+                                                                    vestibulum quam eget neque  vestibulum  Donec vestibulum 
+                                                                    quam eget neque vestibulum
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Left and right controls -->
+                                                        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                                                            <span class="icon-prev" aria-hidden="true"></span>
+                                                        </a>
+                                                        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                                                            <span class="icon-next" aria-hidden="true"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="mi-mapa">
+                                                <!-- The element that will contain our Google Map. This is used in both the Javascript and CSS above. -->
+                                                <div id="map" style="width: 100%; height: 300px;"></div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div role="tabpanel" class="tab-pane " id="tab2">
+
+                                        <div class="menu-cidades">
+                                            <div class="pagina-visitante">
+                                                <div class="denuncias-da-cidade">
+                                                    <c:forEach var="denuncia" items="#{controladorCidade.denunciasPorCidade(controladorCidade.codigoPrefeitura)}">
+                                                        <div class="col-lg-12 denuncia-visitante">
+
+                                                            <div class="row denuncia-topo">
+                                                                <div class="col-lg-12">
+                                                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                                                        <div class="row">
+                                                                            <img src="/EGC/img/icones-denuncia/#{denuncia.iconeDenunica}" class="icone-denuncia"/>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                                                        <div class="row">
+                                                                            <label class="texto-cor-azul-egc1">#{denuncia.tipoDaDenunciaFormatado}</label>
+                                                                        </div>
+
+                                                                        <div class="row">
+                                                                            <div class="col-lg-6 col-xs-6">
+                                                                                <div class="row">
+                                                                                    <div class="texto-cor-cinza-claro  hora-denuncia">#{denuncia.dataDenuncaFormatado}</div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-lg-6 col-xs-6 text-right">
+                                                                                <div class="row">
+                                                                                    <span class="glyphicon glyphicon-heart texto-cor-vermelho" aria-hidden="true"> #{denuncia.numeroAjuda}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-exclamation-sign texto-cor-cinza-claro" aria-hidden="true"> 2</span> 
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="row denuncia-centro">
+                                                                <div class="col-lg-12">
+
+                                                                    <div class="row descricao-denuncia">
+                                                                        <div class="col-lg-12">
+                                                                            #{denuncia.descricao}
+                                                                            Suspendisse tempor erat non rutrum efficitur. Ut blandit sem lacus, 
+                                                                            malesuada pharetra odio laoreet eu. Fusce in justo lectus. 
+                                                                            Aliquam et urna malesuada, consequat ipsum non, eleifend du.
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row endereco-denuncia">
+                                                                        <div class="col-lg-12 texto-cor-cinza-claro">
+                                                                            <label>#{denuncia.enderecoDenuncia}</label>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="row foto-denuncia text-center">
+                                                                <a href="/EGC/pesquisar/#{denuncia.codigo}"><img src="/EGC/sis/denuncias/#{denuncia.foto}"/></a>
+                                                            </div>
+
+                                                            <div class="row text-right">
+                                                                <span class="label label-info">#{denuncia.estadoDeAcompanhamento}</span>
+                                                            </div>
+
+                                                        </div>
+                                                    </c:forEach>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div role="tabpanel" class="tab-pane" id="tab3">
+                                        <div class="menu-acoes">
+
+                                            <c:forEach var="registro" items="#{controladorCidade.registrosDaPrefeitura(controladorCidade.codigoPrefeitura)}" >
+                                                <table class="tb-registro">
+                                                    <tr>
+                                                        <td>
+                                                            <img src="/EGC/img/icon-calendario.png" width="40px"/>
+                                                        </td>
+
+                                                        <td>
+                                                            <div class="td-dia-semana">
+                                                                #{registro.diaDaSemana()} 
+                                                            </div>
+                                                            <div class="td-data-semana">
+                                                                #{registro.dataFormatada()}
+                                                            </div>
+                                                        </td>
+
+                                                        <td>
+                                                            <div class="td-hora">
+                                                                #{registro.horaFormatada()}h
+                                                            </div>
+                                                        </td>
+
+                                                        <td>
+                                                            <div class="td-registro">
+                                                                <c:choose>
+                                                                    <c:when test="#{registro.tipoDeRegistro == 'DENUNCIA_EM_TRABALHO'}">
+                                                                        <a href="#">denúncia</a> atualizada para o estado <span class="label label-info">Em trabalho</span>, <span class="link-mapa-denuncia">#{registro.funcionario.nome}</span>
+                                                                    </c:when>
+                                                                    <c:when test="#{registro.tipoDeRegistro == 'DENUNCIA_ATENDIDA'}">
+                                                                        <a href="#">denúncia</a> atualizada para o estado <span class="label label-success">Atendida</span>, <span class="link-mapa-denuncia">#{registro.funcionario.nome}</span>
+                                                                    </c:when>
+                                                                    <c:when test="#{registro.tipoDeRegistro == 'AGUARDANDO'}">
+                                                                        <a href="#">denúncia</a> atualizada para o estado <span class="label label-default">Aguardando</span>, <span class="link-mapa-denuncia">#{registro.funcionario.nome}</span>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <a href="#">denúncia</a> recebeu uma <span class="label label-danger">Reclamação</span>, <span class="link-mapa-denuncia">#{registro.funcionario.nome}</span>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </div>
+                                                        </td>
+
+                                                    </tr>
+
+                                                </table>
+
+                                            </c:forEach>
+
+                                        </div>
+                                    </div>
+
+                                    <div role="tabpanel" class="tab-pane" id="tab4">
+                                        <div class="menu-cidades">
+
+                                            <div class="comentarios">
+
+                                                <div class="text-center">
+                                                    <h1>Últimos Comentários</h1>
+                                                </div>
+
+                                                <div class="coment">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-2 text-center">
+                                                                <img src="/EGC/img/icon-usuario-mensagem-cinsa.png"/>
+                                                            </div>
+                                                            <div class="col-md-10">
+                                                                <div class="row">
+                                                                    <div class="col-md-10">
+                                                                        <div class="row">
+                                                                            <b>comentário:</b>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2 text-right">
+                                                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="row">
+                                                                    sdlasd asd als dalskd ask dalks d
+                                                                </div>
+
+                                                                <div class="row hora-denuncia">
+                                                                    21:22 - 28/01/2016
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="coment">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-2 text-center">
+                                                                <img src="/EGC/img/icon-usuario-mensagem-cinsa.png"/>
+                                                            </div>
+                                                            <div class="col-md-10">
+                                                                <div class="row">
+                                                                    <div class="col-md-10">
+                                                                        <div class="row">
+                                                                            <b>comentário:</b>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2 text-right">
+                                                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="row">
+                                                                    sdlasd asd als dalskd ask dalks d
+                                                                </div>
+
+                                                                <div class="row hora-denuncia">
+                                                                    21:22 - 28/01/2016
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4 area-direita-perfil-prefeitura">
+                            <div class="info-lista-funcionario">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span class="texto">FUNCIONÁRIOS</span> <br/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h:dataTable value="#{controladorCidade.funcionariosDaPrefeitura(controladorCidade.codigoPrefeitura)}" var="funcionario" class="table table-pesquisar-funcionario" columnClasses="cDescricao">
+
+                                            <h:column id="cDescricao">
+                                                <img src="/EGC/sis/funcionario/foto/#{funcionario.foto}" style="width:40px; border-radius: 90px"/>
+                                            </h:column>
+
+                                            <h:column >
+                                                <h:outputText value="#{funcionario.nome}" style="color: #23a7f1; font-weight: bold"/> <br/>
+                                                <h:outputText value="#{funcionario.email}"/>
+                                            </h:column>
+
+                                        </h:dataTable>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+
+
+            </div>
+
+        </div>
+
+    </h:body>
+
+</html>
+

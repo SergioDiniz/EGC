@@ -7,15 +7,18 @@ package com.br.controle;
 
 import com.br.beans.CidadePK;
 import com.br.beans.Denuncia;
+import com.br.beans.Funcionario;
 import com.br.beans.Prefeitura;
 import com.br.beans.Registro;
 import com.br.fachada.Fachada;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
 
 /**
@@ -41,6 +44,7 @@ public class ControladorCidade implements Serializable {
     private List<Long> informacoesMunicipio;
     private Denuncia visualizarDenuncia;
     private String codigoDenuncia;
+    private String codigoPrefeitura;
 
     public ControladorCidade() {
         this.cidadePK = new CidadePK();
@@ -54,6 +58,7 @@ public class ControladorCidade implements Serializable {
         this.prefeitura = new Prefeitura();
         this.visualizarDenuncia = new Denuncia();
         this.codigoDenuncia = "";
+        this.codigoPrefeitura = "";
     }
 
     public List<Registro> registrosDaCidade(String cidade, String estado) {
@@ -178,8 +183,6 @@ public class ControladorCidade implements Serializable {
         this.visualizarDenuncia = new Denuncia();
         this.visualizarDenuncia = fachada.pesquisarDenunicaCodigo(this.codigoDenuncia);
 
-        
-        
         // pegando informações da prefeitura
         String cidade = this.visualizarDenuncia.getCidade().getCidadePK().getNomeCidade();
         String estado = this.visualizarDenuncia.getCidade().getCidadePK().getSiglaEstado();
@@ -200,6 +203,38 @@ public class ControladorCidade implements Serializable {
         }
         informacoesGeraisMunicipio(emailPrefeitura, cidade, estado);
 
+    }
+
+    public void pesquisarPrefeitura(ComponentSystemEvent event) throws IOException {
+        this.prefeitura = new Prefeitura();
+        this.prefeitura = fachada.pesquisarPrefeituraPorCodigo(this.codigoPrefeitura);
+
+        // vefiricando se a prefeitura existe
+        if (this.prefeitura != null) {
+            this.mostrarInformacoesPrefeitura = true;
+
+            // pegando informações gerais do municipio
+            informacoesGeraisMunicipio(this.prefeitura.getEmail(), this.prefeitura.getCidade().getCidadePK().getNomeCidade(), this.prefeitura.getCidade().getCidadePK().getSiglaEstado());
+
+        } else {
+            this.mostrarInformacoesPrefeitura = false;
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/EGC/erro-404.jsf");
+        }
+        
+        
+
+    }
+
+    public List<Registro> registrosDaPrefeitura(String codigoPrefeitura) {
+        return fachada.registroDaPrefeitura(codigoPrefeitura);
+    }
+
+    public List<Denuncia> denunciasPorCidade(String codigoPrefeitura) {
+        return fachada.denunciaDaPrefeitura(codigoPrefeitura);
+    }
+
+    public List<Funcionario> funcionariosDaPrefeitura(String codigoPrefeitura) {
+        return fachada.funcionarioDaPrefeitura(codigoPrefeitura);
     }
 
     //
@@ -300,6 +335,14 @@ public class ControladorCidade implements Serializable {
 
     public void setCodigoDenuncia(String codigoDenuncia) {
         this.codigoDenuncia = codigoDenuncia;
+    }
+
+    public String getCodigoPrefeitura() {
+        return codigoPrefeitura;
+    }
+
+    public void setCodigoPrefeitura(String codigoPrefeitura) {
+        this.codigoPrefeitura = codigoPrefeitura;
     }
 
 }
