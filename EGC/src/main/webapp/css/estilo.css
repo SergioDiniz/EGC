@@ -2268,7 +2268,8 @@ html, body{
 }
 
 .pagina-visitante .resultado-pesquisa-visitante .img-brasao,
-.pagina-visitante .resultado-pesquisa-visitante .img-lider{
+.pagina-visitante .resultado-pesquisa-visitante .img-lider,
+.perfil-r-brasao .img-brasao{
     width: 10em;
     height: 10em;
     background-repeat: no-repeat;
@@ -2398,7 +2399,64 @@ html, body{
     padding-left: 0; 
 }
 
+/*responsive*/
+.borda-direita{
+    border-right: 0.1em solid #999;
+}
 
+.perfil-responsivo .perfil-r-topo{
+    background-image: url(../img/40.jpg);
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 15em;
+}
+
+.perfil-responsivo .perfil-r-brasao .img-brasao{
+    margin-top: -5em;
+    margin-bottom: 1em;
+}
+
+.perfil-responsivo .perfil-r-nome-cidade-prefeitura{
+    margin-bottom: 1.5em;
+}
+
+.perfil-r-nome-cidade-prefeitura .r-nome-prefeitura{
+    font-weight: 100;
+    font-size: 1.7em;
+}
+
+.perfil-responsivo .r-numero{
+    font-size: 1.7em;
+}
+
+.perfil-responsivo .perfil-r-menu{
+    margin-top: 1em;
+/*    padding-bottom: 0.8em;
+    padding-top: 0.8em;*/
+    font-size: 1.3em;
+}
+
+.perfil-responsivo .perfil-r-menu a{
+    color: #fff;
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+}
+
+.perfil-responsivo .perfil-r-menu .nav li {
+    width: 19.5%;
+}
+
+.perfil-responsivo .perfil-r-menu .nav-pills li.active a:hover,
+.perfil-responsivo .perfil-r-menu .nav-pills li > a:hover,
+.perfil-responsivo .perfil-r-menu .nav-pills li > a:focus{
+    background-color: #337ab7 !important;
+}
+
+.perfil-r-conteudo .pagina-visitante .denuncia-visitante:first-child{
+    /*margin-top: 50px;*/
+    border-top: none;
+}
 
 @media (max-width: 767px){
 
@@ -2456,7 +2514,7 @@ html, body{
         max-height: 100%;
     }
 
-    
+
 }
 
 /*SM*/
