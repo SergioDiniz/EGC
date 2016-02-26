@@ -2269,7 +2269,9 @@ html, body{
 
 .pagina-visitante .resultado-pesquisa-visitante .img-brasao,
 .pagina-visitante .resultado-pesquisa-visitante .img-lider,
-.perfil-r-brasao .img-brasao{
+.perfil-r-brasao .img-brasao,
+.perfil-responsivo .lideres-da-cidade .img-lider,
+.perfil-responsivo .info-cidade .foto-brasao{
     width: 10em;
     height: 10em;
     background-repeat: no-repeat;
@@ -2283,7 +2285,6 @@ html, body{
     -moz-box-shadow: 3px 3px 4px -4px rgba(0,0,0,0.30), inset 2px 2px 1px -1px rgba(0,0,0,0.20);
     box-shadow: 3px 3px 4px -4px rgba(0,0,0,0.30), inset 2px 2px 1px -1px rgba(0,0,0,0.20);
 }
-
 
 
 .pagina-visitante .resultado-pesquisa-visitante .img-lider{
@@ -2456,6 +2457,42 @@ html, body{
 .perfil-r-conteudo .pagina-visitante .denuncia-visitante:first-child{
     /*margin-top: 50px;*/
     border-top: none;
+}
+
+.perfil-responsivo .menu-informacoes .mi-ola{
+    padding-top: 3em;
+    padding-bottom: 3em;
+    text-align: center;
+    font-weight: 200;
+    margin-left: 0.2em;
+    margin-right: 0.2em;
+}
+
+.perfil-responsivo .menu-informacoes .mi-ola .ola{
+    font-size: 4em;
+}
+.perfil-responsivo .menu-informacoes .mi-ola .prefeitura{
+    font-size: 2em;
+}
+.perfil-responsivo .menu-informacoes .mi-ola .cidade{
+    font-size: 2.3em;
+}
+
+
+.perfil-responsivo .info-cidade{
+    margin-bottom: 2em;
+}
+
+.perfil-responsivo .info-cidade .foto-brasao{
+    margin: 0 auto;
+    width: 13em;
+    height: 13em;
+}
+
+.perfil-responsivo .slogan .texto,
+.perfil-responsivo .texto-sobre .texto{
+     margin-left: 0px !important; 
+     margin-right: 0px !important; 
 }
 
 @media (max-width: 767px){
