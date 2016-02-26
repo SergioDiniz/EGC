@@ -2495,6 +2495,14 @@ html, body{
      margin-right: 0px !important; 
 }
 
+/*pesquisa pagina inicial*/
+.pesquisa{
+    width: 100%;
+    padding-top: 3em;
+    padding-bottom: 5em;
+    background-color: #337ab7;
+}
+
 @media (max-width: 767px){
 
     .login{
@@ -2502,10 +2510,46 @@ html, body{
         padding-bottom: 7em;
     }
 
-    .login .from-login{
-        margin-top: 5em;
+    .login #logo-egc img{
+        width: 6em;
+    }
+    
+    .login .from-login input[type="text"],
+    .login .from-login input[type="password"],
+    .login .from-login input[type="submit"],
+    .login .from-login button{
+        border-radius: 2em;
+        text-align: center;
+    }
+    
+    .r-sub-form-login{
+        font-size: 0.9em;
+        color: #fff;
+        margin-top: 1.5em;
+        font-weight: bold;
     }
 
+    .r-sub-form-login .esqueci-senha{
+        margin-top: 2em;
+    }
+    
+    .r-sub-form-login .esqueci-senha a{
+        text-decoration: none;
+        color: #fff;
+        padding-bottom: 1.2em;
+        border-bottom: 1px solid #fff;
+        
+    }
+    
+    .cadastro input[type="submit"]{
+        width: 100%;
+    }
+    
+    .cadastro input{
+        border-radius: 2em;
+    }
+    
+    
     .texto-1{
         font-size: 1.5em;
     }

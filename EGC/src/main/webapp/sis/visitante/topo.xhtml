@@ -51,7 +51,9 @@
 
                                 </c:when>
                                 <c:when test="#{!controladorUsuario.usuarioAtivo}">
-                                    <button class="btn btn-default">Entrar</button>
+                                    <h:form>
+                                        <h:commandButton  class="btn btn-default" action="/index.jsf?faces-redirect=true" value="Entrar"/>
+                                    </h:form>
                                 </c:when>
                             </c:choose>
                         </div>

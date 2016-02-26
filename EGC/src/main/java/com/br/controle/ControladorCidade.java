@@ -103,7 +103,7 @@ public class ControladorCidade implements Serializable {
         this.informacoesMunicipio.add(3, funcionarios);
     }
 
-    public String pesquisarCidade() {
+    public String pesquisarCidade() throws IOException {
 
         // pegando informações de denuncias
         String end[] = this.enderecoPesquisa.split(", ");
@@ -144,7 +144,9 @@ public class ControladorCidade implements Serializable {
         }
         informacoesGeraisMunicipio(emailPrefeitura, this.cidadePK.getNomeCidade(), this.cidadePK.getSiglaEstado());
 
-        return null;
+//        FacesContext.getCurrentInstance().getExternalContext().redirect("/EGC/pesquisar");
+        
+        return "/sis/visitante/pesquisar.jsf?faces-redirect=true";
     }
 
     public long andamentoDasDenuncias() {
