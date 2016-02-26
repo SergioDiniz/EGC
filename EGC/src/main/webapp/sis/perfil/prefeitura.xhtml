@@ -55,10 +55,9 @@
         </f:metadata>
 
         <title>EGC</title>
-    </h:head>
-    <head>
+
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
-    </head>
+    </h:head>
     <h:body>
 
         <div class="tudo visualizar-perfil">
@@ -141,6 +140,7 @@
 
                     <div class="col-sm-12 col-xs-12 perfil-r-conteudo">
                         <div class="tab-content">
+
                             <div role="tabpanel" class="tab-pane active" id="tab1">
                                 <div class="menu-informacoes">
                                     <div class="mi-ola">
@@ -527,65 +527,63 @@
 
                             <div role="tabpanel" class="tab-pane" id="tab4">
                                 <div class="menu-cidades">
-
                                     <div class="comentarios">
 
                                         <div class="text-center">
                                             <h1>Últimos Comentários</h1>
                                         </div>
 
-                                        <div class="coment">
-                                            <div class="row">
-                                                <div class="col-sm-3 col-xs-3 text-right">
-                                                    <img src="/EGC/img/icon-usuario-mensagem-cinsa.png" style="width: 90%; max-width: 56px"/>
-                                                </div>
-                                                <div class="col-sm-9 col-xs-9">
-                                                    <div class="row">
-                                                        <div class="col-sm-12 col-xs-12">
-                                                            <div class="row">
-                                                                <b>comentário:</b>
+                                        <div class="novo-comentario">
+                                            <c:choose>
+                                                <c:when test="#{controladorUsuario.usuarioAtivo}">
+                                                    <div class="text-center">
+                                                        <h3 class="texto-100">Faça Um Novo Comentários</h3>
+                                                    </div>
+
+                                                    <h:form acceptcharset="ISO-8859-1">
+                                                        <form jsf:id="novoComentario">
+
+                                                            <div class="form-group">
+                                                                <label>Comentário:</label>
+                                                                <textarea class="form-control" rows="4" jsf:value="#{controladorCidade.mensagemPrefeitura.mensagem}"></textarea>
+                                                            </div>
+                                                            <h:commandButton action="#{controladorCidade.novoComentario()}" value="enviar" class="btn btn-lg btn-default btn-block"/>
+
+                                                        </form>
+
+                                                    </h:form>
+
+                                                    <br/><br/>
+                                                </c:when>
+                                            </c:choose>
+                                        </div>
+
+                                        <c:forEach var="mensagem" items="#{controladorCidade.mensagensDaPrefeitura(controladorCidade.codigoPrefeitura)}">
+                                            <div class="coment">
+                                                <div class="row">
+                                                    <div class="col-sm-3 col-xs-3 text-right">
+                                                        <img src="/EGC/img/icon-usuario-mensagem-cinsa.png" style="width: 90%; max-width: 56px"/>
+                                                    </div>
+                                                    <div class="col-sm-9 col-xs-9">
+                                                        <div class="row">
+                                                            <div class="col-sm-12 col-xs-12">
+                                                                <div class="row">
+                                                                    <b>comentário:</b>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="row">
-                                                        sdlasd asd als dalskd ask dalks d
-                                                    </div>
+                                                        <div class="row">
+                                                            #{mensagem.mensagem}
+                                                        </div>
 
-                                                    <div class="row hora-denuncia">
-                                                        21:22 - 28/01/2016
+                                                        <div class="row hora-denuncia">
+                                                            #{mensagem.dataMensagemFormatado}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-
-
-
-                                        <div class="coment">
-                                            <div class="row">
-                                                <div class="col-sm-3 col-xs-3 text-right">
-                                                    <img src="/EGC/img/icon-usuario-mensagem-cinsa.png" style="width: 90%; max-width: 56px"/>
-                                                </div>
-                                                <div class="col-sm-9 col-xs-9">
-                                                    <div class="row">
-                                                        <div class="col-sm-12 col-xs-12">
-                                                            <div class="row">
-                                                                <b>comentário:</b>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row">
-                                                        sdlasd asd als dalskd ask dalks d
-                                                    </div>
-
-                                                    <div class="row hora-denuncia">
-                                                        21:22 - 28/01/2016
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
+                                        </c:forEach>
 
                                     </div>
 

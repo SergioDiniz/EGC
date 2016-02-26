@@ -7,6 +7,7 @@ package com.br.service;
 
 import com.br.beans.Denuncia;
 import com.br.beans.Funcionario;
+import com.br.beans.MensagemPrefeitura;
 import com.br.beans.Prefeitura;
 import com.br.beans.Registro;
 import java.util.List;
@@ -48,5 +49,9 @@ public interface PrefeituraServiceIT {
     public List<Denuncia> denunciaDaPrefeitura(String codigoPrefeitura);
     
     public List<Funcionario> funcionarioDaPrefeitura(String codigoPrefeitura);
+    
+    public boolean novaMensagemEmPrefeitura(MensagemPrefeitura mensagemPrefeitura, Prefeitura prefeitura);
+    
+    public List<MensagemPrefeitura> mensagensDaPrefeitura(String codigoPrefeitura);
     
 }

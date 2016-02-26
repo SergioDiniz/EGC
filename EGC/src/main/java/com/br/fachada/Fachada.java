@@ -12,6 +12,7 @@ import com.br.beans.Denuncia;
 import com.br.beans.EnderecoDenuncia;
 import com.br.beans.Funcionario;
 import com.br.beans.InformacaoDeAtendida;
+import com.br.beans.MensagemPrefeitura;
 import com.br.beans.Prefeitura;
 import com.br.beans.Registro;
 import com.br.beans.TipoDeDenuncia;
@@ -156,6 +157,13 @@ public class Fachada implements Serializable {
         return ps.funcionarioDaPrefeitura(codigoPrefeitura);
     }
     
+    public boolean novaMensagemEmPrefeitura(MensagemPrefeitura mensagemPrefeitura, Prefeitura prefeitura){
+        return ps.novaMensagemEmPrefeitura(mensagemPrefeitura, prefeitura);
+    }
+    
+    public List<MensagemPrefeitura> mensagensDaPrefeitura(String codigoPrefeitura) {
+        return ps.mensagensDaPrefeitura(codigoPrefeitura);
+    }
     // FIM PrefeituraServices
     //
     //

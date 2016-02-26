@@ -6,6 +6,7 @@
 package com.br.beans;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -60,6 +61,11 @@ public class MensagemPrefeitura implements Serializable {
         this.mensagem = mensagem;
     }
 
+    public String getDataMensagemFormatado() {
+        SimpleDateFormat formato = new SimpleDateFormat("HH:mm - dd/MM/yyyy");
+        return formato.format(this.dataMensagem);
+    }
+    
     @Override
     public int hashCode() {
         int hash = 7;
@@ -80,6 +86,11 @@ public class MensagemPrefeitura implements Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "MensagemPrefeitura{" + "id=" + id + ", dataMensagem=" + dataMensagem + ", mensagem=" + mensagem + '}';
     }
     
     

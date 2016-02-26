@@ -8,12 +8,14 @@ package com.br.controle;
 import com.br.beans.CidadePK;
 import com.br.beans.Denuncia;
 import com.br.beans.Funcionario;
+import com.br.beans.MensagemPrefeitura;
 import com.br.beans.Prefeitura;
 import com.br.beans.Registro;
 import com.br.fachada.Fachada;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -45,6 +47,7 @@ public class ControladorCidade implements Serializable {
     private Denuncia visualizarDenuncia;
     private String codigoDenuncia;
     private String codigoPrefeitura;
+    private MensagemPrefeitura mensagemPrefeitura;
 
     public ControladorCidade() {
         this.cidadePK = new CidadePK();
@@ -59,6 +62,7 @@ public class ControladorCidade implements Serializable {
         this.visualizarDenuncia = new Denuncia();
         this.codigoDenuncia = "";
         this.codigoPrefeitura = "";
+        this.mensagemPrefeitura = new MensagemPrefeitura();
     }
 
     public List<Registro> registrosDaCidade(String cidade, String estado) {
@@ -236,6 +240,18 @@ public class ControladorCidade implements Serializable {
     public List<Funcionario> funcionariosDaPrefeitura(String codigoPrefeitura) {
         return fachada.funcionarioDaPrefeitura(codigoPrefeitura);
     }
+    
+    public String novoComentario(){
+        this.mensagemPrefeitura.setDataMensagem(new Date());
+        System.out.println("mensagem: " + this.mensagemPrefeitura.toString());
+        fachada.novaMensagemEmPrefeitura(this.mensagemPrefeitura, this.prefeitura);
+        this.mensagemPrefeitura = new MensagemPrefeitura();
+        return null;
+    }
+    
+    public List<MensagemPrefeitura> mensagensDaPrefeitura(String codigoPrefeitura) {
+        return fachada.mensagensDaPrefeitura(codigoPrefeitura);
+    }
 
     //
     //
@@ -345,4 +361,13 @@ public class ControladorCidade implements Serializable {
         this.codigoPrefeitura = codigoPrefeitura;
     }
 
+    public MensagemPrefeitura getMensagemPrefeitura() {
+        return mensagemPrefeitura;
+    }
+
+    public void setMensagemPrefeitura(MensagemPrefeitura mensagemPrefeitura) {
+        this.mensagemPrefeitura = mensagemPrefeitura;
+    }
+
+    
 }

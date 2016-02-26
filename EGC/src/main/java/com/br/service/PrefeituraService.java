@@ -7,6 +7,7 @@ package com.br.service;
 
 import com.br.beans.Denuncia;
 import com.br.beans.Funcionario;
+import com.br.beans.MensagemPrefeitura;
 import com.br.beans.Prefeitura;
 import com.br.beans.Registro;
 import java.util.ArrayList;
@@ -41,50 +42,50 @@ public class PrefeituraService implements PrefeituraServiceIT {
 
         return "ERRO!";
     }
-    
+
     @Override
-    public Prefeitura pesquisarPrefeituraPorCidade(String cidade, String estado){
-        
+    public Prefeitura pesquisarPrefeituraPorCidade(String cidade, String estado) {
+
         try {
-            
+
             Query query = em.createQuery("SELECT p FROM Prefeitura p WHERE p.cidade.CidadePK.nomeCidade = :cidade AND p.cidade.CidadePK.siglaEstado = :estado");
             query.setParameter("cidade", cidade);
             query.setParameter("estado", estado);
-            
+
             List<Prefeitura> p = query.getResultList();
-            
-            if(p.size() > 0){
+
+            if (p.size() > 0) {
                 return p.get(0);
             }
-            
+
         } catch (Exception e) {
             System.out.println("ERRO EM PESQUISAR PREFEITURA POR CIDADE: " + e.getMessage());
         }
-        
+
         return null;
-        
+
     }
-    
+
     @Override
-    public Prefeitura pesquisarPrefeituraPorCodigo(String codigo){
+    public Prefeitura pesquisarPrefeituraPorCodigo(String codigo) {
         try {
-            
+
             Query query = em.createQuery("SELECT p FROM Prefeitura p WHERE p.codigo = :codigo");
             query.setParameter("codigo", codigo);
-            
+
             List<Prefeitura> p = query.getResultList();
-            
-            if(p.size() > 0){
+
+            if (p.size() > 0) {
                 return p.get(0);
             }
-            
+
         } catch (Exception e) {
             System.out.println("ERRO EM PESQUISAR PREFEITURA POR CODIGO: " + e.getMessage());
         }
-        
+
         return null;
     }
-    
+
     @Override
     public Long totalDePrefeitura() {
         Query query = em.createQuery("SELECT COUNT(p) FROM Prefeitura P");
@@ -223,69 +224,100 @@ public class PrefeituraService implements PrefeituraServiceIT {
 
         return dados;
     }
-    
+
     @Override
-    public boolean prefeituraCadastrada(String cidade, String estado){
-        
+    public boolean prefeituraCadastrada(String cidade, String estado) {
+
         Query query = em.createQuery("SELECT p FROM Prefeitura p WHERE p.cidade.CidadePK.nomeCidade = :cidade and p.cidade.CidadePK.siglaEstado = :estado and p.ativo = TRUE");
         query.setParameter("cidade", cidade);
         query.setParameter("estado", estado);
-        
+
         List<Prefeitura> p = query.getResultList();
-        
-        if(p.size() > 0){
+
+        if (p.size() > 0) {
             return true;
         }
-        
+
         return false;
     }
-    
+
     @Override
-    public List<Registro> registroDaPrefeitura(String codigoPrefeitura){
-        
+    public List<Registro> registroDaPrefeitura(String codigoPrefeitura) {
+
         Query query = em.createQuery("SELECT r FROM Registro r JOIN r.denuncia d WHERE r.prefeitura.codigo = :codigo ORDER BY r.data DESC");
         query.setParameter("codigo", codigoPrefeitura);
-        
+
         List<Registro> r = query.getResultList();
-        
-        if (r.size() > 0){
+
+        if (r.size() > 0) {
             return r;
         }
-        
-        
+
         return new ArrayList<>();
     }
-    
+
     @Override
-    public List<Denuncia> denunciaDaPrefeitura(String codigoPrefeitura){
-        
+    public List<Denuncia> denunciaDaPrefeitura(String codigoPrefeitura) {
+
         Query query = em.createQuery("SELECT d FROM Prefeitura p JOIN p.cidade c JOIN c.denuncias d WHERE p.codigo = :codigo ORDER BY d.data DESC");
         query.setParameter("codigo", codigoPrefeitura);
-        
+
         List<Denuncia> d = query.getResultList();
-        
-        if(d.size() > 0){
+
+        if (d.size() > 0) {
             return d;
         }
-        
+
         return new ArrayList<>();
     }
-    
-    
+
     @Override
-    public List<Funcionario> funcionarioDaPrefeitura(String codigoPrefeitura){
-        
+    public List<Funcionario> funcionarioDaPrefeitura(String codigoPrefeitura) {
+
         Query query = em.createQuery("SELECT f FROM Prefeitura p JOIN p.funcionarios f WHERE p.codigo = :codigo ORDER BY f.nome ASC");
         query.setParameter("codigo", codigoPrefeitura);
-        
+
         List<Funcionario> f = query.getResultList();
-        
-        if(f.size() > 0){
+
+        if (f.size() > 0) {
             return f;
         }
-        
-        
+
         return new ArrayList<>();
-    }    
+    }
+
+    @Override
+    public boolean novaMensagemEmPrefeitura(MensagemPrefeitura mensagemPrefeitura, Prefeitura prefeitura) {
+
+        try {
+            prefeitura = em.find(Prefeitura.class, prefeitura.getId());
+
+            em.persist(mensagemPrefeitura);
+
+            prefeitura.getMensagensPrefeitura().add(mensagemPrefeitura);
+            em.merge(prefeitura);
+
+            return true;
+
+        } catch (Exception e) {
+            System.out.println("ERRO EM GRAÇAR MENSAGEM EM PREFEITURA: " + e.getMessage());
+        }
+
+        return false;
+    }
+
+    @Override
+    public List<MensagemPrefeitura> mensagensDaPrefeitura(String codigoPrefeitura) {
+        Query query = em.createQuery("SELECT m FROM Prefeitura p JOIN p.mensagensPrefeitura m WHERE p.codigo = :codigo ORDER BY m.dataMensagem DESC");
+        query.setParameter("codigo", codigoPrefeitura);
+
+        List<MensagemPrefeitura> m = query.getResultList();
+
+        if (m.size() > 0) {
+            return m;
+        }
+
+        return new ArrayList<>();
+    }
 
 }
