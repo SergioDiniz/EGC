@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
 
         <link rel="stylesheet" href="/EGC/css/bootstrap.css" type="text/css"/>
@@ -35,88 +36,16 @@
             <div class="row">
 
                 <div>
-                    <div class="col-xs-2">
-                        <div class="row">
-                            <nav class="menu-container">
-                                <a href="#" class="menu-btn"><i class="fa fa-bars fa-lg "><span class=" glyphicon glyphicon-menu-hamburger"></span></i></a>
-                                <div class="menu-slide">
-                                    <div class="text-center">
-                                        <br/>
-                                        <img src="../../img/logo egc.png" width="80em" style="margin-right: 1em"/>
-                                        <label class="text-center "><h3 class="texto-200 texto-cor-branco">EGC</h3></label> <br/><br/>
-                                        <label class="text-center "><h4 class="texto-200 texto-cor-branco">Bem Vindo #{controladorUsuario.usuario.nickname}</h4></label> <br/>
-                                    </div>
+                    <div class="col-lg-6 col-xs-6">
 
-
-                                    <ul class="menu-list">
-                                        <li class="menu-item">
-                                            <a href="index.jsf">
-                                                <button class="btn-menu-lateral tooltips transition" title="Inicio" rel="tooltip" data-placement="right">
-                                                    <img src="../../img/inicio.png"/>
-                                                </button>
-                                                <label>Inicio</label>
-                                            </a>
-                                        </li>
-
-                                        <li class="menu-item">
-                                            <a href="novadenuncia.jsf">
-                                                <button class="btn-menu-lateral tooltips" title="Pesquisar" rel="tooltip" data-placement="right">
-                                                    <img src="../../img/pesquisar.png"/>
-                                                </button>
-                                                <label>Pesquisar</label>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="denuncia.jsf">
-                                                <button class="btn-menu-lateral tooltips" title="Nova Denuncia" rel="tooltip" data-placement="right">
-                                                    <img src="../../img/novadenuncia.png"/>
-                                                </button>
-                                                <label>Nova Denúncia</label>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="minhas-denuncias.jsf">
-                                                <button class="btn-menu-lateral tooltips" title="Denuncias Realizadas" rel="tooltip" data-placement="right">
-                                                    <img src="../../img/denunciasrealizadas.png"/>
-                                                </button>
-                                                <label>Denúncias Realizadas</label>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="ajudas.jsf">
-                                                <button class="btn-menu-lateral tooltips" title="Denuncias que Ajudei" rel="tooltip" data-placement="right">
-                                                    <img src="../../img/ajudas.png"/>
-                                                </button>
-                                                <label>Denúncias que Ajudei</label>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="configuracoes.jsf">
-                                                <button class="btn-menu-lateral tooltips" title="Configurações" rel="tooltip" data-placement="right">
-                                                    <img src="../../img/configuracoes.png"/>
-                                                </button>
-                                                <label>Configurações</label>
-                                            </a>
-                                        </li>
-                                    </ul>
-
-                                    <div class="col-xs-12">
-                                        <br/>
-                                        <h:form>
-                                            <h:commandButton action="#{controladorUsuario.logout()}" class="btn btn-primary btn-lg btn-block" value="Sair"/>
-                                        </h:form>
-                                        <br/>
-                                    </div>
-
-
-
-                                </div>
-                            </nav>
+                        <div id="menu">
+                            <ui:include src="menu-canvas.xhtml"/>
                         </div>
-                    </div>
-                    <div class="col-lg-6 col-xs-4">
-                        <div class="row logo-visitante">
-                            <img src="/EGC/img/logo-azul.png" alt="EGC"/>
+                        
+                        <div class="left">
+                            <div class="logo-visitante">
+                                <img src="/EGC/img/logo-azul.png" alt="EGC"/>
+                            </div>
                         </div>
                     </div>
 

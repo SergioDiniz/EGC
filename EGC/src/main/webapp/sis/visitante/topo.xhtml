@@ -2,12 +2,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
 
         <link rel="stylesheet" href="/EGC/css/bootstrap.css" type="text/css"/>
         <link rel="stylesheet" href="/EGC/css/bootstrap-theme.css" type="text/css"/>
         <link rel="stylesheet" href="/EGC/css/administrador.css" type="text/css"/>
+        <link rel="stylesheet" href="/EGC/css/navslide.css" type="text/css"/>
         <link rel="stylesheet" href="/EGC/css/estilo.css" type="text/css"/>
         <link rel="stylesheet" href="/EGC/css/circular-chart.css" type="text/css"/>
 
@@ -32,10 +34,19 @@
         <div class="container menu-visitante m-visitante">
             <div class="row">
 
+
+
                 <div>
                     <div class="col-lg-6 col-xs-6">
-                        <div class="logo-visitante">
-                            <img src="/EGC/img/logo-azul.png" alt="EGC"/>
+                        <c:if test="#{controladorUsuario.usuarioAtivo}">
+                            <div id="menu">
+                                <ui:include src="../m/menu-canvas.xhtml"/>
+                            </div>
+                        </c:if>
+                        <div class="left">
+                            <div class="logo-visitante">
+                                <img src="/EGC/img/logo-azul.png" alt="EGC"/>
+                            </div>
                         </div>
                     </div>
 
@@ -45,7 +56,6 @@
                                 <c:when test="#{controladorUsuario.usuarioAtivo}">
                                     <div class="info-usuario-ativo-top">
                                         <a href="#">#{controladorUsuario.usuario.nickname}</a>
-                                        <h:commandButton image="/img/sair-azul.png" action="#{controladorUsuario.logout()}" />
                                     </div>
 
 
