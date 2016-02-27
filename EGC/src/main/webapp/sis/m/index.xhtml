@@ -107,7 +107,9 @@
                                 </div>
 
                                 <div class="row text-right">
-                                    <span class="label label-info">#{denuncia.estadoDeAcompanhamento}</span>
+                                    <h:outputText value="ATENDIDA" styleClass="label label-success" rendered="#{denuncia.tagAtendida()}"/>
+                                    <h:outputText value="AGUARDANDO" styleClass="label label-primary" rendered="#{denuncia.tagAguardando()}"/>
+                                    <h:outputText value="EM ENDAMENTO" styleClass="label label-info" rendered="#{denuncia.tagEmAndamento()}"/>
                                 </div>
 
                             </div>

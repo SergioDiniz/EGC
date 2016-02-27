@@ -265,7 +265,9 @@
 
 
                                             <div class="row text-right">
-                                                <span class="label label-info">#{controladorCidade.visualizarDenuncia.estadoDeAcompanhamento}</span>
+                                                <h:outputText value="ATENDIDA" styleClass="label label-success" rendered="#{controladorCidade.visualizarDenuncia.tagAtendida()}"/>
+                                                <h:outputText value="AGUARDANDO" styleClass="label label-primary" rendered="#{controladorCidade.visualizarDenuncia.tagAguardando()}"/>
+                                                <h:outputText value="EM ENDAMENTO" styleClass="label label-info" rendered="#{controladorCidade.visualizarDenuncia.tagEmAndamento()}"/>
                                             </div>
 
 
