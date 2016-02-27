@@ -42,7 +42,8 @@
   /*background-color: #e0e0e0;*/
   background-color: #202020;
   /*background-image: url(../img/bglogin.png);*/
-  height: 100%;
+  height: calc(100% + 60px); /* 60px para compensar a barra do navegador do celular*/
+  padding-bottom: 60px; /* 60px para compensar a barra do navegador do celular*/
   left: -270px;
   top: 0;
   width: 270px;

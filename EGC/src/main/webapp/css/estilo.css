@@ -2427,7 +2427,8 @@ html, body{
     font-size: 1.7em;
 }
 
-.perfil-responsivo .r-numero{
+.perfil-responsivo .r-numero,
+.info-cidade-m-usuario .r-numero{
     font-size: 1.7em;
 }
 
@@ -2606,6 +2607,11 @@ html, body{
     
     .menu-container .menu-item label{
         color: #fff;
+    }
+    
+    .info-cidade-m-usuario{
+        padding-top: 2em;
+        padding-bottom: 2em;
     }
     
 }
