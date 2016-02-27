@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+
+        <link rel="stylesheet" href="/EGC/css/bootstrap.css" type="text/css"/>
+        <link rel="stylesheet" href="/EGC/css/bootstrap-theme.css" type="text/css"/>
+        <link rel="stylesheet" href="/EGC/css/administrador.css" type="text/css"/>
+        <link rel="stylesheet" href="/EGC/css/navslide.css" type="text/css"/>
+        <link rel="stylesheet" href="/EGC/css/estilo.css" type="text/css"/>
+        <link rel="stylesheet" href="/EGC/css/circular-chart.css" type="text/css"/>
+
+        <link rel="stylesheet" href="/EGC/js/jquery.mCustomScrollbar.css" /> <!-- scrollbar -->
+
+        <script src="/EGC/js/jquery-1.11.2.js" type="text/javascript"/>
+
+        <script src="/EGC/js/m-p/jquery.magnific-popup.js" type="text/javascript"/>
+        <link rel="stylesheet" href="/EGC/js/m-p/magnific-popup.css"/> 
+
+        <script src="/EGC/js/bootstrap.js" type="text/javascript"/>
+
+        <script src="/EGC/js/jquery.mCustomScrollbar.js" type="text/javascript"/> <!-- scrollbar -->
+
+        <script src="/EGC/js/scripts.js" type="text/javascript"/>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    </h:head>
+    <h:body>
+
+
+
+        <div class="container menu-visitante m-visitante">
+            <div class="row">
+
+                <div>
+                    <div class="col-xs-2">
+                        <div class="row">
+                            <nav class="menu-container">
+                                <a href="#" class="menu-btn"><i class="fa fa-bars fa-lg "><span class=" glyphicon glyphicon-menu-hamburger"></span></i></a>
+                                <div class="menu-slide">
+                                    <div class="text-center">
+                                        <br/>
+                                        <img src="../../img/logo egc.png" width="80em" style="margin-right: 1em"/>
+                                        <label class="text-center "><h3 class="texto-200 texto-cor-branco">EGC</h3></label> <br/><br/>
+                                        <label class="text-center "><h4 class="texto-200 texto-cor-branco">Bem Vindo #{controladorUsuario.usuario.nickname}</h4></label> <br/>
+                                    </div>
+
+
+                                    <ul class="menu-list">
+                                        <li class="menu-item">
+                                            <a href="index.jsf">
+                                                <button class="btn-menu-lateral tooltips transition" title="Inicio" rel="tooltip" data-placement="right">
+                                                    <img src="../../img/inicio.png"/>
+                                                </button>
+                                                <label>Inicio</label>
+                                            </a>
+                                        </li>
+
+                                        <li class="menu-item">
+                                            <a href="novadenuncia.jsf">
+                                                <button class="btn-menu-lateral tooltips" title="Pesquisar" rel="tooltip" data-placement="right">
+                                                    <img src="../../img/pesquisar.png"/>
+                                                </button>
+                                                <label>Pesquisar</label>
+                                            </a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="denuncia.jsf">
+                                                <button class="btn-menu-lateral tooltips" title="Nova Denuncia" rel="tooltip" data-placement="right">
+                                                    <img src="../../img/novadenuncia.png"/>
+                                                </button>
+                                                <label>Nova Denúncia</label>
+                                            </a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="minhas-denuncias.jsf">
+                                                <button class="btn-menu-lateral tooltips" title="Denuncias Realizadas" rel="tooltip" data-placement="right">
+                                                    <img src="../../img/denunciasrealizadas.png"/>
+                                                </button>
+                                                <label>Denúncias Realizadas</label>
+                                            </a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="ajudas.jsf">
+                                                <button class="btn-menu-lateral tooltips" title="Denuncias que Ajudei" rel="tooltip" data-placement="right">
+                                                    <img src="../../img/ajudas.png"/>
+                                                </button>
+                                                <label>Denúncias que Ajudei</label>
+                                            </a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="configuracoes.jsf">
+                                                <button class="btn-menu-lateral tooltips" title="Configurações" rel="tooltip" data-placement="right">
+                                                    <img src="../../img/configuracoes.png"/>
+                                                </button>
+                                                <label>Configurações</label>
+                                            </a>
+                                        </li>
+                                    </ul>
+
+                                    <div class="col-xs-12">
+                                        <br/>
+                                        <h:form>
+                                            <h:commandButton action="#{controladorUsuario.logout()}" class="btn btn-primary btn-lg btn-block" value="Sair"/>
+                                        </h:form>
+                                        <br/>
+                                    </div>
+
+
+
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xs-4">
+                        <div class="row logo-visitante">
+                            <img src="/EGC/img/logo-azul.png" alt="EGC"/>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-xs-6">
+                        <div class="text-right">
+                            <c:choose>
+                                <c:when test="#{controladorUsuario.usuarioAtivo}">
+                                    <div class="info-usuario-ativo-top">
+                                        <a href="#">#{controladorUsuario.usuario.nickname}</a>
+                                    </div>
+
+
+                                </c:when>
+                                <c:when test="#{!controladorUsuario.usuarioAtivo}">
+                                    <h:form>
+                                        <h:commandButton  class="btn btn-default" action="/index.jsf?faces-redirect=true" value="Entrar"/>
+                                    </h:form>
+                                </c:when>
+                            </c:choose>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </h:body>
+</html>
+
+
+

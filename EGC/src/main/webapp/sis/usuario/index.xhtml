@@ -11,15 +11,20 @@
       xmlns:p="http://primefaces.org/ui">
 
     <h:head>
+
+
+
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
         <title>EGC - Usuário</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
     </h:head>
 
     <h:body>
 
 
 
-        <div class="tudo">
+        <div class="tudo hidden-xs">
 
             <div id="menu">
                 <ui:include src="topo.xhtml"/>
@@ -30,7 +35,7 @@
             </div>
         </div>
 
-        <div class="area-titulo-pagina">
+        <div class="area-titulo-pagina hidden-xs">
 
             <div class="col-md-5">
                 <div class="titulo-pagina">Bem Vindo!</div>
@@ -54,7 +59,7 @@
             </div>
         </div>
 
-        <div class="tudo">
+        <div class="tudo hidden-xs">
 
             <!-- -->
             <div class="menu-filtro">
@@ -604,7 +609,14 @@
                 </div>
             </div>
         </div>
+
+
     </h:body>
+    <script>
+        if (Modernizr.mq('(max-width: 767px)')) {
+            window.location = "/EGC/sis/m/index.jsf";
+        }
+    </script>
     <style type="text/css">
         body{
             background-color: #f9f9f9;    
