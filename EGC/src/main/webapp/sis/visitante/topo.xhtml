@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
     <h:head>
 
         <link rel="stylesheet" href="/EGC/css/bootstrap.css" type="text/css"/>
@@ -56,6 +57,25 @@
                                 <c:when test="#{controladorUsuario.usuarioAtivo}">
                                     <div class="info-usuario-ativo-top">
                                         <a href="#">#{controladorUsuario.usuario.nickname}</a>
+                                        <!-- Split button -->
+                                        <div class="btn-group hidden-xs menu-drop-usuario">
+                                            <form jsf:id="id">
+                                                <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <span class="glyphicon glyphicon-option-vertical"></span>
+                                                    <span class="sr-only">Toggle Dropdown</span>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="/EGC/sis/usuario/index.jsf"><span><img src="/EGC/img/inicio.png"/></span> Inicio</a></li>
+                                                    <li><a href="/EGC/pesquisar"><span><img src="/EGC/img/pesquisar.png"/></span> Pesquisar</a></li>
+                                                    <li><a href="/EGC/sis/usuario/denuncia.jsf"><span><img src="/EGC/img/novadenuncia.png"/></span> Nova Denúncia</a></li>
+                                                    <li><a href="/EGC/sis/usuario/minhas-denuncias.jsf"><span><img src="/EGC/img/denunciasrealizadas.png"/></span> Denúncias Realizadas</a></li>
+                                                    <li><a href="/EGC/sis/usuario/ajudas.jsf"><span><img src="/EGC/img/ajudas.png"/></span> Denúncias que Ajudei</a></li>
+                                                    <li><a href="/EGC/sis/usuario/configuracoes.jsf"><span><img src="/EGC/img/configuracoes.png"/></span> Configurações</a></li>
+                                                    <li role="separator" class="divider"></li>
+                                                    <li><a href="#" jsf:action="#{controladorUsuario.logout()}"> <span><img src="/EGC/img/sair-azul.png"/></span>Sair</a></li>
+                                                </ul>
+                                            </form>
+                                        </div>
                                     </div>
 
 
