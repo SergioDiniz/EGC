@@ -165,7 +165,7 @@ public class ControladorPrefeitura implements Serializable {
         fachada.atualizar(prefeitura);
 
         //String emailUsuario, String nomeUsuario, String prefeitura, EmailType emailType
-        ControladorAdmin.enviarEmail(this.prefeitura.getEmail(), this.prefeitura.getNome(), "", (this.cidadePK.getNomeCidade() + " - " + this.cidadePK.getSiglaEstado()), EmailType.BEM_VINDO_PREFEITURA);
+        ControladorAdmin.enviarEmail(this.prefeitura.getEmail(), this.prefeitura.getNome(), "", (this.cidade.getCidadePK().getNomeCidade() + " - " + this.cidade.getCidadePK().getSiglaEstado()), EmailType.BEM_VINDO_PREFEITURA);
 
         cidade = new Cidade();
         cidadePK = new CidadePK();
