@@ -128,8 +128,7 @@ public class ControladorPrefeitura implements Serializable {
         this.funcionario = new Funcionario();
         return "/index.jsf?faces-redirect=true";
     }
-    
-    
+
     public String recuperarSenha() throws EmailException, MalformedURLException {
         Prefeitura p = new Prefeitura();
         p = fachada.prefeituraPorEmail(this.emailRecuperarSenha);
@@ -144,7 +143,6 @@ public class ControladorPrefeitura implements Serializable {
         ControladorAdmin.info("Email não Encontrado!");
         return null;
     }
-    
 
     public String cadastro() throws IOException, EmailException {
 
@@ -288,7 +286,7 @@ public class ControladorPrefeitura implements Serializable {
 
     }
 
-    public String cadastrarNovoFuncionario() {
+    public String cadastrarNovoFuncionario() throws EmailException, MalformedURLException {
         funcionario.setCpf(CPFPesquisaF);
         if (this.funcionario.isSexo()) {
             this.funcionario.setFoto("h-funcionario.png");
@@ -300,6 +298,10 @@ public class ControladorPrefeitura implements Serializable {
         funcionario = fachada.buscarFuncionarioPorCPF(CPFPesquisaF);
         fachada.cadastrarNaPrefeitura(prefeitura, funcionario);
         this.prefeitura.setFuncionarios(funcionarios());
+
+        //String emailUsuario, String nomeUsuario, String prefeitura, String senha, EmailType emailType
+        ControladorAdmin.enviarEmail(funcionario.getEmail(), funcionario.getNome(), (this.prefeitura.getCidade().getCidadePK().getNomeCidade() + " - " + this.prefeitura.getCidade().getCidadePK().getSiglaEstado()), "", EmailType.BEM_VINDO_FUNCIONARIO);
+
         funcionario = new Funcionario();
         CPFPesquisaF = "";
         funcionarioNovo = false;
@@ -312,10 +314,12 @@ public class ControladorPrefeitura implements Serializable {
         return fus;
     }
 
-    public String vincularFuncionario() {
+    public String vincularFuncionario() throws EmailException, MalformedURLException {
         Funcionario f = fachada.buscarFuncionarioPorCPF(CPFPesquisaF);
         fachada.vincularFuncionarioPrefeitura(prefeitura, f);
         this.prefeitura.setFuncionarios(funcionarios());
+        //String emailUsuario, String nomeUsuario, String prefeitura, String senha, EmailType emailType
+        ControladorAdmin.enviarEmail(f.getEmail(), f.getNome(), (this.prefeitura.getCidade().getCidadePK().getNomeCidade() + " - " + this.prefeitura.getCidade().getCidadePK().getSiglaEstado()), "", EmailType.BEM_VINDO_FUNCIONARIO);
         CPFPesquisaF = "";
         funcionarioCadastrado = false;
         return "listafuncionarios.jsf?faces-redirect=true";
@@ -565,7 +569,5 @@ public class ControladorPrefeitura implements Serializable {
     public void setEmailRecuperarSenha(String emailRecuperarSenha) {
         this.emailRecuperarSenha = emailRecuperarSenha;
     }
-    
-    
 
 }
