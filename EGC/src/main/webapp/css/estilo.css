@@ -74,7 +74,7 @@ html, body{
 }
 
 .rodape{
-    margin-top: 100px;
+
     background-color: #f3f5f6;
     background-image: url(../img/backinicio.jpg);
     background-position: center;
@@ -2552,6 +2552,38 @@ html, body{
 
 }
 
+
+.mockup-dm{
+    border-top: 1px solid #eee;
+    margin-top: 10em;
+    padding-top: 10em;
+    /*padding-bottom: 100px;*/
+    /*background-color: #999;*/
+
+}
+
+.mockup-dm img{
+    width: 80%;
+    max-width: 800px;
+}
+
+.mockup-rua{
+    width: 100%;
+    height: 40em;
+    background-image: url(../img/mockup-rua.jpg);
+    background-size: cover;
+    background-position: center;
+}
+.mockup-rua h1{
+    margin-top: 14em;
+}
+
+
+.msg-inicio{
+    margin-top: 17em;
+    margin-bottom: 17em;
+}
+
 @media (max-width: 767px){
 
     .login{
@@ -2691,6 +2723,33 @@ html, body{
         margin-top: 2em;
         margin-bottom: 2em;
     }
+
+    .mockup-dm{
+        margin-top: 5em;
+        padding-top: 5em;
+
+    }
+
+    .mockup-rua{
+        width: 100%;
+        height: 20em;
+        text-align: center !important;
+    }
+    .mockup-rua h1{
+        margin-top: 8.5em;
+        font-size: 2em;
+    }
+
+    .msg-inicio{
+        margin-top: 5em;
+        margin-bottom: 5em;
+        font-size: 1.7em;
+    }
+    
+    .msg-inicio h1{
+        font-size: 1em;
+    }
+
 }
 
 /*SM*/

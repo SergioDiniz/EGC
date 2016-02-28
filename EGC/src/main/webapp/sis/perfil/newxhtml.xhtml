@@ -1,3 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+    <h:head>
+
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+
+        <script type="text/javascript">
+            // When the window has finished loading create our google map below
+            google.maps.event.addDomListener(window, 'load', init);
+
+            function init() {
+                // Basic options for a simple Google Map
+                // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
+
+                var loglat = new google.maps.LatLng(#{controladorCidade.prefeitura.enderecoPrefeitura.latitude}, #{controladorCidade.prefeitura.enderecoPrefeitura.longitude}); // -6.722780, -38.640592
+
+                var mapOptions = {
+                    // How zoomed in you want the map to start at (always required)
+                    zoom: 16,
+                    // The latitude and longitude to center the map (always required)
+                    center: loglat, // New York -6.722780, -38.640592
+
+                    // How you would like to style the map. 
+                    // This is where you would paste any style found on Snazzy Maps.
+                    styles: [{"featureType": "landscape", "stylers": [{"hue": "#FFBB00"}, {"saturation": 43.400000000000006}, {"lightness": 37.599999999999994}, {"gamma": 1}]}, {"featureType": "road.highway", "stylers": [{"hue": "#FFC200"}, {"saturation": -61.8}, {"lightness": 45.599999999999994}, {"gamma": 1}]}, {"featureType": "road.arterial", "stylers": [{"hue": "#FF0300"}, {"saturation": -100}, {"lightness": 51.19999999999999}, {"gamma": 1}]}, {"featureType": "road.local", "stylers": [{"hue": "#FF0300"}, {"saturation": -100}, {"lightness": 52}, {"gamma": 1}]}, {"featureType": "water", "stylers": [{"hue": "#0078FF"}, {"saturation": -13.200000000000003}, {"lightness": 2.4000000000000057}, {"gamma": 1}]}, {"featureType": "poi", "stylers": [{"hue": "#00FF6A"}, {"saturation": -1.0989010989011234}, {"lightness": 11.200000000000017}, {"gamma": 1}]}]
+                };
+
+                // Get the HTML DOM element that will contain your map 
+                // We are using a div with id="map" seen below in the body
+                var mapElement = document.getElementById('map');
+
+                // Create the Google Map using our element and options defined above
+                var map = new google.maps.Map(mapElement, mapOptions);
+
+                // Let's also add a marker while we're at it
+                var marker = new google.maps.Marker({
+                    position: loglat,
+                    map: map,
+                    title: 'Prefeitura'
+                });
+            }
+        </script>
+
+        <f:metadata>
+            <f:viewParam  required="true" id="codigoPrefeitura_id" name="codigoPrefeitura" value="#{controladorCidade.codigoPrefeitura}" />
+            <f:event type="preRenderView" listener="#{controladorCidade.pesquisarPrefeitura}" />
+        </f:metadata>
+
+        <title>EGC</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+        <meta name="theme-color" content="#fff"></meta>
+    </h:head>
+    <h:body>
+
+        <div class="tudo visualizar-perfil">
+
+            <div id="menu">
+                <ui:include src="/sis/visitante/topo.xhtml"/>
+            </div>
 
             <div class="area-titulo-pagina perfil-prefeitura visible-lg visible-md">
 
@@ -582,3 +650,7 @@
 
 
             </div>
+        </div>
+    </h:body>
+
+</html>
