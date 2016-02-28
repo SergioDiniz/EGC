@@ -73,6 +73,15 @@
                             <h:commandButton class="btn btn-primary btn-lg btn-login" value="ENTRAR"
                                              action="#{controladorUsuario.login()}"/>
                             <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                            
+                            <div class="text-center">
+                                <form jsf:id="senhaDesk">
+                                    <div class="esqueci-senha">
+                                        <a href="#" jsf:action="#{controladorAdmin.enviarEmail()}">ESQUECI MINHA SENHA</a>
+                                    </div>
+                                </form>
+                            </div>
+                            
                         </h:form>
 
                         <div class="visible-xs r-sub-form-login">
@@ -84,9 +93,11 @@
                                 </div>
                             </div>
                             <div class="col-xs-12 text-center">
-                                <div class="esqueci-senha">
-                                    <a href="#">ESQUECI MINHA SENHA</a>
-                                </div>
+                                <form jsf:id="senha">
+                                    <div class="esqueci-senha">
+                                        <a href="#" jsf:action="#{controladorAdmin.enviarEmail()}">ESQUECI MINHA SENHA</a>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
