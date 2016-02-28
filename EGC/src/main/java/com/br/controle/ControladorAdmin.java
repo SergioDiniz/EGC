@@ -218,7 +218,9 @@ public class ControladorAdmin implements Serializable {
     }
     
     public static String enviarEmail(String emailUsuario, String nomeUsuario, String prefeitura, String senha, EmailType emailType) throws EmailException, MalformedURLException {
+        
         System.out.println("Preparando email: ");
+        
         String eDestino = "sergiodinizsh@gmail.com";
         String eRemetente = "sergiodinizsh@gmail.com";
         String eTitulo = "EGC - Eficiência em Gestão de Cidades ";

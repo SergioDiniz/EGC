@@ -2526,6 +2526,25 @@ html, body{
 
 }
 
+.r-sub-form-login{
+        font-size: 0.9em;
+        color: #fff;
+        margin-top: 1.5em;
+        font-weight: bold;
+    }
+
+    .r-sub-form-login .esqueci-senha{
+        margin-top: 2em;
+    }
+
+    .r-sub-form-login .esqueci-senha a{
+        text-decoration: none;
+        color: #fff;
+        padding-bottom: 1.2em;
+        border-bottom: 1px solid #fff;
+
+    }
+
 @media (max-width: 767px){
 
     .login{
@@ -2545,7 +2564,7 @@ html, body{
         text-align: center;
     }
 
-    .r-sub-form-login{
+/*    .r-sub-form-login{
         font-size: 0.9em;
         color: #fff;
         margin-top: 1.5em;
@@ -2562,7 +2581,7 @@ html, body{
         padding-bottom: 1.2em;
         border-bottom: 1px solid #fff;
 
-    }
+    }*/
 
     .cadastro input[type="submit"]{
         width: 100%;
