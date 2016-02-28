@@ -16,6 +16,7 @@ import com.br.beans.Prefeitura;
 import com.br.beans.Registro;
 import com.br.beans.TipoDeDenuncia;
 import com.br.beans.TipoDeRegistro;
+import com.br.beans.Usuario;
 import com.br.fachada.Fachada;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -23,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +34,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
+import org.apache.commons.mail.EmailException;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
@@ -57,6 +60,7 @@ public class ControladorFuncionario implements Serializable {
     private TipoDeDenuncia tipoDeDenunciaGerenciando;
     private InformacaoDeAtendida informacaoDeAtendida;
     private ConteudoInapropriado conteudoInapropriado;
+    private String emailRecuperarSenha;
     
     private String filtroData;
     private String filtroAjuda;
@@ -79,6 +83,7 @@ public class ControladorFuncionario implements Serializable {
         this.filtroAjuda = "AJUDA_DESC";
         this.filtroQuery = "";
         this.filtroTipo = "";
+        this.emailRecuperarSenha = "";
     }
 
     public void mostrapagina() throws IOException {
@@ -128,6 +133,23 @@ public class ControladorFuncionario implements Serializable {
         return "/index.jsf?faces-redirect=true";
     }
 
+    public String recuperarSenha() throws EmailException, MalformedURLException {
+        Funcionario f = new Funcionario();
+        f = fachada.funcionarioPorEmail(this.emailRecuperarSenha);
+        if (f != null) {
+            //String emailUsuario, String nomeUsuario, String prefeitura, String senha, EmailType emailType
+            ControladorAdmin.enviarEmail(f.getEmail(), f.getNome(), "", f.getSenha(), EmailType.RECUPERAR_SENHA);
+            this.emailRecuperarSenha = "";
+            ControladorAdmin.info("Verifique seu Email!");
+            return null;
+        }
+        this.emailRecuperarSenha = "";
+        ControladorAdmin.info("Email não Encontrado!");
+        return null;
+    }
+    
+    
+    
     public String upload(UploadedFile fileUp, UploadType uploadType) {
         if (fileUp != null) {
             try {
@@ -494,6 +516,14 @@ public class ControladorFuncionario implements Serializable {
 
     public void setFiltroTipo(String filtroTipo) {
         this.filtroTipo = filtroTipo;
+    }
+
+    public String getEmailRecuperarSenha() {
+        return emailRecuperarSenha;
+    }
+
+    public void setEmailRecuperarSenha(String emailRecuperarSenha) {
+        this.emailRecuperarSenha = emailRecuperarSenha;
     }
     
     

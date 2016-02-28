@@ -52,6 +52,21 @@ public class FuncionarioService implements FuncionarioServiceIT {
     }
 
     @Override
+    public Funcionario funcionarioPorEmail(String email) {
+        Query query = em.createQuery("SELECT f FROM Funcionario f WHERE f.email = :email");
+        query.setParameter("email", email);
+
+        List<Funcionario> f = query.getResultList();
+
+        if (f.size() > 0) {
+            f.get(0).getPrefeituras().size();
+            return f.get(0);
+        }
+
+        return null;
+    }
+    
+    @Override
     public Funcionario buscarPorCPF(String cpf) {
         Query query = em.createQuery("SELECT f FROM Funcionario f WHERE f.cpf = :cpf");
         query.setParameter("cpf", cpf);

@@ -65,6 +65,28 @@ public class PrefeituraService implements PrefeituraServiceIT {
         return null;
 
     }
+    
+    @Override
+    public Prefeitura prefeituraPorEmail(String email) {
+
+        try {
+
+            Query query = em.createQuery("SELECT p FROM Prefeitura p WHERE p.email = :email");
+            query.setParameter("email", email);
+
+            List<Prefeitura> p = query.getResultList();
+
+            if (p.size() > 0) {
+                return p.get(0);
+            }
+
+        } catch (Exception e) {
+            System.out.println("ERRO EM PESQUISAR PREFEITURA POR EMAIL: " + e.getMessage());
+        }
+
+        return null;
+
+    }
 
     @Override
     public Prefeitura pesquisarPrefeituraPorCodigo(String codigo) {

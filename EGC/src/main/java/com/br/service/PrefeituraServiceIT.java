@@ -22,6 +22,8 @@ public interface PrefeituraServiceIT {
     
     public Prefeitura pesquisarPrefeituraPorCidade(String cidade, String estado);
     
+    public Prefeitura prefeituraPorEmail(String email);
+    
     public Prefeitura pesquisarPrefeituraPorCodigo(String codigo);
     
     public Long totalDePrefeitura();

@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,6 +23,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import org.apache.commons.mail.EmailException;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -49,6 +51,7 @@ public class ControladorUsuario implements Serializable {
     private int denunicasAtendidas;
     private List<Denuncia> feedDenuncias;
     private boolean usuarioAtivo;
+    private String emailRecuperarSenha;
 
     @EJB
     private Fachada fachada;
@@ -69,6 +72,7 @@ public class ControladorUsuario implements Serializable {
         this.conteudoInapropriado = new ConteudoInapropriado();
         this.feedDenuncias = new ArrayList<>();
         this.usuarioAtivo = false;
+        this.emailRecuperarSenha = "";
     }
 
     public String cadastro() {
@@ -78,6 +82,8 @@ public class ControladorUsuario implements Serializable {
             this.usuario = fachada.loginUsuario(usuario);
             this.cidadeDenuncia = this.usuario.getEndereco().getCidade();
             this.ufDenuncia = this.usuario.getEndereco().getEstado();
+            //String emailUsuario, String nomeUsuario, String prefeitura, EmailType emailType
+            ControladorAdmin.enviarEmail(this.usuario.getEmail(), this.usuario.getNickname(), "", "", EmailType.BEM_VINDO_USUARIO);
             return "/sis/usuario/index.jsf?faces-redirect=true";
         } catch (Exception e) {
 
@@ -137,6 +143,21 @@ public class ControladorUsuario implements Serializable {
         this.feedDenuncias = new ArrayList<>();
         this.usuarioAtivo = false;
         return "/index.jsf?faces-redirect=true";
+    }
+
+    public String recuperarSenha() throws EmailException, MalformedURLException {
+        Usuario u = new Usuario();
+        u = fachada.usuarioPorEmail(this.emailRecuperarSenha);
+        if (u != null) {
+            //String emailUsuario, String nomeUsuario, String prefeitura, String senha, EmailType emailType
+            ControladorAdmin.enviarEmail(u.getEmail(), u.getNickname(), "", u.getSenha(), EmailType.RECUPERAR_SENHA);
+            this.emailRecuperarSenha = "";
+            ControladorAdmin.info("Verifique seu Email!");
+            return null;
+        }
+        this.emailRecuperarSenha = "";
+        ControladorAdmin.info("Email não Encontrado!");
+        return null;
     }
 
     public String fazerDenuncia() {
@@ -655,6 +676,14 @@ public class ControladorUsuario implements Serializable {
 
     public void setUsuarioAtivo(boolean usuarioAtivo) {
         this.usuarioAtivo = usuarioAtivo;
+    }
+
+    public String getEmailRecuperarSenha() {
+        return emailRecuperarSenha;
+    }
+
+    public void setEmailRecuperarSenha(String emailRecuperarSenha) {
+        this.emailRecuperarSenha = emailRecuperarSenha;
     }
 
 }

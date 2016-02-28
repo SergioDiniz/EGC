@@ -79,6 +79,10 @@ public class Fachada implements Serializable {
         return us.login(usuario.getEmail(), usuario.getSenha());
     }
 
+    public Usuario usuarioPorEmail(String email) {
+        return us.usuarioPorEmail(email);
+    }
+    
     public List<Denuncia> minhasDenuncias(String email) {
         return us.minhasDenuncias(email);
     }
@@ -95,6 +99,11 @@ public class Fachada implements Serializable {
     // PrefeituraServices
     public Prefeitura loginPrefeitura(String email, String senha) {
         return ps.login(email, senha);
+    }
+    
+    
+    public Prefeitura prefeituraPorEmail(String email){
+        return ps.prefeituraPorEmail(email);
     }
     
     public Prefeitura pesquisarPrefeituraPorCidade(String cidade, String estado){
@@ -174,6 +183,10 @@ public class Fachada implements Serializable {
         return fs.login(email, senha, cidade, estado);
     }
 
+    public Funcionario funcionarioPorEmail(String email) {
+        return fs.funcionarioPorEmail(email);
+    }
+    
     public Funcionario buscarFuncionarioPorCPF(String cpf) {
         return fs.buscarPorCPF(cpf);
     }

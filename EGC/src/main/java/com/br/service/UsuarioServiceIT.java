@@ -20,6 +20,8 @@ public interface UsuarioServiceIT{
     
     public Usuario login(String email, String senha);
     
+    public Usuario usuarioPorEmail(String email);
+    
     public boolean excluir(Usuario usuario);
     
     public List<Denuncia> minhasDenuncias(String email);

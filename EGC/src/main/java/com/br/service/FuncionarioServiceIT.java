@@ -17,6 +17,8 @@ import java.util.List;
 public interface FuncionarioServiceIT {
 
     public Funcionario login(String email, String senha, String cidade, String estado);
+    
+    public Funcionario funcionarioPorEmail(String email);
 
     public Funcionario buscarPorCPF(String cpf);
 

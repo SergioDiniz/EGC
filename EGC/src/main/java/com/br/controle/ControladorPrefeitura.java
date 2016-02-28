@@ -14,6 +14,7 @@ import com.br.beans.Funcionario;
 import com.br.beans.LideresPrefeitura;
 import com.br.beans.Prefeitura;
 import com.br.beans.Registro;
+import com.br.beans.Usuario;
 import static com.br.controle.ControladorAdmin.info;
 import static com.br.controle.ControladorAdmin.infoUsuarioInvalido;
 import com.br.fachada.Fachada;
@@ -25,6 +26,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
@@ -32,6 +34,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Part;
+import org.apache.commons.mail.EmailException;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -61,6 +64,7 @@ public class ControladorPrefeitura implements Serializable {
     private List<Long> dadosPrefeitura;
     private List<Funcionario> funcionariosOnline;
     private Funcionario funcionarioPerfil;
+    private String emailRecuperarSenha;
 
     @EJB
     private Fachada fachada;
@@ -80,6 +84,7 @@ public class ControladorPrefeitura implements Serializable {
         this.denunciaComMaisAjuda = new ArrayList<>();
         this.denunciaMaisRecentes = new ArrayList<>();
         this.funcionariosOnline = new ArrayList<>();
+        this.emailRecuperarSenha = "";
     }
 
     public void mostrapagina() throws IOException {
@@ -123,8 +128,25 @@ public class ControladorPrefeitura implements Serializable {
         this.funcionario = new Funcionario();
         return "/index.jsf?faces-redirect=true";
     }
+    
+    
+    public String recuperarSenha() throws EmailException, MalformedURLException {
+        Prefeitura p = new Prefeitura();
+        p = fachada.prefeituraPorEmail(this.emailRecuperarSenha);
+        if (p != null) {
+            //String emailUsuario, String nomeUsuario, String prefeitura, String senha, EmailType emailType
+            ControladorAdmin.enviarEmail(p.getEmail(), p.getNome(), "", p.getSenha(), EmailType.RECUPERAR_SENHA);
+            this.emailRecuperarSenha = "";
+            ControladorAdmin.info("Verifique seu Email!");
+            return null;
+        }
+        this.emailRecuperarSenha = "";
+        ControladorAdmin.info("Email não Encontrado!");
+        return null;
+    }
+    
 
-    public String cadastro() throws IOException {
+    public String cadastro() throws IOException, EmailException {
 
         try {
             cidade.setCidadePK(cidadePK);
@@ -144,6 +166,9 @@ public class ControladorPrefeitura implements Serializable {
         prefeitura.setLideresPrefeitura(lideresPrefeitura);
         fachada.atualizar(prefeitura);
 
+        //String emailUsuario, String nomeUsuario, String prefeitura, EmailType emailType
+        ControladorAdmin.enviarEmail(this.prefeitura.getEmail(), this.prefeitura.getNome(), "", (this.cidadePK.getNomeCidade() + " - " + this.cidadePK.getSiglaEstado()), EmailType.BEM_VINDO_PREFEITURA);
+
         cidade = new Cidade();
         cidadePK = new CidadePK();
         prefeitura = new Prefeitura(new EnderecoPrefeitura());
@@ -152,17 +177,16 @@ public class ControladorPrefeitura implements Serializable {
 
     }
 
-    public String upload(UploadedFile fileUp ,UploadType uploadType) {
+    public String upload(UploadedFile fileUp, UploadType uploadType) {
         if (fileUp != null) {
             try {
 
                 File targetFolder;
                 if (uploadType == UploadType.BRASAO_PREFEITURA) {
                     targetFolder = new File("/Volumes/Arquivos/Sergio/Documentos/ADS/P6/TCC/Sistema/EGC/EGC/src/main/webapp/sis/prefeitura/brasao");
-                } else if (uploadType == UploadType.PERFIL_PREFEITO || uploadType == UploadType.PERFIL_VICE_PREFEITO){
+                } else if (uploadType == UploadType.PERFIL_PREFEITO || uploadType == UploadType.PERFIL_VICE_PREFEITO) {
                     targetFolder = new File("/Volumes/Arquivos/Sergio/Documentos/ADS/P6/TCC/Sistema/EGC/EGC/src/main/webapp/sis/prefeitura/lider");
-                }
-                else {
+                } else {
                     targetFolder = new File("/Volumes/Arquivos/Sergio/Documentos/ADS/P6/TCC/Sistema/EGC/EGC/src/main/webapp/sis/admin/documentos-de-solicitacao");
                 }
 
@@ -170,9 +194,9 @@ public class ControladorPrefeitura implements Serializable {
                 String tipoArquivo = fileUp.getFileName();
                 tipoArquivo = tipoArquivo.substring(tipoArquivo.lastIndexOf("."), tipoArquivo.length());
                 String nomeArquivo = prefeitura.getEmail() + tipoArquivo;
-                if(uploadType == UploadType.PERFIL_PREFEITO){
+                if (uploadType == UploadType.PERFIL_PREFEITO) {
                     nomeArquivo = "prefeito_" + nomeArquivo;
-                } else if (uploadType == UploadType.PERFIL_VICE_PREFEITO){
+                } else if (uploadType == UploadType.PERFIL_VICE_PREFEITO) {
                     nomeArquivo = "vice_prefeito_" + nomeArquivo;
                 }
                 OutputStream out = new FileOutputStream(new File(targetFolder, nomeArquivo));
@@ -196,46 +220,43 @@ public class ControladorPrefeitura implements Serializable {
     public String atualizarDados() {
 
         int sleep = 2000;
-        
-        
-        if(file_prefeito.getSize() > 0 || file_vice_prefeito.getSize() > 0){
+
+        if (file_prefeito.getSize() > 0 || file_vice_prefeito.getSize() > 0) {
             sleep = 0;
         }
-        
+
         if (file.getSize() > 0) {
 
             try {
 
                 this.prefeitura.setFoto(upload(this.file, UploadType.BRASAO_PREFEITURA));
                 this.file = null;
-                
+
                 Thread.sleep(sleep);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-        if(file_vice_prefeito.getSize() > 0){
+        if (file_vice_prefeito.getSize() > 0) {
             sleep = 0;
-        } else{
+        } else {
             sleep = 2000;
         }
-        
-        
+
         if (file_prefeito.getSize() > 0) {
 
             try {
 
                 this.prefeitura.getLideresPrefeitura().setFoto_prefeito((upload(this.file_prefeito, UploadType.PERFIL_PREFEITO)));
                 this.file_prefeito = null;
-                
+
                 Thread.sleep(sleep);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        
-        
+
         if (file_vice_prefeito.getSize() > 0) {
 
             try {
@@ -248,7 +269,7 @@ public class ControladorPrefeitura implements Serializable {
                 e.printStackTrace();
             }
         }
-        
+
         fachada.atualizar(prefeitura);
         return null;
     }
@@ -378,14 +399,12 @@ public class ControladorPrefeitura implements Serializable {
         this.funcionariosOnline.addAll(fachada.funcionariosOnline(this.prefeitura.getEmail()));
     }
 
-    public String visualizarPerfilFuncionario(Funcionario funcionario){
+    public String visualizarPerfilFuncionario(Funcionario funcionario) {
         this.funcionarioPerfil = new Funcionario();
         this.funcionarioPerfil = funcionario;
         return "perfil-funcionario?faces-redirect=true";
     }
-    
-    
-    
+
     //
     //
     //
@@ -539,6 +558,14 @@ public class ControladorPrefeitura implements Serializable {
         this.file_vice_prefeito = file_vice_prefeito;
     }
 
+    public String getEmailRecuperarSenha() {
+        return emailRecuperarSenha;
+    }
+
+    public void setEmailRecuperarSenha(String emailRecuperarSenha) {
+        this.emailRecuperarSenha = emailRecuperarSenha;
+    }
     
     
+
 }
