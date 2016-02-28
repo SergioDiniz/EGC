@@ -99,8 +99,10 @@ public class ControladorAdmin implements Serializable {
         return "avaliarsolicitacao.jsf?faces-redirect=true";
     }
 
-    public String excluirPrefeitura() {
+    public String excluirPrefeitura() throws EmailException, MalformedURLException {
         fachada.excluirPrefeitura(prefeituraAx);
+        //String emailUsuario, String nomeUsuario, String prefeitura, String senha, EmailType emailType
+        ControladorAdmin.enviarEmail(this.prefeituraAx.getEmail(), this.prefeituraAx.getNome(), (this.prefeituraAx.getCidade().getCidadePK().getNomeCidade() + " - " + prefeituraAx.getCidade().getCidadePK().getSiglaEstado()), "", EmailType.RECUSO_PREFEITURA);
         this.prefeituraAx = new Prefeitura();
         return "solicitacoes.jsf?faces-redirect=true";
     }
@@ -111,8 +113,10 @@ public class ControladorAdmin implements Serializable {
         return "prefeiturasativas.jsf?faces-redirect=true";
     }
 
-    public String aceitarSolicitacao() {
+    public String aceitarSolicitacao() throws EmailException, MalformedURLException {
         fachada.atualizarSituacaoPrefeitura(prefeituraAx, true);
+        //String emailUsuario, String nomeUsuario, String prefeitura, String senha, EmailType emailType
+        ControladorAdmin.enviarEmail(this.prefeituraAx.getEmail(), this.prefeituraAx.getNome(), (this.prefeituraAx.getCidade().getCidadePK().getNomeCidade() + " - " + prefeituraAx.getCidade().getCidadePK().getSiglaEstado()), "", EmailType.ACEITO_PREFEITURA);
         this.prefeituraAx = new Prefeitura();
         return "solicitacoes.jsf?faces-redirect=true";
     }
@@ -213,14 +217,14 @@ public class ControladorAdmin implements Serializable {
         return fachada.prefeiturasDoFuncionario(email);
     }
 
-    public void estarEmail() throws EmailException, MalformedURLException{
+    public void estarEmail() throws EmailException, MalformedURLException {
         enviarEmail("sergiodinizsh@gmail.com", "SergioDC", "Santa Helena - B", "", EmailType.BEM_VINDO_FUNCIONARIO);
     }
-    
+
     public static String enviarEmail(String emailUsuario, String nomeUsuario, String prefeitura, String senha, EmailType emailType) throws EmailException, MalformedURLException {
-        
+
         System.out.println("Preparando email: ");
-        
+
         String eDestino = "sergiodinizsh@gmail.com";
         String eRemetente = "sergiodinizsh@gmail.com";
         String eTitulo = "EGC - Eficiência em Gestão de Cidades ";
@@ -236,7 +240,6 @@ public class ControladorAdmin implements Serializable {
         email.setTLS(true);
         email.setSSL(true);
 
-        
         //layout emails
         String layoutEmail = "";
         String bemVindoUsuario = "<html> <head> <meta charset=\"UTF-8\"> <style>*{font-family: sans-serif;}</style> </head> <body style=\"color: #666; font-size: 15px\"> <div align=\"center\" style=\"margin-top: 30px;\"> <img src=\"https://raw.githubusercontent.com/SergioDiniz/EGC/master/EGC/src/main/webapp/img/logo-azul.png\" alt=\"Logo EGC\"/> </div><div align=\"center\"> <h2 style=\"font-weight: 100\">Eficiência em Gestão de Cidades</h2> </div><div style=\"font-size: 20px; color: #fff; margin-top: 20px;padding: 15px 0 15px 0; background-color: #03a4f7; width: 100%; max-width: 600px; margin: 0 auto; text-align: center\"> BEM-VINDO! </div><div style=\"margin: 0 auto; margin-top: 50px; max-width: 500px\" align=\"center\"> Olá <b style=\"color: #03a4f7\">" + nomeUsuario + "</b> <br/><br/><br/> Seu cadastrado foi realizado com sucesso e você já pode começar a usar.<br/><br/><br/> <section style=\"margin-bottom: 8px\"><b>Parabéns</b> por se inscrever no <b>EGC</b>! <br/></section> Juntos vamos redefinir o processo de reclamações e criaremos cidades inteligentes! </div><div align=\"center\" style=\"margin-top: 40px\"> <img src=\"https://raw.githubusercontent.com/SergioDiniz/EGC/master/EGC/src/main/webapp/img/icon-parabens.png\" width=\"80\" alt=\"Logo EGC\"/> </div><div align=\"center\" style=\"margin-top: 80px; background-color: #f9f9f9; padding: 40px 0 40px 0\"> <div align=\"center\"> <img src=\"https://raw.githubusercontent.com/SergioDiniz/EGC/master/EGC/src/main/webapp/img/s-logo.png\" width=\"50\" alt=\"Logo EGC\"/> </div><br/> <br/> Em caso de <b>dúvidas</b>, entre em contato conosco através do email: <b style=\"color: #03a4f7\">contato@egc.com.br</b> <br/><br/> <i style=\"font-size: 12px\">Copyright © 2016 - EGC, Todos os direitos reservados.</i> </div></body></html>";
@@ -244,16 +247,27 @@ public class ControladorAdmin implements Serializable {
         String bemVindoPrefeitura = "<html><body style=\"color: #666; font-size: 15px\"> <div align=\"center\" style=\"margin-top: 30px;\"> <img src=\"https://raw.githubusercontent.com/SergioDiniz/EGC/master/EGC/src/main/webapp/img/logo-azul.png\" alt=\"Logo EGC\"/> </div><div align=\"center\"> <h2 style=\"font-weight: 100\">Eficiência em Gestão de Cidades</h2> </div><div style=\"font-size: 20px; color: #fff; margin-top: 20px;padding: 15px 0 15px 0; background-color: #03a4f7; width: 100%; max-width: 600px; margin: 0 auto; text-align: center\"> BEM-VINDO! </div><div style=\"margin: 0 auto; margin-top: 50px; max-width: 500px\" align=\"center\"> Olá <b style=\"color: #03a4f7\">" + nomeUsuario + "</b> <br/><br/><br/> Seu cadastrado foi realizado com sucesso para a <b>Cidade de " + prefeitura + "</b>. Agora você precisa aguarda um pouco enquanto verificamos os seus dados. Fique atento, vamos te informar quando estiver tudo pronto.<br/><br/><br/> <section style=\"margin-bottom: 8px\"><b>Parabéns</b> por fazer parte do <b>EGC</b>! <br/></section> Juntos vamos redefinir o processo de reclamações e criaremos cidades inteligentes! </div><div align=\"center\" style=\"margin-top: 40px\"> <img src=\"https://raw.githubusercontent.com/SergioDiniz/EGC/master/EGC/src/main/webapp/img/icon-parabens.png\" width=\"80\" alt=\"Logo EGC\"/> </div><div align=\"center\" style=\"margin-top: 80px; background-color: #f9f9f9; padding: 40px 0 40px 0\"> <div align=\"center\"> <img src=\"https://raw.githubusercontent.com/SergioDiniz/EGC/master/EGC/src/main/webapp/img/s-logo.png\" width=\"50\" alt=\"Logo EGC\"/> </div><br/> <br/> Em caso de <b>dúvidas</b>, entre em contato conosco através do email: <b style=\"color: #03a4f7\">contato@egc.com.br</b> <br/><br/> <i style=\"font-size: 12px\">Copyright © 2016 - EGC, Todos os direitos reservados.</i> </div></body></html>";
         String aceitoPrefeitura = "<html> <body style=\"color: #666; font-size: 15px\"> <div align=\"center\" style=\"margin-top: 30px;\"> <img src=\"https://raw.githubusercontent.com/SergioDiniz/EGC/master/EGC/src/main/webapp/img/logo-azul.png\" alt=\"Logo EGC\"/> </div><div align=\"center\"> <h2 style=\"font-weight: 100\">Eficiência em Gestão de Cidades</h2> </div><div style=\"font-size: 20px; color: #fff; margin-top: 20px;padding: 15px 0 15px 0; background-color: #03a4f7; width: 100%; max-width: 600px; margin: 0 auto; text-align: center\"> BEM-VINDO! </div><div style=\"margin: 0 auto; margin-top: 50px; max-width: 500px\" align=\"center\"> Olá <b style=\"color: #03a4f7\">" + nomeUsuario + "</b> <br/><br/><br/> Após analise, o seu cadastrado foi confirmado com sucesso para a <b>Cidade de " + prefeitura + "</b>. e você já pode começar a usar.<br/><br/><br/> <section style=\"margin-bottom: 8px\"><b>Parabéns</b> por fazer parte do <b>EGC</b>! <br/></section> Juntos vamos redefinir o processo de reclamações e criaremos cidades inteligentes! </div><div align=\"center\" style=\"margin-top: 40px\"> <img src=\"https://raw.githubusercontent.com/SergioDiniz/EGC/master/EGC/src/main/webapp/img/icon-parabens.png\" width=\"80\" alt=\"Logo EGC\"/> </div><div align=\"center\" style=\"margin-top: 80px; background-color: #f9f9f9; padding: 40px 0 40px 0\"> <div align=\"center\"> <img src=\"https://raw.githubusercontent.com/SergioDiniz/EGC/master/EGC/src/main/webapp/img/s-logo.png\" width=\"50\" alt=\"Logo EGC\"/> </div><br/> <br/> Em caso de <b>dúvidas</b>, entre em contato conosco através do email: <b style=\"color: #03a4f7\">contato@egc.com.br</b> <br/><br/> <i style=\"font-size: 12px\">Copyright © 2016 - EGC, Todos os direitos reservados.</i> </div></body></html>";
         String recusoPrefeitura = "<html> <body style=\"color: #666; font-size: 15px\"> <div align=\"center\" style=\"margin-top: 30px;\"> <img src=\"https://raw.githubusercontent.com/SergioDiniz/EGC/master/EGC/src/main/webapp/img/logo-azul.png\" alt=\"Logo EGC\"/> </div><div align=\"center\"> <h2 style=\"font-weight: 100\">Eficiência em Gestão de Cidades</h2> </div><div style=\"font-size: 20px; color: #fff; margin-top: 20px;padding: 15px 0 15px 0; background-color: #03a4f7; width: 100%; max-width: 600px; margin: 0 auto; text-align: center\"> Ops! </div><div style=\"margin: 0 auto; margin-top: 50px; max-width: 500px\" align=\"center\"> Olá <b style=\"color: #03a4f7\">" + nomeUsuario + "</b> <br/><br/><br/> Após analise, não conseguimos confirmar seu dados para a <b>Cidade de " + prefeitura + "</b>. Entre em contato para mais informações.<br/><br/><br/> <section style=\"margin-bottom: 8px\">Faça parte do <b>EGC</b>! <br/></section> Juntos vamos redefinir o processo de reclamações e criaremos cidades inteligentes! </div><div align=\"center\" style=\"margin-top: 40px\"> <img src=\"https://raw.githubusercontent.com/SergioDiniz/EGC/master/EGC/src/main/webapp/img/icon-parabens.png\" width=\"80\" alt=\"Logo EGC\"/> </div><div align=\"center\" style=\"margin-top: 80px; background-color: #f9f9f9; padding: 40px 0 40px 0\"> <div align=\"center\"> <img src=\"https://raw.githubusercontent.com/SergioDiniz/EGC/master/EGC/src/main/webapp/img/s-logo.png\" width=\"50\" alt=\"Logo EGC\"/> </div><br/> <br/> Em caso de <b>dúvidas</b>, entre em contato conosco através do email: <b style=\"color: #03a4f7\">contato@egc.com.br</b> <br/><br/> <i style=\"font-size: 12px\">Copyright © 2016 - EGC, Todos os direitos reservados.</i> </div></body></html>";
-        String recuperarSenha = "<html> <body style=\"color: #666; font-size: 15px\"> <div align=\"center\" style=\"margin-top: 30px;\"> <img src=\"https://raw.githubusercontent.com/SergioDiniz/EGC/master/EGC/src/main/webapp/img/logo-azul.png\" alt=\"Logo EGC\"/> </div><div align=\"center\"> <h2 style=\"font-weight: 100\">Eficiência em Gestão de Cidades</h2> </div><div style=\"font-size: 20px; color: #fff; margin-top: 20px;padding: 15px 0 15px 0; background-color: #03a4f7; width: 100%; max-width: 600px; margin: 0 auto; text-align: center\"> ALGUM PROBLEMA? </div><div style=\"margin: 0 auto; margin-top: 50px; max-width: 500px\" align=\"center\"> Olá <b style=\"color: #03a4f7\">" + nomeUsuario + "</b> <br/><br/><br/> Nós recebemos uma solicitação e parece que você <b>esqueceu sua senha</b>. Então estamos te enviando os seus dados. Caso não tenha sido você, aconselhamos mudar sua senha. <br/><br/> <b>email:</b> "+ emailUsuario +" <br/> <b>senha:</b> " + senha + " <br/><br/><br/> <section style=\"margin-bottom: 8px\"><b>Obrigado</b> por fazer parte do <b>EGC</b>! <br/></section> Juntos vamos redefinir o processo de reclamações e criaremos cidades inteligentes! </div><div align=\"center\" style=\"margin-top: 40px\"> <img src=\"https://raw.githubusercontent.com/SergioDiniz/EGC/master/EGC/src/main/webapp/img/icon-parabens.png\" width=\"80\" alt=\"Logo EGC\"/> </div><div align=\"center\" style=\"margin-top: 80px; background-color: #f9f9f9; padding: 40px 0 40px 0\"> <div align=\"center\"> <img src=\"https://raw.githubusercontent.com/SergioDiniz/EGC/master/EGC/src/main/webapp/img/s-logo.png\" width=\"50\" alt=\"Logo EGC\"/> </div><br/> <br/> Em caso de <b>dúvidas</b>, entre em contato conosco através do email: <b style=\"color: #03a4f7\">contato@egc.com.br</b> <br/><br/> <i style=\"font-size: 12px\">Copyright © 2016 - EGC, Todos os direitos reservados.</i> </div></body></html>";
-        switch(emailType){
-            case BEM_VINDO_USUARIO: layoutEmail = bemVindoUsuario; break;
-            case BEM_VINDO_FUNCIONARIO: layoutEmail = bemVindoFuncionario; break;
-            case BEM_VINDO_PREFEITURA: layoutEmail = bemVindoPrefeitura; break;
-            case ACEITO_PREFEITURA: layoutEmail = aceitoPrefeitura; break;
-            case RECUSO_PREFEITURA: layoutEmail = recusoPrefeitura; break;
-            case RECUPERAR_SENHA: layoutEmail = recuperarSenha; break;
+        String recuperarSenha = "<html> <body style=\"color: #666; font-size: 15px\"> <div align=\"center\" style=\"margin-top: 30px;\"> <img src=\"https://raw.githubusercontent.com/SergioDiniz/EGC/master/EGC/src/main/webapp/img/logo-azul.png\" alt=\"Logo EGC\"/> </div><div align=\"center\"> <h2 style=\"font-weight: 100\">Eficiência em Gestão de Cidades</h2> </div><div style=\"font-size: 20px; color: #fff; margin-top: 20px;padding: 15px 0 15px 0; background-color: #03a4f7; width: 100%; max-width: 600px; margin: 0 auto; text-align: center\"> ALGUM PROBLEMA? </div><div style=\"margin: 0 auto; margin-top: 50px; max-width: 500px\" align=\"center\"> Olá <b style=\"color: #03a4f7\">" + nomeUsuario + "</b> <br/><br/><br/> Nós recebemos uma solicitação e parece que você <b>esqueceu sua senha</b>. Então estamos te enviando os seus dados. Caso não tenha sido você, aconselhamos mudar sua senha. <br/><br/> <b>email:</b> " + emailUsuario + " <br/> <b>senha:</b> " + senha + " <br/><br/><br/> <section style=\"margin-bottom: 8px\"><b>Obrigado</b> por fazer parte do <b>EGC</b>! <br/></section> Juntos vamos redefinir o processo de reclamações e criaremos cidades inteligentes! </div><div align=\"center\" style=\"margin-top: 40px\"> <img src=\"https://raw.githubusercontent.com/SergioDiniz/EGC/master/EGC/src/main/webapp/img/icon-parabens.png\" width=\"80\" alt=\"Logo EGC\"/> </div><div align=\"center\" style=\"margin-top: 80px; background-color: #f9f9f9; padding: 40px 0 40px 0\"> <div align=\"center\"> <img src=\"https://raw.githubusercontent.com/SergioDiniz/EGC/master/EGC/src/main/webapp/img/s-logo.png\" width=\"50\" alt=\"Logo EGC\"/> </div><br/> <br/> Em caso de <b>dúvidas</b>, entre em contato conosco através do email: <b style=\"color: #03a4f7\">contato@egc.com.br</b> <br/><br/> <i style=\"font-size: 12px\">Copyright © 2016 - EGC, Todos os direitos reservados.</i> </div></body></html>";
+        switch (emailType) {
+            case BEM_VINDO_USUARIO:
+                layoutEmail = bemVindoUsuario;
+                break;
+            case BEM_VINDO_FUNCIONARIO:
+                layoutEmail = bemVindoFuncionario;
+                break;
+            case BEM_VINDO_PREFEITURA:
+                layoutEmail = bemVindoPrefeitura;
+                break;
+            case ACEITO_PREFEITURA:
+                layoutEmail = aceitoPrefeitura;
+                break;
+            case RECUSO_PREFEITURA:
+                layoutEmail = recusoPrefeitura;
+                break;
+            case RECUPERAR_SENHA:
+                layoutEmail = recuperarSenha;
+                break;
         }
-        
 
         // configura a mensagem para o formato HTML
         email.setHtmlMsg(layoutEmail);
