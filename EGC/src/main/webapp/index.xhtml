@@ -114,20 +114,20 @@
                         <h2 class="texto-100 texto-cor-branco">Pesquise uma Cidade</h2><br/>
                     </div>
                     <div>
-                        <form class="form-horizontal">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <h:form>
+                        <h:form acceptcharset="ISO-8859-1">
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <div class="input-group">
                                         <form jsf:id="form">
                                             <input type="text" id="txtEndereco" jsf:id="txtEndereco" name="txtEndereco" class="form-control input-lg"  jsf:value="${controladorCidade.enderecoPesquisa}"/>
                                             <span class="input-group-addon">
                                                 <h:commandButton class="btn-link" image="/img/pesquisar.png" action="#{controladorCidade.pesquisarCidade()}"/>
                                             </span>
                                         </form>
-                                    </h:form>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </h:form>
                     </div>
                 </div>
             </div>
