@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="col-md-2">
                                     <h4>Pesquisar:</h4>
-                                    <p:commandButton styleClass="btn btn-lg btn-default btn-block" value="Pesquisar" action="#{controladorPrefeitura.encontraCEP}" update="frmResultado"/>
+                                    <p:commandButton styleClass="btn btn-lg btn-default btn-block btn-pesquisa-cep" value="Pesquisar" action="#{controladorPrefeitura.encontraCEP}" update="frmResultado"/>
                                 </div>
                                 
                             </h:panelGroup>
@@ -89,7 +89,6 @@
                         </div>
                         <br/>
 
-                        <br/>
                         <div class="row">
                             <div class="col-md-offset-3 col-md-4">
                                 <h4>Rua:</h4>
@@ -104,25 +103,25 @@
                         <div class="row">
                             <div class="col-md-offset-3 col-md-3">
                                 <h4>Prefeito:</h4>
-                                <h:inputText value="#{controladorPrefeitura.prefeitura.lideresPrefeitura.prefeito}" id="prefeito" required="true" pt:placeholder="cidade" class="form-control input-lg"/>
+                                <h:inputText value="#{controladorPrefeitura.prefeitura.lideresPrefeitura.prefeito}" id="prefeito" required="true" pt:placeholder="Nome do Prefeito" class="form-control input-lg"/>
                             </div>
                             <div class="col-md-3">
                                 <h4>Vice-Prefeito:</h4>
-                                <h:inputText value="#{controladorPrefeitura.prefeitura.lideresPrefeitura.vice_prefieto}" id="vice_prefeito" required="true" pt:placeholder="cidade" class="form-control input-lg"/>
+                                <h:inputText value="#{controladorPrefeitura.prefeitura.lideresPrefeitura.vice_prefieto}" id="vice_prefeito" required="true" pt:placeholder="Nome do Vice-Prefeito" class="form-control input-lg"/>
                             </div>
                         </div>
                         <br/>
                         <div class="row">
                             <div class="col-md-offset-3 col-md-6">
                                 <h4>Link do site Oficial:</h4>
-                                <h:inputText value="#{controladorPrefeitura.prefeitura.website}" id="site" required="true" pt:placeholder="cidade" class="form-control input-lg"/>
+                                <h:inputText value="#{controladorPrefeitura.prefeitura.website}" id="site" required="true" pt:placeholder="www.site.com" class="form-control input-lg"/>
                             </div>
                         </div>
                         <br/>
                         <div class="row">
                             <div class="col-md-offset-3 col-md-6">
                                 <h4>Slogan:</h4>
-                                <h:inputText value="#{controladorPrefeitura.prefeitura.slogan}" id="slogan" required="true" pt:placeholder="cidade" class="form-control input-lg"/>
+                                <h:inputText value="#{controladorPrefeitura.prefeitura.slogan}" id="slogan" required="true" pt:placeholder="slogan" class="form-control input-lg"/>
                             </div>
                         </div>
                         <br/>
@@ -138,7 +137,7 @@
                         </div>
                         <br/>
                         <div class="row">
-                            <div class="col-md-offset-3 col-md-6">
+                            <div class="col-md-offset-3 col-md-6 btn-arquivo">
                                 <br/>
                                 <p>Anexe um documento em formato JPEG solicitando 
                                     o acesso ao sistema. O documento deve conter 
@@ -152,7 +151,7 @@
                                     mode="simple" 
                                     skinSimple="true"
                                     required="true"
-
+                                    styleClass="btn btn-default "
                                     />
                                 <br/>
                             </div>
@@ -163,7 +162,9 @@
                             <div class="col-md-offset-3 col-md-6">
                                 <h:commandButton class="btn btn-primary btn-lg" value="Cadastrar" action="#{controladorPrefeitura.cadastro()}"/>
                             </div>
-                        </div>    
+                        </div> 
+                        <br/>
+                        <br/>
                     </h:form> 
                 </div>
             </div>

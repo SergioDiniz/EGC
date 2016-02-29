@@ -247,20 +247,49 @@ html, body{
     margin-top: 70px;
 }
 
-.cadastro .ui-c{
+.cadastro .ui-c:first-child{
     padding: 0;
 }
 
-.cadastro .ui-button-text{
+
+.cadastro .ui-button-text:first-child{
     line-height: none;
 }
 
 
-.ui-button .ui-button-text {
+.cadastro .ui-button .ui-button-text:first-child {
     display: block;
     line-height: inherit;
 }
 
+//tirando sombra do btn do primeface
+//
+.cadastro .ui-fileupload-simple input[type=file]{
+    position: relative;
+    width: 100px;
+    font-size: 0;
+}
+
+.cadastro .ui-button-text-icon-left .ui-button-text{
+    padding: 10px 5px 10px 30px;
+}
+
+.cadastro .ui-fileupload-simple input[type=file]{
+    position: absolute;
+}
+
+.cadastro .btn-arquivo .ui-state-default, 
+.cadastro .btn-arquivo .ui-widget-content .ui-state-default, 
+.cadastro .btn-arquivo .ui-widget-header .ui-state-default,
+.cadastro .btn-arquivo .ui-state-default, 
+.cadastro .btn-arquivo .ui-widget-content .ui-state-default, 
+.cadastro .btn-arquivo .ui-widget-header .ui-state-hover{
+    background: none;
+    border:none;
+    box-shadow: none;
+}
+//
+//
 
 .area-login{
     width: 330px;
@@ -2760,7 +2789,7 @@ html, body{
         margin-bottom: 5em;
         font-size: 1.7em;
     }
-    
+
     .msg-inicio h1{
         font-size: 1em;
     }

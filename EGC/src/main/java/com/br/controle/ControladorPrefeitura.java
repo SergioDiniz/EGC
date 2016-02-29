@@ -160,9 +160,11 @@ public class ControladorPrefeitura implements Serializable {
         prefeitura.getEnderecoPrefeitura().setCidade(cidade.getCidadePK().getNomeCidade());
         prefeitura.getEnderecoPrefeitura().setEstado(cidade.getCidadePK().getSiglaEstado());
         prefeitura.setDocumento(upload(this.file, UploadType.DOCUMENTO_SOLICITACAO));
-        LideresPrefeitura lideresPrefeitura = new LideresPrefeitura();
-        fachada.cadastrar(lideresPrefeitura);
-        prefeitura.setLideresPrefeitura(lideresPrefeitura);
+//        LideresPrefeitura lideresPrefeitura = new LideresPrefeitura();
+//        lideresPrefeitura.setPrefeito(prefeitura.getLideresPrefeitura().getPrefeito());
+//        lideresPrefeitura.setVice_prefieto(prefeitura.getLideresPrefeitura().getVice_prefieto());
+//        fachada.cadastrar(lideresPrefeitura);
+//        prefeitura.setLideresPrefeitura(lideresPrefeitura);
         fachada.atualizar(prefeitura);
 
         //Enviando Email
