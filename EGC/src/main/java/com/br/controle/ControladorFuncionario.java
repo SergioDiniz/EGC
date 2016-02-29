@@ -137,8 +137,8 @@ public class ControladorFuncionario implements Serializable {
         Funcionario f = new Funcionario();
         f = fachada.funcionarioPorEmail(this.emailRecuperarSenha);
         if (f != null) {
-            //String emailUsuario, String nomeUsuario, String prefeitura, String senha, EmailType emailType
-            ControladorAdmin.enviarEmail(f.getEmail(), f.getNome(), "", f.getSenha(), EmailType.RECUPERAR_SENHA);
+            //Enviando Eamil
+            fachada.emailRecuperarSenha(f.getEmail(), f.getNome(), f.getSenha());
             this.emailRecuperarSenha = "";
             ControladorAdmin.info("Verifique seu Email!");
             return null;

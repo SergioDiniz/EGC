@@ -82,8 +82,8 @@ public class ControladorUsuario implements Serializable {
             this.usuario = fachada.loginUsuario(usuario);
             this.cidadeDenuncia = this.usuario.getEndereco().getCidade();
             this.ufDenuncia = this.usuario.getEndereco().getEstado();
-            //String emailUsuario, String nomeUsuario, String prefeitura, EmailType emailType
-            ControladorAdmin.enviarEmail(this.usuario.getEmail(), this.usuario.getNickname(), "", "", EmailType.BEM_VINDO_USUARIO);
+            //Enviando email
+            fachada.emailBemVindoUsuario(this.usuario.getEmail(), this.usuario.getNickname());
             return "/sis/usuario/index.jsf?faces-redirect=true";
         } catch (Exception e) {
 
@@ -149,8 +149,8 @@ public class ControladorUsuario implements Serializable {
         Usuario u = new Usuario();
         u = fachada.usuarioPorEmail(this.emailRecuperarSenha);
         if (u != null) {
-            //String emailUsuario, String nomeUsuario, String prefeitura, String senha, EmailType emailType
-            ControladorAdmin.enviarEmail(u.getEmail(), u.getNickname(), "", u.getSenha(), EmailType.RECUPERAR_SENHA);
+            //Enviando email
+            fachada.emailRecuperarSenha(u.getEmail(), u.getNickname(), u.getSenha());
             this.emailRecuperarSenha = "";
             ControladorAdmin.info("Verifique seu Email!");
             return null;

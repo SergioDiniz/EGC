@@ -22,6 +22,7 @@ import com.br.service.AdministradorServiceIT;
 import com.br.service.CidadeServiceIT;
 import com.br.service.DaoIT;
 import com.br.service.DenunciaServiceIT;
+import com.br.service.EmailServiceIT;
 import com.br.service.FuncionarioServiceIT;
 import com.br.service.PrefeituraServiceIT;
 import com.br.service.UploadServiceIT;
@@ -55,6 +56,8 @@ public class Fachada implements Serializable {
     private DenunciaServiceIT ds;
     @EJB
     private UploadServiceIT ups;
+    @EJB
+    private EmailServiceIT es;
 
     // DAO
     public boolean cadastrar(Object object) {
@@ -64,11 +67,11 @@ public class Fachada implements Serializable {
     public boolean atualizar(Object object) {
         return dao.atualizar(object);
     }
-    
-    public Object pesquisar(Class classe, Object chave){
+
+    public Object pesquisar(Class classe, Object chave) {
         return dao.pesquisar(classe, chave);
     }
-    
+
     //
     //
     //
@@ -82,7 +85,7 @@ public class Fachada implements Serializable {
     public Usuario usuarioPorEmail(String email) {
         return us.usuarioPorEmail(email);
     }
-    
+
     public List<Denuncia> minhasDenuncias(String email) {
         return us.minhasDenuncias(email);
     }
@@ -100,21 +103,20 @@ public class Fachada implements Serializable {
     public Prefeitura loginPrefeitura(String email, String senha) {
         return ps.login(email, senha);
     }
-    
-    
-    public Prefeitura prefeituraPorEmail(String email){
+
+    public Prefeitura prefeituraPorEmail(String email) {
         return ps.prefeituraPorEmail(email);
     }
-    
-    public Prefeitura pesquisarPrefeituraPorCidade(String cidade, String estado){
+
+    public Prefeitura pesquisarPrefeituraPorCidade(String cidade, String estado) {
         return ps.pesquisarPrefeituraPorCidade(cidade, estado);
     }
-    
-    public Prefeitura pesquisarPrefeituraPorCodigo(String codigo){
+
+    public Prefeitura pesquisarPrefeituraPorCodigo(String codigo) {
         return ps.pesquisarPrefeituraPorCodigo(codigo);
     }
-    
-    public Long totalDePrefeitura(){
+
+    public Long totalDePrefeitura() {
         return ps.totalDePrefeitura();
     }
 
@@ -149,36 +151,38 @@ public class Fachada implements Serializable {
     public List<Long> dadosGeraisPrefeitura(String emailPrefeitura, String cidade, String estado) {
         return ps.dadosGeraisPrefeitura(emailPrefeitura, cidade, estado);
     }
-    
-    public boolean prefeituraCadastrada(String cidade, String estado){
+
+    public boolean prefeituraCadastrada(String cidade, String estado) {
         return ps.prefeituraCadastrada(cidade, estado);
     }
 
-    public List<Registro> registroDaPrefeitura(String codigoPrefeitura){
+    public List<Registro> registroDaPrefeitura(String codigoPrefeitura) {
         return ps.registroDaPrefeitura(codigoPrefeitura);
     }
-    
-    public List<Denuncia> denunciaDaPrefeitura(String codigoPrefeitura){
+
+    public List<Denuncia> denunciaDaPrefeitura(String codigoPrefeitura) {
         return ps.denunciaDaPrefeitura(codigoPrefeitura);
     }
-    
-    public List<Funcionario> funcionarioDaPrefeitura(String codigoPrefeitura){
+
+    public List<Funcionario> funcionarioDaPrefeitura(String codigoPrefeitura) {
         return ps.funcionarioDaPrefeitura(codigoPrefeitura);
     }
-    
-    public boolean novaMensagemEmPrefeitura(MensagemPrefeitura mensagemPrefeitura, Prefeitura prefeitura){
+
+    public boolean novaMensagemEmPrefeitura(MensagemPrefeitura mensagemPrefeitura, Prefeitura prefeitura) {
         return ps.novaMensagemEmPrefeitura(mensagemPrefeitura, prefeitura);
     }
-    
+
     public List<MensagemPrefeitura> mensagensDaPrefeitura(String codigoPrefeitura) {
         return ps.mensagensDaPrefeitura(codigoPrefeitura);
     }
+
     // FIM PrefeituraServices
     //
     //
     //
     //
     // FuncionarioServices
+
     public Funcionario loginFuncionario(String email, String senha, String cidade, String estado) {
         return fs.login(email, senha, cidade, estado);
     }
@@ -186,7 +190,7 @@ public class Fachada implements Serializable {
     public Funcionario funcionarioPorEmail(String email) {
         return fs.funcionarioPorEmail(email);
     }
-    
+
     public Funcionario buscarFuncionarioPorCPF(String cpf) {
         return fs.buscarPorCPF(cpf);
     }
@@ -241,21 +245,22 @@ public class Fachada implements Serializable {
         return cs.registrosDaCidade(cidade, estado);
     }
 
-    public List<List> ruasDeUmaCidadeNumerosDeDenuncia(String cidade, String estado){
+    public List<List> ruasDeUmaCidadeNumerosDeDenuncia(String cidade, String estado) {
         return cs.ruasDeUmaCidadeNumerosDeDenuncia(cidade, estado);
     }
-    
-    public List<List> cepDeUmaCidadeNumerosDeDenuncia(String cidade, String estado){
+
+    public List<List> cepDeUmaCidadeNumerosDeDenuncia(String cidade, String estado) {
         return cs.cepDeUmaCidadeNumerosDeDenuncia(cidade, estado);
     }
- 
-    public List<List> tiposDeDenunciasNumerosDeDenuncia(String cidade, String estado){
+
+    public List<List> tiposDeDenunciasNumerosDeDenuncia(String cidade, String estado) {
         return cs.tiposDeDenunciasNumerosDeDenuncia(cidade, estado);
     }
-    
-    public List<List> estadoDeDenunciasNumerosDeDenuncia(String cidade, String estado){
+
+    public List<List> estadoDeDenunciasNumerosDeDenuncia(String cidade, String estado) {
         return cs.estadoDeDenunciasNumerosDeDenuncia(cidade, estado);
     }
+
     // FIM CidadeServices
     //
     //
@@ -263,6 +268,7 @@ public class Fachada implements Serializable {
     //
     // AdministradorServices
     // FIM AdministradorServices
+
     public Administrador loginAdmin(String email, String senha) {
         return as.login(email, senha);
     }
@@ -296,8 +302,8 @@ public class Fachada implements Serializable {
     public String novaDenuncia(Usuario usuario, EnderecoDenuncia enderecoDenuncia, String denucia, String foto, TipoDeDenuncia tipoDeDenuncia) {
         return ds.novaDenuncia(usuario, enderecoDenuncia, denucia, foto, tipoDeDenuncia);
     }
-    
-    public Long totalDeDenuncias(){
+
+    public Long totalDeDenuncias() {
         return ds.totalDeDenuncias();
     }
 
@@ -349,30 +355,30 @@ public class Fachada implements Serializable {
         return ds.comentariosDeConteudoInapropriadoEmDenuncia(denuncia);
     }
 
-    public Denuncia pesquisarDenunicaCodigo(String codigo){
+    public Denuncia pesquisarDenunicaCodigo(String codigo) {
         return ds.pesquisarDenunicaCodigo(codigo);
     }
-    
-    public boolean atualizarDenunciaGerenciada(Registro registro){
+
+    public boolean atualizarDenunciaGerenciada(Registro registro) {
         return ds.atualizarDenunciaGerenciada(registro);
     }
-    
-    public List<Registro> registroDeUmaDenuncia(String codigoDenuncia){
+
+    public List<Registro> registroDeUmaDenuncia(String codigoDenuncia) {
         return ds.registroDeUmaDenuncia(codigoDenuncia);
     }
-    
-    public boolean atenderDenuncia(InformacaoDeAtendida informacaoDeAtendida, Registro registro){
+
+    public boolean atenderDenuncia(InformacaoDeAtendida informacaoDeAtendida, Registro registro) {
         return ds.atenderDenuncia(informacaoDeAtendida, registro);
     }
-    
-    public List<Denuncia> gerenciarDenunciasFiltro(String cidade, String estado, String ordem, String filtroQuery, String filtro){
+
+    public List<Denuncia> gerenciarDenunciasFiltro(String cidade, String estado, String ordem, String filtroQuery, String filtro) {
         return ds.gerenciarDenunciasFiltro(cidade, estado, ordem, filtroQuery, filtro);
     }
-    
-    public List<Denuncia> denunciasAtendidasEmCidade(String cidade, String estado){
+
+    public List<Denuncia> denunciasAtendidasEmCidade(String cidade, String estado) {
         return ds.denunciasAtendidasEmCidade(cidade, estado);
     }
-    
+
     // FIM DenunciaServices
     //
     //
@@ -382,4 +388,37 @@ public class Fachada implements Serializable {
     public String upload(UploadType uploadType, String email, UploadedFile file) {
         return ups.upload(uploadType, email, file);
     }
+
+    //
+    //
+    //
+    //
+    //
+    //
+    // Email Service
+    public boolean emailBemVindoUsuario(String emailUsuario, String nomeUsuario) {
+        return es.emailBemVindoUsuario(emailUsuario, nomeUsuario);
+    }
+
+    public boolean emailBemVindoFuncionario(String emailUsuario, String nomeUsuario, String prefeitura) {
+        return es.emailBemVindoFuncionario(emailUsuario, nomeUsuario, prefeitura);
+    }
+
+    public boolean emailBemVindoPrefeitura(String emailUsuario, String nomeUsuario, String prefeitura) {
+        return es.emailAceitoPrefeitura(emailUsuario, nomeUsuario, prefeitura);
+    }
+
+    public boolean emailAceitoPrefeitura(String emailUsuario, String nomeUsuario, String prefeitura) {
+        return es.emailAceitoPrefeitura(emailUsuario, nomeUsuario, prefeitura);
+    }
+
+    public boolean emailRecusoPrefeitura(String emailUsuario, String nomeUsuario, String prefeitura) {
+        return es.emailRecusoPrefeitura(emailUsuario, nomeUsuario, prefeitura);
+    }
+
+    public boolean emailRecuperarSenha(String emailUsuario, String nomeUsuario, String senha) {
+        return es.emailRecuperarSenha(emailUsuario, nomeUsuario, senha);
+    }
+    // FIM Email Service
+
 }

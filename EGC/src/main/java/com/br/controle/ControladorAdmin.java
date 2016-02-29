@@ -101,8 +101,8 @@ public class ControladorAdmin implements Serializable {
 
     public String excluirPrefeitura() throws EmailException, MalformedURLException {
         fachada.excluirPrefeitura(prefeituraAx);
-        //String emailUsuario, String nomeUsuario, String prefeitura, String senha, EmailType emailType
-        ControladorAdmin.enviarEmail(this.prefeituraAx.getEmail(), this.prefeituraAx.getNome(), (this.prefeituraAx.getCidade().getCidadePK().getNomeCidade() + " - " + prefeituraAx.getCidade().getCidadePK().getSiglaEstado()), "", EmailType.RECUSO_PREFEITURA);
+        //Enviando Email
+        fachada.emailRecusoPrefeitura(this.prefeituraAx.getEmail(), this.prefeituraAx.getNome(), (this.prefeituraAx.getCidade().getCidadePK().getNomeCidade() + " - " + prefeituraAx.getCidade().getCidadePK().getSiglaEstado()));
         this.prefeituraAx = new Prefeitura();
         return "solicitacoes.jsf?faces-redirect=true";
     }
@@ -115,8 +115,8 @@ public class ControladorAdmin implements Serializable {
 
     public String aceitarSolicitacao() throws EmailException, MalformedURLException {
         fachada.atualizarSituacaoPrefeitura(prefeituraAx, true);
-        //String emailUsuario, String nomeUsuario, String prefeitura, String senha, EmailType emailType
-        ControladorAdmin.enviarEmail(this.prefeituraAx.getEmail(), this.prefeituraAx.getNome(), (this.prefeituraAx.getCidade().getCidadePK().getNomeCidade() + " - " + prefeituraAx.getCidade().getCidadePK().getSiglaEstado()), "", EmailType.ACEITO_PREFEITURA);
+        //Enviando Email
+        fachada.emailAceitoPrefeitura(this.prefeituraAx.getEmail(), this.prefeituraAx.getNome(), (this.prefeituraAx.getCidade().getCidadePK().getNomeCidade() + " - " + prefeituraAx.getCidade().getCidadePK().getSiglaEstado()));
         this.prefeituraAx = new Prefeitura();
         return "solicitacoes.jsf?faces-redirect=true";
     }
@@ -217,10 +217,7 @@ public class ControladorAdmin implements Serializable {
         return fachada.prefeiturasDoFuncionario(email);
     }
 
-    public void estarEmail() throws EmailException, MalformedURLException {
-        enviarEmail("sergiodinizsh@gmail.com", "SergioDC", "Santa Helena - B", "", EmailType.BEM_VINDO_FUNCIONARIO);
-    }
-
+    // Lembra de excluir
     public static String enviarEmail(String emailUsuario, String nomeUsuario, String prefeitura, String senha, EmailType emailType) throws EmailException, MalformedURLException {
 
         System.out.println("Preparando email: ");
