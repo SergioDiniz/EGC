@@ -74,6 +74,8 @@ public class Prefeitura implements Serializable{
     
 
     public Prefeitura() {
+        this.lideresPrefeitura = new LideresPrefeitura();
+        this.enderecoPrefeitura = new EnderecoPrefeitura();
     }
 
     public Prefeitura(String nome, String email, String senha, String documento, EnderecoPrefeitura enderecoPrefeitura, boolean ativo, Cidade cidade) {

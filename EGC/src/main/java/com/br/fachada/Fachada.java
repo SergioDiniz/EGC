@@ -405,7 +405,7 @@ public class Fachada implements Serializable {
     }
 
     public boolean emailBemVindoPrefeitura(String emailUsuario, String nomeUsuario, String prefeitura) {
-        return es.emailAceitoPrefeitura(emailUsuario, nomeUsuario, prefeitura);
+        return es.emailBemVindoPrefeitura(emailUsuario, nomeUsuario, prefeitura);
     }
 
     public boolean emailAceitoPrefeitura(String emailUsuario, String nomeUsuario, String prefeitura) {

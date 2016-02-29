@@ -16,7 +16,7 @@
         </div>
 
         <div class="container">
-            <div class="conteudo">   
+            <div style="padding-top: 50px;">   
                 <div class="cadastro">
 
 
@@ -29,58 +29,114 @@
                             <br/>
                         </div>
                     </div>
-                    <h:form enctype="multipart/form-data">    
+
+
+                    <div class="row">
+                        <h:form id="frmBusca2">
+                            <h:panelGroup id="pnCEP2">
+                                <div class="col-md-offset-3 col-md-4">
+                                    <h4>CEP:</h4>
+                                    <h:inputText value="#{controladorPrefeitura.prefeitura.enderecoPrefeitura.cep}" id="cep" required="true" pt:placeholder="CEP" class="form-control input-lg"/>
+                                </div>
+                                <div class="col-md-2">
+                                    <h4>Pesquisar:</h4>
+                                    <p:commandButton styleClass="btn btn-lg btn-default btn-block" value="Pesquisar" action="#{controladorPrefeitura.encontraCEP}" update="frmResultado"/>
+                                </div>
+                                
+                            </h:panelGroup>
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-6">
+                                    <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+
+
+                    <h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1" id="frmResultado">  
+
+
+                        <br/>
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-3">
+                                <h4>Cidade:</h4>
+                                <h:inputText disabled="true" value="#{controladorPrefeitura.cidadePK.nomeCidade}" id="cidade" required="true" pt:placeholder="cidade" class="form-control input-lg"/>
+                            </div>
+                            <div class="col-md-3">
+                                <h4>Estado:</h4>
+                                <h:inputText disabled="true" value="#{controladorPrefeitura.cidadePK.siglaEstado}" id="estado" required="true" pt:placeholder="estado" class="form-control input-lg"/>
+                            </div>
+                        </div>
+                        <br/>
                         <div class="row">
                             <div class="col-md-offset-3 col-md-6">
-                                <h4>Nome</h4>
+                                <h4>Nome:</h4>
                                 <h:inputText value="#{controladorPrefeitura.prefeitura.nome}" id="nome" required="true" pt:placeholder="nome da prefeitura" class="form-control input-lg"/>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-offset-3 col-md-6">
-                                <h4>Telefone</h4>
-                                <h:inputText value="#{controladorPrefeitura.prefeitura.telefone}" id="telefone" required="true" pt:placeholder="telefone" class="form-control input-lg"/>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-offset-3 col-md-6">
-                                <h4>Email</h4>
-                                <h:inputText value="#{controladorPrefeitura.prefeitura.email}" id="email" required="true" pt:placeholder="email" class="form-control input-lg"/>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-md-offset-3 col-md-6">
-                                <h4>Senha</h4>
-                                <h:inputSecret value="#{controladorPrefeitura.prefeitura.senha}" id="senha" required="true" pt:placeholder="senha" class="form-control input-lg"/>
-                            </div>
-                        </div>
+                        <br/>
                         <div class="row">
                             <div class="col-md-offset-3 col-md-3">
-                                <h4>Estado:</h4>
-                                <h:inputText value="#{controladorPrefeitura.cidadePK.siglaEstado}" id="estado" required="true" pt:placeholder="estado" class="form-control input-lg"/>
+                                <h4>Telefone:</h4>
+                                <h:inputText value="#{controladorPrefeitura.prefeitura.telefone}" id="telefone" required="true" pt:placeholder="telefone" class="form-control input-lg"/>
                             </div>
-                            <div class="col-md-3">
-                                <h4>CEP</h4>
-                                <h:inputText value="#{controladorPrefeitura.prefeitura.enderecoPrefeitura.cep}" id="cep" required="true" pt:placeholder="CEP" class="form-control input-lg"/>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-offset-3 col-md-6">
-                                <h4>Cidade:</h4>
-                                <h:inputText value="#{controladorPrefeitura.cidadePK.nomeCidade}" id="cidade" required="true" pt:placeholder="cidade" class="form-control input-lg"/>
+                            <div class="col-md-3"> 
+                                <h4>Aniversário:</h4>
+                                <h:inputText class="form-control input-lg campos-formulario" value="#{controladorPrefeitura.prefeitura.aniversario}" pt:placeholder="dia/mes/ano">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </h:inputText>
                             </div>
                         </div>
+                        <br/>
+
+                        <br/>
                         <div class="row">
                             <div class="col-md-offset-3 col-md-4">
-                                <h4>Rua</h4>
+                                <h4>Rua:</h4>
                                 <h:inputText value="#{controladorPrefeitura.prefeitura.enderecoPrefeitura.rua}" id="rua" required="true" pt:placeholder="rua" class="form-control input-lg"/>
                             </div>
                             <div class="col-md-2">
-                                <h4>Numero</h4>
+                                <h4>Numero:</h4>
                                 <h:inputText value="#{controladorPrefeitura.prefeitura.enderecoPrefeitura.numero}" id="numero" required="true" pt:placeholder="numero" class="form-control input-lg"/>
                             </div>
                         </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-3">
+                                <h4>Prefeito:</h4>
+                                <h:inputText value="#{controladorPrefeitura.prefeitura.lideresPrefeitura.prefeito}" id="prefeito" required="true" pt:placeholder="cidade" class="form-control input-lg"/>
+                            </div>
+                            <div class="col-md-3">
+                                <h4>Vice-Prefeito:</h4>
+                                <h:inputText value="#{controladorPrefeitura.prefeitura.lideresPrefeitura.vice_prefieto}" id="vice_prefeito" required="true" pt:placeholder="cidade" class="form-control input-lg"/>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-6">
+                                <h4>Link do site Oficial:</h4>
+                                <h:inputText value="#{controladorPrefeitura.prefeitura.website}" id="site" required="true" pt:placeholder="cidade" class="form-control input-lg"/>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-6">
+                                <h4>Slogan:</h4>
+                                <h:inputText value="#{controladorPrefeitura.prefeitura.slogan}" id="slogan" required="true" pt:placeholder="cidade" class="form-control input-lg"/>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-3">
+                                <h4>Email:</h4>
+                                <h:inputText value="#{controladorPrefeitura.prefeitura.email}" id="email" required="true" pt:placeholder="email" class="form-control input-lg"/>
+                            </div>
+                            <div class="col-md-3">
+                                <h4>Senha:</h4>
+                                <h:inputSecret value="#{controladorPrefeitura.prefeitura.senha}" id="senha" required="true" pt:placeholder="senha" class="form-control input-lg"/>
+                            </div>
+                        </div>
+                        <br/>
                         <div class="row">
                             <div class="col-md-offset-3 col-md-6">
                                 <br/>
@@ -96,7 +152,7 @@
                                     mode="simple" 
                                     skinSimple="true"
                                     required="true"
-                                    
+
                                     />
                                 <br/>
                             </div>

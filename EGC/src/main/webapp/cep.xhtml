@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+
+    </h:head>
+    <h:body>
+
+
+        <p:dialog closable="false" draggable="false"
+                  footer="/programandojava.wordpress.com - Visite :)"
+                  header="Web Service CEP" maximizable="true" minimizable="true"
+                  position="center" resizable="false" showEffect="slide" visible="true">
+
+            <h:form id="frmBusca">
+                <h:panelGrid id="pnCEP" columns="3">
+                    <h:outputText value="CEP: " />
+                    <p:inputMask mask="99999-999" value="#{controladorPrefeitura.cep}" />
+
+                    <p:commandButton value="Pesquisar" icon="ui-icon-search"
+                                     action="#{controladorPrefeitura.encontraCEP}" update=":frmResultado" />
+                </h:panelGrid>
+            </h:form>
+
+            <h:form id="frmResultado">
+                <h:panelGrid id="pnResultado" columns="2">
+                    <h:outputLabel value="UF: "
+                                   style="font-weight:bold; padding-right: 5px; float: right;" />
+                    <p:inputText size="5" value="#{controladorPrefeitura.estadoCep}" />
+
+                    <h:outputLabel value="Logradouro: "
+                                   style="font-weight:bold; padding-right: 5px; float: right;" />
+                    <p:inputText size="50"
+                                 value="#{controladorPrefeitura.tipoLogradouroCep} #{controladorPrefeitura.logradouroCep}" />
+
+                    <h:outputLabel value="Cidade: "
+                                   style="font-weight:bold; padding-right: 5px; float: right;" />
+                    <p:inputText size="50" value="#{controladorPrefeitura.cidadeCep}" />
+
+                    <h:outputLabel value="Bairro: "
+                                   style="font-weight:bold; padding-right: 5px; float: right;" />
+                    <p:inputText size="25" value="#{controladorPrefeitura.bairroCep}" />
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+
+    </h:body>
+</html>
+
+

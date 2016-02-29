@@ -18,6 +18,7 @@ import com.br.beans.Usuario;
 import static com.br.controle.ControladorAdmin.info;
 import static com.br.controle.ControladorAdmin.infoUsuarioInvalido;
 import com.br.fachada.Fachada;
+import com.br.service.PesquisarCep;
 import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -319,7 +320,7 @@ public class ControladorPrefeitura implements Serializable {
         fachada.vincularFuncionarioPrefeitura(prefeitura, f);
         this.prefeitura.setFuncionarios(funcionarios());
         //Enviando Email
-        fachada.emailBemVindoFuncionario(funcionario.getEmail(), funcionario.getNome(), (this.prefeitura.getCidade().getCidadePK().getNomeCidade() + " - " + this.prefeitura.getCidade().getCidadePK().getSiglaEstado()));
+        fachada.emailBemVindoFuncionario(f.getEmail(), f.getNome(), (this.prefeitura.getCidade().getCidadePK().getNomeCidade() + " - " + this.prefeitura.getCidade().getCidadePK().getSiglaEstado()));
         CPFPesquisaF = "";
         funcionarioCadastrado = false;
         return "listafuncionarios.jsf?faces-redirect=true";
@@ -409,6 +410,37 @@ public class ControladorPrefeitura implements Serializable {
         return "perfil-funcionario?faces-redirect=true";
     }
 
+    
+    
+    //
+    //
+    //
+ 
+ 
+    public void encontraCEP() {
+        System.out.println("cep: " + this.prefeitura.getEnderecoPrefeitura().getCep());
+        PesquisarCep cepWebService = new PesquisarCep(this.prefeitura.getEnderecoPrefeitura().getCep());
+ 
+        System.out.println("Resultado: " + cepWebService.getResultado());
+        
+        if (cepWebService.getResultado() >= 1) {
+            
+            this.cidadePK.setNomeCidade(cepWebService.getCidade());
+            this.cidadePK.setSiglaEstado(cepWebService.getEstado());
+            
+        } else {
+            this.cidadePK.setNomeCidade("");
+            this.cidadePK.setSiglaEstado("");
+            
+            FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "Erro!",
+                            "Cep Não encontrado."));
+        }
+    }
+
+    
     //
     //
     //

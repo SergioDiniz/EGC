@@ -38,7 +38,6 @@
                             <li role="presentation" class="active"><a href="#tab1" data-toggle="tab">Informações</a></li>
                             <li role="presentation" ><a href="#tab2" data-toggle="tab">Sobre</a></li>
                             <li role="presentation"><a href="#tab3" data-toggle="tab">Lideres</a></li>
-                            <li role="presentation"><a href="#tab4" data-toggle="tab">Mapa</a></li>
                         </ul>
                     </div>
                 </div>
@@ -140,6 +139,18 @@
                                                     <h:inputText value="#{controladorPrefeitura.prefeitura.enderecoPrefeitura.numero}" class="form-control input-lg campos-formulario" id="numero" required="required" pt:placeholder="numero"/> 
                                                 </div>
 
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-offset-3 col-md-7"> 
+                                                    <br/>
+                                                    Localização da Prefeitura <br/>
+                                                    <input type="text" id="txtEndereco" jsf:id="txtEndereco" name="txtEndereco" class="form-control"  jsf:value="${controladorUsuario.endMapa}"/>
+                                                    <br/>
+                                                    <div id="mapa" style="height: 450px; width: 100%"></div>
+
+                                                    <input type="hidden" id="txtLatitude" name="txtLatitude" jsf:value="#{controladorPrefeitura.prefeitura.enderecoPrefeitura.latitude}" />
+                                                    <input type="hidden" id="txtLongitude" name="txtLongitude" jsf:value="#{controladorPrefeitura.prefeitura.enderecoPrefeitura.longitude}" />
+                                                </div>
                                             </div>
 
 
@@ -254,22 +265,7 @@
                                 </div>
                             </div>
 
-                            <div role="tabpanel" class="tab-pane" id="tab4">
-                                <div class="menu-mapa">
-                                    <div class="col-md-offset-2 col-md-8">
-                                        <br/><br/>
-                                        <div class="form-group">
-                                            <label for="txtEndereco">Endereço:</label>
-                                            <input type="text" id="txtEndereco" jsf:id="txtEndereco" name="txtEndereco" class="form-control"  jsf:value="${controladorUsuario.endMapa}"/>
-                                        </div>
-
-                                        <div id="mapa" style="height: 450px; width: 100%"></div>
-
-                                        <input type="hidden" id="txtLatitude" name="txtLatitude" jsf:value="#{controladorPrefeitura.prefeitura.enderecoPrefeitura.latitude}" />
-                                        <input type="hidden" id="txtLongitude" name="txtLongitude" jsf:value="#{controladorPrefeitura.prefeitura.enderecoPrefeitura.longitude}" />
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
 
@@ -307,7 +303,7 @@
                 zoom: 16,
                 center: latlng,
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
-                styles: [{"featureType":"landscape","stylers":[{"hue":"#FFBB00"},{"saturation":43.400000000000006},{"lightness":37.599999999999994},{"gamma":1}]},{"featureType":"road.highway","stylers":[{"hue":"#FFC200"},{"saturation":-61.8},{"lightness":45.599999999999994},{"gamma":1}]},{"featureType":"road.arterial","stylers":[{"hue":"#FF0300"},{"saturation":-100},{"lightness":51.19999999999999},{"gamma":1}]},{"featureType":"road.local","stylers":[{"hue":"#FF0300"},{"saturation":-100},{"lightness":52},{"gamma":1}]},{"featureType":"water","stylers":[{"hue":"#0078FF"},{"saturation":-13.200000000000003},{"lightness":2.4000000000000057},{"gamma":1}]},{"featureType":"poi","stylers":[{"hue":"#00FF6A"},{"saturation":-1.0989010989011234},{"lightness":11.200000000000017},{"gamma":1}]}]
+                styles: [{"featureType": "landscape", "stylers": [{"hue": "#FFBB00"}, {"saturation": 43.400000000000006}, {"lightness": 37.599999999999994}, {"gamma": 1}]}, {"featureType": "road.highway", "stylers": [{"hue": "#FFC200"}, {"saturation": -61.8}, {"lightness": 45.599999999999994}, {"gamma": 1}]}, {"featureType": "road.arterial", "stylers": [{"hue": "#FF0300"}, {"saturation": -100}, {"lightness": 51.19999999999999}, {"gamma": 1}]}, {"featureType": "road.local", "stylers": [{"hue": "#FF0300"}, {"saturation": -100}, {"lightness": 52}, {"gamma": 1}]}, {"featureType": "water", "stylers": [{"hue": "#0078FF"}, {"saturation": -13.200000000000003}, {"lightness": 2.4000000000000057}, {"gamma": 1}]}, {"featureType": "poi", "stylers": [{"hue": "#00FF6A"}, {"saturation": -1.0989010989011234}, {"lightness": 11.200000000000017}, {"gamma": 1}]}]
             };
 
             map = new google.maps.Map(document.getElementById("mapa"), options);

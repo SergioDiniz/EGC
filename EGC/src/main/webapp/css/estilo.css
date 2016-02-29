@@ -247,6 +247,21 @@ html, body{
     margin-top: 70px;
 }
 
+.cadastro .ui-c{
+    padding: 0;
+}
+
+.cadastro .ui-button-text{
+    line-height: none;
+}
+
+
+.ui-button .ui-button-text {
+    display: block;
+    line-height: inherit;
+}
+
+
 .area-login{
     width: 330px;
     margin-top: -530px;
