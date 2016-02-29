@@ -16,9 +16,10 @@
         </f:metadata>
 
         <title>EGC</title>
-        
+
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
         <meta name="theme-color" content="#fff"></meta>
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
     </h:head>
     <h:body>
 
@@ -330,6 +331,12 @@
                                                 </div> 
                                             </div>
                                         </h:panelGroup>
+
+                                        <div>
+                                            <div class="mapa-dr">
+                                                <p:gmap center="#{controladorCidade.visualizarDenuncia.enderecoDenuncia.latitude},#{controladorCidade.visualizarDenuncia.enderecoDenuncia.longitude}" zoom="16" type="terrain" style="width:100%;height:110px" model="#{controladorDenuncia.marcaPonto(controladorCidade.visualizarDenuncia.enderecoDenuncia.latitude, controladorCidade.visualizarDenuncia.enderecoDenuncia.longitude)}" />
+                                            </div>
+                                        </div>
 
                                         <!--registros da denuncia-->
                                         <div class="col-lg-12" id="registro-denuncia-unica">
