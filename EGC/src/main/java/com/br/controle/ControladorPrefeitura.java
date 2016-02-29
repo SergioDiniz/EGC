@@ -386,6 +386,11 @@ public class ControladorPrefeitura implements Serializable {
         this.denunciaMaisRecentes.addAll(fachada.denunciasMaisRecentesPorCidade(this.prefeitura.getCidade().getCidadePK().getNomeCidade(),
                 this.prefeitura.getCidade().getCidadePK().getSiglaEstado()));
     }
+    
+    public List<Denuncia> denunciasAtendidasEmCidade(){
+        return fachada.denunciasAtendidasEmCidade(this.prefeitura.getCidade().getCidadePK().getNomeCidade(),
+                this.prefeitura.getCidade().getCidadePK().getSiglaEstado());
+    }
 
     public void dadosGeraisPrefeitura(String emailPrefeitura, String cidade, String estado) {
         this.dadosPrefeitura = new ArrayList<>();

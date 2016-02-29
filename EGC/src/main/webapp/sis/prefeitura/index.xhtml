@@ -355,20 +355,20 @@
                                 <div class="row">
                                     Últimas Denúncias Atendidas
                                 </div>
-                                <c:forEach var="ultimasDenuncia" items="#{controladorPrefeitura.denunciaMaisRecentes}" id="id-denuncias">
+                                <c:forEach var="ultimasDenuncia" items="#{controladorPrefeitura.denunciasAtendidasEmCidade()}" id="id-denuncias">
                                     <div class="ud-denuncia">
 
                                         <div class="row">
                                             <div class="col-md-1">
-                                                <img src="../../img/icones-denuncia/#{ultimasDenuncia.iconeDenunica}" height="50px"/>
+                                                <img src="/EGC/img/icones-denuncia/#{ultimasDenuncia.iconeDenunica}" height="50px"/>
                                             </div>
                                             <div class="col-md-11">
                                                 <div class="row">
                                                     <div class="col-md-7 rua-denuncia">
-                                                        #{ultimasDenuncia.tipoDaDenunciaFormatado}
+                                                        <a href="/EGC/funcionario/denuncia/#{ultimasDenuncia.codigo}">#{ultimasDenuncia.tipoDaDenunciaFormatado}</a>
                                                     </div>
                                                     <div class="col-md-5 hora-denuncia">
-                                                        #{ultimasDenuncia.dataDenuncaFormatado}
+                                                        #{ultimasDenuncia.informacaoDeAtendida.dataDenuncaFormatado}
                                                     </div>
                                                 </div>
 
@@ -379,14 +379,14 @@
                                                         <table CELLSPACING="0">
                                                             <tr>
                                                                 <td rows="2">
-                                                                    <div class="denuncia-feita" style="background-image: url(../denuncias/#{ultimasDenuncia.foto});">
+                                                                    <div class="denuncia-feita" style="background-image: url(/EGC/sis/denuncias/#{ultimasDenuncia.foto});">
 
                                                                     </div>
                                                                 </td>
-                                                                <td rowspan="2" style="background-image: url(../denuncias/#{ultimasDenuncia.foto});">
+                                                                <td rowspan="2" style="background-image: url(/EGC/sis/denuncias/#{ultimasDenuncia.informacaoDeAtendida.foto});">
                                                                     <div class="reposta-denuncia">
                                                                         <div class="texto-centro">
-                                                                            teste
+                                                                            #{ultimasDenuncia.informacaoDeAtendida.descricao}
                                                                         </div>
                                                                     </div>
                                                                 </td>
@@ -399,26 +399,6 @@
                                                                 </td>
                                                             </tr>
                                                         </table>
-
-                                                        <!--
-                                                        <div class="col-md-5 col-md-mesmo-tamanho">
-                                                            <div class="denuncia-feita">
-                                                                <div class="row">
-                                                                    <br/><br/><br/>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <br/><br/><br/>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-7 col-md-mesmo-tamanho">
-                                                            <div class="reposta-denuncia">
-                                                                <div class="row">
-                                                                    <br/><br/><br/>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        -->
 
                                                     </div>
                                                 </div>
@@ -445,7 +425,7 @@
                 });
             })(jQuery);
         </script>
-        
+
     </h:body>
 </html>
 
