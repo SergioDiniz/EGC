@@ -13,6 +13,7 @@ import com.br.beans.EnderecoPrefeitura;
 import com.br.beans.EstadoDeAcompanhamento;
 import com.br.beans.Funcionario;
 import com.br.beans.LideresPrefeitura;
+import com.br.beans.MensagemPrefeitura;
 import com.br.beans.Prefeitura;
 import com.br.beans.Registro;
 import com.br.beans.TipoDeRegistro;
@@ -556,6 +557,11 @@ public class ControladorPrefeitura implements Serializable {
 
         fachada.atualizar(registro);
 
+        return null;
+    }
+    
+    public String excluirMensagemPrefeitura(MensagemPrefeitura mensagemPrefeitura){
+        fachada.excluirMensagemEmPrefeitura(mensagemPrefeitura, this.prefeitura);
         return null;
     }
 

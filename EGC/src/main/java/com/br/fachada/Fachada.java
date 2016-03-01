@@ -184,6 +184,10 @@ public class Fachada implements Serializable {
         return ps.mensagensDaPrefeitura(codigoPrefeitura);
     }
 
+    public boolean excluirMensagemEmPrefeitura(MensagemPrefeitura mensagemPrefeitura, Prefeitura prefeitura){
+        return ps.excluirMensagemEmPrefeitura(mensagemPrefeitura, prefeitura);
+    }
+    
     // FIM PrefeituraServices
     //
     //

@@ -58,4 +58,6 @@ public interface PrefeituraServiceIT {
     
     public List<MensagemPrefeitura> mensagensDaPrefeitura(String codigoPrefeitura);
     
+    public boolean excluirMensagemEmPrefeitura(MensagemPrefeitura mensagemPrefeitura, Prefeitura prefeitura);
+    
 }

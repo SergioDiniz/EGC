@@ -351,4 +351,22 @@ public class PrefeituraService implements PrefeituraServiceIT {
         return new ArrayList<>();
     }
 
+    @Override
+    public boolean excluirMensagemEmPrefeitura(MensagemPrefeitura mensagemPrefeitura, Prefeitura prefeitura){
+        
+        try {
+           
+            prefeitura = em.find(Prefeitura.class, prefeitura.getId());
+            
+            prefeitura.getMensagensPrefeitura().remove(mensagemPrefeitura);
+            
+            em.merge(prefeitura);
+            
+        } catch (Exception e) {
+            System.out.println("ERRO AO TENTAR EXCLUIR MENSAGEM DE PREFEITURA: "+ e.getMessage());
+        }
+        
+        return false;
+    }
+    
 }

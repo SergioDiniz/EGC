@@ -527,69 +527,41 @@
                                                 <div class="text-center">
                                                     <h1>Últimos Comentários</h1>
                                                 </div>
-
-                                                <div class="coment">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="col-md-2 text-center">
-                                                                <img src="../../img/icon-usuario-mensagem-cinsa.png"/>
-                                                            </div>
-                                                            <div class="col-md-10">
-                                                                <div class="row">
-                                                                    <div class="col-md-10">
+                                                <h:form>
+                                                    <c:forEach var="mensagem" items="#{controladorCidade.mensagensDaPrefeitura(controladorPrefeitura.prefeitura.codigo)}">
+                                                        <div class="coment">
+                                                            <div class="row">
+                                                                <div>
+                                                                    <div class="col-md-2 text-right">
+                                                                        <img src="/EGC/img/icon-usuario-mensagem-cinsa.png" style="width: 90%; max-width: 56px"/>
+                                                                    </div>
+                                                                    <div class="col-lg-10">
                                                                         <div class="row">
-                                                                            <b>comentário:</b>
+                                                                            <div class="col-lg-9">
+                                                                                <div class="row">
+                                                                                    <b>comentário:</b>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-lg-3">
+                                                                                <span class="glyphicon glyphicon-trash" aria-hidden="true">
+                                                                                    <h:commandButton class="btn-link " value="excluir" action="#{controladorPrefeitura.excluirMensagemPrefeitura(mensagem)}"/>
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row">
+                                                                            #{mensagem.mensagem}
+                                                                        </div>
+
+                                                                        <div class="row hora-denuncia">
+                                                                            #{mensagem.dataMensagemFormatado}
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-md-2 text-right">
-                                                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="row">
-                                                                    sdlasd asd als dalskd ask dalks d
-                                                                </div>
-
-                                                                <div class="row hora-denuncia">
-                                                                    21:22 - 28/01/2016
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-
-
-
-                                                <div class="coment">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="col-md-2 text-center">
-                                                                <img src="../../img/icon-usuario-mensagem-cinsa.png"/>
-                                                            </div>
-                                                            <div class="col-md-10">
-                                                                <div class="row">
-                                                                    <div class="col-md-10">
-                                                                        <div class="row">
-                                                                            <b>comentário:</b>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-2 text-right">
-                                                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="row">
-                                                                    sdlasd asd als dalskd ask dalks d
-                                                                </div>
-
-                                                                <div class="row hora-denuncia">
-                                                                    21:22 - 28/01/2016
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
+                                                    </c:forEach>
+                                                </h:form>
 
                                             </div>
 
