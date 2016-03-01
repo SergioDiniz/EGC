@@ -44,7 +44,7 @@
                                     Denúncias
                                 </div>
                                 <div class="row">
-                                    0
+                                    #{controladorDenuncia.totalDeDenuncias()}
                                 </div>
                             </div>
                         </div>
@@ -56,10 +56,10 @@
 
                             <div class="col-md-6">
                                 <div class="row">
-                                    Atendidas
+                                    Prefeituras/Ativas
                                 </div>
                                 <div class="row">
-                                    0
+                                    #{controladorPrefeitura.totalDePrefeituras()} / #{controladorPrefeitura.totalDePrefeiturasAtivas()}
                                 </div>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                                     Usuários
                                 </div>
                                 <div class="row">
-                                    3
+                                    #{controladorUsuario.totalDeUsuarios()}
                                 </div>
                             </div>
                         </div>

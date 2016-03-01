@@ -448,6 +448,15 @@ public class ControladorPrefeitura implements Serializable {
     }
 
     
+    public Long totalDePrefeituras(){
+        return fachada.totalDePrefeitura();
+    }
+    
+    public Long totalDePrefeiturasAtivas(){
+        return fachada.totalDePrefeituraAtivas();
+    }
+    
+    
     //
     //
     //

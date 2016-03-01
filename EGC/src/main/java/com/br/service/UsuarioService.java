@@ -104,4 +104,13 @@ public class UsuarioService implements UsuarioServiceIT {
         return null;
     }
 
+    @Override
+    public Long totalDeUsuarios(){
+        Query query = em.createQuery("SELECT COUNT(u) FROM Usuario u");
+        List<Long> d = query.getResultList();
+
+        return d.get(0);
+        
+    }
+    
 }

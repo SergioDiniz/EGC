@@ -532,6 +532,10 @@ public class ControladorUsuario implements Serializable {
         return "";
 
     }
+    
+    public Long totalDeUsuarios(){
+        return fachada.totalDeUsuarios();
+    }
 
 //    
 //

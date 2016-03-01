@@ -116,6 +116,15 @@ public class PrefeituraService implements PrefeituraServiceIT {
         return d.get(0);
 
     }
+    
+    @Override
+    public Long totalDePrefeituraAtivas() {
+        Query query = em.createQuery("SELECT COUNT(p) FROM Prefeitura P WHERE p.ativo = TRUE");
+        List<Long> d = query.getResultList();
+
+        return d.get(0);
+
+    }
 
     @Override
     public Prefeitura login(String email, String senha) {

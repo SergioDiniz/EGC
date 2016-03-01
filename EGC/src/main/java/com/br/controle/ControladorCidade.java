@@ -145,7 +145,6 @@ public class ControladorCidade implements Serializable {
         informacoesGeraisMunicipio(emailPrefeitura, this.cidadePK.getNomeCidade(), this.cidadePK.getSiglaEstado());
 
 //        FacesContext.getCurrentInstance().getExternalContext().redirect("/EGC/pesquisar");
-        
         return "/sis/visitante/pesquisar.jsf?faces-redirect=true";
     }
 
@@ -186,48 +185,56 @@ public class ControladorCidade implements Serializable {
     }
 
     public void pesquisarDenuncia(ComponentSystemEvent event) {
-        this.visualizarDenuncia = new Denuncia();
-        this.visualizarDenuncia = fachada.pesquisarDenunicaCodigo(this.codigoDenuncia);
 
-        // pegando informações da prefeitura
-        String cidade = this.visualizarDenuncia.getCidade().getCidadePK().getNomeCidade();
-        String estado = this.visualizarDenuncia.getCidade().getCidadePK().getSiglaEstado();
-        this.prefeitura = new Prefeitura();
-        this.prefeitura = fachada.pesquisarPrefeituraPorCidade(cidade, estado);
+        try {
+            this.visualizarDenuncia = new Denuncia();
+            this.visualizarDenuncia = fachada.pesquisarDenunicaCodigo(this.codigoDenuncia);
 
-        // vefiricando se a prefeitura existe
-        if (this.prefeitura != null) {
-            this.mostrarInformacoesPrefeitura = true;
-        } else {
-            this.mostrarInformacoesPrefeitura = false;
+            // pegando informações da prefeitura
+            String cidade = this.visualizarDenuncia.getCidade().getCidadePK().getNomeCidade();
+            String estado = this.visualizarDenuncia.getCidade().getCidadePK().getSiglaEstado();
+            this.prefeitura = new Prefeitura();
+            this.prefeitura = fachada.pesquisarPrefeituraPorCidade(cidade, estado);
+
+            // vefiricando se a prefeitura existe
+            if (this.prefeitura != null) {
+                this.mostrarInformacoesPrefeitura = true;
+            } else {
+                this.mostrarInformacoesPrefeitura = false;
+            }
+
+            // pegando informações gerais do municipio
+            String emailPrefeitura = "";
+            if (this.prefeitura != null) {
+                emailPrefeitura = this.prefeitura.getEmail();
+            }
+            informacoesGeraisMunicipio(emailPrefeitura, cidade, estado);
+        } catch (Exception e) {
+            System.out.println("ERRO AO TENTAR PESQUISAR DENUNCIA: " + e.getMessage());
         }
-
-        // pegando informações gerais do municipio
-        String emailPrefeitura = "";
-        if (this.prefeitura != null) {
-            emailPrefeitura = this.prefeitura.getEmail();
-        }
-        informacoesGeraisMunicipio(emailPrefeitura, cidade, estado);
 
     }
 
     public void pesquisarPrefeitura(ComponentSystemEvent event) throws IOException {
-        this.prefeitura = new Prefeitura();
-        this.prefeitura = fachada.pesquisarPrefeituraPorCodigo(this.codigoPrefeitura);
 
-        // vefiricando se a prefeitura existe
-        if (this.prefeitura != null) {
-            this.mostrarInformacoesPrefeitura = true;
+        try {
+            this.prefeitura = new Prefeitura();
+            this.prefeitura = fachada.pesquisarPrefeituraPorCodigo(this.codigoPrefeitura);
 
-            // pegando informações gerais do municipio
-            informacoesGeraisMunicipio(this.prefeitura.getEmail(), this.prefeitura.getCidade().getCidadePK().getNomeCidade(), this.prefeitura.getCidade().getCidadePK().getSiglaEstado());
+            // vefiricando se a prefeitura existe
+            if (this.prefeitura != null) {
+                this.mostrarInformacoesPrefeitura = true;
 
-        } else {
-            this.mostrarInformacoesPrefeitura = false;
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/EGC/erro-404.jsf");
+                // pegando informações gerais do municipio
+                informacoesGeraisMunicipio(this.prefeitura.getEmail(), this.prefeitura.getCidade().getCidadePK().getNomeCidade(), this.prefeitura.getCidade().getCidadePK().getSiglaEstado());
+
+            } else {
+                this.mostrarInformacoesPrefeitura = false;
+//                FacesContext.getCurrentInstance().getExternalContext().redirect("/EGC/erro-404.jsf");
+            }
+        } catch (Exception e) {
+            System.out.println("ERRO AO PESQUISAR PREFEITURA: " + e.getMessage());
         }
-        
-        
 
     }
 
@@ -242,15 +249,15 @@ public class ControladorCidade implements Serializable {
     public List<Funcionario> funcionariosDaPrefeitura(String codigoPrefeitura) {
         return fachada.funcionarioDaPrefeitura(codigoPrefeitura);
     }
-    
-    public String novoComentario(){
+
+    public String novoComentario() {
         this.mensagemPrefeitura.setDataMensagem(new Date());
         System.out.println("mensagem: " + this.mensagemPrefeitura.toString());
         fachada.novaMensagemEmPrefeitura(this.mensagemPrefeitura, this.prefeitura);
         this.mensagemPrefeitura = new MensagemPrefeitura();
         return null;
     }
-    
+
     public List<MensagemPrefeitura> mensagensDaPrefeitura(String codigoPrefeitura) {
         return fachada.mensagensDaPrefeitura(codigoPrefeitura);
     }
@@ -371,5 +378,4 @@ public class ControladorCidade implements Serializable {
         this.mensagemPrefeitura = mensagemPrefeitura;
     }
 
-    
 }

@@ -93,6 +93,10 @@ public class Fachada implements Serializable {
     public List<Denuncia> denunciasQueAjudei(String email) {
         return us.denunciasQueAjudei(email);
     }
+    
+    public Long totalDeUsuarios(){
+        return us.totalDeUsuarios();
+    }
 
     // FIM UsuarioServices
     //
@@ -118,6 +122,10 @@ public class Fachada implements Serializable {
 
     public Long totalDePrefeitura() {
         return ps.totalDePrefeitura();
+    }
+    
+    public Long totalDePrefeituraAtivas() {
+        return ps.totalDePrefeituraAtivas();
     }
 
     public String cadastrarNaPrefeitura(Prefeitura prefeitura, Funcionario funcionario) {

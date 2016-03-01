@@ -28,5 +28,6 @@ public interface UsuarioServiceIT{
     
     public List<Denuncia> denunciasQueAjudei(String email);
    
+    public Long totalDeUsuarios();
     
 }

@@ -99,6 +99,10 @@ public class ControladorDenuncia implements Serializable {
         FacesContext.getCurrentInstance().getExternalContext().redirect("/EGC/funcionario/denuncia/" + codigoDenuncia);
     }
     
+    public Long totalDeDenuncias(){
+        return fachada.totalDeDenuncias();
+    }
+    
     
 //
 //

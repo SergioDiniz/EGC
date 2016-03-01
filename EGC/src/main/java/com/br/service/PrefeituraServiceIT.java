@@ -28,6 +28,8 @@ public interface PrefeituraServiceIT {
     
     public Long totalDePrefeitura();
     
+    public Long totalDePrefeituraAtivas();
+    
     public String cadastrarNaPrefeitura(Prefeitura prefeitura, Funcionario funcionario);
     
     public List<Prefeitura> prefeiturasPendentes();
