@@ -31,6 +31,10 @@
 
                 <div class="lista-de-denuncias">
 
+                    <h:panelGroup rendered="#{controladorAdmin.denunciasComReclamacoes().size() == 0}">
+                        <label><h1 class="texto-100">Nenhum Registro.</h1></label>
+                    </h:panelGroup>
+
                     <c:forEach items="#{controladorAdmin.denunciasComReclamacoes()}" var="denuncia" varStatus="index">
                         <div class="col-md-4">
                             <div class="denuncia-com-reclamacao">

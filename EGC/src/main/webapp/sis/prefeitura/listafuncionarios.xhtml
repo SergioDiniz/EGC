@@ -30,6 +30,10 @@
 
                 <div class="lista-de-funcionarios">
 
+                    <h:panelGroup rendered="#{controladorPrefeitura.funcionarios().size() == 0}">
+                        <label><h1 class="texto-100">Nenhum Funcionário</h1></label>
+                    </h:panelGroup>
+
                     <c:forEach items="#{controladorPrefeitura.funcionarios()}" var="funcionario" varStatus="indexFuncionario">
                         <div class="col-md-4">
                             <div class="funcionario">
@@ -157,7 +161,7 @@
                                                                 <a href="#" jsf:action="#{controladorPrefeitura.visualizarPerfilFuncionario(funcionario)}" type="button" class="btn btn-link">
                                                                     Perfil
                                                                 </a>
-                                                                
+
                                                             </li>
 
                                                         </ul>

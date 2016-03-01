@@ -378,7 +378,12 @@ public class ControladorFuncionario implements Serializable {
     
     
     public long andamentoDasDenuncias(){
-        return (totalDeDenunciasAtendidasNaCidade() * 100) / totalDeDenunciasNaCidade();
+        try {
+            return (totalDeDenunciasAtendidasNaCidade() * 100) / totalDeDenunciasNaCidade();
+        } catch (Exception e) {
+        }
+        
+        return 0;
     }
     
 

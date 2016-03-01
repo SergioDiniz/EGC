@@ -35,6 +35,10 @@
 
                 <div class="lista-de-funcionarios">
 
+                    <h:panelGroup rendered="#{controladorAdmin.todosFuncionarios().size() == 0}">
+                        <label><h1 class="texto-100">Nenhum Funcionário.</h1></label>
+                    </h:panelGroup>
+
                     <c:forEach items="#{controladorAdmin.todosFuncionarios()}" var="funcionario">
                         <div class="col-md-4">
                             <div class="funcionario">

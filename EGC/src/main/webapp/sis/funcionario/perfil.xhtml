@@ -47,7 +47,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="foto" style="background-image: url(foto/#{controladorFuncionario.funcionario.foto})">
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -113,6 +113,10 @@
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="tab1">
 
+                            <h:panelGroup rendered="#{controladorFuncionario.registrosDoFuncionario(controladorFuncionario.funcionario.email).size() == null}">
+                                <label><h1 class="texto-100">Nenhum Registro.</h1></label>
+                            </h:panelGroup>
+
                             <c:forEach var="registro" items="#{controladorFuncionario.registrosDoFuncionario(controladorFuncionario.funcionario.email)}" >
                                 <table class="tb-registro">
                                     <tr>
@@ -162,6 +166,11 @@
 
                         <div role="tabpanel" class="tab-pane" id="tab2">
                             <div class="menu-cidades">
+
+                                <h:panelGroup rendered="#{controladorAdmin.prefeiturasDoFuncionario(controladorFuncionario.funcionario.email).size() == null}">
+                                    <label><h1 class="texto-100">Nenhum Registro.</h1></label>
+                                </h:panelGroup>
+
                                 <c:forEach var="prefeitura" items="#{controladorAdmin.prefeiturasDoFuncionario(controladorFuncionario.funcionario.email)}" >
                                     #{controladorPrefeitura.dadosGeraisPrefeitura(prefeitura.email, prefeitura.cidade.cidadePK.nomeCidade, prefeitura.cidade.cidadePK.siglaEstado)}
                                     <div class="row">
@@ -171,7 +180,7 @@
                                                     <div class="col-md-12 cidade-info">
                                                         <div class="col-md-3 info-foto">
                                                             <div class="foto" style="background-image: url(../prefeitura/brasao/#{prefeitura.foto})">
-                                                                
+
                                                             </div>
                                                         </div>
 
@@ -221,7 +230,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12 cidade-dados">
-                                                        
+
                                                         <table>
                                                             <tr>
                                                                 <td>

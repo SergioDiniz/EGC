@@ -40,6 +40,10 @@
                 <div class="row">
                     <div class="col-md-9">
 
+                        <h:panelGroup class="text-center" rendered="#{controladorFuncionario.denunciaGerenciadas.size() == 0}">
+                            <label><h1 class="texto-100">Nenhuma Denúncia no Município.</h1></label>
+                        </h:panelGroup>
+
                         <c:forEach var="denuncia" items="#{controladorFuncionario.denunciaGerenciadas}">
                             <div class=" col-md-6">
                                 <div class="denuncia col-md-12">
@@ -110,7 +114,7 @@
                     </div>
 
                     <div class="col-md-3 lista-de-fitro">
-                        <h:form>
+                        <h:form rendered="#{controladorFuncionario.denunciaGerenciadas.size() > 0}">
 
                             <div class="texto text-center">ANDAMENTO</div>
                             <div class="progress-pie-chart" data-percent="#{controladorFuncionario.andamentoDasDenuncias()}">
@@ -166,14 +170,14 @@
                             <ul class="list-unstyled">
 
                                 <c:forEach  var="estado" items="#{controladorCidade.estadoDeDenunciasNumerosDeDenuncia(controladorFuncionario.cidade.cidadePK.nomeCidade, controladorFuncionario.cidade.cidadePK.siglaEstado)}">
-                                    
+
                                     <li>
                                         <b>
                                             <h:commandLink value="#{estado.get(0)}" action="#{controladorFuncionario.gerenciarDenunciasFiltro('', estado.get(0), 'ESTADO' )}"/>
                                             <span class="badge">#{estado.get(1)}</span>
                                         </b>    
                                     </li>
-                                    
+
                                 </c:forEach>
 
                             </ul>

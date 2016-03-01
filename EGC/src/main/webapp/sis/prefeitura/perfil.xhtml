@@ -415,6 +415,11 @@
 
                                         <div class="menu-cidades">
                                             <div class="ultimas-denuncias">
+
+                                                <h:panelGroup rendered="#{controladorPrefeitura.denunciaMaisRecentes.size() == 0}">
+                                                    <label><h1 class="texto-100">Nenhum Denúncia.</h1></label>
+                                                </h:panelGroup>
+
                                                 <c:forEach var="ultimasDenuncia" items="#{controladorPrefeitura.denunciaMaisRecentes}" >
                                                     <div>
                                                         <div class="ud-denuncia">
@@ -459,6 +464,10 @@
 
                                     <div role="tabpanel" class="tab-pane" id="tab3">
                                         <div class="menu-acoes">
+
+                                            <h:panelGroup rendered="#{controladorCidade.registrosDaCidade(controladorPrefeitura.prefeitura.cidade.cidadePK.nomeCidade, controladorPrefeitura.prefeitura.cidade.cidadePK.siglaEstado).size() == null}">
+                                                <label><h1 class="texto-100">Nenhum Registro.</h1></label>
+                                            </h:panelGroup>
 
                                             <c:forEach var="registro" items="#{controladorCidade.registrosDaCidade(controladorPrefeitura.prefeitura.cidade.cidadePK.nomeCidade, controladorPrefeitura.prefeitura.cidade.cidadePK.siglaEstado)}" >
                                                 <table class="tb-registro">
@@ -600,6 +609,11 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
+
+                                        <h:panelGroup rendered="#{controladorPrefeitura.funcionarios().size() == 0}">
+                                            <label><h1 class="texto-100">Nenhum Registro.</h1></label>
+                                        </h:panelGroup>
+
                                         <h:dataTable value="#{controladorPrefeitura.funcionarios()}" var="funcionario" class="table table-pesquisar-funcionario" columnClasses="cDescricao">
 
                                             <h:column id="cDescricao">

@@ -112,6 +112,10 @@
                                 Últimos Registros
                             </div>
 
+                            <h:panelGroup rendered="#{controladorCidade.registrosDaCidade(controladorPrefeitura.prefeitura.cidade.cidadePK.nomeCidade, controladorPrefeitura.prefeitura.cidade.cidadePK.siglaEstado).size() == null}">
+                                <label><h3 class="texto-100">Nenhum Registro.</h3></label>
+                            </h:panelGroup>
+
                             <c:forEach var="registro" items="#{controladorCidade.registrosDaCidade(controladorPrefeitura.prefeitura.cidade.cidadePK.nomeCidade, controladorPrefeitura.prefeitura.cidade.cidadePK.siglaEstado)}" >
                                 <table class="tb-registro">
                                     <tr>
@@ -175,10 +179,17 @@
                                     Com mais ajudas
                                 </div>
                             </div>
+
                             <div class="row">
                                 <div class="col-md-12">
 
-                                    <h:form>
+
+                                    <h:panelGroup class="text-center" rendered="#{controladorPrefeitura.totalDeDenunciasNaCidade() == 0}">
+                                        <label><h3 class="texto-100">Nenhuma Denúncia no Município.</h3></label>
+                                    </h:panelGroup>
+
+
+                                    <h:form rendered="#{controladorPrefeitura.denunciaComMaisAjuda.size() > 0}">
                                         <p:poll interval="3" update="maisAjudadas" listener="#{controladorPrefeitura.denunciasComMaisAjudas()}"/>
                                         <h:dataTable value="#{controladorPrefeitura.denunciaComMaisAjuda}" var="denuncia" styleClass="table table-hover" id="maisAjudadas">
                                             <h:column>
@@ -298,120 +309,130 @@
                 </div>
             </div>
 
-            <div class="resumo-meio">
-                <div class="col-md-12">
-                    <div class="col-md-4">
-                        <div class="col-md-12">
-                            <div class="ultimas-denuncias">
-                                <div class="row">
-                                    Últimas Denúncias Realizadas
-                                </div>
-                                <h:form>
-                                    <p:poll interval="10" listener="#{controladorPrefeitura.denunciasMaisRecentes()}" update="teste123"/>
-                                    <h:panelGroup id="teste123">
-                                        <c:forEach var="ultimasDenuncia" items="#{controladorPrefeitura.denunciaMaisRecentes}" >
-                                            <div class="ud-denuncia">
 
-                                                <div class="row">
-                                                    <div class="col-md-2">
-                                                        <img src="../../img/icones-denuncia/#{ultimasDenuncia.iconeDenunica}" height="50px"/>
-                                                    </div>
-                                                    <div class="col-md-10">
-                                                        <div class="row">
-                                                            <div class="col-md-7 rua-denuncia">
-                                                                #{ultimasDenuncia.tipoDaDenunciaFormatado}
+            <h:panelGroup class="text-center" rendered="#{controladorPrefeitura.totalDeDenunciasNaCidade() > 0}">
+                <div class="resumo-meio">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="col-md-12">
+                                <div class="ultimas-denuncias">
+                                    <div class="row">
+                                        Últimas Denúncias Realizadas
+                                    </div>
+                                    <h:form>
+                                        <p:poll interval="10" listener="#{controladorPrefeitura.denunciasMaisRecentes()}" update="teste123"/>
+                                        <h:panelGroup id="teste123">
+                                            <c:forEach var="ultimasDenuncia" items="#{controladorPrefeitura.denunciaMaisRecentes}" >
+                                                <div class="ud-denuncia">
+
+                                                    <div class="row">
+                                                        <div class="col-md-2">
+                                                            <img src="../../img/icones-denuncia/#{ultimasDenuncia.iconeDenunica}" height="50px"/>
+                                                        </div>
+                                                        <div class="col-md-10">
+                                                            <div class="row">
+                                                                <div class="col-md-7 rua-denuncia">
+                                                                    #{ultimasDenuncia.tipoDaDenunciaFormatado}
+                                                                </div>
+                                                                <div class="col-md-5 hora-denuncia">
+                                                                    #{ultimasDenuncia.dataDenuncaFormatado}
+                                                                </div>
                                                             </div>
-                                                            <div class="col-md-5 hora-denuncia">
-                                                                #{ultimasDenuncia.dataDenuncaFormatado}
+                                                            <div class="row">
+                                                                <div class="col-md-12 conteudo-denuncia">
+                                                                    #{ultimasDenuncia.descricao}
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <span class="link-mapa-denuncia">#{ultimasDenuncia.enderecoDenuncia.rua} - #{ultimasDenuncia.enderecoDenuncia.numero}, #{ultimasDenuncia.enderecoDenuncia.bairro}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <img src="../denuncias/#{ultimasDenuncia.foto}" class="img-denuncia" height="130px"/>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="row">
-                                                            <div class="col-md-12 conteudo-denuncia">
-                                                                #{ultimasDenuncia.descricao}
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-12">
-                                                                <span class="link-mapa-denuncia">#{ultimasDenuncia.enderecoDenuncia.rua} - #{ultimasDenuncia.enderecoDenuncia.numero}, #{ultimasDenuncia.enderecoDenuncia.bairro}</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-12">
-                                                                <img src="../denuncias/#{ultimasDenuncia.foto}" class="img-denuncia" height="130px"/>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div> 
-                                            </div>
-                                        </c:forEach>
-                                    </h:panelGroup>
-                                </h:form>
+                                                    </div> 
+                                                </div>
+                                            </c:forEach>
+                                        </h:panelGroup>
+                                    </h:form>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="col-md-12">
-                            <div class="ultimas-atendidas">
-                                <div class="row">
-                                    Últimas Denúncias Atendidas
-                                </div>
-                                <c:forEach var="ultimasDenuncia" items="#{controladorPrefeitura.denunciasAtendidasEmCidade()}" id="id-denuncias">
-                                    <div class="ud-denuncia">
-
-                                        <div class="row">
-                                            <div class="col-md-1">
-                                                <img src="/EGC/img/icones-denuncia/#{ultimasDenuncia.iconeDenunica}" height="50px"/>
-                                            </div>
-                                            <div class="col-md-11">
-                                                <div class="row">
-                                                    <div class="col-md-7 rua-denuncia">
-                                                        <a href="/EGC/funcionario/denuncia/#{ultimasDenuncia.codigo}">#{ultimasDenuncia.tipoDaDenunciaFormatado}</a>
-                                                    </div>
-                                                    <div class="col-md-5 hora-denuncia">
-                                                        #{ultimasDenuncia.informacaoDeAtendida.dataDenuncaFormatado}
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-md-12">                                                    
-
-
-                                                        <table CELLSPACING="0">
-                                                            <tr>
-                                                                <td rows="2">
-                                                                    <div class="denuncia-feita" style="background-image: url(/EGC/sis/denuncias/#{ultimasDenuncia.foto});">
-
-                                                                    </div>
-                                                                </td>
-                                                                <td rowspan="2" style="background-image: url(/EGC/sis/denuncias/#{ultimasDenuncia.informacaoDeAtendida.foto});">
-                                                                    <div class="reposta-denuncia">
-                                                                        <div class="texto-centro">
-                                                                            #{ultimasDenuncia.informacaoDeAtendida.descricao}
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="denuncia-feita-descricao">
-                                                                        #{ultimasDenuncia.descricao}
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div> 
+                        <div class="col-md-8">
+                            <div class="col-md-12">
+                                <div class="ultimas-atendidas">
+                                    <div class="row">
+                                        Últimas Denúncias Atendidas
                                     </div>
-                                </c:forEach>
+                                    
+                                    <h:panelGroup class="text-center" rendered="#{controladorPrefeitura.denunciasAtendidasEmCidade().size() == 0}">
+                                        <label><h3 class="texto-100">Nenhuma denúncia atendida ate o momento.</h3></label>
+                                    </h:panelGroup>
+                                    
+                                    <c:forEach var="ultimasDenuncia" items="#{controladorPrefeitura.denunciasAtendidasEmCidade()}" id="id-denuncias">
+                                        <div class="ud-denuncia">
+
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                    <img src="/EGC/img/icones-denuncia/#{ultimasDenuncia.iconeDenunica}" height="50px"/>
+                                                </div>
+                                                <div class="col-md-11">
+                                                    <div class="row">
+                                                        <div class="col-md-7 rua-denuncia">
+                                                            <a href="/EGC/funcionario/denuncia/#{ultimasDenuncia.codigo}">#{ultimasDenuncia.tipoDaDenunciaFormatado}</a>
+                                                        </div>
+                                                        <div class="col-md-5 hora-denuncia">
+                                                            #{ultimasDenuncia.informacaoDeAtendida.dataDenuncaFormatado}
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-md-12">                                                    
+
+
+                                                            <table CELLSPACING="0">
+                                                                <tr>
+                                                                    <td rows="2">
+                                                                        <div class="denuncia-feita" style="background-image: url(/EGC/sis/denuncias/#{ultimasDenuncia.foto});">
+
+                                                                        </div>
+                                                                    </td>
+                                                                    <td rowspan="2" style="background-image: url(/EGC/sis/denuncias/#{ultimasDenuncia.informacaoDeAtendida.foto});">
+                                                                        <div class="reposta-denuncia">
+                                                                            <div class="texto-centro">
+                                                                                #{ultimasDenuncia.informacaoDeAtendida.descricao}
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="denuncia-feita-descricao">
+                                                                            #{ultimasDenuncia.descricao}
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </c:forEach>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </h:panelGroup>
+
+
 
 
         </div>

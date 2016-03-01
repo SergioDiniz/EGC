@@ -54,6 +54,9 @@
 
                             <!-- -->
 
+                            <h:panelGroup rendered="#{controladorUsuario.minhasDenunicas().size() == 0}">
+                                <label><h1 class="texto-100">Nenhum Denúncia</h1></label>
+                            </h:panelGroup>
 
                             <c:forEach var="denuncia" items="#{controladorUsuario.minhasDenunicas()}" id="id-denuncias">
                                 <div class="denuncia-visualizada">

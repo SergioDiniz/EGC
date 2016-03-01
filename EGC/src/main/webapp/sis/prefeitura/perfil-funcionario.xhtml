@@ -126,6 +126,10 @@
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="tab1">
 
+                            <h:panelGroup rendered="#{controladorFuncionario.registrosDoFuncionario(controladorPrefeitura.funcionarioPerfil.email).size() == null}">
+                                <label><h1 class="texto-100">Nenhum Registro.</h1></label>
+                            </h:panelGroup>
+
                             <c:forEach var="registro" items="#{controladorFuncionario.registrosDoFuncionario(controladorPrefeitura.funcionarioPerfil.email)}" >
                                 <table class="tb-registro">
                                     <tr>
@@ -172,6 +176,11 @@
 
                         <div role="tabpanel" class="tab-pane" id="tab2">
                             <div class="menu-cidades">
+
+                                <h:panelGroup rendered="#{controladorAdmin.prefeiturasDoFuncionario(controladorPrefeitura.funcionarioPerfil.email).size() == null}">
+                                    <label><h1 class="texto-100">Nenhum Registro.</h1></label>
+                                </h:panelGroup>
+
                                 <c:forEach var="prefeitura" items="#{controladorAdmin.prefeiturasDoFuncionario(controladorPrefeitura.funcionarioPerfil.email)}" >
                                     #{controladorPrefeitura.dadosGeraisPrefeitura(prefeitura.email, prefeitura.cidade.cidadePK.nomeCidade, prefeitura.cidade.cidadePK.siglaEstado)}
                                     <div class="row">
