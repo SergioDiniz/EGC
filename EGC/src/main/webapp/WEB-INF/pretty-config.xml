@@ -53,5 +53,11 @@
         </url-mapping>
         
         
+        <!--Prefeitura-->
+        
+        <url-mapping id="gerenciarDenunciaPrefeitura">
+                <pattern value="/prefeitura/denuncia/#{codigoDenuncia}" />
+                <view-id value="/sis/prefeitura/gerenciar.jsf" />
+        </url-mapping>
 
 </pretty-config>

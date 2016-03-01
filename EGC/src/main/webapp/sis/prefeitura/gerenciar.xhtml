@@ -14,8 +14,8 @@
     <h:head>
 
         <f:metadata>
-            <f:viewParam  required="true" id="codigoDenuncia_id" name="codigoDenuncia" value="#{controladorFuncionario.codigoDenuncia}" />
-            <f:event type="preRenderView" listener="#{controladorFuncionario.pesquisarDenuncia}" />
+            <f:viewParam  required="true" id="codigoDenuncia_id" name="codigoDenuncia" value="#{controladorPrefeitura.codigoDenuncia}" />
+            <f:event type="preRenderView" listener="#{controladorPrefeitura.pesquisarDenuncia}" />
         </f:metadata>
 
         <title>EGC - Funcionario</title>
@@ -49,32 +49,32 @@
                         <div class="ud-denuncia">
                             <div class="row">
                                 <div class="col-md-12 text-center">
-                                    <img src="/EGC/sis/denuncias/#{controladorFuncionario.denunciaGerenciada.foto}" class="img-denuncia-atendida" width="100%"/>
+                                    <img src="/EGC/sis/denuncias/#{controladorPrefeitura.denunciaGerenciada.foto}" class="img-denuncia-atendida" width="100%"/>
                                 </div>
                             </div>
                             <div class="row" style="margin: 5px; margin-left: -15px;">
                                 <div class="col-md-2 ">
-                                    <img src="/EGC/img/icones-denuncia/#{controladorFuncionario.denunciaGerenciada.iconeDenunica}" height="50px" align="right"/>
+                                    <img src="/EGC/img/icones-denuncia/#{controladorPrefeitura.denunciaGerenciada.iconeDenunica}" height="50px" align="right"/>
                                 </div>
                                 <div class="col-md-10">
                                     <div class="row">
                                         <div class="col-md-9 rua-denuncia">
-                                            #{controladorFuncionario.denunciaGerenciada.tipoDaDenunciaFormatado}
+                                            #{controladorPrefeitura.denunciaGerenciada.tipoDaDenunciaFormatado}
                                         </div>
                                         <div class="col-md-3">
                                             <div class="hora-denuncia">
-                                                #{controladorFuncionario.denunciaGerenciada.dataDenuncaFormatado}
+                                                #{controladorPrefeitura.denunciaGerenciada.dataDenuncaFormatado}
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 conteudo-denuncia">
-                                            #{controladorFuncionario.denunciaGerenciada.descricao}
+                                            #{controladorPrefeitura.denunciaGerenciada.descricao}
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <span class="link-mapa-denuncia">#{controladorFuncionario.denunciaGerenciada.enderecoDenuncia.rua} - #{controladorFuncionario.denunciaGerenciada.enderecoDenuncia.numero}, #{controladorFuncionario.denunciaGerenciada.enderecoDenuncia.bairro}, #{controladorFuncionario.denunciaGerenciada.enderecoDenuncia.cidade} - #{controladorFuncionario.denunciaGerenciada.enderecoDenuncia.estado}</span>
+                                            <span class="link-mapa-denuncia">#{controladorPrefeitura.denunciaGerenciada.enderecoDenuncia.rua} - #{controladorPrefeitura.denunciaGerenciada.enderecoDenuncia.numero}, #{controladorPrefeitura.denunciaGerenciada.enderecoDenuncia.bairro}, #{controladorPrefeitura.denunciaGerenciada.enderecoDenuncia.cidade} - #{controladorPrefeitura.denunciaGerenciada.enderecoDenuncia.estado}</span>
                                         </div>
                                     </div>
 
@@ -82,19 +82,19 @@
                                         <div class="col-md-12">
                                             <div class="col-md-1 text-left">
                                                 <div class="row">
-                                                    <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> #{controladorFuncionario.denunciaGerenciada.numeroAjuda}
+                                                    <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> #{controladorPrefeitura.denunciaGerenciada.numeroAjuda}
                                                 </div>
                                             </div>
                                             <div class="col-md-1">
                                                 <div class="row">
-                                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> #{controladorDenuncia.getReclamarDenuncia(controladorFuncionario.denunciaGerenciada)}
+                                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> #{controladorDenuncia.getReclamarDenuncia(controladorPrefeitura.denunciaGerenciada)}
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="row text-left" style="padding-top: 8px;">
-                                                    <h:outputText value="ATENDIDA" styleClass="label label-success" rendered="#{controladorFuncionario.denunciaGerenciada.tagAtendida()}"/>
-                                                    <h:outputText value="AGUARDANDO" styleClass="label label-primary" rendered="#{controladorFuncionario.denunciaGerenciada.tagAguardando()}"/>
-                                                    <h:outputText value="EM ENDAMENTO" styleClass="label label-info" rendered="#{controladorFuncionario.denunciaGerenciada.tagEmAndamento()}"/>
+                                                    <h:outputText value="ATENDIDA" styleClass="label label-success" rendered="#{controladorPrefeitura.denunciaGerenciada.tagAtendida()}"/>
+                                                    <h:outputText value="AGUARDANDO" styleClass="label label-primary" rendered="#{controladorPrefeitura.denunciaGerenciada.tagAguardando()}"/>
+                                                    <h:outputText value="EM ENDAMENTO" styleClass="label label-info" rendered="#{controladorPrefeitura.denunciaGerenciada.tagEmAndamento()}"/>
                                                 </div>
                                             </div>
                                             <div class="col-md-offset-4 col-md-2">
@@ -123,13 +123,13 @@
                                                                         <div class="row">
 
                                                                             <div class="col-md-5">
-                                                                                <img src="/EGC/sis/denuncias/#{controladorFuncionario.denunciaGerenciada.foto}" style="width: 100%; max-height: 100%;" />
+                                                                                <img src="/EGC/sis/denuncias/#{controladorPrefeitura.denunciaGerenciada.foto}" style="width: 100%; max-height: 100%;" />
                                                                             </div>
                                                                             <div class="col-md-7">
 
                                                                                 <div class="form-group">
                                                                                     <label>Tipo de Conteúdo: </label>
-                                                                                    <h:selectOneListbox size="1" class="form-control" value="#{controladorFuncionario.conteudoInapropriado.tipoDeConteudo}">
+                                                                                    <h:selectOneListbox size="1" class="form-control" value="#{controladorPrefeitura.conteudoInapropriado.tipoDeConteudo}">
                                                                                         <f:selectItem itemValue="FALSA_DENUNCIA" itemLabel="Falsa Denúncia" />
                                                                                         <f:selectItem itemValue="NUDEZ" itemLabel="Exposição de Nudez"/>
                                                                                         <f:selectItem itemValue="SPAN" itemLabel="Span"/>
@@ -139,7 +139,7 @@
 
                                                                                 <div class="form-group">
                                                                                     <label>Descrição:</label>
-                                                                                    <textarea class="form-control" rows="6" jsf:value="${controladorFuncionario.conteudoInapropriado.descricao}">
+                                                                                    <textarea class="form-control" rows="6" jsf:value="${controladorPrefeitura.conteudoInapropriado.descricao}">
                                                 
                                                                                     </textarea>
                                                                                 </div>
@@ -150,7 +150,7 @@
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                                                        <h:commandButton value="Reclamar" action="#{controladorFuncionario.fazerReclamacaoEmDenuncia()}" class="btn btn-primary"/>
+                                                                        <h:commandButton value="Reclamar" action="#{controladorPrefeitura.fazerReclamacaoEmDenuncia()}" class="btn btn-primary"/>
                                                                     </div>
 
                                                                 </h:form>
@@ -170,47 +170,10 @@
                     </div>
                 </div>
 
-                <h:panelGroup rendered="#{!controladorFuncionario.denunciaGerenciada.tagAtendida()}">
-                    <div class="btn-atender-denuncia">
-                        <div class="row">
-                            <div class="col-md-offset-2 col-md-8">
+                
 
 
-                                <h:form>
-                                    <label>Acompanhamento: </label>
-                                    <div>
-                                        <div class="col-md-7">
-                                            <div class="row">
-
-                                                <h:selectOneListbox size="1" class="form-control input-lg" value="#{controladorFuncionario.denunciaGerenciada.estadoDeAcompanhamento}">
-                                                    <f:selectItem itemValue="AGUARDANDO" itemLabel="Aguardando" />
-                                                    <f:selectItem itemValue="EM_TRABALHO" itemLabel="Em Trabalho"/>
-                                                </h:selectOneListbox>
-
-                                            </div>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <div class="row">
-
-                                                <div class="btn-group" role="group" >
-                                                    <h:commandButton class="btn btn-default btn-lg" style="width: 135px;" value="Salvar" action="#{controladorFuncionario.atualizarDenunciaGerenciada()}" />
-                                                    <h:commandButton action="#{controladorFuncionario.paginaAtenderDenuncia()}" value="Atender Denuncia" class="btn btn-success btn-lg"/>
-
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-                                </h:form>
-                            </div>
-                        </div>
-                    </div>
-                </h:panelGroup>
-
-
-                <h:panelGroup rendered="#{controladorFuncionario.denunciaGerenciada.tagAtendida()}">
+                <h:panelGroup rendered="#{controladorPrefeitura.denunciaGerenciada.tagAtendida()}">
                     <div class="info-de-atendida">
                         <div class="row">
                             <div class="col-md-offset-2 col-md-8">
@@ -221,23 +184,23 @@
                                     <div class="row" style="margin: 5px; margin-left: -15px;">
                                         <br/>
                                         <div class="col-md-2 ">
-                                            <img src="/EGC/sis/funcionario/foto/#{controladorFuncionario.denunciaGerenciada.informacaoDeAtendida.funcionario.foto}" height="50px" align="right"/>
+                                            <img src="/EGC/sis/funcionario/foto/#{controladorPrefeitura.denunciaGerenciada.informacaoDeAtendida.funcionario.foto}" height="50px" align="right"/>
                                         </div>
                                         
                                         <div class="col-md-10">
                                             <div class="row">
                                                 <div class="col-md-9 rua-denuncia">
-                                                    #{controladorFuncionario.denunciaGerenciada.informacaoDeAtendida.funcionario.nome}
+                                                    #{controladorPrefeitura.denunciaGerenciada.informacaoDeAtendida.funcionario.nome}
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="hora-denuncia">
-                                                        #{controladorFuncionario.denunciaGerenciada.informacaoDeAtendida.dataDenuncaFormatado}
+                                                        #{controladorPrefeitura.denunciaGerenciada.informacaoDeAtendida.dataDenuncaFormatado}
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12 conteudo-denuncia">
-                                                    #{controladorFuncionario.denunciaGerenciada.informacaoDeAtendida.descricao}
+                                                    #{controladorPrefeitura.denunciaGerenciada.informacaoDeAtendida.descricao}
                                                 </div>
                                             </div>
                                         </div>
@@ -247,7 +210,7 @@
                                     <br/>
                                     <div class="row">
                                         <div class="col-md-12 text-center">
-                                            <img src="/EGC/sis/denuncias/#{controladorFuncionario.denunciaGerenciada.informacaoDeAtendida.foto}" class="img-denuncia-atendida"/>
+                                            <img src="/EGC/sis/denuncias/#{controladorPrefeitura.denunciaGerenciada.informacaoDeAtendida.foto}" class="img-denuncia-atendida"/>
                                         </div>
                                     </div>
                                 </div>
@@ -262,7 +225,7 @@
                     <div class="row">
                         <div class="col-md-offset-2 col-md-8">
                             <label>Registros: </label>
-                            <c:forEach var="registro" items="#{controladorDenuncia.registroDeUmaDenuncia(controladorFuncionario.codigoDenuncia)}" >
+                            <c:forEach var="registro" items="#{controladorDenuncia.registroDeUmaDenuncia(controladorPrefeitura.codigoDenuncia)}" >
                                 <table class="tb-registro">
                                     <tr>
                                         <td>

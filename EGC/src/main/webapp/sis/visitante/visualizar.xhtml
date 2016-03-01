@@ -33,8 +33,10 @@
 
 
                 <h:panelGroup rendered="#{controladorCidade.visualizarDenuncia == null}">
-                    <br/><br/>
+                    <div class="col-lg-12 text-center">
+                        <br/><br/>
                     <label><h1 class="texto-100">Nenhum Denúncia Encontrada.</h1></label>
+                    </div>
                 </h:panelGroup>
 
 
@@ -242,7 +244,7 @@
                                                                 </div>
                                                                 <div class="col-lg-6 col-xs-6 text-right">
                                                                     <div class="row">
-                                                                        <span class="glyphicon glyphicon-heart texto-cor-vermelho" aria-hidden="true"> #{controladorCidade.visualizarDenuncia.numeroAjuda}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-exclamation-sign texto-cor-cinza-claro" aria-hidden="true"> 2</span> 
+                                                                        <span class="glyphicon glyphicon-heart texto-cor-vermelho" aria-hidden="true"> #{controladorCidade.visualizarDenuncia.numeroAjuda}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-exclamation-sign texto-cor-cinza-claro" aria-hidden="true">  #{controladorDenuncia.getReclamarDenuncia(controladorCidade.visualizarDenuncia)}</span> 
                                                                     </div>
                                                                 </div>
                                                             </div>

@@ -222,81 +222,15 @@
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header"></f:facet>
-                                                <button class="btn btn-visualizar-denuncia" data-toggle="modal" data-target=".denunciaComMaisAjuda#{denuncia.id}">
-                                                    <span class="glyphicon glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
-                                                </button>
-
-                                                <!--modal--> 
-                                                <!--
-                                                <div class="modal fade bs-example-modal-lg denunciaComMaisAjuda#{denuncia.id}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-lg">
-                                                        <div class="modal-content">
-    
-    
-                                                            <div class="row">
-                                                                <div class="col-md-8 img-modal">
-                                                                    <img src="../denuncias/#{denuncia.foto}" class="img-denuncia-modal" />
-                                                                </div>
-                                                                <div class="col-md-4">
-    
-                                                                    <div class="modal-header btn-fecha-modal">
-                                                                        <button type="button" class="close " data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                                    </div>
-    
-                                                                    <div class="row">
-                                                                        <div class="col-md-2 icone-denuncia">
-                                                                            <img src="../../img/icones-denuncia/#{denuncia.iconeDenunica}" />
-                                                                        </div>
-                                                                        <div class="col-md-8">
-                                                                            <div class="row rua-denuncia">
-                                                #{denuncia.tipoDaDenunciaFormatado}
-                                            </div>
-                                        </div>
-                                    </div>
-    
-                                    <div class="row conteudo-denuncia-modal">
-                                        <div class="scroll">
-                                                #{denuncia.descricao} 
-    
-    
-                                                <iframe src="mapa.jsf?latitude=#{denuncia.enderecoDenuncia.latitude}&amp;longitude=#{denuncia.enderecoDenuncia.longitude}&amp;" class="frame-mapa" width="100%" height="110px" style="border: none" scrolling="no"></iframe>
-    
-    
-    
-    
-                                                <c:if test="#{denuncia.informacaoDeAtendida.id > -1}">
-                                                    <c:choose>
-    
-                                                        <c:when test="#{denuncia.tagEmAndamento()}">
-                                                            <span class="tooltips" title="Denuncia em Trabalho" rel="tooltip" data-placement="top" >
-                                                                <div class="modal-inf-em-trabalho">
-                                                                    EM TRABALHO
-                                                                </div>
-                                                            </span>
-                                                        </c:when>
-    
-                                                        <c:when test="#{denuncia.tagAtendida()}">
-                                                            <span class="tooltips" title="Denuncia Atendida" rel="tooltip" data-placement="top" >
-                                                                <div class="modal-inf-atendida">
-                                                                    ATENDIDA
-                                                                </div>
-                                                            </span>
-                                                        </c:when>
-    
-    
-                                                    </c:choose>    
-                                                </c:if>
-    
-    
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                                                -->
-
+                                                
+                                                <a href="/EGC/sis/visitante/visualizar.jsf?codigoDenuncia=#{denuncia.codigo}">
+                                                    <button class="btn btn-visualizar-denuncia" data-toggle="modal" data-target=".denunciaComMaisAjuda#{denuncia.id}">
+                                                        <span class="glyphicon glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+                                                    </button>
+                                                </a>
+                                                
+                                                
+                                                
                                             </h:column>
                                         </h:dataTable>
                                     </h:form>
@@ -310,7 +244,7 @@
             </div>
 
 
-            <h:panelGroup class="text-center" rendered="#{controladorPrefeitura.totalDeDenunciasNaCidade() > 0}">
+            <h:panelGroup  rendered="#{controladorPrefeitura.totalDeDenunciasNaCidade() > 0}">
                 <div class="resumo-meio">
                     <div class="col-md-12">
                         <div class="col-md-4">
@@ -345,7 +279,7 @@
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-md-12">
-                                                                    <span class="link-mapa-denuncia">#{ultimasDenuncia.enderecoDenuncia.rua} - #{ultimasDenuncia.enderecoDenuncia.numero}, #{ultimasDenuncia.enderecoDenuncia.bairro}</span>
+                                                                    <a href="/EGC/pesquisar/#{ultimasDenuncia.codigo}"><span class="link-mapa-denuncia">#{ultimasDenuncia.enderecoDenuncia.rua} - #{ultimasDenuncia.enderecoDenuncia.numero}, #{ultimasDenuncia.enderecoDenuncia.bairro}</span></a>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
@@ -368,11 +302,11 @@
                                     <div class="row">
                                         Últimas Denúncias Atendidas
                                     </div>
-                                    
+
                                     <h:panelGroup class="text-center" rendered="#{controladorPrefeitura.denunciasAtendidasEmCidade().size() == 0}">
                                         <label><h3 class="texto-100">Nenhuma denúncia atendida ate o momento.</h3></label>
                                     </h:panelGroup>
-                                    
+
                                     <c:forEach var="ultimasDenuncia" items="#{controladorPrefeitura.denunciasAtendidasEmCidade()}" id="id-denuncias">
                                         <div class="ud-denuncia">
 
@@ -383,7 +317,11 @@
                                                 <div class="col-md-11">
                                                     <div class="row">
                                                         <div class="col-md-7 rua-denuncia">
-                                                            <a href="/EGC/funcionario/denuncia/#{ultimasDenuncia.codigo}">#{ultimasDenuncia.tipoDaDenunciaFormatado}</a>
+
+                                                            <a href="/EGC/pesquisar/#{ultimasDenuncia.codigo}">#{ultimasDenuncia.tipoDaDenunciaFormatado}</a>
+                                                            <br/>
+                                                            <a href="/EGC/pesquisar/#{ultimasDenuncia.codigo}"><span class="link-mapa-denuncia">#{ultimasDenuncia.enderecoDenuncia.rua} - #{ultimasDenuncia.enderecoDenuncia.numero}, #{ultimasDenuncia.enderecoDenuncia.bairro}</span></a>
+
                                                         </div>
                                                         <div class="col-md-5 hora-denuncia">
                                                             #{ultimasDenuncia.informacaoDeAtendida.dataDenuncaFormatado}

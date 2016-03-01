@@ -35,7 +35,15 @@
                         </button>
                     </a>
                 </li>
+                <li>
 
+                    <h:form>
+                        <button class="btn-menu-lateral tooltips" title="Gerenciar Denuncias" rel="tooltip" data-placement="right">
+                            <h:commandButton action="#{controladorPrefeitura.paginaGerenciarDenuncias()}" class="btn-menu-lateral tooltips" image="/img/denunciasrealizadas.png"/>
+                        </button>
+                    </h:form>
+
+                </li>
                 <li>
                     <a href="/EGC/pesquisar">
                         <button class="btn-menu-lateral tooltips" title="Pesquisar" rel="tooltip" data-placement="right">
@@ -59,9 +67,9 @@
                     <p:poll interval="10" update="funcionarioOnline" listener="#{controladorPrefeitura.funcionariosQueEstaoOnline()}"/>
                     <h:panelGroup id="funcionarioOnline">
                         <div class="user-online">
-                            
+
                             <span class="label label-danger">Online (#{controladorPrefeitura.funcionariosOnline.size()})</span>
-                            
+
                         </div>
                         <c:forEach var="funcionario" items="#{controladorPrefeitura.funcionariosOnline}">
                             <li>

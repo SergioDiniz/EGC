@@ -7,6 +7,7 @@ package com.br.controle;
 
 import com.br.beans.Cidade;
 import com.br.beans.CidadePK;
+import com.br.beans.ConteudoInapropriado;
 import com.br.beans.Denuncia;
 import com.br.beans.EnderecoPrefeitura;
 import com.br.beans.EstadoDeAcompanhamento;
@@ -14,6 +15,7 @@ import com.br.beans.Funcionario;
 import com.br.beans.LideresPrefeitura;
 import com.br.beans.Prefeitura;
 import com.br.beans.Registro;
+import com.br.beans.TipoDeRegistro;
 import com.br.beans.Usuario;
 import static com.br.controle.ControladorAdmin.info;
 import static com.br.controle.ControladorAdmin.infoUsuarioInvalido;
@@ -29,11 +31,13 @@ import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ComponentSystemEvent;
 import javax.servlet.http.Part;
 import org.apache.commons.mail.EmailException;
 import org.primefaces.model.UploadedFile;
@@ -66,6 +70,16 @@ public class ControladorPrefeitura implements Serializable {
     private List<Funcionario> funcionariosOnline;
     private Funcionario funcionarioPerfil;
     private String emailRecuperarSenha;
+    private List<Denuncia> denunciaGerenciadas;
+    private Denuncia denunciaGerenciada;
+    private ConteudoInapropriado conteudoInapropriado;
+    
+    
+    private String codigoDenuncia;
+    private String filtroData;
+    private String filtroAjuda;
+    private String filtroQuery;
+    private String filtroTipo;
 
     @EJB
     private Fachada fachada;
@@ -86,6 +100,16 @@ public class ControladorPrefeitura implements Serializable {
         this.denunciaMaisRecentes = new ArrayList<>();
         this.funcionariosOnline = new ArrayList<>();
         this.emailRecuperarSenha = "";
+        this.denunciaGerenciadas = new ArrayList<>();
+        this.filtroData = "DATA_DESC";
+        this.filtroAjuda = "AJUDA_DESC";
+        this.filtroQuery = "";
+        this.filtroTipo = "";
+        this.emailRecuperarSenha = "";
+        this.codigoDenuncia = "";
+        this.denunciaGerenciada = new Denuncia();
+        this.conteudoInapropriado = new ConteudoInapropriado();
+
     }
 
     public void mostrapagina() throws IOException {
@@ -386,8 +410,8 @@ public class ControladorPrefeitura implements Serializable {
         this.denunciaMaisRecentes.addAll(fachada.denunciasMaisRecentesPorCidade(this.prefeitura.getCidade().getCidadePK().getNomeCidade(),
                 this.prefeitura.getCidade().getCidadePK().getSiglaEstado()));
     }
-    
-    public List<Denuncia> denunciasAtendidasEmCidade(){
+
+    public List<Denuncia> denunciasAtendidasEmCidade() {
         return fachada.denunciasAtendidasEmCidade(this.prefeitura.getCidade().getCidadePK().getNomeCidade(),
                 this.prefeitura.getCidade().getCidadePK().getSiglaEstado());
     }
@@ -417,28 +441,24 @@ public class ControladorPrefeitura implements Serializable {
         return "perfil-funcionario?faces-redirect=true";
     }
 
-    
-    
     //
     //
     //
- 
- 
     public void encontraCEP() {
         System.out.println("cep: " + this.prefeitura.getEnderecoPrefeitura().getCep());
         PesquisarCep cepWebService = new PesquisarCep(this.prefeitura.getEnderecoPrefeitura().getCep());
- 
+
         System.out.println("Resultado: " + cepWebService.getResultado());
-        
+
         if (cepWebService.getResultado() >= 1) {
-            
+
             this.cidadePK.setNomeCidade(cepWebService.getCidade());
             this.cidadePK.setSiglaEstado(cepWebService.getEstado());
-            
+
         } else {
             this.cidadePK.setNomeCidade("");
             this.cidadePK.setSiglaEstado("");
-            
+
             FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -447,16 +467,98 @@ public class ControladorPrefeitura implements Serializable {
         }
     }
 
-    
-    public Long totalDePrefeituras(){
+    public Long totalDePrefeituras() {
         return fachada.totalDePrefeitura();
     }
-    
-    public Long totalDePrefeiturasAtivas(){
+
+    public Long totalDePrefeiturasAtivas() {
         return fachada.totalDePrefeituraAtivas();
     }
-    
-    
+
+    public void setTodasDenunciasEmGerenciamento() {
+        this.denunciaGerenciadas = new ArrayList<>();
+        this.denunciaGerenciadas = fachada.pesquisarTodasDenunciasPorCidade(this.prefeitura.getCidade().getCidadePK().getNomeCidade(),
+                this.prefeitura.getCidade().getCidadePK().getSiglaEstado(), "data");
+    }
+
+    public String paginaGerenciarDenuncias() {
+        setTodasDenunciasEmGerenciamento();
+        this.filtroData = "DATA_DESC";
+        this.filtroAjuda = "AJUDA_DESC";
+        this.filtroQuery = "";
+        this.filtroTipo = "";
+        return "denuncias.jsf?faces-redirect=true";
+    }
+
+    public String gerenciarDenunciasFiltro(String ordem, String filtroQuery, String filtro) {
+
+        // setando ordem
+        if (ordem.compareToIgnoreCase("DATA") == 0) {
+            if (this.filtroData.compareToIgnoreCase("DATA_ASC") == 0) {
+                this.filtroData = "DATA_DESC";
+            } else {
+                this.filtroData = "DATA_ASC";
+            }
+            ordem = this.filtroData;
+
+        } else if (ordem.compareToIgnoreCase("AJUDA") == 0) {
+            if (this.filtroAjuda.compareToIgnoreCase("AJUDA_ASC") == 0) {
+                this.filtroAjuda = "AJUDA_DESC";
+            } else {
+                this.filtroAjuda = "AJUDA_ASC";
+            }
+            ordem = this.filtroAjuda;
+
+        }
+
+        this.filtroQuery = filtroQuery;
+        this.filtroTipo = filtro;
+
+        this.denunciaGerenciadas = new ArrayList<>();
+        this.denunciaGerenciadas = fachada.gerenciarDenunciasFiltro(this.prefeitura.getCidade().getCidadePK().getNomeCidade(), this.prefeitura.getCidade().getCidadePK().getSiglaEstado(),
+                ordem, this.filtroQuery, this.filtroTipo);
+
+        return null;
+
+    }
+
+    public long andamentoDasDenuncias() {
+        try {
+            return (totalDeDenunciasAtendidasNaCidade() * 100) / totalDeDenunciasNaCidade();
+        } catch (Exception e) {
+        }
+
+        return 0;
+    }
+
+    public void pesquisarDenuncia(ComponentSystemEvent event) {
+//        System.out.println("Codigo Denuncia: " + this.codigoDenuncia);
+        this.denunciaGerenciada = new Denuncia();
+        this.denunciaGerenciada = fachada.pesquisarDenunicaCodigo(this.codigoDenuncia);
+//        System.out.println("Descricao: " + this.denunciaGerenciada.getDescricao());
+
+    }
+
+    public String fazerReclamacaoEmDenuncia() {
+
+        //Salvando reclamação
+        fachada.setReclamarDenuncia(this.denunciaGerenciada, this.conteudoInapropriado);
+        this.conteudoInapropriado = new ConteudoInapropriado();
+
+        // Criando registro par agardar no historico
+        Registro registro = new Registro();
+        registro.setData(new Date());
+        this.denunciaGerenciada.setEstadoDeAcompanhamento(EstadoDeAcompanhamento.ATENDIDA);
+        registro.setDenuncia(this.denunciaGerenciada);
+        registro.setFuncionario(this.funcionario);
+        registro.setPrefeitura(fachada.pesquisarPrefeituraPorCidade(this.cidade.getCidadePK().getNomeCidade(), this.cidade.getCidadePK().getSiglaEstado()));
+        registro.setTipoDeRegistro(TipoDeRegistro.RECLAMACAO);
+
+        fachada.atualizar(registro);
+
+        return null;
+    }
+
     //
     //
     //
@@ -618,4 +720,70 @@ public class ControladorPrefeitura implements Serializable {
         this.emailRecuperarSenha = emailRecuperarSenha;
     }
 
+    public List<Denuncia> getDenunciaGerenciadas() {
+        return denunciaGerenciadas;
+    }
+
+    public void setDenunciaGerenciadas(List<Denuncia> denunciaGerenciadas) {
+        this.denunciaGerenciadas = denunciaGerenciadas;
+    }
+
+    public String getFiltroData() {
+        return filtroData;
+    }
+
+    public void setFiltroData(String filtroData) {
+        this.filtroData = filtroData;
+    }
+
+    public String getFiltroAjuda() {
+        return filtroAjuda;
+    }
+
+    public void setFiltroAjuda(String filtroAjuda) {
+        this.filtroAjuda = filtroAjuda;
+    }
+
+    public String getFiltroQuery() {
+        return filtroQuery;
+    }
+
+    public void setFiltroQuery(String filtroQuery) {
+        this.filtroQuery = filtroQuery;
+    }
+
+    public String getFiltroTipo() {
+        return filtroTipo;
+    }
+
+    public void setFiltroTipo(String filtroTipo) {
+        this.filtroTipo = filtroTipo;
+    }
+
+    public Denuncia getDenunciaGerenciada() {
+        return denunciaGerenciada;
+    }
+
+    public void setDenunciaGerenciada(Denuncia denunciaGerenciada) {
+        this.denunciaGerenciada = denunciaGerenciada;
+    }
+
+    public String getCodigoDenuncia() {
+        return codigoDenuncia;
+    }
+
+    public void setCodigoDenuncia(String codigoDenuncia) {
+        this.codigoDenuncia = codigoDenuncia;
+    }
+
+    public ConteudoInapropriado getConteudoInapropriado() {
+        return conteudoInapropriado;
+    }
+
+    public void setConteudoInapropriado(ConteudoInapropriado conteudoInapropriado) {
+        this.conteudoInapropriado = conteudoInapropriado;
+    }
+
+    
+    
 }
