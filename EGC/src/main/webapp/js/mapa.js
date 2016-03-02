@@ -3,13 +3,11 @@ var map;
 var marker;
 
 function initialize() {
-    var latlng = new google.maps.LatLng(-6.7227885, -38.641765599999985);
+    var latlng = new google.maps.LatLng(-6.8885567514929305, -38.55806422219848);
     var options = {
         zoom: 16,
         center: latlng,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
-        
-        
     };
 
     map = new google.maps.Map(document.getElementById("mapa"), options);
@@ -22,12 +20,16 @@ function initialize() {
     });
 
     marker.setPosition(latlng);
+
+
+
 }
 
 
 //if (navigator.geolocation) {
-//   navigator.geolocation.getCurrentPosition(function (position)
-//      { var ponto = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+//   navigator.geolocation.getCurrentPosition(function (position){ 
+//      var ponto = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+//      marker.setPosition(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
 //      map.setCenter(ponto);
 //      map.setZoom(16);
 //   });
@@ -39,11 +41,25 @@ function  posicaoAtual() {
         navigator.geolocation.getCurrentPosition(function (position) { // callback de sucesso
             // ajusta a posição do marker para a localização do usuário
             marker.setPosition(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
-            
-           
-            carregarNoMapa($(this).val());
 
-            
+            var ponto = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            map.setCenter(ponto);
+            map.setZoom(16);
+
+//            carregarNoMapa(position.val());
+
+
+            geocoder.geocode({'latLng': marker.getPosition()}, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[0]) {
+                        $('#txtEndereco').val(results[0].formatted_address);
+                        $('#txtLatitude').val(marker.getPosition().lat());
+                        $('#txtLongitude').val(marker.getPosition().lng());
+                    }
+                }
+            });
+
+
         },
                 function (error) { // callback de erro
                     alert('Erro ao obter localização!');
@@ -59,10 +75,32 @@ $(document).ready(function () {
 });
 
 
+function carregarNoMapa(endereco) {
+    console.log("entrou no carregar mapa");
+    geocoder.geocode({'address': endereco + ', Brasil', 'region': 'BR'}, function (results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            if (results[0]) {
+                var latitude = results[0].geometry.location.lat();
+                var longitude = results[0].geometry.location.lng();
+
+                $('#txtEndereco').val(results[0].formatted_address);
+                $('#txtLatitude').val(latitude);
+                $('#txtLongitude').val(longitude);
+
+                var location = new google.maps.LatLng(latitude, longitude);
+                marker.setPosition(location);
+                map.setCenter(location);
+                map.setZoom(16);
+            }
+        }
+    });
+}
+
 $(document).ready(function () {
 
 
     function carregarNoMapa(endereco) {
+        console.log("entrou no carregar mapa");
         geocoder.geocode({'address': endereco + ', Brasil', 'region': 'BR'}, function (results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
                 if (results[0]) {

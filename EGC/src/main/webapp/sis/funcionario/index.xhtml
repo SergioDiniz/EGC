@@ -380,7 +380,7 @@
                                     <div class="row">
                                         Últimas Denúncias Atendidas
                                     </div>
-                                    <h:panelGroup class="text-center" rendered="#{controladorFuncionario.denunciasAtendidasEmCidade() == 0}">
+                                    <h:panelGroup class="text-center" rendered="#{controladorFuncionario.denunciasAtendidasEmCidade().size() == 0}">
                                         <label><h3 class="texto-100">Nenhuma Denúncia no Município.</h3></label>
                                     </h:panelGroup>
                                     <c:forEach var="ultimasDenuncia" items="#{controladorFuncionario.denunciasAtendidasEmCidade()}" id="id-denuncias">

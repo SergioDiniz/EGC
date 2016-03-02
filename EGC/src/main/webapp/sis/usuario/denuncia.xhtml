@@ -29,19 +29,30 @@
             </div>
         </div>
 
-        
+
 
         <div class="tudo" style="margin-top: 50px;">
+
             <h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1">
                 <form jsf:id="form">
-                    
+
                     <div class="col-md-12">
 
                         <div class="row">
                             <div class="formulario-denuncia">
                                 <div class="form-group form-group-lg">
-                                    <label for="txtEndereco">Endereço:</label>
-                                    <input type="text" id="txtEndereco" jsf:id="txtEndereco" name="txtEndereco" class="form-control"  jsf:value="${controladorUsuario.endMapa}"/>
+                                    <div class="col-lg-10">
+                                        <div class="row">
+                                            <label for="txtEndereco">Endereço:</label>
+                                            <input type="text" id="txtEndereco" jsf:id="txtEndereco" name="txtEndereco" class="form-control"  jsf:value="${controladorUsuario.endMapa}"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="row">
+                                            <label for="txtEndereco">@</label><br/>
+                                            <button class="btn btn-default btn-lg" onclick="posicaoAtual()"><span class="glyphicon glyphicon-map-marker"></span></button>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div>
@@ -119,12 +130,21 @@
                         <input type="hidden" id="txtLongitude" name="txtLongitude" jsf:value="#{controladorUsuario.endLogitude}" />
 
                     </div>
-                    
+
                     <div class="area-mapa">
                         <div id="mapa" class="mapa-denuncia"></div>
                     </div>
                 </form>
             </h:form>
+
+            <div class="formulario-denuncia">
+                <div class="row">
+                    <br/><br/><br/><br/><br/><br/><br/><br/>
+                    
+                    <button class="btn btn-default btn-lg" onclick="posicaoAtual()"><span class="glyphicon glyphicon-map-marker"></span></button>
+                </div>
+            </div>
+
         </div>
     </h:body>
 
