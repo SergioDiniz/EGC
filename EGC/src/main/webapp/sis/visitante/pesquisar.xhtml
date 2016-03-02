@@ -26,7 +26,7 @@
                 <div>
                     <div class="mapa-fundo-visitante hidden-xs">
                         <h:form>
-                            <p:gmap id="gmap" center="-6.8885567514929305, -38.55806422219848" zoom="2" type="ROADMAP" model="#{controladorCidade.advancedModel}" style="width:100%;height:500px">
+                            <p:gmap id="gmap" center="#{controladorCidade.endLatitude},#{controladorCidade.endLogitude}" zoom="#{controladorCidade.endZoom}" type="ROADMAP" model="#{controladorCidade.advancedModel}" style="width:100%;height:500px">
 
                                 <p:ajax event="overlaySelect" listener="#{controladorCidade.onMarkerSelect}" />
 
@@ -34,7 +34,7 @@
                                     <p:outputPanel style="text-align: center; display: block; margin: auto">
 
                                         <img src="/EGC/sis/denuncias/#{controladorCidade.marker.data}" height="150"/> <br/>
-                                        <label>Leganda da foto</label>
+                                        <label>#{controladorCidade.marker.title}</label>
 
                                     </p:outputPanel>
                                 </p:gmapInfoWindow>
@@ -61,7 +61,10 @@
                                     <!--<button class="btn btn-default btn-lg btn-block" jsf:action="#{controladorCidade.pesquisarCidade()}">pesquisar</button>-->
                                 </div>
 
-                                <div class="hidden-xs area-mapa">
+                                <input type="hidden" id="txtLatitude" name="txtLatitude" jsf:value="#{controladorCidade.endLatitude}" />
+                                <input type="hidden" id="txtLongitude" name="txtLongitude" jsf:value="#{controladorCidade.endLogitude}" />
+
+                                <div class="hidden-xs ">
                                     <div id="mapa" class="mapa-denuncia"></div>
                                 </div>
 
@@ -625,7 +628,10 @@
                             }
                         }));
                     })
-                }
+                }, select: function (event, ui) {
+                    $("#txtLatitude").val(ui.item.latitude);
+                    $("#txtLongitude").val(ui.item.longitude);
+                },
             });
         });
 

@@ -57,6 +57,9 @@ public class ControladorCidade implements Serializable {
     //mapa pagina de pesquisa
     private MapModel advancedModel;
     private Marker marker;
+    private String endLatitude;
+    private String endLogitude;
+    private String endZoom;
 
     public ControladorCidade() {
         this.cidadePK = new CidadePK();
@@ -73,7 +76,10 @@ public class ControladorCidade implements Serializable {
         this.codigoPrefeitura = "";
         this.mensagemPrefeitura = new MensagemPrefeitura();
         this.advancedModel = new DefaultMapModel();
-        setarMarkerNoMapa();
+        this.endLatitude = "0";
+        this.endLogitude = "0";
+        this.endZoom = "2";
+//        setarMarkerNoMapa();
 
     }
 
@@ -157,23 +163,37 @@ public class ControladorCidade implements Serializable {
         informacoesGeraisMunicipio(emailPrefeitura, this.cidadePK.getNomeCidade(), this.cidadePK.getSiglaEstado());
 
         setarMarkerNoMapa();
-        
+
 //        FacesContext.getCurrentInstance().getExternalContext().redirect("/EGC/pesquisar");
         return "/sis/visitante/pesquisar.jsf?faces-redirect=true";
     }
 
     public void setarMarkerNoMapa() {
-        //Shared coordinates
-        LatLng coord1 = new LatLng(36.879466, 30.667648);
-        LatLng coord2 = new LatLng(36.883707, 30.689216);
-        LatLng coord3 = new LatLng(36.879703, 30.706707);
-        LatLng coord4 = new LatLng(36.885233, 30.702323);
-
-        //Icons and Data
-        advancedModel.addOverlay(new Marker(coord1, "Konyaalti", "1455792872487.jpg", "/EGC/img/marker-icon/marker-acessibilidade.png"));
-        advancedModel.addOverlay(new Marker(coord2, "Ataturk Parki", "1456672054483.jpg", "/EGC/img/marker-icon/marker-agua-esgoto.png"));
-        advancedModel.addOverlay(new Marker(coord4, "Kaleici", "1456877109885.gif", "/EGC/img/marker-icon/marker-agua-esgoto.png"));
-        advancedModel.addOverlay(new Marker(coord3, "Karaalioglu Parki", "karaalioglu.png", "http://maps.google.com/mapfiles/ms/micons/yellow-dot.png"));
+        
+        // mudando o zoom do mapa
+        this.endZoom = "15";
+        
+        
+        
+        
+        for (Denuncia denuncia : denunciasPesquisaVisitante) {
+            LatLng coord = new LatLng(Double.valueOf(denuncia.getEnderecoDenuncia().getLatitude()), Double.valueOf(denuncia.getEnderecoDenuncia().getLongitude()));
+            advancedModel.addOverlay(new Marker(coord, denuncia.getDescricao(), denuncia.getFoto(), "/EGC/img/marker-icon/marker-acessibilidade.png"));
+        }
+        
+        
+        
+//        //Shared coordinates
+//        LatLng coord1 = new LatLng(-6.8885567514929305, -38.55806422219848);
+//        LatLng coord2 = new LatLng(-6.723491733871978, -38.64107895449217);
+//        LatLng coord3 = new LatLng(36.879703, 30.706707);
+//        LatLng coord4 = new LatLng(36.885233, 30.702323);
+//
+//        //Icons and Data
+//        advancedModel.addOverlay(new Marker(coord1, "Konyaalti", "1455792872487.jpg", "/EGC/img/marker-icon/marker-acessibilidade.png"));
+//        advancedModel.addOverlay(new Marker(coord2, "Ataturk Parki", "1456672054483.jpg", "/EGC/img/marker-icon/marker-agua-esgoto.png"));
+//        advancedModel.addOverlay(new Marker(coord4, "Kaleici", "1456877109885.gif", "/EGC/img/marker-icon/marker-agua-esgoto.png"));
+//        advancedModel.addOverlay(new Marker(coord3, "Karaalioglu Parki", "karaalioglu.png", "/EGC/img/marker-icon/marker-acessibilidade.png"));
     }
 
     public long andamentoDasDenuncias() {
@@ -427,4 +447,29 @@ public class ControladorCidade implements Serializable {
         this.marker = marker;
     }
 
+    public String getEndLatitude() {
+        return endLatitude;
+    }
+
+    public void setEndLatitude(String endLatitude) {
+        this.endLatitude = endLatitude;
+    }
+
+    public String getEndLogitude() {
+        return endLogitude;
+    }
+
+    public void setEndLogitude(String endLogitude) {
+        this.endLogitude = endLogitude;
+    }
+
+    public String getEndZoom() {
+        return endZoom;
+    }
+
+    public void setEndZoom(String endZoom) {
+        this.endZoom = endZoom;
+    }
+
+    
 }

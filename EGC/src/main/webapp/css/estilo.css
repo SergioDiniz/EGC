@@ -2309,6 +2309,7 @@ html, body{
 
 .pagina-visitante .barra-pesquisa{
     margin-top: 20px;
+    margin-bottom: 350px;
     background-color: #fff;
     padding: 15px 10px 15px 10px;
     /*    border: 1px solid #d8d8d8;*/
@@ -2331,8 +2332,9 @@ html, body{
 }
 
 .pagina-visitante .resultado-pesquisa-visitante{
-    margin-top: 350px;
-
+    /*margin-top: 350px;*/
+    /*padding-top: 350px;*/
+    /*top: 1350px;*/
 }
 
 .pagina-visitante .visualisar-denuncia-individual{
@@ -2706,6 +2708,10 @@ html, body{
         padding: 10px 0 10px 0;
     }
 
+    .pagina-visitante .barra-pesquisa{
+        margin-bottom: 1em;
+    }
+    
     .pagina-visitante .resultado-pesquisa-visitante{
         margin-top: 0;
     }

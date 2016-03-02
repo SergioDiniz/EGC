@@ -45,7 +45,7 @@ function  posicaoAtual() {
             var ponto = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
             map.setCenter(ponto);
             map.setZoom(16);
-            
+
             // atualiza calor do campo e endereço
             geocoder.geocode({'latLng': marker.getPosition()}, function (results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
@@ -177,10 +177,6 @@ $(document).ready(function () {
             map.setZoom(16);
         },
     });
-
-
-
-
 });
 
 
