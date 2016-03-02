@@ -2327,7 +2327,7 @@ html, body{
     width: 100%;
     height: 500px;
     position: absolute;
-    z-index: -1;
+    z-index: 0;
 }
 
 .pagina-visitante .resultado-pesquisa-visitante{

@@ -25,7 +25,21 @@
             <div class="pagina-visitante">
                 <div>
                     <div class="mapa-fundo-visitante hidden-xs">
+                        <h:form>
+                            <p:gmap id="gmap" center="-6.8885567514929305, -38.55806422219848" zoom="2" type="ROADMAP" model="#{controladorCidade.advancedModel}" style="width:100%;height:500px">
 
+                                <p:ajax event="overlaySelect" listener="#{controladorCidade.onMarkerSelect}" />
+
+                                <p:gmapInfoWindow id="infoWindow">
+                                    <p:outputPanel style="text-align: center; display: block; margin: auto">
+
+                                        <img src="/EGC/sis/denuncias/#{controladorCidade.marker.data}" height="150"/> <br/>
+                                        <label>Leganda da foto</label>
+
+                                    </p:outputPanel>
+                                </p:gmapInfoWindow>
+                            </p:gmap>
+                        </h:form>
                     </div>
 
                 </div>

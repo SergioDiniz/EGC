@@ -22,6 +22,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
+import org.primefaces.event.map.OverlaySelectEvent;
+import org.primefaces.model.map.DefaultMapModel;
+import org.primefaces.model.map.LatLng;
+import org.primefaces.model.map.MapModel;
+import org.primefaces.model.map.Marker;
 
 /**
  *
@@ -49,6 +54,10 @@ public class ControladorCidade implements Serializable {
     private String codigoPrefeitura;
     private MensagemPrefeitura mensagemPrefeitura;
 
+    //mapa pagina de pesquisa
+    private MapModel advancedModel;
+    private Marker marker;
+
     public ControladorCidade() {
         this.cidadePK = new CidadePK();
         this.denunciasPesquisaVisitante = new ArrayList<>();
@@ -63,6 +72,9 @@ public class ControladorCidade implements Serializable {
         this.codigoDenuncia = "";
         this.codigoPrefeitura = "";
         this.mensagemPrefeitura = new MensagemPrefeitura();
+        this.advancedModel = new DefaultMapModel();
+        setarMarkerNoMapa();
+
     }
 
     public List<Registro> registrosDaCidade(String cidade, String estado) {
@@ -144,8 +156,24 @@ public class ControladorCidade implements Serializable {
         }
         informacoesGeraisMunicipio(emailPrefeitura, this.cidadePK.getNomeCidade(), this.cidadePK.getSiglaEstado());
 
+        setarMarkerNoMapa();
+        
 //        FacesContext.getCurrentInstance().getExternalContext().redirect("/EGC/pesquisar");
         return "/sis/visitante/pesquisar.jsf?faces-redirect=true";
+    }
+
+    public void setarMarkerNoMapa() {
+        //Shared coordinates
+        LatLng coord1 = new LatLng(36.879466, 30.667648);
+        LatLng coord2 = new LatLng(36.883707, 30.689216);
+        LatLng coord3 = new LatLng(36.879703, 30.706707);
+        LatLng coord4 = new LatLng(36.885233, 30.702323);
+
+        //Icons and Data
+        advancedModel.addOverlay(new Marker(coord1, "Konyaalti", "1455792872487.jpg", "/EGC/img/marker-icon/marker-acessibilidade.png"));
+        advancedModel.addOverlay(new Marker(coord2, "Ataturk Parki", "1456672054483.jpg", "/EGC/img/marker-icon/marker-agua-esgoto.png"));
+        advancedModel.addOverlay(new Marker(coord4, "Kaleici", "1456877109885.gif", "/EGC/img/marker-icon/marker-agua-esgoto.png"));
+        advancedModel.addOverlay(new Marker(coord3, "Karaalioglu Parki", "karaalioglu.png", "http://maps.google.com/mapfiles/ms/micons/yellow-dot.png"));
     }
 
     public long andamentoDasDenuncias() {
@@ -262,6 +290,11 @@ public class ControladorCidade implements Serializable {
         return fachada.mensagensDaPrefeitura(codigoPrefeitura);
     }
 
+    //mapa pagina de pesquisa
+    public void onMarkerSelect(OverlaySelectEvent event) {
+        marker = (Marker) event.getOverlay();
+    }
+
     //
     //
     // GETs and SETs
@@ -376,6 +409,22 @@ public class ControladorCidade implements Serializable {
 
     public void setMensagemPrefeitura(MensagemPrefeitura mensagemPrefeitura) {
         this.mensagemPrefeitura = mensagemPrefeitura;
+    }
+
+    public MapModel getAdvancedModel() {
+        return advancedModel;
+    }
+
+    public void setAdvancedModel(MapModel advancedModel) {
+        this.advancedModel = advancedModel;
+    }
+
+    public Marker getMarker() {
+        return marker;
+    }
+
+    public void setMarker(Marker marker) {
+        this.marker = marker;
     }
 
 }
