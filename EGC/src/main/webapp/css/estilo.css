@@ -1138,6 +1138,13 @@ html, body{
     /*border: 5px solid #dfdfdf;*/
 }
 
+.btn-posicaomapa{
+    position: absolute;
+    margin-top: 9px;
+    margin-left: 170px;
+    z-index: 9999;
+}
+
 .formulario-denuncia{
     margin-left: 77px;
     margin-top: 55px;
@@ -2806,6 +2813,13 @@ html, body{
 
     .msg-inicio h1{
         font-size: 1em;
+    }
+
+    .btn-posicaomapa{
+        position: absolute;
+        margin-top: 125px;
+        margin-left: 120px;
+        z-index: 9999;
     }
 
 }
