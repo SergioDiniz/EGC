@@ -95,11 +95,152 @@
                         </div>
                     </div>
                 </div>
-                
-                <div>
-                    1
+
+
+                <div class="resumo container">
+                    <div class="col-lg-12">
+                        <c:choose>
+                            <c:when test="${controladorAdmin.prefeiturasPendentes().size() > 0}">
+
+                                <div class="bg-formulario">
+
+                                    <div class="titulo-formulario">
+                                        Ultimas Solicitações Pendentes
+                                    </div>
+
+                                    <div class="tabela-formulario">
+
+                                        <h:form>
+                                            <h:dataTable value="#{controladorAdmin.prefeiturasPendentes()}" var="prefeitura" class="table table-hover table-solicitacao-prefeitura" columnClasses="cDescricao">
+
+                                                <h:column id="cDescricao">
+                                                    <f:facet name="header">
+                                                        <h:outputText value=""/>
+                                                    </f:facet>
+                                                    <img src="../prefeitura/brasao/#{prefeitura.foto}" style="width:40px; height: 40px; border-radius: 90px"/>
+                                                </h:column>
+
+                                                <h:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Nome"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{prefeitura.nome}" style="color: #1ca39c; font-weight: bold"/> <br/>
+                                                    <h:outputText value="#{prefeitura.email}"/>
+                                                </h:column>
+
+                                                <h:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="local"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{prefeitura.cidade.cidadePK.nomeCidade} - #{prefeitura.cidade.cidadePK.siglaEstado}"/>
+                                                </h:column>
+
+                                                <h:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Telefone"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{prefeitura.telefone}"/>
+                                                </h:column>
+
+                                                <h:column>
+                                                    <div align="center">
+                                                        <div class="btn-group">
+
+                                                            <h:commandButton value="Avaliar" class="btn btn-info" action="#{controladorAdmin.avaliarSolicitacao(prefeitura)}" />
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </h:column>
+                                            </h:dataTable>
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <label><h1 class="texto-100">Nenhuma solicitação pendente.</h1></label>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
                 </div>
-                
+
+
+                <div class="resumo">
+                    <div class="col-lg-4">
+
+                        <div>
+                            <div class="titulo-formulario">
+                                Últimas Denuncias com Reclamações
+                            </div>
+                        </div>
+
+                        <div class="lista-de-denuncias">
+
+                            <h:panelGroup rendered="#{controladorAdmin.denunciasComReclamacoes().size() == 0}">
+                                <label><h1 class="texto-100">Nenhum Registro.</h1></label>
+                            </h:panelGroup>
+
+                            <c:forEach items="#{controladorAdmin.denunciasComReclamacoes()}" var="denuncia" varStatus="index">
+                                <div class="col-lg-12">
+                                    <div class="denuncia-com-reclamacao">
+                                        <div class="topo" style="background-image: url(../denuncias/#{denuncia.foto}); background-size: 100%;">
+                                            <div class="nome-funcionario" >
+
+                                            </div>
+                                        </div>
+                                        <div class="foto">
+                                            <img src="../../img/icones-denuncia/#{denuncia.iconeDenunica}" style="width: 87px"/>
+                                        </div>
+                                        <div class="dados">
+
+                                            <div class="row">
+                                                <div class="col-md-offset-1 col-md-10">
+                                                    <div class="col-md-9">
+                                                        <b>Descrição: </b> <br/>
+                                                        #{denuncia.descricao}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-offset-1 col-md-10">
+                                                    <div class="col-md-12">
+                                                        <b>Cidade:</b>
+                                                        <div class="link-mapa-denuncia" style="padding: 0">
+                                                            #{denuncia.enderecoDenuncia.cidade} - #{denuncia.enderecoDenuncia.estado}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="rodape-info">
+                                            <div class="row">
+                                                <div class="col-md-4 hora-denuncia">
+                                                    #{denuncia.dataDenuncaFormatado}
+                                                </div>
+                                                <div class="col-md-4 numero-denuncias">
+                                                    Denúncias: #{controladorDenuncia.getReclamarDenuncia(denuncia)}
+                                                </div>
+                                                <div class="col-md-2 btn-opcoes">
+                                                    <div>
+                                                        <h:form>
+                                                            <h:commandButton action="#{controladorAdmin.selecionarDenunciaReclamacao(denuncia)}" class="btn-link" image="../../img/icon-configuracoes.png" />
+                                                        </h:form>
+                                                        <!--<button class="btn-link"><img src="../../img/icon-configuracoes.png"/></button>-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
 
         </div>
