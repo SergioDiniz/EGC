@@ -162,26 +162,39 @@ public class ControladorCidade implements Serializable {
         }
         informacoesGeraisMunicipio(emailPrefeitura, this.cidadePK.getNomeCidade(), this.cidadePK.getSiglaEstado());
 
-        setarMarkerNoMapa(this.denunciasPesquisaVisitante);
+        setarMarkerNoMapa();
 
 //        FacesContext.getCurrentInstance().getExternalContext().redirect("/EGC/pesquisar");
         return "/sis/visitante/pesquisar.jsf?faces-redirect=true";
     }
 
-    public void setarMarkerNoMapa(List<Denuncia> denuncias) {
+    public void setarMarkerNoMapa() {
 
         // mudando o zoom do mapa
         this.endZoom = "15";
 
+        List<Denuncia> denuncias = new ArrayList<>();
+        denuncias = fachada.denunciasNaoAtendidasEmCidade(this.cidadePK.getNomeCidade(), this.cidadePK.getSiglaEstado());
         
         for (Denuncia denuncia : denuncias) {
             LatLng coord = new LatLng(Double.valueOf(denuncia.getEnderecoDenuncia().getLatitude()), Double.valueOf(denuncia.getEnderecoDenuncia().getLongitude()));
-            advancedModel.addOverlay(new Marker(coord, denuncia.getDescricao(), denuncia.getFoto(), ("/EGC/img/marker-icon/" + denuncia.getIconeDenunica())));
+            Marker m = new Marker(coord, denuncia.getCodigo(), denuncia.getFoto(), ("/EGC/img/marker-icon/" + denuncia.getIconeDenunica()));
+            
+            if(!advancedModel.getMarkers().contains(m)){
+                advancedModel.addOverlay(m);
+            }
+            
+            
+            
         }
 
     }
 
     public long andamentoDasDenuncias() {
+        try {
+            return ((informacoesMunicipio.get(1) * 100) / informacoesMunicipio.get(0));
+        } catch (Exception e) {
+        }
         return 0;
     }
 

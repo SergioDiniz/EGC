@@ -480,6 +480,23 @@ public class DenunciaService implements DenunciaServiceIT {
         
     }
     
+    @Override
+    public List<Denuncia> denunciasNaoAtendidasEmCidade(String cidade, String estado){
+        
+        Query query = em.createQuery("SELECT d from Denuncia d JOIN d.enderecoDenuncia ed  WHERE ed.cidade = :cidade and ed.estado = :estado and d.estadoDeAcompanhamento = :atendida or d.estadoDeAcompanhamento = :trabalho " );
+        query.setParameter("cidade", cidade);
+        query.setParameter("estado", estado);
+        query.setParameter("atendida", EstadoDeAcompanhamento.valueOf("ATENDIDA"));
+        query.setParameter("trabalho", EstadoDeAcompanhamento.valueOf("EM_TRABALHO"));
+        List<Denuncia> d = query.getResultList();
+        
+        if(d.size() > 0){
+            return d;
+        }
+        
+        return new ArrayList<>();
+        
+    }
     
 
 }

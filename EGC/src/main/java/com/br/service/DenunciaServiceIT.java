@@ -61,4 +61,6 @@ public interface DenunciaServiceIT {
     
     public List<Denuncia> denunciasAtendidasEmCidade(String cidade, String estado);
     
+    public List<Denuncia> denunciasNaoAtendidasEmCidade(String cidade, String estado);
+    
 }
