@@ -44,19 +44,19 @@
                             <th>Atendidas</th>
                         </tr>
 
-                        <c:forEach varStatus="index" var="rua" items="#{controladorDenuncia.ruasDeUmaCidadeTipoDenunciaNumerosDeDenuncia(controladorPrefeitura.prefeitura.cidade.cidadePK.nomeCidade, controladorPrefeitura.prefeitura.cidade.cidadePK.siglaEstado)}">
+                        <c:forEach varStatus="index" var="rua" items="#{controladorDenuncia.ruasDeUmaCidadeTipoDenunciaNumerosDeDenuncia(controladorFuncionario.cidade.cidadePK.nomeCidade, controladorFuncionario.cidade.cidadePK.siglaEstado)}">
                             <tr>
                                 <td>#{index.count}</td>
                                 <td>#{rua.get(0)}</td>
                                 <td>#{rua.get(1)}</td>
                                 <td>#{rua.get(2)}</td>
-                                <td>#{controladorDenuncia.totalDeDenunciasAtendidasPorTipoERua(controladorPrefeitura.prefeitura.cidade.cidadePK.nomeCidade, controladorPrefeitura.prefeitura.cidade.cidadePK.siglaEstado, rua.get(0), rua.get(1))}</td>
+                                <td>#{controladorDenuncia.totalDeDenunciasAtendidasPorTipoERua(controladorFuncionario.cidade.cidadePK.nomeCidade, controladorFuncionario.cidade.cidadePK.siglaEstado, rua.get(0), rua.get(1))}</td>
                             </tr>
                         </c:forEach>
                         <tr>
                             <th colspan="3">Total</th>
-                            <th>#{controladorCidade.totalDeDenunciasNaCidade(controladorPrefeitura.prefeitura.cidade.cidadePK.nomeCidade, controladorPrefeitura.prefeitura.cidade.cidadePK.siglaEstado)}</th>
-                            <th>#{controladorCidade.totalDeDenunciasAtendidasNaCidade(controladorPrefeitura.prefeitura.cidade.cidadePK.nomeCidade, controladorPrefeitura.prefeitura.cidade.cidadePK.siglaEstado)}</th>
+                            <th>#{controladorCidade.totalDeDenunciasNaCidade(controladorFuncionario.cidade.cidadePK.nomeCidade, controladorFuncionario.cidade.cidadePK.siglaEstado)}</th>
+                            <th>#{controladorCidade.totalDeDenunciasAtendidasNaCidade(controladorFuncionario.cidade.cidadePK.nomeCidade, controladorFuncionario.cidade.cidadePK.siglaEstado)}</th>
                         </tr>
                     </table>
                 </div>
