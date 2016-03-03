@@ -162,38 +162,23 @@ public class ControladorCidade implements Serializable {
         }
         informacoesGeraisMunicipio(emailPrefeitura, this.cidadePK.getNomeCidade(), this.cidadePK.getSiglaEstado());
 
-        setarMarkerNoMapa();
+        setarMarkerNoMapa(this.denunciasPesquisaVisitante);
 
 //        FacesContext.getCurrentInstance().getExternalContext().redirect("/EGC/pesquisar");
         return "/sis/visitante/pesquisar.jsf?faces-redirect=true";
     }
 
-    public void setarMarkerNoMapa() {
-        
+    public void setarMarkerNoMapa(List<Denuncia> denuncias) {
+
         // mudando o zoom do mapa
         this.endZoom = "15";
+
         
-        
-        
-        
-        for (Denuncia denuncia : denunciasPesquisaVisitante) {
+        for (Denuncia denuncia : denuncias) {
             LatLng coord = new LatLng(Double.valueOf(denuncia.getEnderecoDenuncia().getLatitude()), Double.valueOf(denuncia.getEnderecoDenuncia().getLongitude()));
-            advancedModel.addOverlay(new Marker(coord, denuncia.getDescricao(), denuncia.getFoto(), "/EGC/img/marker-icon/marker-acessibilidade.png"));
+            advancedModel.addOverlay(new Marker(coord, denuncia.getDescricao(), denuncia.getFoto(), ("/EGC/img/marker-icon/" + denuncia.getIconeDenunica())));
         }
-        
-        
-        
-//        //Shared coordinates
-//        LatLng coord1 = new LatLng(-6.8885567514929305, -38.55806422219848);
-//        LatLng coord2 = new LatLng(-6.723491733871978, -38.64107895449217);
-//        LatLng coord3 = new LatLng(36.879703, 30.706707);
-//        LatLng coord4 = new LatLng(36.885233, 30.702323);
-//
-//        //Icons and Data
-//        advancedModel.addOverlay(new Marker(coord1, "Konyaalti", "1455792872487.jpg", "/EGC/img/marker-icon/marker-acessibilidade.png"));
-//        advancedModel.addOverlay(new Marker(coord2, "Ataturk Parki", "1456672054483.jpg", "/EGC/img/marker-icon/marker-agua-esgoto.png"));
-//        advancedModel.addOverlay(new Marker(coord4, "Kaleici", "1456877109885.gif", "/EGC/img/marker-icon/marker-agua-esgoto.png"));
-//        advancedModel.addOverlay(new Marker(coord3, "Karaalioglu Parki", "karaalioglu.png", "/EGC/img/marker-icon/marker-acessibilidade.png"));
+
     }
 
     public long andamentoDasDenuncias() {
@@ -471,5 +456,4 @@ public class ControladorCidade implements Serializable {
         this.endZoom = endZoom;
     }
 
-    
 }
