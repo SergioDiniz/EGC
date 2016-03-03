@@ -243,10 +243,28 @@ public class ControladorUsuario implements Serializable {
 
     public String pesquisarCidadeFiltro() {
         this.feedDenuncias.clear();
-        String cidadeEstado[] = this.strPesquisarCidadeFiltro.split(" - ");
+        
+//        String cidadeEstado[] = this.strPesquisarCidadeFiltro.split(" - ");
+//        this.cidadeDenuncia = cidadeEstado[0];
+//        this.ufDenuncia = cidadeEstado[1];
+        
+        // pegando informações de denuncias
+        String end[] = this.strPesquisarCidadeFiltro.split(", ");
 
-        this.cidadeDenuncia = cidadeEstado[0];
-        this.ufDenuncia = cidadeEstado[1];
+        if (end.length == 3) {
+            String cs[] = end[1].split(" - ");
+            this.cidadeDenuncia = cs[0];
+            this.ufDenuncia = cs[1];
+        } else if (end.length == 1) {
+            String cs[] = end[0].split(" - ");
+            if (cs.length == 2) {
+                this.cidadeDenuncia = cs[0];
+                this.ufDenuncia = cs[1];
+            } else {
+                this.cidadeDenuncia = "";
+                this.ufDenuncia = "";
+            }
+        }
 
         this.strPesquisarCidadeFiltro = "";
         this.ordemDenuncia = "data";
@@ -532,8 +550,8 @@ public class ControladorUsuario implements Serializable {
         return "";
 
     }
-    
-    public Long totalDeUsuarios(){
+
+    public Long totalDeUsuarios() {
         return fachada.totalDeUsuarios();
     }
 

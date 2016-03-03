@@ -14,7 +14,7 @@
 
 
 
-        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA7--w4nokUUqyxvIeuDh37KaIcLivbQHs"></script>
 
         <title>EGC - Usuário</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
@@ -68,8 +68,11 @@
 
                     <div class="barra-pesquisa-usuario">         
                         <h:form acceptcharset="ISO-8859-1">
-                            <h:inputText class="form-control input-lg" value="#{controladorUsuario.strPesquisarCidadeFiltro}" pt:placeholder="Pesquisar Cidade"/>
-                            <h:commandButton value="teste" class="hidden" action="#{controladorUsuario.pesquisarCidadeFiltro()}"/>
+                            <form jsf:id="formPesquisa">
+                                <input type="text" placeholder="Pesquisar Cidade" id="txtEndereco" jsf:id="txtEndereco" name="txtEndereco" class="form-control input-lg"  jsf:value="${controladorUsuario.strPesquisarCidadeFiltro}"/>
+                                <!--<h:inputText class="form-control input-lg" value="#{controladorUsuario.strPesquisarCidadeFiltro}" pt:placeholder="Pesquisar Cidade"/>-->
+                                <h:commandButton value="teste" class="hidden" action="#{controladorUsuario.pesquisarCidadeFiltro()}"/>
+                            </form>
                         </h:form>
                     </div>
                 </div>
@@ -280,14 +283,14 @@
 
             <div class="container">
 
-                
+
 
 
                 <div class="conteudo feed-usuario">   
 
                     <div class="row">
                         <div class="col-md-offset-2 col-md-6">
-                            
+
                             <h:panelGroup rendered="#{controladorUsuario.feedDenuncias.size() == 0}">
                                 <label><h1 class="texto-100">Nenhum Denúncia</h1></label>
                             </h:panelGroup>
@@ -618,6 +621,49 @@
     <script>
         $('.tooltips').tooltip('hide')
     </script>
+
+    <script type="text/javascript">
+
+        var geocoder;
+        var marker;
+
+        function initialize() {
+            geocoder = new google.maps.Geocoder();
+            marker = new google.maps.Marker({
+                draggable: true,
+            });
+        }
+
+
+        $(document).ready(function () {
+            initialize();
+        });
+
+
+        $(document).ready(function () {
+            $("#txtEndereco").autocomplete({
+                source: function (request, response) {
+                    geocoder.geocode({'address': request.term + ', Brasil', 'region': 'BR'}, function (results, status) {
+                        response($.map(results, function (item) {
+                            return {
+                                label: item.formatted_address,
+                                value: item.formatted_address,
+                                latitude: item.geometry.location.lat(),
+                                longitude: item.geometry.location.lng()
+                            }
+                        }));
+                    })
+                }, select: function (event, ui) {
+                    $("#txtLatitude").val(ui.item.latitude);
+                    $("#txtLongitude").val(ui.item.longitude);
+                },
+            });
+        });
+
+
+    </script>
+    <script src="/EGC/js/jquery-ui.custom.min.js" type="text/javascript"/>
+
 </html>
 
 
