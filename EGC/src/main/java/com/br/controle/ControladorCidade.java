@@ -313,6 +313,15 @@ public class ControladorCidade implements Serializable {
         marker = (Marker) event.getOverlay();
     }
 
+    public long totalDeDenunciasNaCidade(String cidade, String estado){
+        return fachada.totalDeDenunciasNaCidade(cidade, estado);
+    }
+    
+    public long totalDeDenunciasAtendidasNaCidade(String cidade, String estado){
+        return fachada.totalDeDenunciasAtendidasNaCidade(cidade, estado);
+    }
+    
+    
     //
     //
     // GETs and SETs

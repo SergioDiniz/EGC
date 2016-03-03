@@ -16,6 +16,7 @@ import com.br.beans.TipoDeDenuncia;
 import com.br.beans.Usuario;
 import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
@@ -498,5 +499,60 @@ public class DenunciaService implements DenunciaServiceIT {
         
     }
     
+    @Override
+    public List<List> ruasDeUmaCidadeTipoDenunciaNumerosDeDenuncia(String cidade, String estado){
+        System.out.println("Cidade: " + cidade);
+        System.out.println("Estado: " + estado);
+        //Query query = em.createQuery("SELECT d.enderecoDenuncia.rua, COUNT(d.enderecoDenuncia.rua) FROM Cidade c JOIN c.denuncias d WHERE c.CidadePK.nomeCidade = :cidade and c.CidadePK.siglaEstado = :estado GROUP BY d.enderecoDenuncia.rua ORDER BY d.enderecoDenuncia.rua ASC");
+        Query query = em.createQuery("SELECT ed.rua, d.tipoDeDenuncia, COUNT(d.tipoDeDenuncia) FROM Cidade c JOIN c.denuncias d JOIN d.enderecoDenuncia ed WHERE c.CidadePK.nomeCidade = :cidade and c.CidadePK.siglaEstado = :estado GROUP BY ed.rua, d.tipoDeDenuncia ORDER BY ed.rua");
+        query.setParameter("cidade", cidade);
+        query.setParameter("estado", estado);
+        
+        List resultado = query.getResultList();
+        
+        List<List> ruas = new ArrayList<>();
+        Iterator i = resultado.iterator();
+        
+        while(i.hasNext()){
+            Object[] r = (Object[]) i.next();
+            
+            List l = new ArrayList();
+            l.add(r[0]);
+            String tipo = (String) r[1].toString();
+            l.add(tipo.replaceAll("_", " "));
+            l.add(r[2]);
+            
+            
+            ruas.add(l);
+            
+        }
+        
+        
+        if (ruas.size() > 0){
+            return ruas;
+        }
+        
+        return new ArrayList<>();
+        
+    }
+    
+    
+    public Long totalDeDenunciasAtendidasPorTipoERua(String cidade, String estado, String rua, String tipoDeDenuncia) {
+        Query query = em.createQuery("SELECT COUNT(d.tipoDeDenuncia) FROM Cidade c JOIN c.denuncias d JOIN d.enderecoDenuncia ed WHERE c.CidadePK.nomeCidade = :cidade AND c.CidadePK.siglaEstado = :estado AND ed.rua = :rua and d.tipoDeDenuncia = :tipo and d.estadoDeAcompanhamento = :atendida");
+        query.setParameter("cidade", cidade);
+        query.setParameter("estado", estado);
+        query.setParameter("rua", rua);
+        
+        String tipo = tipoDeDenuncia.replaceAll(" ", "_");
+        query.setParameter("tipo", TipoDeDenuncia.valueOf(tipo));
+        
+        query.setParameter("atendida", EstadoDeAcompanhamento.valueOf("ATENDIDA"));
+        
+        
+        List<Long> d = query.getResultList();
 
+        return d.get(0);
+    }
+    
+    
 }

@@ -150,6 +150,11 @@ html, body{
     margin-left: -5px;
 }
 
+.btn-menu-lateral span{
+    font-size: 26px;
+    color: #777;
+}
+
 .btn-menu-lateral .foto{
     width: 40px;
     height: 40px;

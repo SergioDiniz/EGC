@@ -104,6 +104,15 @@ public class ControladorDenuncia implements Serializable {
     }
     
     
+    public List<List> ruasDeUmaCidadeTipoDenunciaNumerosDeDenuncia(String cidade, String estado){
+        return fachada.ruasDeUmaCidadeTipoDenunciaNumerosDeDenuncia(cidade, estado);
+    }
+    
+    
+    public Long totalDeDenunciasAtendidasPorTipoERua(String cidade, String estado, String rua, String tipoDeDenuncia) {
+        return fachada.totalDeDenunciasAtendidasPorTipoERua(cidade, estado, rua, tipoDeDenuncia);
+    }
+    
 //
 //
 //

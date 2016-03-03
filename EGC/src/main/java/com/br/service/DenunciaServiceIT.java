@@ -63,4 +63,7 @@ public interface DenunciaServiceIT {
     
     public List<Denuncia> denunciasNaoAtendidasEmCidade(String cidade, String estado);
     
+    public List<List> ruasDeUmaCidadeTipoDenunciaNumerosDeDenuncia(String cidade, String estado);
+    
+    public Long totalDeDenunciasAtendidasPorTipoERua(String cidade, String estado, String rua, String tipoDeDenuncia);
 }
