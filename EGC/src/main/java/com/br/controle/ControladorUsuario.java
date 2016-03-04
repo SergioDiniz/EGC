@@ -7,6 +7,7 @@ package com.br.controle;
 
 import com.br.beans.*;
 import com.br.fachada.Fachada;
+import com.br.service.PesquisarCep;
 import com.sun.webkit.Timer;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -52,6 +53,7 @@ public class ControladorUsuario implements Serializable {
     private List<Denuncia> feedDenuncias;
     private boolean usuarioAtivo;
     private String emailRecuperarSenha;
+    private String cepEndereco;
 
     @EJB
     private Fachada fachada;
@@ -73,6 +75,7 @@ public class ControladorUsuario implements Serializable {
         this.feedDenuncias = new ArrayList<>();
         this.usuarioAtivo = false;
         this.emailRecuperarSenha = "";
+        this.cepEndereco = "";
     }
 
     public String cadastro() {
@@ -243,11 +246,10 @@ public class ControladorUsuario implements Serializable {
 
     public String pesquisarCidadeFiltro() {
         this.feedDenuncias.clear();
-        
+
 //        String cidadeEstado[] = this.strPesquisarCidadeFiltro.split(" - ");
 //        this.cidadeDenuncia = cidadeEstado[0];
 //        this.ufDenuncia = cidadeEstado[1];
-        
         // pegando informações de denuncias
         String end[] = this.strPesquisarCidadeFiltro.split(", ");
 
@@ -555,6 +557,29 @@ public class ControladorUsuario implements Serializable {
         return fachada.totalDeUsuarios();
     }
 
+    public void encontraCEP() {
+        
+        PesquisarCep cepWebService = new PesquisarCep(this.cepEndereco);
+
+        System.out.println("Resultado: " + cepWebService.getResultado());
+
+        if (cepWebService.getResultado() >= 1) {
+            this.usuario.getEndereco().setCidade(cepWebService.getCidade());
+            this.usuario.getEndereco().setEstado(cepWebService.getEstado());
+
+        } else {
+            this.usuario.getEndereco().setCidade("");
+            this.usuario.getEndereco().setEstado("");
+
+
+            FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "Erro!",
+                            "Cep Não encontrado."));
+        }
+    }
+
 //    
 //
 //
@@ -706,6 +731,14 @@ public class ControladorUsuario implements Serializable {
 
     public void setEmailRecuperarSenha(String emailRecuperarSenha) {
         this.emailRecuperarSenha = emailRecuperarSenha;
+    }
+
+    public String getCepEndereco() {
+        return cepEndereco;
+    }
+
+    public void setCepEndereco(String cepEndereco) {
+        this.cepEndereco = cepEndereco;
     }
 
 }

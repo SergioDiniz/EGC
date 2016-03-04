@@ -446,7 +446,7 @@ public class ControladorPrefeitura implements Serializable {
     //
     //
     public void encontraCEP() {
-        System.out.println("cep: " + this.prefeitura.getEnderecoPrefeitura().getCep());
+        
         PesquisarCep cepWebService = new PesquisarCep(this.prefeitura.getEnderecoPrefeitura().getCep());
 
         System.out.println("Resultado: " + cepWebService.getResultado());

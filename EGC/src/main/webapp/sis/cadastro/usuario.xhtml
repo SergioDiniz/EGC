@@ -4,76 +4,102 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>EGC - Cadastre-se</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
         <meta name="theme-color" content="#3498db"></meta>
     </h:head>
     <h:body>
-        
-        
+
+
         <div id="menu">
             <ui:include src="../../menu.xhtml"/>
         </div>
-        
+
         <div class="container">
             <div>   
                 <div class="cadastro">
-                
-                
-                <div class="row">
-                    <div class="col-md-offset-3 col-md-6">
-                        <div align="center">
-                            <img src="../../img/icon usuario.png" alt="Cadastro Usuario" />
-                            <h2>Participe hoje do EGC!</h2>
+
+
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-6">
+                            <div align="center">
+                                <img src="../../img/icon usuario.png" alt="Cadastro Usuario" />
+                                <h2>Participe hoje do EGC!</h2>
+                            </div>
+                            <br/>
                         </div>
-                        <br/>
                     </div>
-                </div>
-                <h:form acceptcharset="ISO-8859-1">    
-                <div class="row">
-                    <div class="col-md-offset-3 col-md-6">
-                        <h4>Nickname:</h4>
-                        <h:inputText value="#{controladorUsuario.usuario.nickname}" id="nickname" required="true" pt:placeholder="nickname" class="form-control input-lg"/>
+
+                    <div class="row">
+                        <h:form id="frmBusca2">
+                            <h:panelGroup id="pnCEP2">
+                                <div class="col-md-offset-3 col-md-4">
+                                    <h4>CEP:</h4>
+                                    <h:inputText value="#{controladorUsuario.cepEndereco}" id="cep" required="true" pt:placeholder="CEP" class="form-control input-lg"/>
+                                </div>
+                                <div class="col-md-2">
+                                    <h4>Pesquisar:</h4>
+                                    <p:commandButton styleClass="btn btn-lg btn-default btn-block btn-pesquisa-cep" value="Pesquisar" action="#{controladorUsuario.encontraCEP}" update="frmResultado"/>
+                                </div>
+
+                            </h:panelGroup>
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-6">
+                                    <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                                </div>
+                            </div>
+                        </h:form>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-offset-3 col-md-6">
-                        <h4>Email</h4>
-                        <h:inputText value="#{controladorUsuario.usuario.email}" id="email" required="true" pt:placeholder="email" class="form-control input-lg"/>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-offset-3 col-md-6">
-                        <h4>Senha</h4>
-                        <h:inputSecret value="#{controladorUsuario.usuario.senha}" id="senha" required="true" pt:placeholder="senha" class="form-control input-lg"/>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-offset-3 col-md-4">
-                        <h4>Cidade:</h4>
-                        <h:inputText value="#{controladorUsuario.usuario.endereco.cidade}" id="cidade" required="true" pt:placeholder="cidade" class="form-control input-lg"/>
-                    </div>
-                    <div class="col-md-2">
-                        <h4>Estado:</h4>
-                        <h:inputText value="#{controladorUsuario.usuario.endereco.estado}" id="estado" required="true" pt:placeholder="estado" class="form-control input-lg"/>
-                    </div>
-                </div>  
-                <br/>    
-                <div class="row">
-                    <div class="col-md-offset-3 col-md-6">
-                        <h:commandButton class="btn btn-primary btn-lg" value="Cadastrar" action="#{controladorUsuario.cadastro()}"/>
-                    </div>
-                </div>    
-                </h:form> 
+                    <br/> 
+                    <h:form acceptcharset="ISO-8859-1" id="frmResultado">  
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-4">
+                                <h4>Cidade:</h4>
+                                <h:inputText disabled="true" value="#{controladorUsuario.usuario.endereco.cidade}" id="cidade" required="true" pt:placeholder="cidade" class="form-control input-lg"/>
+                            </div>
+                            <div class="col-md-2">
+                                <h4>Estado:</h4>
+                                <h:inputText disabled="true" value="#{controladorUsuario.usuario.endereco.estado}" id="estado" required="true" pt:placeholder="estado" class="form-control input-lg"/>
+                            </div>
+                        </div>  
+                        <br/> 
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-6">
+                                <h4>Nickname:</h4>
+                                <h:inputText value="#{controladorUsuario.usuario.nickname}" id="nickname" required="true" pt:placeholder="nickname" class="form-control input-lg"/>
+                            </div>
+                        </div>
+                        <br/> 
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-6">
+                                <h4>Email</h4>
+                                <h:inputText value="#{controladorUsuario.usuario.email}" id="email" required="true" pt:placeholder="email" class="form-control input-lg"/>
+                            </div>
+                        </div>
+                        <br/> 
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-6">
+                                <h4>Senha</h4>
+                                <h:inputSecret value="#{controladorUsuario.usuario.senha}" id="senha" required="true" pt:placeholder="senha" class="form-control input-lg"/>
+                            </div>
+                        </div>
+                        <br/> 
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-6">
+                                <h:commandButton class="btn btn-primary btn-lg" value="Cadastrar" action="#{controladorUsuario.cadastro()}"/>
+                            </div>
+                        </div>    
+                    </h:form> 
                 </div>
             </div>
-            
+
             <br/><br/>
-            
+
         </div>
-        
+
     </h:body>
 </html>
 
