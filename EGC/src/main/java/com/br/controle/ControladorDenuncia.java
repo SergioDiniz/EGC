@@ -7,6 +7,7 @@ package com.br.controle;
 
 import com.br.beans.ConteudoInapropriado;
 import com.br.beans.Denuncia;
+import com.br.beans.MensagemPrefeitura;
 import com.br.beans.Registro;
 import com.br.fachada.Fachada;
 import java.io.IOException;
@@ -112,6 +113,11 @@ public class ControladorDenuncia implements Serializable {
     public Long totalDeDenunciasAtendidasPorTipoERua(String cidade, String estado, String rua, String tipoDeDenuncia) {
         return fachada.totalDeDenunciasAtendidasPorTipoERua(cidade, estado, rua, tipoDeDenuncia);
     }
+    
+    public List<MensagemPrefeitura> denunciasPorPrefeituraLimitado(String codigo, int limite){
+        return fachada.denunciasPorPrefeituraLimitado(codigo, limite);
+    }
+    
     
 //
 //

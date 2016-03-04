@@ -402,6 +402,10 @@ public class Fachada implements Serializable {
     public Long totalDeDenunciasAtendidasPorTipoERua(String cidade, String estado, String rua, String tipoDeDenuncia) {
         return ds.totalDeDenunciasAtendidasPorTipoERua(cidade, estado, rua, tipoDeDenuncia);
     }
+    
+    public List<MensagemPrefeitura> denunciasPorPrefeituraLimitado(String codigo, int limite){
+        return ds.denunciasPorPrefeituraLimitado(codigo, limite);
+    }
 
     // FIM DenunciaServices
     //

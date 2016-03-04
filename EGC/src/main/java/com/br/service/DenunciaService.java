@@ -11,6 +11,8 @@ import com.br.beans.EnderecoDenuncia;
 import com.br.beans.EstadoDeAcompanhamento;
 import com.br.beans.Funcionario;
 import com.br.beans.InformacaoDeAtendida;
+import com.br.beans.MensagemPrefeitura;
+import com.br.beans.Prefeitura;
 import com.br.beans.Registro;
 import com.br.beans.TipoDeDenuncia;
 import com.br.beans.Usuario;
@@ -552,6 +554,23 @@ public class DenunciaService implements DenunciaServiceIT {
         List<Long> d = query.getResultList();
 
         return d.get(0);
+    }
+    
+    @Override
+    public List<MensagemPrefeitura> denunciasPorPrefeituraLimitado(String codigo, int limite){
+        
+        Query query = em.createQuery("SELECT m from Prefeitura p JOIN p.mensagensPrefeitura m WHERE p.codigo = :codigo ORDER BY m.dataMensagem DESC");
+        query.setParameter("codigo", codigo);
+        query.setMaxResults(4);
+        
+        List<MensagemPrefeitura> d = query.getResultList();
+        
+        if(d.size() > 0){
+            return d;
+        }
+        
+        
+        return new ArrayList<>();
     }
     
     

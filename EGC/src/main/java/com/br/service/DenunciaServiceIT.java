@@ -10,6 +10,8 @@ import com.br.beans.Denuncia;
 import com.br.beans.EnderecoDenuncia;
 import com.br.beans.Funcionario;
 import com.br.beans.InformacaoDeAtendida;
+import com.br.beans.MensagemPrefeitura;
+import com.br.beans.Prefeitura;
 import com.br.beans.Registro;
 import com.br.beans.TipoDeDenuncia;
 import com.br.beans.Usuario;
@@ -66,4 +68,7 @@ public interface DenunciaServiceIT {
     public List<List> ruasDeUmaCidadeTipoDenunciaNumerosDeDenuncia(String cidade, String estado);
     
     public Long totalDeDenunciasAtendidasPorTipoERua(String cidade, String estado, String rua, String tipoDeDenuncia);
+    
+    public List<MensagemPrefeitura> denunciasPorPrefeituraLimitado(String codigo, int limite);
+    
 }

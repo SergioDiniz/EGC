@@ -348,45 +348,38 @@
 
                                                         <!-- Wrapper for slides -->
                                                         <div class="carousel-inner" role="listbox">
-                                                            <div class="item active">
-                                                                <img style="height: 220px;"/>
-                                                                <div class="carousel-caption">
-                                                                    <img src="../../img/icon-usuario-mensagem.png"/> <br/><br/>
-                                                                    Donec vestibulum quam eget neque vestibulum  Donec 
-                                                                    vestibulum quam eget neque  vestibulum  Donec vestibulum 
-                                                                    quam eget neque vestibulum
-                                                                </div>
-                                                            </div>
 
-                                                            <div class="item">
-                                                                <img style="height: 220px;"/>
-                                                                <div class="carousel-caption">
-                                                                    <img src="../../img/icon-usuario-mensagem.png"/> <br/><br/>
-                                                                    Donec vestibulum quam eget neque vestibulum  Donec 
-                                                                    vestibulum quam eget neque  vestibulum  Donec vestibulum 
-                                                                    quam eget neque vestibulum
-                                                                </div>
-                                                            </div>
 
-                                                            <div class="item">
-                                                                <img style="height: 220px;"/>
-                                                                <div class="carousel-caption">
-                                                                    <img src="../../img/icon-usuario-mensagem.png"/> <br/><br/>
-                                                                    Donec vestibulum quam eget neque vestibulum  Donec 
-                                                                    vestibulum quam eget neque  vestibulum  Donec vestibulum 
-                                                                    quam eget neque vestibulum
-                                                                </div>
-                                                            </div>
+                                                            <c:forEach varStatus="index" var="mensagem" items="#{controladorDenuncia.denunciasPorPrefeituraLimitado(controladorPrefeitura.prefeitura.codigo, 4)}">
 
-                                                            <div class="item">
-                                                                <img style="height: 220px;"/>
-                                                                <div class="carousel-caption">
-                                                                    <img src="../../img/icon-usuario-mensagem.png"/> <br/><br/>
-                                                                    Donec vestibulum quam eget neque vestibulum  Donec 
-                                                                    vestibulum quam eget neque  vestibulum  Donec vestibulum 
-                                                                    quam eget neque vestibulum
-                                                                </div>
-                                                            </div>
+
+                                                                <c:choose>
+                                                                    <c:when test="#{index.count == 1}">
+                                                                        <div class="item active">
+                                                                            <img style="height: 220px;"/>
+                                                                            <div class="carousel-caption">
+                                                                                <img src="../../img/icon-usuario-mensagem.png"/> <br/><br/>
+                                                                                #{mensagem.mensagem} <br/>
+                                                                                #{mensagem.dataMensagemFormatado}
+                                                                            </div>
+                                                                        </div>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <div class="item">
+                                                                            <img style="height: 220px;"/>
+                                                                            <div class="carousel-caption">
+                                                                                <img src="../../img/icon-usuario-mensagem.png"/> <br/><br/>
+                                                                                #{mensagem.mensagem} <br/>
+                                                                                #{mensagem.dataMensagemFormatado}
+                                                                            </div>
+                                                                        </div>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+
+                                                            </c:forEach>
+
+
+
                                                         </div>
 
                                                         <!-- Left and right controls -->
