@@ -574,34 +574,6 @@ public class ControladorPrefeitura implements Serializable {
         fachada.excluirMensagemEmPrefeitura(mensagemPrefeitura, this.prefeitura);
         return null;
     }
-
-    
-    private void chart(){
-        LineChartSeries series1 = new LineChartSeries();
-        series1.setLabel("Serie 1");
-        series1.set(1, 2);
-        series1.set(2, 3);
-        series1.set(3, 1);
-        series1.set(4, 6);
-        series1.set(5, 10);
-        
-        LineChartSeries series2 = new LineChartSeries();
-        series2.setLabel("Serie 2");
-        series2.set(1, 10);
-        series2.set(2, 13);
-        series2.set(3, 11);
-        series2.set(4, 16);
-        series1.set(5, 15);
-        
-        this.chartDenunciasRealizadasEAtendidas.addSeries(series1);
-        this.chartDenunciasRealizadasEAtendidas.addSeries(series2);
-        this.chartDenunciasRealizadasEAtendidas.setTitle("Teste de Grafico");
-        this.chartDenunciasRealizadasEAtendidas.setLegendPosition("e");
-        Axis yAxis = this.chartDenunciasRealizadasEAtendidas.getAxis(AxisType.Y);
-        yAxis.setMax(0);
-        yAxis.setMax(16);
-        
-    }
     
     // graficos
     private void createLineModels() {
@@ -610,11 +582,11 @@ public class ControladorPrefeitura implements Serializable {
         this.chartDenunciasRealizadasEAtendidas.setTitle("Denúncias por Mês");
         this.chartDenunciasRealizadasEAtendidas.setLegendPosition("e");
         this.chartDenunciasRealizadasEAtendidas.setShowPointLabels(true);
-        this.chartDenunciasRealizadasEAtendidas.getAxes().put(AxisType.X, new CategoryAxis("Dias"));
+        this.chartDenunciasRealizadasEAtendidas.getAxes().put(AxisType.X, new CategoryAxis("Mês"));
         Axis yAxis = this.chartDenunciasRealizadasEAtendidas.getAxis(AxisType.Y);
         yAxis.setLabel("Numero");
         yAxis.setMin(0);
-        yAxis.setMax(10);
+//        yAxis.setMax(this + 10);
         
     }
 
@@ -624,20 +596,21 @@ public class ControladorPrefeitura implements Serializable {
         ChartSeries atendidas = new ChartSeries();
         atendidas.setLabel("Atendidas");
         
-        for (List d : fachada.denunciasRealizadasPorMesChart(this.prefeitura.getCidade().getCidadePK().getNomeCidade(), this.prefeitura.getCidade().getCidadePK().getSiglaEstado())) {
+        for (List d : fachada.denunciasAtendidasPorMesChart(this.prefeitura.getCodigo())) {
             atendidas.set(d.get(0), Integer.parseInt(d.get(1).toString()));
         }
+        
+        
  
-//        ChartSeries realizadas = new ChartSeries();
-//        realizadas.setLabel("Realizadas");
-//        realizadas.set("2004", 52);
-//        realizadas.set("2005", 60);
-//        realizadas.set("2006", 110);
-//        realizadas.set("2007", 90);
-//        realizadas.set("2008", 120);
+        ChartSeries realizadas = new ChartSeries();
+        realizadas.setLabel("Realizadas");
+        
+        for (List d : fachada.denunciasRealizadasPorMesChart(this.prefeitura.getCodigo())) {
+            realizadas.set(d.get(0), Integer.parseInt(d.get(1).toString()));
+        }
  
         model.addSeries(atendidas);
-//        model.addSeries(realizadas);
+        model.addSeries(realizadas);
          
         return model;
     }

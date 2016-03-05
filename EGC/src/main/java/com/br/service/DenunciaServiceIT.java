@@ -71,6 +71,8 @@ public interface DenunciaServiceIT {
     
     public List<MensagemPrefeitura> denunciasPorPrefeituraLimitado(String codigo, int limite);
     
-    public List<List> denunciasRealizadasPorMesChart(String cidade, String estado);
+    public List<List> denunciasRealizadasPorMesChart(String codigo);
+    
+    public List<List> denunciasAtendidasPorMesChart(String codigo);
     
 }

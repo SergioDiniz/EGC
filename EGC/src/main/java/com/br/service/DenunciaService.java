@@ -581,10 +581,8 @@ public class DenunciaService implements DenunciaServiceIT {
     }
 
     @Override
-    public List<List> denunciasRealizadasPorMesChart(String cidade, String estado) {
+    public List<List> denunciasRealizadasPorMesChart(String codigo) {
 
-        System.out.println("Cidade: " + cidade);
-        System.out.println("Estado: " + estado);
         
         
         String q = "SELECT "
@@ -604,12 +602,67 @@ public class DenunciaService implements DenunciaServiceIT {
                 + "end as mes "
                 + ", count(to_char(d.data, 'MM')) "
                 + "from denuncia d join enderecodenuncia ed on d.enderecodenuncia_id = ed.id  "
-                + "where ed.cidade = ?1 and ed.estado = ?2  "
+                + "join prefeitura p on ed.cidade = p.cidade and ed.estado = p.estado "
+                + "where p.codigo = ?1 "
                 + "group by mes order by mes asc ";
         
         Query query = em.createNativeQuery(q);
-        query.setParameter(1, cidade);
-        query.setParameter(2, estado);
+        query.setParameter(1, codigo);
+
+        
+        List resultado = query.getResultList();
+
+        List<List> denuncias = new ArrayList<>();
+        
+        Iterator i = resultado.iterator();
+
+        while (i.hasNext()) {
+            Object[] r = (Object[]) i.next();
+
+            List l = new ArrayList();
+            l.add(r[0]);
+            l.add(r[1]);
+
+            denuncias.add(l);
+
+        }
+
+        if (denuncias.size() > 0) {
+            return denuncias;
+        }
+        
+        
+        return new ArrayList<>();
+    }
+    
+    @Override
+    public List<List> denunciasAtendidasPorMesChart(String codigo) {       
+        
+        String q = "SELECT "
+                + "case "
+                + "when to_char(d.data, 'MM')  =  '01' then 'Janeiro' "
+                + "when to_char(d.data, 'MM')  =  '02' then 'Fevereiro' "
+                + "when to_char(d.data, 'MM')  =  '03' then 'Março' "
+                + "when to_char(d.data, 'MM')  =  '04' then 'Abril' "
+                + "when to_char(d.data, 'MM')  =  '05' then 'Maio' "
+                + "when to_char(d.data, 'MM')  =  '06' then 'Junho' "
+                + "when to_char(d.data, 'MM')  =  '07' then 'Julho' "
+                + "when to_char(d.data, 'MM')  =  '08' then 'Agosto' "
+                + "when to_char(d.data, 'MM')  =  '09' then 'Setembro' "
+                + "when to_char(d.data, 'MM')  =  '10' then 'Outubro' "
+                + "when to_char(d.data, 'MM')  =  '11' then 'Novembro' "
+                + "when to_char(d.data, 'MM')  =  '12' then 'Dezembro' "
+                + "end as mes "
+                + ", count(to_char(d.data, 'MM')) "
+                + "from denuncia d join enderecodenuncia ed on d.enderecodenuncia_id = ed.id  "
+                + "join prefeitura p on ed.cidade = p.cidade and ed.estado = p.estado "
+                + "where p.codigo = ?1 "
+                + "and d.estadodeacompanhamento = 'ATENDIDA' "
+                + "group by mes order by mes asc ";
+        
+        Query query = em.createNativeQuery(q);
+        query.setParameter(1, codigo);
+        
 
         
         List resultado = query.getResultList();

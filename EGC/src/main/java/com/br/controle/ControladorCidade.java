@@ -23,6 +23,11 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
 import org.primefaces.event.map.OverlaySelectEvent;
+import org.primefaces.model.chart.Axis;
+import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.CategoryAxis;
+import org.primefaces.model.chart.ChartSeries;
+import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
 import org.primefaces.model.map.MapModel;
@@ -61,6 +66,9 @@ public class ControladorCidade implements Serializable {
     private String endLogitude;
     private String endZoom;
 
+    
+    private LineChartModel chartDenunciasRealizadasEAtendidas;
+    
     public ControladorCidade() {
         this.cidadePK = new CidadePK();
         this.denunciasPesquisaVisitante = new ArrayList<>();
@@ -79,7 +87,8 @@ public class ControladorCidade implements Serializable {
         this.endLatitude = "0";
         this.endLogitude = "0";
         this.endZoom = "2";
-//        setarMarkerNoMapa();
+        this.chartDenunciasRealizadasEAtendidas = new LineChartModel();
+
 
     }
 
@@ -175,17 +184,15 @@ public class ControladorCidade implements Serializable {
 
         List<Denuncia> denuncias = new ArrayList<>();
         denuncias = fachada.denunciasNaoAtendidasEmCidade(this.cidadePK.getNomeCidade(), this.cidadePK.getSiglaEstado());
-        
+
         for (Denuncia denuncia : denuncias) {
             LatLng coord = new LatLng(Double.valueOf(denuncia.getEnderecoDenuncia().getLatitude()), Double.valueOf(denuncia.getEnderecoDenuncia().getLongitude()));
             Marker m = new Marker(coord, denuncia.getCodigo(), denuncia.getFoto(), ("/EGC/img/marker-icon/" + denuncia.getIconeDenunica()));
-            
-            if(!advancedModel.getMarkers().contains(m)){
+
+            if (!advancedModel.getMarkers().contains(m)) {
                 advancedModel.addOverlay(m);
             }
-            
-            
-            
+
         }
 
     }
@@ -274,6 +281,8 @@ public class ControladorCidade implements Serializable {
                 // pegando informações gerais do municipio
                 informacoesGeraisMunicipio(this.prefeitura.getEmail(), this.prefeitura.getCidade().getCidadePK().getNomeCidade(), this.prefeitura.getCidade().getCidadePK().getSiglaEstado());
 
+                //chart
+                createLineModels();
             } else {
                 this.mostrarInformacoesPrefeitura = false;
 //                FacesContext.getCurrentInstance().getExternalContext().redirect("/EGC/erro-404.jsf");
@@ -282,6 +291,44 @@ public class ControladorCidade implements Serializable {
             System.out.println("ERRO AO PESQUISAR PREFEITURA: " + e.getMessage());
         }
 
+    }
+
+    // graficos
+    private void createLineModels() {
+
+        this.chartDenunciasRealizadasEAtendidas = initCategoryModel();
+        this.chartDenunciasRealizadasEAtendidas.setTitle("Denúncias por Mês");
+        this.chartDenunciasRealizadasEAtendidas.setLegendPosition("e");
+        this.chartDenunciasRealizadasEAtendidas.setShowPointLabels(true);
+        this.chartDenunciasRealizadasEAtendidas.getAxes().put(AxisType.X, new CategoryAxis("Mês"));
+        Axis yAxis = this.chartDenunciasRealizadasEAtendidas.getAxis(AxisType.Y);
+        yAxis.setLabel("Numero");
+        yAxis.setMin(0);
+//        yAxis.setMax(this + 10);
+
+    }
+
+    private LineChartModel initCategoryModel() {
+        LineChartModel model = new LineChartModel();
+
+        ChartSeries atendidas = new ChartSeries();
+        atendidas.setLabel("Atendidas");
+
+        for (List d : fachada.denunciasAtendidasPorMesChart(this.prefeitura.getCodigo())) {
+            atendidas.set(d.get(0), Integer.parseInt(d.get(1).toString()));
+        }
+
+        ChartSeries realizadas = new ChartSeries();
+        realizadas.setLabel("Realizadas");
+
+        for (List d : fachada.denunciasRealizadasPorMesChart(this.prefeitura.getCodigo())) {
+            realizadas.set(d.get(0), Integer.parseInt(d.get(1).toString()));
+        }
+
+        model.addSeries(atendidas);
+        model.addSeries(realizadas);
+
+        return model;
     }
 
     public List<Registro> registrosDaPrefeitura(String codigoPrefeitura) {
@@ -313,15 +360,14 @@ public class ControladorCidade implements Serializable {
         marker = (Marker) event.getOverlay();
     }
 
-    public long totalDeDenunciasNaCidade(String cidade, String estado){
+    public long totalDeDenunciasNaCidade(String cidade, String estado) {
         return fachada.totalDeDenunciasNaCidade(cidade, estado);
     }
-    
-    public long totalDeDenunciasAtendidasNaCidade(String cidade, String estado){
+
+    public long totalDeDenunciasAtendidasNaCidade(String cidade, String estado) {
         return fachada.totalDeDenunciasAtendidasNaCidade(cidade, estado);
     }
-    
-    
+
     //
     //
     // GETs and SETs
@@ -477,5 +523,15 @@ public class ControladorCidade implements Serializable {
     public void setEndZoom(String endZoom) {
         this.endZoom = endZoom;
     }
+
+    public LineChartModel getChartDenunciasRealizadasEAtendidas() {
+        return chartDenunciasRealizadasEAtendidas;
+    }
+
+    public void setChartDenunciasRealizadasEAtendidas(LineChartModel chartDenunciasRealizadasEAtendidas) {
+        this.chartDenunciasRealizadasEAtendidas = chartDenunciasRealizadasEAtendidas;
+    }
+    
+    
 
 }

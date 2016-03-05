@@ -407,10 +407,14 @@ public class Fachada implements Serializable {
         return ds.denunciasPorPrefeituraLimitado(codigo, limite);
     }
     
-    public List<List> denunciasRealizadasPorMesChart(String cidade, String estado) {
-        return ds.denunciasRealizadasPorMesChart(cidade, estado);
+    public List<List> denunciasRealizadasPorMesChart(String codigo) {
+        return ds.denunciasRealizadasPorMesChart(codigo);
     }
 
+    public List<List> denunciasAtendidasPorMesChart(String codigo) {
+        return ds.denunciasAtendidasPorMesChart(codigo);
+    }
+    
     // FIM DenunciaServices
     //
     //
