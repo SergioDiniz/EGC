@@ -42,6 +42,12 @@ import javax.faces.event.ComponentSystemEvent;
 import javax.servlet.http.Part;
 import org.apache.commons.mail.EmailException;
 import org.primefaces.model.UploadedFile;
+import org.primefaces.model.chart.Axis;
+import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.CategoryAxis;
+import org.primefaces.model.chart.ChartSeries;
+import org.primefaces.model.chart.LineChartModel;
+import org.primefaces.model.chart.LineChartSeries;
 
 /**
  *
@@ -74,13 +80,14 @@ public class ControladorPrefeitura implements Serializable {
     private List<Denuncia> denunciaGerenciadas;
     private Denuncia denunciaGerenciada;
     private ConteudoInapropriado conteudoInapropriado;
-    
-    
+
     private String codigoDenuncia;
     private String filtroData;
     private String filtroAjuda;
     private String filtroQuery;
     private String filtroTipo;
+
+    private LineChartModel chartDenunciasRealizadasEAtendidas;
 
     @EJB
     private Fachada fachada;
@@ -110,7 +117,9 @@ public class ControladorPrefeitura implements Serializable {
         this.codigoDenuncia = "";
         this.denunciaGerenciada = new Denuncia();
         this.conteudoInapropriado = new ConteudoInapropriado();
-
+        this.chartDenunciasRealizadasEAtendidas = new LineChartModel();
+        
+        
     }
 
     public void mostrapagina() throws IOException {
@@ -128,6 +137,7 @@ public class ControladorPrefeitura implements Serializable {
             if (prefeitura.isAtivo() == true) {
                 denunciasComMaisAjudas();
                 denunciasMaisRecentes();
+                createLineModels();
                 return "/sis/prefeitura/index.jsf?faces-redirect=true";
             }
             info("Conta aguardando confirmação!");
@@ -446,7 +456,7 @@ public class ControladorPrefeitura implements Serializable {
     //
     //
     public void encontraCEP() {
-        
+
         PesquisarCep cepWebService = new PesquisarCep(this.prefeitura.getEnderecoPrefeitura().getCep());
 
         System.out.println("Resultado: " + cepWebService.getResultado());
@@ -559,12 +569,79 @@ public class ControladorPrefeitura implements Serializable {
 
         return null;
     }
-    
-    public String excluirMensagemPrefeitura(MensagemPrefeitura mensagemPrefeitura){
+
+    public String excluirMensagemPrefeitura(MensagemPrefeitura mensagemPrefeitura) {
         fachada.excluirMensagemEmPrefeitura(mensagemPrefeitura, this.prefeitura);
         return null;
     }
 
+    
+    private void chart(){
+        LineChartSeries series1 = new LineChartSeries();
+        series1.setLabel("Serie 1");
+        series1.set(1, 2);
+        series1.set(2, 3);
+        series1.set(3, 1);
+        series1.set(4, 6);
+        series1.set(5, 10);
+        
+        LineChartSeries series2 = new LineChartSeries();
+        series2.setLabel("Serie 2");
+        series2.set(1, 10);
+        series2.set(2, 13);
+        series2.set(3, 11);
+        series2.set(4, 16);
+        series1.set(5, 15);
+        
+        this.chartDenunciasRealizadasEAtendidas.addSeries(series1);
+        this.chartDenunciasRealizadasEAtendidas.addSeries(series2);
+        this.chartDenunciasRealizadasEAtendidas.setTitle("Teste de Grafico");
+        this.chartDenunciasRealizadasEAtendidas.setLegendPosition("e");
+        Axis yAxis = this.chartDenunciasRealizadasEAtendidas.getAxis(AxisType.Y);
+        yAxis.setMax(0);
+        yAxis.setMax(16);
+        
+    }
+    
+    // graficos
+    private void createLineModels() {
+
+        this.chartDenunciasRealizadasEAtendidas = initCategoryModel();
+        this.chartDenunciasRealizadasEAtendidas.setTitle("Denúncias por Mês");
+        this.chartDenunciasRealizadasEAtendidas.setLegendPosition("e");
+        this.chartDenunciasRealizadasEAtendidas.setShowPointLabels(true);
+        this.chartDenunciasRealizadasEAtendidas.getAxes().put(AxisType.X, new CategoryAxis("Dias"));
+        Axis yAxis = this.chartDenunciasRealizadasEAtendidas.getAxis(AxisType.Y);
+        yAxis.setLabel("Numero");
+        yAxis.setMin(0);
+        yAxis.setMax(10);
+        
+    }
+
+    private LineChartModel initCategoryModel() {
+        LineChartModel model = new LineChartModel();
+ 
+        ChartSeries atendidas = new ChartSeries();
+        atendidas.setLabel("Atendidas");
+        
+        for (List d : fachada.denunciasRealizadasPorMesChart(this.prefeitura.getCidade().getCidadePK().getNomeCidade(), this.prefeitura.getCidade().getCidadePK().getSiglaEstado())) {
+            atendidas.set(d.get(0), Integer.parseInt(d.get(1).toString()));
+        }
+ 
+//        ChartSeries realizadas = new ChartSeries();
+//        realizadas.setLabel("Realizadas");
+//        realizadas.set("2004", 52);
+//        realizadas.set("2005", 60);
+//        realizadas.set("2006", 110);
+//        realizadas.set("2007", 90);
+//        realizadas.set("2008", 120);
+ 
+        model.addSeries(atendidas);
+//        model.addSeries(realizadas);
+         
+        return model;
+    }
+    
     //
     //
     //
@@ -790,6 +867,14 @@ public class ControladorPrefeitura implements Serializable {
         this.conteudoInapropriado = conteudoInapropriado;
     }
 
+    public LineChartModel getChartDenunciasRealizadasEAtendidas() {
+        return chartDenunciasRealizadasEAtendidas;
+    }
+
+    public void setChartDenunciasRealizadasEAtendidas(LineChartModel chartDenunciasRealizadasEAtendidas) {
+        this.chartDenunciasRealizadasEAtendidas = chartDenunciasRealizadasEAtendidas;
+    }
     
     
+
 }

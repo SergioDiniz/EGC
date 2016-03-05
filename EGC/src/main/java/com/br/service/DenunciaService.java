@@ -389,189 +389,252 @@ public class DenunciaService implements DenunciaServiceIT {
     public boolean atenderDenuncia(InformacaoDeAtendida informacaoDeAtendida, Registro registro) {
 
         try {
-            
+
             registro.getDenuncia().setInformacaoDeAtendida(informacaoDeAtendida);
-            
+
             em.merge(informacaoDeAtendida);
             em.merge(registro.getDenuncia());
             em.merge(registro);
-            
+
         } catch (Exception e) {
             System.out.println("ERRO AO ATENDER DENUNCIA: " + e.getMessage());
         }
-        
+
         return false;
     }
-    
-    
+
     @Override
-    public List<Denuncia> gerenciarDenunciasFiltro(String cidade, String estado, String ordem, String filtroQuery, String filtro){
-        
-        
-        
-        
-        
+    public List<Denuncia> gerenciarDenunciasFiltro(String cidade, String estado, String ordem, String filtroQuery, String filtro) {
+
         //ordem
         String sqlOrdem = "";
-        switch(ordem){
-            case "DATA_DESC" : sqlOrdem = " ORDER BY d.data DESC"; break;
-            case "DATA_ASC" : sqlOrdem = " ORDER BY d.data ASC"; break;
-            case "AJUDA_DESC" : sqlOrdem = " ORDER BY d.numeroAjuda DESC"; break;
-            case "AJUDA_ASC" : sqlOrdem = " ORDER BY d.numeroAjuda ASC"; break;
-            default: sqlOrdem = " ORDER BY d.data DESC"; break;
+        switch (ordem) {
+            case "DATA_DESC":
+                sqlOrdem = " ORDER BY d.data DESC";
+                break;
+            case "DATA_ASC":
+                sqlOrdem = " ORDER BY d.data ASC";
+                break;
+            case "AJUDA_DESC":
+                sqlOrdem = " ORDER BY d.numeroAjuda DESC";
+                break;
+            case "AJUDA_ASC":
+                sqlOrdem = " ORDER BY d.numeroAjuda ASC";
+                break;
+            default:
+                sqlOrdem = " ORDER BY d.data DESC";
+                break;
         }
-        
-        
-        
+
         // filtro
         String sqlFiltro = "";
-        switch(filtro){
-            case "ESTADO" : sqlFiltro = " and d.estadoDeAcompanhamento = :filtroQuery"; 
-                            filtroQuery = filtroQuery.replaceAll(" ", "_"); //substituindo " " por "_"
-                            break;
-            case "CATEGORIA" : sqlFiltro = " and d.tipoDeDenuncia = :filtroQuery"; 
-                            filtroQuery = filtroQuery.replaceAll(" ", "_"); //substituindo " " por "_"
+        switch (filtro) {
+            case "ESTADO":
+                sqlFiltro = " and d.estadoDeAcompanhamento = :filtroQuery";
+                filtroQuery = filtroQuery.replaceAll(" ", "_"); //substituindo " " por "_"
+                break;
+            case "CATEGORIA":
+                sqlFiltro = " and d.tipoDeDenuncia = :filtroQuery";
+                filtroQuery = filtroQuery.replaceAll(" ", "_"); //substituindo " " por "_"
 //                            filtroQuery = TipoDeDenuncia.valueOf(filtroQuery);
-                            break;
-            case "RUA" : sqlFiltro = " and ed.rua = :filtroQuery"; break;
-            case "CEP" : sqlFiltro = " and ed.cep = :filtroQuery"; break;
+                break;
+            case "RUA":
+                sqlFiltro = " and ed.rua = :filtroQuery";
+                break;
+            case "CEP":
+                sqlFiltro = " and ed.cep = :filtroQuery";
+                break;
         }
-        
+
         System.out.println("ordem: " + ordem);
         System.out.println("SQL Ordem: " + sqlOrdem);
         System.out.println("Filto: " + filtro);
         System.out.println("SQL Filtro: " + sqlFiltro);
         System.out.println("Filtro Query: " + filtroQuery);
-        
+
         Query query = em.createQuery("SELECT d from Denuncia d JOIN d.enderecoDenuncia ed WHERE ed.cidade = :cidade AND ed.estado = :estado " + sqlFiltro + sqlOrdem);
         query.setParameter("cidade", cidade);
         query.setParameter("estado", estado);
-        if(sqlFiltro.length() > 2){
-            switch(filtro){
-                case "CATEGORIA" : query.setParameter("filtroQuery", TipoDeDenuncia.valueOf(filtroQuery));  break;
-                case "ESTADO": query.setParameter("filtroQuery", EstadoDeAcompanhamento.valueOf(filtroQuery)); break;
-                default: query.setParameter("filtroQuery", filtroQuery); break;
+        if (sqlFiltro.length() > 2) {
+            switch (filtro) {
+                case "CATEGORIA":
+                    query.setParameter("filtroQuery", TipoDeDenuncia.valueOf(filtroQuery));
+                    break;
+                case "ESTADO":
+                    query.setParameter("filtroQuery", EstadoDeAcompanhamento.valueOf(filtroQuery));
+                    break;
+                default:
+                    query.setParameter("filtroQuery", filtroQuery);
+                    break;
             }
         }
-        
-        
-        
+
         List<Denuncia> d = query.getResultList();
-        
-        if(d.size() > 0){
+
+        if (d.size() > 0) {
             return d;
         }
-        
-        
+
         return new ArrayList<>();
     }
-    
+
     @Override
-    public List<Denuncia> denunciasAtendidasEmCidade(String cidade, String estado){
-        
+    public List<Denuncia> denunciasAtendidasEmCidade(String cidade, String estado) {
+
         Query query = em.createQuery("SELECT d from Denuncia d JOIN d.enderecoDenuncia ed JOIN d.informacaoDeAtendida ia WHERE ed.cidade = :cidade and ed.estado = :estado ORDER BY ia.data DESC");
         query.setParameter("cidade", cidade);
         query.setParameter("estado", estado);
-        
+
         List<Denuncia> d = query.getResultList();
-        
-        if(d.size() > 0){
+
+        if (d.size() > 0) {
             return d;
         }
-        
+
         return new ArrayList<>();
-        
+
     }
-    
+
     @Override
-    public List<Denuncia> denunciasNaoAtendidasEmCidade(String cidade, String estado){
-        
-        Query query = em.createQuery("SELECT d from Denuncia d JOIN d.enderecoDenuncia ed  WHERE ed.cidade = :cidade and ed.estado = :estado and d.estadoDeAcompanhamento = :atendida or d.estadoDeAcompanhamento = :trabalho " );
+    public List<Denuncia> denunciasNaoAtendidasEmCidade(String cidade, String estado) {
+
+        Query query = em.createQuery("SELECT d from Denuncia d JOIN d.enderecoDenuncia ed  WHERE ed.cidade = :cidade and ed.estado = :estado and d.estadoDeAcompanhamento = :atendida or d.estadoDeAcompanhamento = :trabalho ");
         query.setParameter("cidade", cidade);
         query.setParameter("estado", estado);
         query.setParameter("atendida", EstadoDeAcompanhamento.valueOf("ATENDIDA"));
         query.setParameter("trabalho", EstadoDeAcompanhamento.valueOf("EM_TRABALHO"));
         List<Denuncia> d = query.getResultList();
-        
-        if(d.size() > 0){
+
+        if (d.size() > 0) {
             return d;
         }
-        
+
         return new ArrayList<>();
-        
+
     }
-    
+
     @Override
-    public List<List> ruasDeUmaCidadeTipoDenunciaNumerosDeDenuncia(String cidade, String estado){
+    public List<List> ruasDeUmaCidadeTipoDenunciaNumerosDeDenuncia(String cidade, String estado) {
         System.out.println("Cidade: " + cidade);
         System.out.println("Estado: " + estado);
         //Query query = em.createQuery("SELECT d.enderecoDenuncia.rua, COUNT(d.enderecoDenuncia.rua) FROM Cidade c JOIN c.denuncias d WHERE c.CidadePK.nomeCidade = :cidade and c.CidadePK.siglaEstado = :estado GROUP BY d.enderecoDenuncia.rua ORDER BY d.enderecoDenuncia.rua ASC");
         Query query = em.createQuery("SELECT ed.rua, d.tipoDeDenuncia, COUNT(d.tipoDeDenuncia) FROM Cidade c JOIN c.denuncias d JOIN d.enderecoDenuncia ed WHERE c.CidadePK.nomeCidade = :cidade and c.CidadePK.siglaEstado = :estado GROUP BY ed.rua, d.tipoDeDenuncia ORDER BY ed.rua");
         query.setParameter("cidade", cidade);
         query.setParameter("estado", estado);
-        
+
         List resultado = query.getResultList();
-        
+
         List<List> ruas = new ArrayList<>();
         Iterator i = resultado.iterator();
-        
-        while(i.hasNext()){
+
+        while (i.hasNext()) {
             Object[] r = (Object[]) i.next();
-            
+
             List l = new ArrayList();
             l.add(r[0]);
             String tipo = (String) r[1].toString();
             l.add(tipo.replaceAll("_", " "));
             l.add(r[2]);
-            
-            
+
             ruas.add(l);
-            
+
         }
-        
-        
-        if (ruas.size() > 0){
+
+        if (ruas.size() > 0) {
             return ruas;
         }
-        
+
         return new ArrayList<>();
-        
+
     }
-    
-    
+
     public Long totalDeDenunciasAtendidasPorTipoERua(String cidade, String estado, String rua, String tipoDeDenuncia) {
         Query query = em.createQuery("SELECT COUNT(d.tipoDeDenuncia) FROM Cidade c JOIN c.denuncias d JOIN d.enderecoDenuncia ed WHERE c.CidadePK.nomeCidade = :cidade AND c.CidadePK.siglaEstado = :estado AND ed.rua = :rua and d.tipoDeDenuncia = :tipo and d.estadoDeAcompanhamento = :atendida");
         query.setParameter("cidade", cidade);
         query.setParameter("estado", estado);
         query.setParameter("rua", rua);
-        
+
         String tipo = tipoDeDenuncia.replaceAll(" ", "_");
         query.setParameter("tipo", TipoDeDenuncia.valueOf(tipo));
-        
+
         query.setParameter("atendida", EstadoDeAcompanhamento.valueOf("ATENDIDA"));
-        
-        
+
         List<Long> d = query.getResultList();
 
         return d.get(0);
     }
-    
+
     @Override
-    public List<MensagemPrefeitura> denunciasPorPrefeituraLimitado(String codigo, int limite){
-        
+    public List<MensagemPrefeitura> denunciasPorPrefeituraLimitado(String codigo, int limite) {
+
         Query query = em.createQuery("SELECT m from Prefeitura p JOIN p.mensagensPrefeitura m WHERE p.codigo = :codigo ORDER BY m.dataMensagem DESC");
         query.setParameter("codigo", codigo);
         query.setMaxResults(4);
-        
+
         List<MensagemPrefeitura> d = query.getResultList();
-        
-        if(d.size() > 0){
+
+        if (d.size() > 0) {
             return d;
+        }
+
+        return new ArrayList<>();
+    }
+
+    @Override
+    public List<List> denunciasRealizadasPorMesChart(String cidade, String estado) {
+
+        System.out.println("Cidade: " + cidade);
+        System.out.println("Estado: " + estado);
+        
+        
+        String q = "SELECT "
+                + "case "
+                + "when to_char(d.data, 'MM')  =  '01' then 'Janeiro' "
+                + "when to_char(d.data, 'MM')  =  '02' then 'Fevereiro' "
+                + "when to_char(d.data, 'MM')  =  '03' then 'Março' "
+                + "when to_char(d.data, 'MM')  =  '04' then 'Abril' "
+                + "when to_char(d.data, 'MM')  =  '05' then 'Maio' "
+                + "when to_char(d.data, 'MM')  =  '06' then 'Junho' "
+                + "when to_char(d.data, 'MM')  =  '07' then 'Julho' "
+                + "when to_char(d.data, 'MM')  =  '08' then 'Agosto' "
+                + "when to_char(d.data, 'MM')  =  '09' then 'Setembro' "
+                + "when to_char(d.data, 'MM')  =  '10' then 'Outubro' "
+                + "when to_char(d.data, 'MM')  =  '11' then 'Novembro' "
+                + "when to_char(d.data, 'MM')  =  '12' then 'Dezembro' "
+                + "end as mes "
+                + ", count(to_char(d.data, 'MM')) "
+                + "from denuncia d join enderecodenuncia ed on d.enderecodenuncia_id = ed.id  "
+                + "where ed.cidade = ?1 and ed.estado = ?2  "
+                + "group by mes order by mes asc ";
+        
+        Query query = em.createNativeQuery(q);
+        query.setParameter(1, cidade);
+        query.setParameter(2, estado);
+
+        
+        List resultado = query.getResultList();
+
+        List<List> denuncias = new ArrayList<>();
+        
+        Iterator i = resultado.iterator();
+
+        while (i.hasNext()) {
+            Object[] r = (Object[]) i.next();
+
+            List l = new ArrayList();
+            l.add(r[0]);
+            l.add(r[1]);
+
+            denuncias.add(l);
+
+        }
+
+        if (denuncias.size() > 0) {
+            return denuncias;
         }
         
         
         return new ArrayList<>();
     }
-    
-    
+
 }
