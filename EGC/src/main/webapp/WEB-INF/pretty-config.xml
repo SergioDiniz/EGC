@@ -23,7 +23,7 @@
         <!--Perfil-->
         <url-mapping id="perfilPrefeitura">
                 <pattern value="/perfil/prefeitura/#{codigoPrefeitura}" />
-                <view-id value="/sis/perfil/prefeitura.jsf?faces-redirect=true" />
+                <view-id value="/sis/perfil/prefeiturad.jsf?faces-redirect=true" />
         </url-mapping>
 
         <!--Funcionario-->

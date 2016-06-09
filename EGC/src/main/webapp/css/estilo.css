@@ -1143,6 +1143,19 @@ html, body{
     /*border: 5px solid #dfdfdf;*/
 }
 
+.alerta-mapa{
+    position: absolute;
+    z-index: 9999;
+    margin-left: 220px;
+    margin-top: 2px;
+}
+
+.alerta-mapa-m{
+    position: absolute;
+    z-index: 9999;
+    margin-top: 168px;
+}
+
 .btn-posicaomapa{
     position: absolute;
     margin-top: 9px;

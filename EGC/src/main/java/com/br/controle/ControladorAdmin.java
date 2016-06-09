@@ -222,8 +222,8 @@ public class ControladorAdmin implements Serializable {
 
         System.out.println("Preparando email: ");
 
-        String eDestino = "sergiodinizsh@gmail.com";
-        String eRemetente = "sergiodinizsh@gmail.com";
+        String eDestino = "seu@email.com";
+        String eRemetente = "seu@email.com";
         String eTitulo = "EGC - Eficiência em Gestão de Cidades ";
 
         HtmlEmail email = new HtmlEmail();
